@@ -1,0 +1,145 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+$sun-dimension: 60px;
+$sun-container-dimension: 200px;
+
+/* Sun animation */
+@include keyframes(sun-rays-animation) {
+    0% { @include transform(rotate(0deg)); }
+    100% { @include transform(rotate(360deg)); }
+}
+
+@keyframes sunpulse {
+    //from { box-shadow: 0 0 100px #ff0, 0 0 100px #ff0; }
+    //to { box-shadow: 0 0 50px #ff0, 0 0 75px #ff0;  }
+    
+    from {
+        box-shadow: 0 0 100px $color-white, 0 0 100px $color-white;
+    }
+    to {
+        box-shadow: 0 0 50px $color-white, 0 0 75px $color-white;
+    }
+}
+
+.app-weather-effect-sun {
+    animation: sunpulse 2s alternate infinite;
+    border-radius: 50%;
+    height: $sun-dimension;
+    margin: auto;
+    opacity: 1.0;
+    position: absolute;
+    width: $sun-dimension;
+    z-index: 200;
+    
+    // TODO: this one must change from night to midday themes
+    //background-color: $color-sun;
+    //background-color: $color-white;
+    //background: radial-gradient(ellipse at center, #f90 0%,#fc0 60%,#ff0 100%);
+    background: radial-gradient(ellipse at center, $color-light_gray 0%, $color-dirty_white 60%, $color-white 100%);
+    
+    // TODO: remove this, handled by animation
+    //box-shadow: 0 0 40px 15px $color-sun;
+    //box-shadow: 0 0 60px 20px $color-white;
+    
+    // TODO: remove this, must be handled by day-time-view
+    left: 70%;
+    top: 20%;
+    
+    
+    &__ray-box {
+        @include animation(sun-rays-animation, 120s, linear, infinite);
+        height: $sun-dimension;
+        position: absolute;
+        width: $sun-dimension;
+    }
+    
+    &__ray {
+        background: linear-gradient(to top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,0) 80%);
+        border-radius: 50% 50% 0 0;
+        filter: brightness(1.2) blur(5.0px);
+        margin-left: 10px;
+        opacity: 0.1;
+        position: absolute;
+        
+        &-1 {
+            @include transform(rotate(180deg));
+            height: 170px;
+            left: 15px;
+            top: -175px;
+            width: 30px;
+        }
+    
+        &-2 {
+            @include transform(rotate(220deg));
+            height: 100px;
+            left: 75px;
+            top: -90px;
+            width: 8px;
+        }
+    
+        &-3 {
+            @include transform(rotate(250deg));
+            height: 170px;
+            left: 100px;
+            top: -80px;
+            width: 30px;
+        }
+    
+        &-4 {
+            @include transform(rotate(305deg));
+            height: 120px;
+            left: 100px;
+            top: 30px;
+            width: 14px;
+        }
+    
+        &-5 {
+            @include transform(rotate(-15deg));
+            height: 140px;
+            left: 40px;
+            top: 60px;
+            width: 30px;
+        }
+    
+        &-6 {
+            @include transform(rotate(30deg));
+            height: 120px;
+            left: -50px;
+            top: 60px;
+            width: 40px;
+        }
+    
+        &-7 {
+            @include transform(rotate(70deg));
+            height: 180px;
+            left: -80px;
+            top: -25px;
+            width: 10px;
+        }
+    
+        &-8 {
+            @include transform(rotate(100deg));
+            height: 120px;
+            left: -90px;
+            top: -45px;
+            width: 30px;
+        }
+    
+        &-9 {
+            @include transform(rotate(120deg));
+            height: 80px;
+            left: -60px;
+            top: -65px;
+            width: 10px;
+        }
+    
+        &-10 {
+            @include transform(rotate(150deg));
+            height: 190px;
+            left: -60px;
+            top: -185px;
+            width: 23px;
+        }
+    }
+}

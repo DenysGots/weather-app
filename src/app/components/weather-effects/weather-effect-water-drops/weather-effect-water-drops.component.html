@@ -1,0 +1,27 @@
+<div class="app-weather-effect-water-drops__container">
+    
+    <div class="app-weather-effect-water-drops">
+    </div>
+    
+    <div *ngFor="let drop of drops"
+         class="app-weather-effect-water-drops_drop"
+         [ngStyle]="{
+                'top': drop.yPosition + 'px',
+                'left': drop.xPosition + 'px',
+                'width': drop.dropWidth + 'px',
+                'height': drop.dropHeight + 'px',
+                'background-position': drop.backgroundPosition
+             }">
+    </div>
+    
+    <div *ngFor="let border of borders"
+         class="app-weather-effect-water-drops_border"
+         [ngStyle]="{
+                'top': border.yPosition + 'px',
+                'left': border.xPosition + 'px',
+                'width': border.borderWidth + 'px',
+                'height': border.dropHeight + 'px'
+             }">
+    </div>
+
+</div>

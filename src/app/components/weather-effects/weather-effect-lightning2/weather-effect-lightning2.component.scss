@@ -1,0 +1,70 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+// TODO: start/end darker color must be equal to day-time background weather color, or transparent
+// lighter color must be lighter variant of day-time background weather color
+// OR: darker and lighter are lighter and lighter x 2 of background
+// OR: just lighter and lighter x 2 of day gray background color with 100% opacity at start/end (PREFERABLE!!!)
+@keyframes thunder-background {
+    0% { background-color: $color-lightning-background-darker; }
+    9% { background-color: $color-lightning-background-darker; }
+    10% { background-color: $color-lightning-background-lighter; }
+    10.5% { background-color: $color-lightning-background-darker; }
+    80% { background-color: $color-lightning-background-darker; }
+    82% { background-color: $color-lightning-background-lighter; }
+    83% { background-color: $color-lightning-background-darker; }
+    83.5% { background-color: $color-lightning-background-lighter; }
+    100% { background-color: $color-lightning-background-darker; }
+}
+
+.app-weather-effect-lightning2 {
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 500;
+    
+    &:after {
+        animation: thunder-background 6s infinite;
+        //background-color: $color-transparent;
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 515;
+    }
+    
+    //&__background {
+    //    // TODO: delete
+    //    background-image: url('https://drive.google.com/uc?export=view&id=0BzFF7FmbJUo5X0NEUXFVd0NBcWc');
+    //    background-size: cover;
+    //    background-position: 0 0;
+    //    background-repeat: no-repeat;
+    //    height: 100%;
+    //    position: absolute;
+    //    width: 100%;
+    //    z-index: 510;
+    //}
+
+    &__canvas {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 520;
+    
+        .canvas3 {
+            z-index: 525;
+        }
+    
+        .canvas2 {
+            z-index: 530;
+        }
+    
+        .canvas1 {
+            z-index: 550;
+        }
+    }
+}

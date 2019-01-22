@@ -1,0 +1,64 @@
+@import 'colors.scss';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i&subset=latin-ext');
+
+/* Fonts */
+$font-default: 'Roboto', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-size-default: 16px;
+$line-height-default: 18px;
+$font-weight-default: 400;
+$font-color-default: $color-black;
+
+/* Spaces */
+$space-lg: 15px;
+$space-md: 10px;
+$space-sm: 5px;
+$space-xsm: 2px;
+
+/* Lines */
+$line-default: 1px;
+$line-medium: 2px;
+$line-thick: 3px;
+$line-fat: 4px;
+
+/* Z-indexes */
+
+/* Box-shadows */
+//@nui-shadow-default: 0 0 5px 0 @nui-shadow-color;
+//@nui-shadow-default: 0 0 5px 0 var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-elevated: 0 2px 10px 0 @nui-shadow-color;
+//@nui-shadow-elevated: 0 2px 10px 0 var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-inner: inset 0 1px 3px 0 @nui-shadow-color;
+//@nui-shadow-inner: inset 0 1px 3px 0 var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-inner-top: inset 6px 0 5px -5px @nui-shadow-color;
+//@nui-shadow-inner-top: inset 6px 0 5px -5px var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-inner-top-bottom: inset 0 6px 5px -5px @nui-shadow-color, inset 0 -6px 5px -5px @nui-shadow-color;
+//@nui-shadow-inner-top-bottom: inset 0 6px 5px -5px var(--nui-shadow-color, @nui-shadow-color), inset 0 -6px 5px -5px var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-inner-bottom: inset 0 -6px 5px -5px @nui-shadow-color;
+//@nui-shadow-inner-bottom: inset 0 -6px 5px -5px var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-inner-left: inset 6px 0px 5px -5px @nui-shadow-color;
+//@nui-shadow-inner-left: inset 6px 0px 5px -5px var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-inner-right: inset -6px 0px 5px -5px @nui-shadow-color;
+//@nui-shadow-inner-right: inset -6px 0px 5px -5px var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-inner-left-right: inset 6px 0px 5px -5px @nui-shadow-color, inset -6px 0px 5px -5px @nui-shadow-color;
+//@nui-shadow-inner-left-right: inset 6px 0px 5px -5px var(--nui-shadow-color, @nui-shadow-color), inset -6px 0px 5px -5px var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-top: 0 -6px 5px -5px @nui-shadow-color;
+//@nui-shadow-top: 0 -6px 5px -5px var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-bottom: 0 6px 5px -5px @nui-shadow-color;
+//@nui-shadow-bottom: 0 6px 5px -5px var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-left: -6px 0px 5px -5px @nui-shadow-color;
+//@nui-shadow-left: -6px 0px 5px -5px var(--nui-shadow-color, @nui-shadow-color);
+//
+//@nui-shadow-right: 6px 0px 5px -5px @nui-shadow-color;
+//@nui-shadow-right: 6px 0px 5px -5px var(--nui-shadow-color, @nui-shadow-color);

@@ -1,0 +1,188 @@
+@import '../../../../styles/variables.scss';
+
+@keyframes clouds-move {
+    0% { left: 0; }
+    100% { left: -100%; }
+}
+
+@keyframes clouds-change-opacity-1 {
+    0% { opacity: 0.1; }
+    22% { opacity: 0.5; }
+    40% { opacity: 0.28; }
+    58% { opacity: 0.4; }
+    80% { opacity: 0.16; }
+    100% { opacity: 0.1; }
+}
+
+@keyframes clouds-change-opacity-2 {
+    0% { opacity: 0.5; }
+    25% { opacity: 0.2; }
+    50% { opacity: 0.1; }
+    80% { opacity: 0.3; }
+    100% { opacity: 0.5; }
+}
+
+@keyframes clouds-change-opacity-3 {
+    0% { opacity: 0.8; }
+    27% { opacity: 0.2; }
+    52% { opacity: 0.6; }
+    68% { opacity: 0.3; }
+    100% { opacity: 0.8; }
+}
+
+@keyframes clouds-change-opacity-4 {
+    0% { opacity: 0.05; }
+    22% { opacity: 0.1; }
+    40% { opacity: 0.15; }
+    58% { opacity: 0.2; }
+    80% { opacity: 0.08; }
+    100% { opacity: 0.05; }
+}
+
+@keyframes clouds-change-opacity-5 {
+    0% { opacity: 0.6; }
+    21% { opacity: 0.1; }
+    47% { opacity: 0.5; }
+    74% { opacity: 0.2; }
+    100% { opacity: 0.6; }
+}
+
+.app-weather-effect-clouds {
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 700;
+    
+    &__background {
+        // TODO: calibrate with night theme and add separate background for night with heavy clouds
+        background: linear-gradient(25deg, $color-cloud_sky_lighter 0%, $color-cloud_sky_darker 100%);
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 710;
+    }
+
+    &__layer {
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        width: 200%;
+        z-index: 720;
+
+        &-01 {
+            animation: clouds-change-opacity-1 10s linear infinite, clouds-move 30s linear infinite;
+        }
+
+        &-02 {
+            animation: clouds-change-opacity-2 22s linear infinite, clouds-move 28s linear infinite;
+        }
+
+        &-03 {
+            animation: clouds-change-opacity-3 18s linear infinite, clouds-move 26s linear infinite;
+        }
+
+        &-04 {
+            animation: clouds-change-opacity-4 14s linear infinite, clouds-move 32s linear infinite;
+        }
+
+        &-05 {
+            animation: clouds-change-opacity-1 16s linear infinite, clouds-move 24s linear infinite;
+        }
+
+        &-06 {
+            animation: clouds-change-opacity-2 24s linear infinite, clouds-move 34s linear infinite;
+        }
+
+        &-07 {
+            animation: clouds-change-opacity-3 12s linear infinite, clouds-move 22s linear infinite;
+        }
+
+        &-08 {
+            animation: clouds-change-opacity-4 20s linear infinite, clouds-move 36s linear infinite;
+        }
+
+        &-09 {
+            animation: clouds-change-opacity-1 16s linear infinite, clouds-move 28s linear infinite;
+        }
+
+        &-10 {
+            animation: clouds-change-opacity-2 22s linear infinite, clouds-move 30s linear infinite;
+        }
+
+        &-11 {
+            animation: clouds-change-opacity-3 18s linear infinite, clouds-move 26s linear infinite;
+        }
+
+        &-12 {
+            animation: clouds-change-opacity-4 24s linear infinite, clouds-move 32s linear infinite;
+        }
+    }
+
+    &__img {
+        float: left;
+        height: 100%;
+        position: relative;
+        width: 50%;
+
+        &-01 {
+            background: url('../../../../assets/img/cloud-01.png') center center / 100% 100% no-repeat transparent;
+            top: 15%;
+        }
+
+        &-02 {
+            background: url('../../../../assets/img/cloud-02.png') center center / 100% 100% no-repeat transparent;
+            top: -15%;
+        }
+
+        &-03 {
+            background: url('../../../../assets/img/cloud-03.png') center center / 100% 100% no-repeat transparent;
+            top: 15%;
+        }
+
+        &-04 {
+            background: url('../../../../assets/img/cloud-04.png') center center / 100% 100% no-repeat transparent;
+            top: -15%;
+        }
+
+        &-05 {
+            background: url('../../../../assets/img/cloud-05.png') center center / 100% 100% no-repeat transparent;
+            top: 10%;
+        }
+
+        &-06 {
+            background: url('../../../../assets/img/cloud-06.png') center center / 100% 100% no-repeat transparent;
+            top: -10%;
+        }
+
+        &-07 {
+            background: url('../../../../assets/img/cloud-07.png') center center / 100% 100% no-repeat transparent;
+            top: 10%;
+        }
+
+        &-08 {
+            background: url('../../../../assets/img/cloud-08.png') center center / 100% 100% no-repeat transparent;
+            top: -10%;
+        }
+
+        &-09 {
+            background: url('../../../../assets/img/cloud-09.png') center center / 100% 100% no-repeat transparent;
+            top: 5%;
+        }
+
+        &-10 {
+            background: url('../../../../assets/img/cloud-10.png') center center / 100% 100% no-repeat transparent;
+            top: -5%;
+        }
+
+        &-11 {
+            background: url('../../../../assets/img/cloud-11.png') center center / 100% 100% no-repeat transparent;
+            top: 5%;
+        }
+
+        &-12 {
+            background: url('../../../../assets/img/cloud-12.png') center center / 100% 100% no-repeat transparent;
+            top: -5%;
+        }
+    }
+}

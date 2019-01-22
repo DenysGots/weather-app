@@ -1,0 +1,164 @@
+@import '../../../../styles/variables.scss';
+
+$moon-dimension: 120px;
+
+// TODO: add moon phases with different box-shadow, according to data, if any time left
+
+.app-weather-effect-moon {
+    background: $color-moon_main;
+    border-radius: 50%;
+    box-shadow: inset -25px 1px 1px 1px $color-moon_box-shadow, 0 0 50px 0 $color-moon_main;
+    filter: brightness(1.2) blur(0.5px);
+    height: $moon-dimension;
+    position: absolute;
+    width: $moon-dimension;
+    z-index: 300;
+
+    // TODO: remove this, must be handled by day-time-view
+    left: 70%;
+    top: 20%;
+
+    &_crater {
+        background: $color-moon_crater;
+        border-radius: 50%;
+        filter: brightness(1.2) blur(0.5px);
+        position: absolute;
+
+        &:nth-child(1) {
+            box-shadow: inset 6px -2px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+            height: (0.25 * $moon-dimension); //
+            left: (0.125 * $moon-dimension); //
+            top: (0.3 * $moon-dimension); //
+            width: (0.25 * $moon-dimension); //
+        }
+
+        &:nth-child(2) {
+            box-shadow: inset 3px -1px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+            height: (0.125 * $moon-dimension); //
+            left: (0.75 * $moon-dimension); //
+            top: (0.25 * $moon-dimension); //
+            width: (0.125 * $moon-dimension); //
+        }
+
+        &:nth-child(3) {
+            box-shadow: inset 3px -1px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+            height: (0.125 * $moon-dimension); //
+            left: (0.5 * $moon-dimension); //
+            top: (0.75 * $moon-dimension); //
+            width: (0.125 * $moon-dimension); //
+        }
+
+        &:nth-child(4) {
+            box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+            height: (0.08 * $moon-dimension); //
+            left: (0.25 * $moon-dimension); //
+            top: (0.75 * $moon-dimension); //
+            width: (0.08 * $moon-dimension); //
+        }
+
+        &:nth-child(5) {
+            box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+            height: (0.08 * $moon-dimension); //
+            left: (0.44 * $moon-dimension); //
+            top: (0.095 * $moon-dimension); //
+            width: (0.08 * $moon-dimension); //
+        }
+
+        &:nth-child(6) {
+            box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+            height: (0.08 * $moon-dimension); //
+            left: (0.57 * $moon-dimension); //
+            top: (0.4 * $moon-dimension); //
+            width: (0.08 * $moon-dimension); //
+        }
+
+        &:nth-child(7) {
+            box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+            height: (0.08 * $moon-dimension); //
+            left: (0.81 * $moon-dimension); //
+            top: (0.5 * $moon-dimension); //
+            width: (0.08 * $moon-dimension); //
+        }
+    }
+}
+
+
+//
+//.app-weather-effect-moon {
+//    background: $color-moon_main;
+//    border-radius: 50%;
+//    box-shadow: inset -25px 1px 1px 1px $color-moon_box-shadow, 0 0 50px 0 $color-moon_main;
+//    filter: brightness(1.2) blur(0.5px);
+//    height: 200px;
+//    margin: -100px;
+//    position: absolute;
+//    width: 200px;
+//    z-index: 200;
+//
+//    // TODO: remove this, must be handled by day-time-view
+//    left: 50%;
+//    top: 50%;
+//
+//    &_crater {
+//        background: $color-moon_crater;
+//        border-radius: 50%;
+//        filter: brightness(1.2) blur(0.5px);
+//        position: absolute;
+//
+//        &:nth-child(1) {
+//            box-shadow: inset 6px -2px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+//            height: 50px; //
+//            left: 25px; //
+//            top: 60px; //
+//            width: 50px; //
+//        }
+//
+//        &:nth-child(2) {
+//            box-shadow: inset 3px -1px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+//            height: 25px; //
+//            left: 150px; //
+//            top: 50px; //
+//            width: 25px; //
+//        }
+//
+//        &:nth-child(3) {
+//            box-shadow: inset 3px -1px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+//            height: 25px; //
+//            left: 100px; //
+//            top: 150px; //
+//            width: 25px; //
+//        }
+//
+//        &:nth-child(4) {
+//            box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+//            height: 12px; //
+//            left: 50px; //
+//            top: 150px; //
+//            width: 12px; //
+//        }
+//
+//        &:nth-child(5) {
+//            box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+//            height: 12px; //
+//            left: 88px; //
+//            top: 17px; //
+//            width: 12px; //
+//        }
+//
+//        &:nth-child(6) {
+//            box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+//            height: 12px; //
+//            left: 114px; //
+//            top: 80px; //
+//            width: 12px; //
+//        }
+//
+//        &:nth-child(7) {
+//            box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
+//            height: 12px; //
+//            left: 182px; //
+//            top: 100px; //
+//            width: 12px; //
+//        }
+//    }
+//}

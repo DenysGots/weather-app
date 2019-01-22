@@ -1,0 +1,55 @@
+@import '../../../../styles/variables.scss';
+
+
+// TODO: delete
+.app-weather-effect-water-drops__container {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+
+.app-weather-effect-water-drops {
+    height: 100%;
+    min-height: 100%;
+    min-width: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 900;
+
+    // TODO: change for realtime background => create 2 gradient samples: sun + fog background, cloudy + fog background
+    background-image: url("https://i.imgur.com/xQdYC7x.jpg");
+    background-size: cover;
+
+    // TODO: reuse for fog + this water drops
+    filter: blur(10px);
+
+    // TODO: move to variables
+    //z-index: 900;
+
+    &_drop {
+        // TODO: change for realtime background from above
+        background: no-repeat url("https://i.imgur.com/xQdYC7x.jpg");
+        background-size: (100vh /100 * 5) (100vw /100 * 5);
+        border-radius: 50%;
+        filter: brightness(1.2) blur(0.5px);
+        overflow: hidden;
+        position: absolute;
+        transform: rotate(180deg) rotateY(0);
+        z-index: 800;
+    }
+
+    &_border {
+        border-radius: 50%;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+        filter: brightness(1.2) blur(0.5px);
+        margin-left: 2px;
+        margin-top: 1px;
+        overflow: hidden;
+        position: absolute;
+        transform: rotateY(0);
+        z-index: 950;
+    }
+}

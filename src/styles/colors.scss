@@ -1,0 +1,41 @@
+/** Colors **/
+$color-transparent: transparent;
+$color-white: #fff;
+$color-dirty_white: #fafafa;
+$color-light_gray: #f0f0f0;
+$color-gray: #d5d5d5;
+$color-mid_gray: #999;
+$color-dark_gray: #707070;
+$color-light_black: #333;
+$color-black: #111;
+$color-orange: #f99d1c;
+$color-blue: #0079aa;
+$color-cyan: #00c4d2;
+$color-red: #950000;
+$color-yellow: #fec405;
+$color-green: #00a753;
+
+/** Palette **/
+/* Sky */
+$color-blue_sky: #2EB5E5;
+$color-night_sky: #00000c;
+$color-rain_wall: hsla(242, 90%, 5%, 0.3);
+$color-snow_wall: hsla(242, 95%, 3%, 0.5);
+$color-cloud_sky_lighter: rgba(253, 245, 230, 0.6); // #fdf5e6
+$color-cloud_sky_darker: rgba(128, 128, 128, 0.9); // #808080
+
+/* Sun */
+$color-sun: #FDB813;
+
+/* Moon */
+$color-moon_main: #c7cbd0;
+$color-moon_box-shadow: #9098a1;
+$color-moon_crater: #737277;
+$color-moon_crater_box-shadow: #414043;
+
+/* Lightning */
+$color-lightning-background-lighter: rgba(59, 59, 59, 0.3);
+$color-lightning-background-darker: rgba(34, 34, 34, 0.9);
+
+/* Box-shadow */
+$color-box-shadow: rgba(17, 17, 17, 0.3);

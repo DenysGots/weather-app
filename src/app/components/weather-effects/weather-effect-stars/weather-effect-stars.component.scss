@@ -1,0 +1,104 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+@function create-box-shadow($quantity-of-stars) {
+    $box-shadow: ();
+    
+    @for $i from 1 to $quantity-of-stars {
+        $box-shadow: append($box-shadow, (random(2000) + 0px) (random(2000) + 0px) $color-white, comma);
+    }
+    
+    @return ($box-shadow);
+}
+
+$stars-box-shadow-large: create-box-shadow(300);
+$stars-box-shadow-medium: create-box-shadow(500);
+$stars-box-shadow-small: create-box-shadow(800);
+
+@include keyframes(stars-blink-large) {
+    0% { box-shadow: $stars-box-shadow-large; }
+    
+    70% {
+        $colors: '#{$color-white}', '#{$color-transparent}';
+        $stars: $stars-box-shadow-large;
+        
+        @for $i from 1 to length($stars) {
+            $star: set-nth(nth($stars, $i), 3, unquote(nth($colors, random(length($colors)))));
+            $stars: set-nth($stars, $i, $star);
+        }
+        
+        box-shadow: $stars;
+    }
+    
+    100% { box-shadow: $stars-box-shadow-large; }
+}
+
+@include keyframes(stars-blink-medium) {
+    0% { box-shadow: $stars-box-shadow-medium; }
+    
+    70% {
+        $colors: '#{$color-white}', '#{$color-transparent}';
+        $stars: $stars-box-shadow-medium;
+        
+        @for $i from 1 to length($stars) {
+            $star: set-nth(nth($stars, $i), 3, unquote(nth($colors, random(length($colors)))));
+            $stars: set-nth($stars, $i, $star);
+        }
+        
+        box-shadow: $stars;
+    }
+    
+    100% { box-shadow: $stars-box-shadow-medium; }
+}
+
+@include keyframes(stars-blink-small) {
+    0% { box-shadow: $stars-box-shadow-small; }
+    
+    70% {
+        $colors: '#{$color-white}', '#{$color-transparent}';
+        $stars: $stars-box-shadow-small;
+        
+        @for $i from 1 to length($stars) {
+            $star: set-nth(nth($stars, $i), 3, unquote(nth($colors, random(length($colors)))));
+            $stars: set-nth($stars, $i, $star);
+        }
+        
+        box-shadow: $stars;
+    }
+    
+    100% { box-shadow: $stars-box-shadow-small; }
+}
+
+.app-weather-effect-stars {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+    
+    &--large {
+        animation: stars-blink-large 7s infinite;
+        background: transparent;
+        border-radius: 50%;
+        box-shadow: $stars-box-shadow-large;
+        height: 3px;
+        width: 3px;
+    }
+    
+    &--medium {
+        animation: stars-blink-medium 5s infinite;
+        background: transparent;
+        border-radius: 50%;
+        box-shadow: $stars-box-shadow-medium;
+        height: 2px;
+        width: 2px;
+    }
+    
+    &--small {
+        animation: stars-blink-small 3s infinite;
+        background: transparent;
+        border-radius: 50%;
+        box-shadow: $stars-box-shadow-small;
+        height: 1px;
+        width: 1px;
+    }
+}

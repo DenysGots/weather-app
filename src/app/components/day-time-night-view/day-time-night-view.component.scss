@@ -1,0 +1,14 @@
+@import '../../../styles/variables.scss';
+
+.app-day-time-night-view {
+    height: 100%;
+    position: relative;
+    z-index: 0;
+    
+    //background-color: $color-night_sky;
+    //background: radial-gradient(ellipse at bottom, rgb(9, 76, 114) 0%, rgb(1, 41, 63) 100%);
+    background: radial-gradient(ellipse at bottom, rgb(3, 16, 44) 0%, rgb(1, 11, 23) 100%);
+    
+    // TODO: width must be calculated programmatically
+    width: 100%;
+}

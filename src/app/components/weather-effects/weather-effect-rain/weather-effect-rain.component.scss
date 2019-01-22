@@ -1,0 +1,33 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+.app-weather-effect-rain {
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 600;
+
+    // TODO: need 2 different layers for medium and heavy types of rain
+    &__background {
+        background: $color-rain_wall;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 610;
+    }
+
+    &__canvas {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 620;
+    }
+    
+    &-through__canvas {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 630;
+    }
+}

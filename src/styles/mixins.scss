@@ -1,0 +1,36 @@
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}
+
+@mixin animation($name, $duration, $timing-function, $delay) {
+    -webkit-animation: $name $duration $timing-function $delay;
+    animation: $name $duration $timing-function $delay;
+}
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+    
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+    
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+//@mixin gradient($) {
+//
+//}
+
+//@mixin box-shadow($) {
+//
+//}
