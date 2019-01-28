@@ -1,11 +1,12 @@
 /** Colors **/
-$color-transparent: transparent;
+$color-transparent: rgba(255, 255, 255, 0);
 $color-white: #fff;
 $color-dirty_white: #fafafa;
 $color-light_gray: #f0f0f0;
 $color-gray: #d5d5d5;
 $color-mid_gray: #999;
 $color-dark_gray: #707070;
+$color-darker-gray: #808080;
 $color-light_black: #333;
 $color-black: #111;
 $color-orange: #f99d1c;
@@ -19,10 +20,13 @@ $color-green: #00a753;
 /* Sky */
 $color-blue_sky: #2EB5E5;
 $color-night_sky: #00000c;
-$color-rain_wall: hsla(242, 90%, 5%, 0.3);
+$color-rain_wall_lighter: hsla(242, 90%, 5%, 0.3);
+$color-rain_wall_darker: hsla(242, 90%, 5%, 0.6);
 $color-snow_wall: hsla(242, 95%, 3%, 0.5);
-$color-cloud_sky_lighter: rgba(253, 245, 230, 0.6); // #fdf5e6
-$color-cloud_sky_darker: rgba(128, 128, 128, 0.9); // #808080
+$color-cloud_sky_day_lighter: rgba(253, 245, 230, 0.6); // #fdf5e6
+$color-cloud_sky_day_darker: rgba(128, 128, 128, 0.9); // #808080
+$color-cloud_sky_night_lighter: rgba(16, 12, 5, 0.8);
+$color-cloud_sky_night_darker: rgba(4, 4, 4, 0.9);
 
 /* Sun */
 $color-sun: #FDB813;
@@ -34,8 +38,11 @@ $color-moon_crater: #737277;
 $color-moon_crater_box-shadow: #414043;
 
 /* Lightning */
-$color-lightning-background-lighter: rgba(59, 59, 59, 0.3);
-$color-lightning-background-darker: rgba(34, 34, 34, 0.9);
+$color-lightning-background-lighter: rgba(255, 255, 240, 0.7); //rgba(59, 59, 59, 0.3);
+$color-lightning-background-darker: rgba(203, 205, 200, 0.1); //rgba(34, 34, 34, 0.9);
 
 /* Box-shadow */
 $color-box-shadow: rgba(17, 17, 17, 0.3);
+
+/* Weather card */
+$weather-card-background: rgba(255, 255, 255, 0.7);

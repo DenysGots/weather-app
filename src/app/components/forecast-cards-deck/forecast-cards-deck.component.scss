@@ -1,5 +1,17 @@
 @import '../../../styles/variables.scss';
 
+:host {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
 .app-forecast-cards-deck {
+    align-content: center;
+    contain: content;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    position: relative;
     width: 100%;
 }

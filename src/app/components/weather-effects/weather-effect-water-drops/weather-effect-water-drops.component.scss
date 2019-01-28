@@ -3,6 +3,7 @@
 
 // TODO: delete
 .app-weather-effect-water-drops__container {
+    contain: content;
     height: 100%;
     overflow: hidden;
     position: relative;
@@ -11,6 +12,7 @@
 
 
 .app-weather-effect-water-drops {
+    contain: content;
     height: 100%;
     min-height: 100%;
     min-width: 100%;

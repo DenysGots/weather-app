@@ -4,7 +4,8 @@
 .app-weather-effect-lightning {
     // TODO: delete
     background: #222;
-
+    
+    contain: content;
     height: 100%;
     overflow: hidden;
     width: 100%;

@@ -1,0 +1,44 @@
+@import "variables.scss";
+
+/* Text */
+.app-text-size-default {
+    font-size: $font-size-default;
+    line-height: $line-height-default;
+}
+
+.app-text-size-extra {
+    font-size: $font-size-extra;
+    line-height: $line-height-extra;
+}
+
+.app-text-size-small {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+}
+
+.app-text-size-heading-default {
+    font-size: $font-size-big;
+    line-height: $line-height-big;
+}
+
+.app-text-size-heading-big {
+    font-size: $font-size-hero;
+    line-height: $line-height-hero;
+}
+
+.app-text-size-heading-hero {
+    font-size: $font-size-extra-big;
+    line-height: $line-height-hero;
+}
+
+.app-text-weight-regular {
+    font-weight: $font-weight-default;
+}
+
+.app-text-weight-semibold {
+    font-weight: $font-weight-semibold;
+}
+
+.app-text-weight-bold {
+    font-weight: $font-weight-bold;
+}

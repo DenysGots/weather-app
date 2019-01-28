@@ -1,6 +1,15 @@
 @import '../../../styles/variables.scss';
 
+:host {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
 .app-day-time-weather-view {
+    border-radius: $border-radius-default;
+    box-shadow: $box-shadow-default;
+    contain: content;
     height: 100%;
     position: relative;
     width: 100%;

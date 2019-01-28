@@ -2,32 +2,41 @@
 @import '../../../../styles/mixins.scss';
 
 .app-weather-effect-rain {
+    contain: content;
     height: 100%;
     overflow: hidden;
     position: absolute;
     width: 100%;
-    z-index: 600;
+    z-index: 800;
 
     // TODO: need 2 different layers for medium and heavy types of rain
-    &__background {
-        background: $color-rain_wall;
+    &__background-lighter {
+        background: $color-rain_wall-lighter;
         height: 100%;
         position: absolute;
         width: 100%;
-        z-index: 610;
+        z-index: 810;
+    }
+
+    &__background-darker {
+        background: $color-rain_wall-darker;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 810;
     }
 
     &__canvas {
         height: 100%;
         position: absolute;
         width: 100%;
-        z-index: 620;
+        z-index: 820;
     }
-    
+
     &-through__canvas {
         height: 100%;
         position: absolute;
         width: 100%;
-        z-index: 630;
+        z-index: 830;
     }
 }

@@ -1,13 +1,14 @@
 @import '../../../styles/variables.scss';
 
 .app-day-time-day-view {
+    contain: content;
     height: 100%;
     position: relative;
     z-index: 0;
-    
+
     background-image: linear-gradient(#6af, #bdf);
     //background-color: $color-blue_sky;
-    
+
     // TODO: width must be calculated programmatically
     width: 100%;
 }

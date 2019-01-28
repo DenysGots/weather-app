@@ -25,6 +25,7 @@ $sun-container-dimension: 200px;
 .app-weather-effect-sun {
     animation: sunpulse 2s alternate infinite;
     border-radius: 50%;
+    contain: content;
     height: $sun-dimension;
     margin: auto;
     opacity: 1.0;

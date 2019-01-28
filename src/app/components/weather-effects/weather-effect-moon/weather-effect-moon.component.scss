@@ -8,6 +8,7 @@ $moon-dimension: 120px;
     background: $color-moon_main;
     border-radius: 50%;
     box-shadow: inset -25px 1px 1px 1px $color-moon_box-shadow, 0 0 50px 0 $color-moon_main;
+    contain: content;
     filter: brightness(1.2) blur(0.5px);
     height: $moon-dimension;
     position: absolute;

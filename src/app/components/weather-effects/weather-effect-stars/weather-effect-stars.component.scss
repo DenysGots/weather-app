@@ -70,6 +70,7 @@ $stars-box-shadow-small: create-box-shadow(800);
 }
 
 .app-weather-effect-stars {
+    contain: content;
     height: 100%;
     width: 100%;
     position: absolute;

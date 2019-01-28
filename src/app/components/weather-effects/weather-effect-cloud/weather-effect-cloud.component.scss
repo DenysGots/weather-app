@@ -23,11 +23,11 @@
 }
 
 @keyframes clouds-change-opacity-3 {
-    0% { opacity: 0.8; }
+    0% { opacity: 0.6; }
     27% { opacity: 0.2; }
-    52% { opacity: 0.6; }
+    52% { opacity: 0.4; }
     68% { opacity: 0.3; }
-    100% { opacity: 0.8; }
+    100% { opacity: 0.6; }
 }
 
 @keyframes clouds-change-opacity-4 {
@@ -48,19 +48,27 @@
 }
 
 .app-weather-effect-clouds {
+    contain: content;
     height: 100%;
     overflow: hidden;
     position: absolute;
     width: 100%;
     z-index: 700;
     
-    &__background {
-        // TODO: calibrate with night theme and add separate background for night with heavy clouds
-        background: linear-gradient(25deg, $color-cloud_sky_lighter 0%, $color-cloud_sky_darker 100%);
+    &__day-background {
+        background: linear-gradient(25deg, $color-cloud_sky_day_lighter 0%, $color-cloud_sky_day_darker 100%);
         height: 100%;
         position: absolute;
         width: 100%;
         z-index: 710;
+    }
+    
+    &__night-background {
+        background: linear-gradient(25deg, $color-cloud_sky_night_lighter 0%, $color-cloud_sky_night_darker 100%);
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 730;
     }
 
     &__layer {

@@ -1,5 +1,11 @@
 <div class="app-weather-effect-clouds">
-    <div *ngIf="isOvercast('heavy')" class="app-weather-effect-clouds__background"></div>
+    <div *ngIf="isOvercast('heavy') && isTimeOfDay('day')"
+         class="app-weather-effect-clouds__day-background">
+    </div>
+    
+    <div *ngIf="isOvercast('heavy') && isTimeOfDay('night')"
+         class="app-weather-effect-clouds__night-background">
+    </div>
     
     <div class="app-weather-effect-clouds__layer app-weather-effect-clouds__layer-01">
         <div class="app-weather-effect-clouds__img app-weather-effect-clouds__img-01"></div>

@@ -23,6 +23,7 @@
 }
 
 .app-weather-effect-fog {
+    contain: content;
     height: 100%;
     overflow: hidden;
     position: absolute;

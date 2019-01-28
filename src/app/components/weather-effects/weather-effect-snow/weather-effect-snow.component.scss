@@ -2,6 +2,7 @@
 @import '../../../../styles/mixins.scss';
 
 .app-weather-effect-snow {
+    contain: content;
     height: 100%;
     overflow: hidden;
     position: absolute;

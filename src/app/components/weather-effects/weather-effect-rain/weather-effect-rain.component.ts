@@ -3,10 +3,17 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    Input,
     NgZone,
     OnInit,
     ViewChild,
 } from '@angular/core';
+
+export enum Overcast {
+    light = 'light',
+    medium = 'medium',
+    heavy = 'heavy',
+}
 
 @Component({
     selector: 'app-weather-effect-rain',
@@ -15,6 +22,8 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeatherEffectRainComponent implements OnInit {
+    @Input() public overcast: Overcast = Overcast.heavy;
+
     public rainCanvas;
     public rainThroughCanvas;
 
@@ -37,6 +46,10 @@ export class WeatherEffectRainComponent implements OnInit {
         this.ngZone.runOutsideAngular(() => {
             this.makeItRain();
         });
+    }
+
+    public isOvercast(type): boolean {
+        return this.overcast === Overcast[type];
     }
 
     private makeItRain(): void {

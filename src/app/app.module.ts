@@ -13,6 +13,7 @@ import { DayTimeDayViewComponent } from './components/day-time-day-view/day-time
 import { DayTimeNightViewComponent } from './components/day-time-night-view/day-time-night-view.component';
 import { DayTimeWeatherViewComponent } from './components/day-time-weather-view/day-time-weather-view.component';
 import { ForecastCardsDeckComponent } from './components/forecast-cards-deck/forecast-cards-deck.component';
+import { ForecastCurrentInformationComponent } from './components/forecast-current-information/forecast-current-information.component';
 import { ForecastWeatherCardComponent } from './components/forecast-weather-card/forecast-weather-card.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { WeatherEffectCloudComponent } from './components/weather-effects/weather-effect-cloud/weather-effect-cloud.component';
@@ -45,6 +46,7 @@ export function getWindow() {
         DayTimeNightViewComponent,
         DayTimeWeatherViewComponent,
         ForecastCardsDeckComponent,
+        ForecastCurrentInformationComponent,
         ForecastWeatherCardComponent,
         MainPageComponent,
         WeatherEffectCloudComponent,

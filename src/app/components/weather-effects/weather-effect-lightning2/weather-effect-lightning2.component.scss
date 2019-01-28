@@ -5,36 +5,67 @@
 // lighter color must be lighter variant of day-time background weather color
 // OR: darker and lighter are lighter and lighter x 2 of background
 // OR: just lighter and lighter x 2 of day gray background color with 100% opacity at start/end (PREFERABLE!!!)
+//@keyframes thunder-background {
+//    0% { background-color: $color-lightning-background-darker; }
+//    1% { background-color: $color-lightning-background-darker; }
+//    9% { background-color: $color-lightning-background-darker; }
+//    10% { background-color: $color-lightning-background-lighter; }
+//    10.5% { background-color: $color-lightning-background-darker; }
+//    80% { background-color: $color-lightning-background-darker; }
+//    82% { background-color: $color-lightning-background-lighter; }
+//    83% { background-color: $color-lightning-background-darker; }
+//    83.5% { background-color: $color-lightning-background-lighter; }
+//    98% { background-color: $color-lightning-background-lighter; }
+//    100% { background-color: $color-lightning-background-darker; }
+//}
+
 @keyframes thunder-background {
     0% { background-color: $color-lightning-background-darker; }
-    9% { background-color: $color-lightning-background-darker; }
-    10% { background-color: $color-lightning-background-lighter; }
-    10.5% { background-color: $color-lightning-background-darker; }
-    80% { background-color: $color-lightning-background-darker; }
-    82% { background-color: $color-lightning-background-lighter; }
-    83% { background-color: $color-lightning-background-darker; }
-    83.5% { background-color: $color-lightning-background-lighter; }
+    1% { background-color: $color-lightning-background-lighter; }
+    9% { background-color: $color-lightning-background-lighter; }
+    10% { background-color: $color-lightning-background-darker; }
+    10.5% { background-color: $color-lightning-background-lighter; }
+    11% { background-color: $color-lightning-background-darker; }
+    79% { background-color: $color-lightning-background-darker; }
+    80% { background-color: $color-lightning-background-lighter; }
+    82% { background-color: $color-lightning-background-darker; }
+    83% { background-color: $color-lightning-background-lighter; }
+    83.5% { background-color: $color-lightning-background-darker; }
+    98% { background-color: $color-lightning-background-darker; }
+    99% { background-color: $color-lightning-background-lighter; }
     100% { background-color: $color-lightning-background-darker; }
 }
 
 .app-weather-effect-lightning2 {
+    contain: content;
     height: 100%;
     overflow: hidden;
     position: absolute;
     width: 100%;
-    z-index: 500;
+    z-index: 900;
     
-    &:after {
+    //&:after {
+    //    animation: thunder-background 6s infinite;
+    //    background-color: $color-transparent;
+    //    content: '';
+    //    display: block;
+    //    height: 100%;
+    //    left: 0;
+    //    position: absolute;
+    //    top: 0;
+    //    width: 100%;
+    //    z-index: 515;
+    //}
+    
+    &__background {
         animation: thunder-background 6s infinite;
-        //background-color: $color-transparent;
-        content: '';
-        display: block;
+        //animation-timing-function: steps(10, end);
+        transition: none !important;
         height: 100%;
-        left: 0;
         position: absolute;
-        top: 0;
         width: 100%;
-        z-index: 515;
+        z-index: 915;
+        background-color: white;
     }
     
     //&__background {
@@ -53,18 +84,18 @@
         height: 100%;
         position: absolute;
         width: 100%;
-        z-index: 520;
+        z-index: 920;
     
         .canvas3 {
-            z-index: 525;
+            z-index: 925;
         }
     
         .canvas2 {
-            z-index: 530;
+            z-index: 930;
         }
     
         .canvas1 {
-            z-index: 550;
+            z-index: 950;
         }
     }
 }

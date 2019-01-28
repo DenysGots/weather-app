@@ -1,6 +1,7 @@
 @import '../../../styles/variables.scss';
 
 .app-day-time-night-view {
+    contain: content;
     height: 100%;
     position: relative;
     z-index: 0;

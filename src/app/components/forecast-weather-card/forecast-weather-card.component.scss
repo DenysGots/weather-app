@@ -1,6 +1,17 @@
 @import '../../../styles/variables.scss';
 
-.app-forecast-weather-card {
+:host {
     height: 100%;
+    position: relative;
+    width: calc(100% / 7 - #{$space-md} / 2);
+}
+
+.app-forecast-weather-card {
+    background-color: $weather-card-background;
+    border-radius: $border-radius-default;
+    box-shadow: $box-shadow-default;
+    contain: content;
+    height: $weather-card-height;
+    position: relative;
     width: 100%;
 }
