@@ -22,18 +22,20 @@ export enum Overcast {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeatherEffectRainComponent implements OnInit {
-    @Input() public overcast: Overcast = Overcast.heavy;
+    @Input() viewHeight: number;
+    @Input() viewWidth: number;
+    @Input() overcast: Overcast = Overcast.heavy;
+
+    @ViewChild('rainCanvas') rainCanvasRef: ElementRef;
+    @ViewChild('rainThroughCanvas') rainThroughCanvasRef: ElementRef;
 
     public rainCanvas;
     public rainThroughCanvas;
 
-    private pageWidth = window.innerWidth;
-    private pageHeight = window.innerHeight;
+    // private viewHeight = window.innerHeight;
+    // private viewWidth = window.innerWidth;
     private numberOfDrops = 750;
     private numberOfThroughDrops = 50;
-
-    @ViewChild('rainCanvas') rainCanvasRef: ElementRef;
-    @ViewChild('rainThroughCanvas') rainThroughCanvasRef: ElementRef;
 
     constructor(private ngZone: NgZone,
                 private changeDetectorRef: ChangeDetectorRef) { }
@@ -57,8 +59,8 @@ export class WeatherEffectRainComponent implements OnInit {
         const rainThroughContext = this.rainThroughCanvas.getContext('2d');
         const numberOfDrops = this.numberOfDrops;
         const numberOfThroughDrops = this.numberOfThroughDrops;
-        const canvasWidth = this.pageWidth;
-        const canvasHeight = this.pageHeight;
+        const canvasWidth = this.viewWidth;
+        const canvasHeight = this.viewHeight;
         const drops = [];
         const throughDrops = [];
         const mv = 20;
@@ -97,8 +99,8 @@ export class WeatherEffectRainComponent implements OnInit {
                 this.gradient = rainThroughContext.createLinearGradient(0, this.y, 0, this.y + this.length);
                 // this.gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
                 // this.gradient.addColorStop(1, `rgba(255, 255, 255, ${this.opacity})`);
-                this.gradient.addColorStop(0, '#000');
-                this.gradient.addColorStop(1, `rgba(0, 0, 0, ${this.opacity})`);
+                this.gradient.addColorStop(0, `rgba(0, 0, 0, ${this.opacity})`);
+                this.gradient.addColorStop(1, '#000');
                 rainThroughContext.beginPath();
                 rainThroughContext.fillStyle = this.gradient;
                 rainThroughContext.fillRect(this.x, this.y, 1, this.length);

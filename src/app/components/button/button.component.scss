@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+:host {
+    position: relative;
+}
+
+.app-button {
+    align-items: center;
+    background-color: $color-button;
+    border-radius: 50%;
+    border: 1px solid $color-transparent;
+    contain: content;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    
+    &:hover {
+        background-color: $color-button-active;
+    }
+    
+    &:active {
+        background-color: $color-button-active;
+        border: 1px solid $color-light_black;
+    }
+}

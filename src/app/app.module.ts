@@ -9,12 +9,22 @@ import { SharedModule } from './modules/shared/shared.module';
 import { routes } from './app.routing';
 import { AppComponent } from './app.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
+
+import { ButtonComponent } from './components/button/button.component';
+import { ControlPanelComponent } from './components/control-panel/control-panel.component';
 import { DayTimeDayViewComponent } from './components/day-time-day-view/day-time-day-view.component';
 import { DayTimeNightViewComponent } from './components/day-time-night-view/day-time-night-view.component';
 import { DayTimeWeatherViewComponent } from './components/day-time-weather-view/day-time-weather-view.component';
 import { ForecastCardsDeckComponent } from './components/forecast-cards-deck/forecast-cards-deck.component';
 import { ForecastCurrentInformationComponent } from './components/forecast-current-information/forecast-current-information.component';
 import { ForecastWeatherCardComponent } from './components/forecast-weather-card/forecast-weather-card.component';
+import { IconComponent } from './components/icon/icon.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { WeatherEffectCloudComponent } from './components/weather-effects/weather-effect-cloud/weather-effect-cloud.component';
 import { WeatherEffectFogComponent } from './components/weather-effects/weather-effect-fog/weather-effect-fog.component';
@@ -42,12 +52,15 @@ export function getWindow() {
 @NgModule({
     declarations: [
         AppComponent,
+        ButtonComponent,
+        ControlPanelComponent,
         DayTimeDayViewComponent,
         DayTimeNightViewComponent,
         DayTimeWeatherViewComponent,
         ForecastCardsDeckComponent,
         ForecastCurrentInformationComponent,
         ForecastWeatherCardComponent,
+        IconComponent,
         MainPageComponent,
         WeatherEffectCloudComponent,
         WeatherEffectFogComponent,
@@ -78,6 +91,7 @@ export function getWindow() {
         }),
         SharedModule,
         BrowserAnimationsModule,
+        FontAwesomeModule,
     ],
     providers: [
         {
@@ -88,4 +102,8 @@ export function getWindow() {
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor() {
+        library.add(faAngleLeft, faAngleRight, faPlus, faMinus);
+    }
+}

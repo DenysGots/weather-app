@@ -3,15 +3,65 @@
 :host {
     height: 100%;
     position: relative;
-    width: calc(100% / 7 - #{$space-md} / 2);
+    width: calc((100% - 2* #{$space-xs}) / 7 - #{$space-md} / 2);
 }
 
 .app-forecast-weather-card {
+    // TODO: add color with opacity ~0.7
     background-color: $weather-card-background;
     border-radius: $border-radius-default;
     box-shadow: $box-shadow-default;
+    color: $color-cloud_sky_night_darker;
     contain: content;
     height: $weather-card-height;
+    padding: $space-md;
     position: relative;
     width: 100%;
+    
+    &__block {
+        padding: $space-xs 0;
+        position: relative;
+    
+        &:first-of-type {
+            padding-top: 0;
+        }
+    
+        &:last-of-type {
+            padding-bottom: 0;
+        }
+    }
+    
+    &__double-data-container {
+        display: inline-block;
+        padding: 0 $space-lg;
+        position: relative;
+        transform: rotate(-55deg);
+    }
+    
+    &__double-data-content {
+        &:first-of-type {
+            padding-bottom: $space-md;
+        }
+    
+        &:last-of-type {
+            padding-top: $space-md;
+        }
+    }
+    
+    &__double-data {
+        display: inline-block;
+        transform: rotate(55deg);
+    }
+    
+    &__double-data-divider {
+        margin: 0 auto;
+        width: 70%;
+        height: 0;
+        border-top: 2px solid $color-cloud_sky_night_darker;
+        transform: rotate(25deg);
+    }
+    
+    .wi {
+        color: $color-blue;
+    }
 }

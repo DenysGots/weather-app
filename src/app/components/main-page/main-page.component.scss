@@ -8,7 +8,9 @@
 
 .app-main-page {
     contain: content;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
+    overflow: auto;
     position: relative;
     width: 100%;
     
@@ -27,7 +29,7 @@
     &__day-time-view {
         align-items: center;
         display: flex;
-        height: 45%;
+        height: 45vh;
         justify-content: center;
         padding: 0 15%;
         position: relative;

@@ -1,0 +1,10 @@
+@import '../../../styles/variables.scss';
+
+:host {
+    position: relative;
+}
+
+.app-control-panel {
+    contain: content;
+    position: relative;
+}

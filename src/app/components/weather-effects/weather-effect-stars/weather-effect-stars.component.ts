@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    Input,
 } from '@angular/core';
 
 @Component({
@@ -10,5 +11,8 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeatherEffectStarsComponent {
+    @Input() viewHeight: number;
+    @Input() viewWidth: number;
+
     constructor() { }
 }

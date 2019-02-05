@@ -1,6 +1,7 @@
 import {
     Component,
     ElementRef,
+    Input,
     OnInit,
     ViewChild,
 } from '@angular/core';
@@ -14,9 +15,12 @@ import { WeatherEffectLightningService } from '../../../services/weather-effect-
     styleUrls: ['./weather-effect-lightning.component.scss']
 })
 export class WeatherEffectLightningComponent implements OnInit {
-    public lightningCanvas;
+    @Input() viewHeight: number;
+    @Input() viewWidth: number;
 
     @ViewChild('lightningCanvas') lightningCanvasRef: ElementRef;
+
+    public lightningCanvas;
 
     constructor(private weatherEffectLightningService: WeatherEffectLightningService) { }
 

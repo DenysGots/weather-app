@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    Input,
     NgZone,
     OnInit,
     ViewChild,
@@ -15,13 +16,16 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeatherEffectSnowComponent implements OnInit {
+    @Input() viewHeight: number;
+    @Input() viewWidth: number;
+
+    @ViewChild('snowCanvas') snowCanvasRef: ElementRef;
+
     public snowCanvas;
 
     private pageWidth = window.innerWidth;
     private pageHeight = window.innerHeight;
     private numberOfDrops = 500;
-
-    @ViewChild('snowCanvas') snowCanvasRef: ElementRef;
 
     constructor(private ngZone: NgZone,
                 private changeDetectorRef: ChangeDetectorRef) { }

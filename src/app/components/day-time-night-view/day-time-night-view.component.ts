@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    Input,
     OnInit,
 } from '@angular/core';
 
@@ -11,6 +12,9 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DayTimeNightViewComponent implements OnInit {
+    @Input() viewHeight: number;
+    @Input() viewWidth: number;
+
     constructor() { }
 
     ngOnInit() { }

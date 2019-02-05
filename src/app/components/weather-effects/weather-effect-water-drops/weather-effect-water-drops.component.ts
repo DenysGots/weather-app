@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+} from '@angular/core';
 
 @Component({
-  selector: 'app-weather-effect-water-drops',
-  templateUrl: './weather-effect-water-drops.component.html',
-  styleUrls: ['./weather-effect-water-drops.component.scss']
+    selector: 'app-weather-effect-water-drops',
+    templateUrl: './weather-effect-water-drops.component.html',
+    styleUrls: ['./weather-effect-water-drops.component.scss']
 })
 export class WeatherEffectWaterDropsComponent implements OnInit {
+    @Input() viewHeight: number;
+    @Input() viewWidth: number;
+
     public drops: any[] = [];
     public borders: any[] = [];
 

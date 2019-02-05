@@ -4,7 +4,6 @@ import {
     OnInit,
 } from '@angular/core';
 
-// export type Overcast = 'light' | 'medium' | 'heavy';
 export enum Overcast {
     light = 'light',
     medium = 'medium',
@@ -22,9 +21,8 @@ export enum TimeOfDay {
     styleUrls: ['./weather-effect-cloud.component.scss'],
 })
 export class WeatherEffectCloudComponent implements OnInit {
-    // @Input() public overcast: Overcast<string> = 'heavy';
-    @Input() public overcast: Overcast = Overcast.heavy;
-    @Input() public timeOfDay: TimeOfDay = TimeOfDay.day;
+    @Input() overcast: Overcast = Overcast.heavy;
+    @Input() timeOfDay: TimeOfDay = TimeOfDay.day;
 
     constructor() { }
 

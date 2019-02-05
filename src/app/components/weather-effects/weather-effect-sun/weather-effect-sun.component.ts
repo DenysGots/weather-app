@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+} from '@angular/core';
 
 @Component({
     selector: 'app-weather-effect-sun',
@@ -7,6 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeatherEffectSunComponent implements OnInit {
     // TODO: sun animation can be created here, as a simple x/y coords change in time
+
+    @Input() viewHeight: number;
+    @Input() viewWidth: number;
 
     constructor() { }
 
