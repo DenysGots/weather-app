@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     Input,
     OnInit,
@@ -10,52 +11,61 @@ import {
     styleUrls: ['./weather-effect-water-drops.component.scss']
 })
 export class WeatherEffectWaterDropsComponent implements OnInit {
+    // TODO: import all possible backgrounds here and use them for drops background accordingly with main view
+
     @Input() viewHeight: number;
     @Input() viewWidth: number;
 
     public drops: any[] = [];
     public borders: any[] = [];
 
-    private pageWidth = window.innerWidth;
-    private pageHeight = window.innerHeight;
     private numberOfDrops = 100;
 
-    constructor() { }
+    constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.generateDrops();
     }
 
+    private randomTimeout(): number {
+        return Math.random() * 10000;
+    }
+
     private generateDrops(): void {
         for (let i = 0; i < this.numberOfDrops; i++) {
-            const x = Math.random();
-            const y = Math.random();
+            setTimeout(() => {
+                const x = Math.random();
+                const y = Math.random();
 
-            const dropWidth = Math.random() * 11 + 6;
-            const dropHeight = dropWidth * ((Math.random() * 0.5) + 0.7);
+                const dropWidth = Math.random() * 11 + 6;
+                const dropHeight = dropWidth * ((Math.random() * 0.5) + 0.7);
 
-            const xPosition =  x * this.pageWidth;
-            const yPosition =  y * this.pageHeight;
+                const xPosition =  x * this.viewWidth;
+                const yPosition =  y * this.viewHeight;
 
-            // const backgroundPosition = `${Math.random() * 100}% ${Math.random() * 100}%`;
-            const backgroundPosition = `${x * 100}% ${y * 100}%`;
+                const backgroundPosition = `${x * 100}% ${y * 100}%`;
+                const backgroundSize = `${this.viewHeight / 100 * 5}px ${this.viewWidth / 100 * 5}px`;
 
-            const borderWidth = dropWidth - 4;
+                const borderWidth = dropWidth - 4;
 
-            this.drops.push({
-                xPosition,
-                yPosition,
-                dropWidth,
-                dropHeight,
-                backgroundPosition,
-            });
+                this.drops.push({
+                    xPosition,
+                    yPosition,
+                    dropWidth,
+                    dropHeight,
+                    backgroundPosition,
+                    backgroundSize,
+                });
 
-            this.borders.push({
-                xPosition,
-                yPosition,
-                borderWidth,
-                dropHeight,
-            });
+                this.borders.push({
+                    xPosition,
+                    yPosition,
+                    borderWidth,
+                    dropHeight,
+                });
+
+                this.changeDetectorRef.detectChanges();
+            }, this.randomTimeout());
         }
     }
 }

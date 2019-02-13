@@ -2,7 +2,6 @@
 @import '../../../../styles/mixins.scss';
 
 $sun-dimension: 60px;
-$sun-container-dimension: 200px;
 
 /* Sun animation */
 @include keyframes(sun-rays-animation) {
@@ -11,9 +10,6 @@ $sun-container-dimension: 200px;
 }
 
 @keyframes sunpulse {
-    //from { box-shadow: 0 0 100px #ff0, 0 0 100px #ff0; }
-    //to { box-shadow: 0 0 50px #ff0, 0 0 75px #ff0;  }
-    
     from {
         box-shadow: 0 0 100px $color-white, 0 0 100px $color-white;
     }
@@ -22,18 +18,21 @@ $sun-container-dimension: 200px;
     }
 }
 
+:host {
+    contain: content;
+    position: relative;
+}
+
 .app-weather-effect-sun {
     animation: sunpulse 2s alternate infinite;
     border-radius: 50%;
-    contain: content;
     height: $sun-dimension;
-    margin: auto;
     opacity: 1.0;
     position: absolute;
     width: $sun-dimension;
-    z-index: 200;
+    z-index: $z-index-sun;
     
-    // TODO: this one must change from night to midday themes
+    // TODO: this one must change from dusk/dawn (more red) to midday (current white) themes
     //background-color: $color-sun;
     //background-color: $color-white;
     //background: radial-gradient(ellipse at center, #f90 0%,#fc0 60%,#ff0 100%);
@@ -43,11 +42,6 @@ $sun-container-dimension: 200px;
     //box-shadow: 0 0 40px 15px $color-sun;
     //box-shadow: 0 0 60px 20px $color-white;
     
-    // TODO: remove this, must be handled by day-time-view
-    left: 70%;
-    top: 20%;
-    
-    
     &__ray-box {
         @include animation(sun-rays-animation, 120s, linear, infinite);
         height: $sun-dimension;
@@ -56,11 +50,12 @@ $sun-container-dimension: 200px;
     }
     
     &__ray {
-        background: linear-gradient(to top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,0) 80%);
+        // TODO: move to variables
+        background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0) 80%);
         border-radius: 50% 50% 0 0;
         filter: brightness(1.2) blur(5.0px);
         margin-left: 10px;
-        opacity: 0.1;
+        opacity: 0.3;
         position: absolute;
         
         &-1 {

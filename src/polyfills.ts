@@ -82,3 +82,5 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
  * Fix "Uncaught ReferenceError: global is not defined" https://github.com/valor-software/ng2-dragula/issues/849
  */
 (window as any).global = window;
+
+import 'hammerjs/hammer';

@@ -1,23 +1,23 @@
 @import '../../../../styles/variables.scss';
 
-$moon-dimension: 120px;
+$moon-dimension: 60px;
 
-// TODO: add moon phases with different box-shadow, according to data, if any time left
+// TODO: add moon phases with different box-shadow, according to data, if (any time left)
+
+:host {
+    contain: content;
+}
 
 .app-weather-effect-moon {
     background: $color-moon_main;
     border-radius: 50%;
     box-shadow: inset -25px 1px 1px 1px $color-moon_box-shadow, 0 0 50px 0 $color-moon_main;
-    contain: content;
     filter: brightness(1.2) blur(0.5px);
     height: $moon-dimension;
+    opacity: 1.0;
     position: absolute;
     width: $moon-dimension;
-    z-index: 300;
-
-    // TODO: remove this, must be handled by day-time-view
-    left: 70%;
-    top: 20%;
+    z-index: $z-index-moon;
 
     &_crater {
         background: $color-moon_crater;

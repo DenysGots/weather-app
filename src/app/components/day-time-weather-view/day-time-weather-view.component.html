@@ -1,16 +1,34 @@
 <div class="app-day-time-weather-view" #weatherView>
-    <!--<app-day-time-night-view [viewHeight]="viewHeight" [viewWidth]="viewWidth"></app-day-time-night-view>-->
-    <app-weather-effect-rain [viewHeight]="viewHeight" [viewWidth]="viewWidth"></app-weather-effect-rain>
-    <!--<app-weather-effect-snow [viewHeight]="viewHeight" [viewWidth]="viewWidth"></app-weather-effect-snow>-->
-    <app-weather-effect-cloud></app-weather-effect-cloud>
-    <!--<app-weather-effect-stars [viewHeight]="viewHeight" [viewWidth]="viewWidth"></app-weather-effect-stars>-->
+    <!--<app-weather-effect-rain [viewHeight]="viewHeight"-->
+                             <!--[viewWidth]="viewWidth"-->
+                             <!--overcast="medium"></app-weather-effect-rain>-->
+    
+    <!--<app-weather-effect-snow [viewHeight]="viewHeight"-->
+                             <!--[viewWidth]="viewWidth"-->
+                             <!--overcast="light"></app-weather-effect-snow>-->
+    
+    <!--<app-weather-effect-cloud overcast="medium"-->
+                              <!--timeOfDay="day"></app-weather-effect-cloud>-->
+    
+    <!--<app-weather-effect-stars [viewHeight]="viewHeight" -->
+                              <!--[viewWidth]="viewWidth"></app-weather-effect-stars>-->
+    
     <!--<app-weather-effect-fog></app-weather-effect-fog>-->
-    <!--<app-weather-effect-water-drops [viewHeight]="viewHeight" [viewWidth]="viewWidth"></app-weather-effect-water-drops>-->
     
-    <!--<app-weather-effect-lightning [viewHeight]="viewHeight" [viewWidth]="viewWidth"></app-weather-effect-lightning>-->
-    <app-weather-effect-lightning2 [viewHeight]="viewHeight" [viewWidth]="viewWidth"></app-weather-effect-lightning2>
-    <!--<app-day-time-day-view [viewHeight]="viewHeight" [viewWidth]="viewWidth"></app-day-time-day-view>-->
+    <!--<app-weather-effect-water-drops [viewHeight]="viewHeight" -->
+                                    <!--[viewWidth]="viewWidth"></app-weather-effect-water-drops>-->
     
+    <!--<app-weather-effect-lightning2 [viewHeight]="viewHeight"-->
+                                   <!--[viewWidth]="viewWidth"></app-weather-effect-lightning2>-->
+    
+    <!--<app-day-time-day-view [viewHeight]="viewHeight"-->
+                           <!--[viewWidth]="viewWidth"></app-day-time-day-view>-->
+    
+    <app-day-time-night-view [viewHeight]="viewHeight"
+                             [viewWidth]="viewWidth"
+                             withoutHeavyOvercast="true"></app-day-time-night-view>
+    
+    <!-- TODO: move to day/night views -->
     <!--<app-weather-effect-sun></app-weather-effect-sun>-->
     <!--<app-weather-effect-moon></app-weather-effect-moon>-->
 </div>

@@ -23,10 +23,14 @@ $color-night_sky: #00000c;
 $color-rain_wall_lighter: hsla(242, 90%, 5%, 0.3);
 $color-rain_wall_darker: hsla(242, 90%, 5%, 0.6);
 $color-snow_wall: hsla(242, 95%, 3%, 0.5);
-$color-cloud_sky_day_lighter: rgba(253, 245, 230, 0.6); // #fdf5e6
-$color-cloud_sky_day_darker: rgba(128, 128, 128, 0.9); // #808080
-$color-cloud_sky_night_lighter: rgba(16, 12, 5, 0.8);
-$color-cloud_sky_night_darker: rgba(4, 4, 4, 0.9);
+$color-cloud_sky_medium_day_lighter: rgba(253, 245, 230, 0.2);
+$color-cloud_sky_medium_day_darker: rgba(128, 128, 128, 0.3);
+$color-cloud_sky_heavy_day_lighter: rgba(253, 245, 230, 0.6); // #fdf5e6
+$color-cloud_sky_heavy_day_darker: rgba(128, 128, 128, 0.9); // #808080
+$color-cloud_sky_medium_night_lighter: rgba(16, 12, 5, 0.7);
+$color-cloud_sky_medium_night_darker: rgba(4, 4, 4, 0.6);
+$color-cloud_sky_heavy_night_lighter: rgba(16, 12, 5, 0.8);
+$color-cloud_sky_heavy_night_darker: rgba(4, 4, 4, 0.9);
 
 /* Sun */
 $color-sun: #FDB813;

@@ -53,22 +53,32 @@
     overflow: hidden;
     position: absolute;
     width: 100%;
-    z-index: 700;
+    z-index: $z-index-clouds;
     
-    &__day-background {
-        background: linear-gradient(25deg, $color-cloud_sky_day_lighter 0%, $color-cloud_sky_day_darker 100%);
+    &__background {
         height: 100%;
         position: absolute;
         width: 100%;
-        z-index: 710;
     }
     
-    &__night-background {
-        background: linear-gradient(25deg, $color-cloud_sky_night_lighter 0%, $color-cloud_sky_night_darker 100%);
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        z-index: 730;
+    &__day-medium-background {
+        background: linear-gradient(25deg, $color-cloud_sky_medium_day_lighter 0%, $color-cloud_sky_medium_day_darker 100%);
+        z-index: ($z-index-clouds + 10);
+    }
+    
+    &__day-heavy-background {
+        background: linear-gradient(25deg, $color-cloud_sky_heavy_day_lighter 0%, $color-cloud_sky_heavy_day_darker 100%);
+        z-index: ($z-index-clouds + 10);
+    }
+    
+    &__night-medium-background {
+        background: linear-gradient(25deg, $color-cloud_sky_medium_night_lighter 0%, $color-cloud_sky_medium_night_darker 100%);
+        z-index: ($z-index-clouds + 30);
+    }
+    
+    &__night-heavy-background {
+        background: linear-gradient(25deg, $color-cloud_sky_heavy_night_lighter 0%, $color-cloud_sky_heavy_night_darker 100%);
+        z-index: ($z-index-clouds + 30);
     }
 
     &__layer {
@@ -76,41 +86,41 @@
         overflow: hidden;
         position: absolute;
         width: 200%;
-        z-index: 720;
+        z-index: ($z-index-clouds + 20);
 
-        &-01 {
+        &-1 {
             animation: clouds-change-opacity-1 10s linear infinite, clouds-move 30s linear infinite;
         }
 
-        &-02 {
+        &-2 {
             animation: clouds-change-opacity-2 22s linear infinite, clouds-move 28s linear infinite;
         }
 
-        &-03 {
+        &-3 {
             animation: clouds-change-opacity-3 18s linear infinite, clouds-move 26s linear infinite;
         }
 
-        &-04 {
+        &-4 {
             animation: clouds-change-opacity-4 14s linear infinite, clouds-move 32s linear infinite;
         }
 
-        &-05 {
+        &-5 {
             animation: clouds-change-opacity-1 16s linear infinite, clouds-move 24s linear infinite;
         }
 
-        &-06 {
+        &-6 {
             animation: clouds-change-opacity-2 24s linear infinite, clouds-move 34s linear infinite;
         }
 
-        &-07 {
+        &-7 {
             animation: clouds-change-opacity-3 12s linear infinite, clouds-move 22s linear infinite;
         }
 
-        &-08 {
+        &-8 {
             animation: clouds-change-opacity-4 20s linear infinite, clouds-move 36s linear infinite;
         }
 
-        &-09 {
+        &-9 {
             animation: clouds-change-opacity-1 16s linear infinite, clouds-move 28s linear infinite;
         }
 
@@ -133,47 +143,47 @@
         position: relative;
         width: 50%;
 
-        &-01 {
+        &-1 {
             background: url('../../../../assets/img/cloud-01.png') center center / 100% 100% no-repeat transparent;
             top: 15%;
         }
 
-        &-02 {
+        &-2 {
             background: url('../../../../assets/img/cloud-02.png') center center / 100% 100% no-repeat transparent;
             top: -15%;
         }
 
-        &-03 {
+        &-3 {
             background: url('../../../../assets/img/cloud-03.png') center center / 100% 100% no-repeat transparent;
             top: 15%;
         }
 
-        &-04 {
+        &-4 {
             background: url('../../../../assets/img/cloud-04.png') center center / 100% 100% no-repeat transparent;
             top: -15%;
         }
 
-        &-05 {
+        &-5 {
             background: url('../../../../assets/img/cloud-05.png') center center / 100% 100% no-repeat transparent;
             top: 10%;
         }
 
-        &-06 {
+        &-6 {
             background: url('../../../../assets/img/cloud-06.png') center center / 100% 100% no-repeat transparent;
             top: -10%;
         }
 
-        &-07 {
+        &-7 {
             background: url('../../../../assets/img/cloud-07.png') center center / 100% 100% no-repeat transparent;
             top: 10%;
         }
 
-        &-08 {
+        &-8 {
             background: url('../../../../assets/img/cloud-08.png') center center / 100% 100% no-repeat transparent;
             top: -10%;
         }
 
-        &-09 {
+        &-9 {
             background: url('../../../../assets/img/cloud-09.png') center center / 100% 100% no-repeat transparent;
             top: 5%;
         }

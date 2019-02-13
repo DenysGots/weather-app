@@ -1,4 +1,10 @@
 <div class="app-day-time-night-view">
-    <app-weather-effect-stars></app-weather-effect-stars>
-    <app-weather-effect-moon></app-weather-effect-moon>
+    <div class="app-day-time-night-view__moon-container"
+         [ngStyle]="{
+            'bottom': moonPosition.y,
+            'left': moonPosition.x
+         }">
+        <app-weather-effect-moon></app-weather-effect-moon>
+    </div>
+    <app-weather-effect-stars *ngIf="withoutHeavyOvercast"></app-weather-effect-stars>
 </div>

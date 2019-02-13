@@ -1,9 +1,14 @@
-<div class="app-button"
-     [ngStyle]="{
-        'width': size,
-        'height': size,
-        'font-size': fontSize
-     }">
-    
-    <fa-icon [icon]="['fas', type]"></fa-icon>
-</div>
+<button class="app-button"
+        [ngClass]="{
+            'app-button--circle': isCircle(),
+            'app-button--rectangle': isRectangle()
+        }"
+        [ngStyle]="{
+           'min-width': size,
+           'min-height': size,
+           'font-size': fontSize
+        }">
+    <fa-icon *ngIf="buttonType"
+             [icon]="['fas', type]"></fa-icon>
+    <ng-content></ng-content>
+</button>

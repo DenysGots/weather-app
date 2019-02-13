@@ -9,6 +9,18 @@ import {
     ViewChild,
 } from '@angular/core';
 
+export enum Overcast {
+    light = 'light',
+    medium = 'medium',
+    heavy = 'heavy',
+}
+
+enum NumberOfDrops {
+    light = 100,
+    medium = 300,
+    heavy = 500,
+}
+
 @Component({
     selector: 'app-weather-effect-snow',
     templateUrl: './weather-effect-snow.component.html',
@@ -18,21 +30,23 @@ import {
 export class WeatherEffectSnowComponent implements OnInit {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
+    @Input() overcast: Overcast = Overcast.light;
 
     @ViewChild('snowCanvas') snowCanvasRef: ElementRef;
 
     public snowCanvas;
 
-    private pageWidth = window.innerWidth;
-    private pageHeight = window.innerHeight;
-    private numberOfDrops = 500;
+    // private viewWidth = window.innerWidth;
+    // private viewHeight = window.innerHeight;
+    private numberOfDrops: number/* = 500*/;
 
     constructor(private ngZone: NgZone,
-                private changeDetectorRef: ChangeDetectorRef) { }
+                /*private changeDetectorRef: ChangeDetectorRef*/) { }
 
     ngOnInit() {
-        this.changeDetectorRef.detach();
+        // this.changeDetectorRef.detach();
         this.snowCanvas = this.snowCanvasRef.nativeElement;
+        this.numberOfDrops = NumberOfDrops[this.overcast];
 
         this.ngZone.runOutsideAngular(() => {
             this.makeItSnow();
@@ -43,8 +57,8 @@ export class WeatherEffectSnowComponent implements OnInit {
     private makeItSnow(): void {
         const context = this.snowCanvas.getContext('2d');
         const numberOfDrops = this.numberOfDrops;
-        const canvasWidth = this.pageWidth;
-        const canvasHeight = this.pageHeight;
+        const canvasWidth = this.viewWidth;
+        const canvasHeight = this.viewHeight;
         const drops = [];
         const scale = 1.3;
         const mv = 20;

@@ -9,8 +9,8 @@
 .app-day-time-weather-view {
     border-radius: $border-radius-default;
     box-shadow: $box-shadow-default;
-    contain: content;
     height: 100%;
+    overflow: hidden;
     position: relative;
     width: 100%;
 }

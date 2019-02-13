@@ -7,36 +7,36 @@
     overflow: hidden;
     position: absolute;
     width: 100%;
-    z-index: 800;
+    z-index: $z-index-rain;
 
-    // TODO: need 2 different layers for medium and heavy types of rain
-    &__background-lighter {
-        background: $color-rain_wall-lighter;
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        z-index: 810;
-    }
-
-    &__background-darker {
-        background: $color-rain_wall-darker;
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        z-index: 810;
-    }
+    //// TODO: need 2 different layers for medium and heavy types of rain
+    //&__background-lighter {
+    //    background: $color-rain_wall-lighter;
+    //    height: 100%;
+    //    position: absolute;
+    //    width: 100%;
+    //    z-index: 810;
+    //}
+    //
+    //&__background-darker {
+    //    background: $color-rain_wall-darker;
+    //    height: 100%;
+    //    position: absolute;
+    //    width: 100%;
+    //    z-index: 810;
+    //}
 
     &__canvas {
         height: 100%;
         position: absolute;
         width: 100%;
-        z-index: 820;
+        z-index: ($z-index-rain + 20);
     }
 
     &-through__canvas {
         height: 100%;
         position: absolute;
         width: 100%;
-        z-index: 830;
+        z-index: ($z-index-rain + 30);
     }
 }

@@ -3,6 +3,7 @@ import {
     Input,
     OnInit,
 } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-control-panel',
@@ -10,6 +11,15 @@ import {
     styleUrls: ['./control-panel.component.scss']
 })
 export class ControlPanelComponent implements OnInit {
+    // TODO: must implement and visualize current state parameters by default
+    // "Reset" button click resets to state's current parameters
+    // "Set custom settings" button should enable/disable change of settings
+
+    public controlForm = new FormGroup({
+        // firstName: new FormControl(''),
+        // lastName: new FormControl(''),
+    });
+
     constructor() { }
 
     ngOnInit() { }

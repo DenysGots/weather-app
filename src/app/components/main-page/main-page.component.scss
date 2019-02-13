@@ -7,7 +7,6 @@
 }
 
 .app-main-page {
-    contain: content;
     height: auto;
     min-height: 100%;
     overflow: auto;
@@ -43,5 +42,11 @@
         padding: $space-lg 15%;
         position: relative;
         width: 100%;
+    }
+    
+    &__control-panel {
+        position: absolute;
+        right: $space-sm;
+        top: $space-sm;
     }
 }

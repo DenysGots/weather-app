@@ -1,6 +1,7 @@
 @import '../../../../styles/variables.scss';
 @import '../../../../styles/mixins.scss';
 
+// Taken from https://codepen.io/angiebadfox/pen/RRdQAb by angie
 @function create-box-shadow($quantity-of-stars) {
     $box-shadow: ();
     
@@ -69,12 +70,16 @@ $stars-box-shadow-small: create-box-shadow(800);
     100% { box-shadow: $stars-box-shadow-small; }
 }
 
-.app-weather-effect-stars {
+:host {
     contain: content;
+    position: relative;
+}
+
+.app-weather-effect-stars {
     height: 100%;
     width: 100%;
     position: absolute;
-    z-index: 100;
+    z-index: $z-index-stars;
     
     &--large {
         animation: stars-blink-large 7s infinite;

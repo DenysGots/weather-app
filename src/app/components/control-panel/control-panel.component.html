@@ -1,29 +1,70 @@
 <div class="app-control-panel">
-    <div>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Change weather settings
+                </mat-panel-title>
+                
+                <mat-panel-description>
+                    Click here
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            
+            <div class="app-control-panel__block">
+                <mat-slide-toggle>Set custom settings</mat-slide-toggle>
+            </div>
+        
+            <div class="app-control-panel__block">
+                <p>Time of day</p>
+                <mat-radio-group>
+                    <mat-radio-button value="time-of-day">Day</mat-radio-button>
+                    <mat-radio-button value="time-of-day">Night</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        
+            <div class="app-control-panel__block">
+                <p>Rain</p>
+                <mat-radio-group>
+                    <mat-radio-button value="rain">Low</mat-radio-button>
+                    <mat-radio-button value="rain">Medium</mat-radio-button>
+                    <mat-radio-button value="rain">Heavy</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        
+            <div class="app-control-panel__block">
+                <p>Snow</p>
+                <mat-radio-group>
+                    <mat-radio-button value="snow">Low</mat-radio-button>
+                    <mat-radio-button value="snow">Medium</mat-radio-button>
+                    <mat-radio-button value="snow">Heavy</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        
+            <div class="app-control-panel__block">
+                <p>Clouds</p>
+                <mat-radio-group>
+                    <mat-radio-button value="clouds">Low</mat-radio-button>
+                    <mat-radio-button value="clouds">Medium</mat-radio-button>
+                    <mat-radio-button value="clouds">Heavy</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        
+            <div class="app-control-panel__block">
+                <mat-slide-toggle>Fog</mat-slide-toggle>
+            </div>
+        
+            <div class="app-control-panel__block">
+                <mat-slide-toggle>Lightning</mat-slide-toggle>
+            </div>
+        
+            <div class="app-control-panel__block">
+                <mat-slide-toggle>Drops on screen</mat-slide-toggle>
+            </div>
     
-    </div>
-    
-    <div>
-    
-    </div>
-    
-    <div>
-    
-    </div>
-    
-    <div>
-    
-    </div>
-    
-    <div>
-    
-    </div>
-    
-    <div>
-    
-    </div>
-    
-    <div>
-    
-    </div>
+            <div class="app-control-panel__block">
+                <app-button buttonShape="rectangle">Reset settings</app-button>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>

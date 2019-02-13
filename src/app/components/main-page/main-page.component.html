@@ -4,12 +4,11 @@
     </section>
     
     <div style="display: flex; align-items: center; justify-content: center;">
-        <app-button buttonType="left" buttonSize="big"></app-button>
+        <app-button buttonType="left" buttonSize="big" buttonShape="circle"></app-button>
         <app-button buttonType="right" buttonSize="big"></app-button>
         <app-button buttonType="plus" buttonSize="medium"></app-button>
         <app-button buttonType="minus" buttonSize="medium"></app-button>
         <app-button buttonType="home" buttonSize="big"></app-button>
-        <mat-slide-toggle></mat-slide-toggle>
     </div>
     
     <section class="app-main-page__day-time-view">
@@ -19,4 +18,8 @@
     <section class="app-main-page__cards-deck">
         <app-forecast-cards-deck></app-forecast-cards-deck>
     </section>
+    
+    <aside class="app-main-page__control-panel">
+        <app-control-panel></app-control-panel>
+    </aside>
 </main>

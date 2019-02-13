@@ -6,12 +6,13 @@
 
 .app-button {
     align-items: center;
+    appearance: none;
     background-color: $color-button;
-    border-radius: 50%;
     border: 1px solid $color-transparent;
     contain: content;
     display: flex;
     justify-content: center;
+    outline: none;
     position: relative;
     
     &:hover {
@@ -21,5 +22,13 @@
     &:active {
         background-color: $color-button-active;
         border: 1px solid $color-light_black;
+    }
+    
+    &--circle {
+        border-radius: 50%;
+    }
+    
+    &--rectangle {
+        border-radius: $border-radius-default;
     }
 }

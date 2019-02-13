@@ -1,20 +1,30 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { PreloadAllModules, RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatSlideToggleModule,
+} from '@angular/material';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { DragulaModule } from 'ng2-dragula';
-import { SharedModule } from './modules/shared/shared.module';
-import { routes } from './app.routing';
-import { AppComponent } from './app.component';
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faMinus } from '@fortawesome/free-solid-svg-icons';
+import {
+    faAngleLeft,
+    faAngleRight,
+    faPlus,
+    faMinus,
+    faHome,
+} from '@fortawesome/free-solid-svg-icons';
+
+import { AppComponent } from './app.component';
+import { routes } from './app.routing';
+import { SharedModule } from './modules/shared/shared.module';
 
 import { ButtonComponent } from './components/button/button.component';
 import { ControlPanelComponent } from './components/control-panel/control-panel.component';
@@ -41,6 +51,8 @@ import { WeatherTypeFoggyComponent } from './components/weather-types/weather-ty
 import { WeatherTypeRainyComponent } from './components/weather-types/weather-type-rainy/weather-type-rainy.component';
 import { WeatherTypeSnowyComponent } from './components/weather-types/weather-type-snowy/weather-type-snowy.component';
 
+import { NumberToIterablePipe } from './pipes/numberToIterable.pipe';
+
 import { WindowService } from './services/window/window.service';
 import { WeatherEffectLightningService } from './services/weather-effect-lightning.service';
 
@@ -62,10 +74,11 @@ export function getWindow() {
         ForecastWeatherCardComponent,
         IconComponent,
         MainPageComponent,
+        NumberToIterablePipe,
         WeatherEffectCloudComponent,
         WeatherEffectFogComponent,
-        WeatherEffectLightningComponent,
         WeatherEffectLightning2Component,
+        WeatherEffectLightningComponent,
         WeatherEffectMoonComponent,
         WeatherEffectRainComponent,
         WeatherEffectSnowComponent,
@@ -90,8 +103,13 @@ export function getWindow() {
             preloadingStrategy: PreloadAllModules,
         }),
         SharedModule,
+        ReactiveFormsModule,
         BrowserAnimationsModule,
         FontAwesomeModule,
+        MatCheckboxModule,
+        MatExpansionModule,
+        MatRadioModule,
+        MatSlideToggleModule,
     ],
     providers: [
         {
@@ -104,6 +122,6 @@ export function getWindow() {
 })
 export class AppModule {
     constructor() {
-        library.add(faAngleLeft, faAngleRight, faPlus, faMinus);
+        library.add(faAngleLeft, faAngleRight, faPlus, faMinus, faHome);
     }
 }

@@ -22,7 +22,10 @@ export class DayTimeWeatherViewComponent implements OnInit {
     constructor(private elementRef: ElementRef) { }
 
     ngOnInit() {
+        // TODO: this ones are calculated wrong in Firefox and IE, needs adjustment, other hook? constructor?
         this.viewHeight = this.elementRef.nativeElement.offsetHeight;
         this.viewWidth = this.elementRef.nativeElement.offsetWidth;
+
+        console.log(this.viewHeight, this.viewWidth);
     }
 }

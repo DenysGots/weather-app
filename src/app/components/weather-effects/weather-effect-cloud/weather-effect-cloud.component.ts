@@ -4,13 +4,19 @@ import {
     OnInit,
 } from '@angular/core';
 
-export enum Overcast {
+enum Overcast {
     light = 'light',
     medium = 'medium',
     heavy = 'heavy',
 }
 
-export enum TimeOfDay {
+enum NumberOfClouds {
+    light = 4,
+    medium = 8,
+    heavy = 12,
+}
+
+enum TimeOfDay {
     day = 'day',
     night = 'night'
 }
@@ -21,12 +27,16 @@ export enum TimeOfDay {
     styleUrls: ['./weather-effect-cloud.component.scss'],
 })
 export class WeatherEffectCloudComponent implements OnInit {
-    @Input() overcast: Overcast = Overcast.heavy;
-    @Input() timeOfDay: TimeOfDay = TimeOfDay.day;
+    @Input() public overcast: Overcast = Overcast.light;
+    @Input() public timeOfDay: TimeOfDay = TimeOfDay.day;
+
+    public numberOfClouds: number;
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.numberOfClouds = NumberOfClouds[this.overcast];
+    }
 
     public isOvercast(type): boolean {
         return this.overcast === Overcast[type];

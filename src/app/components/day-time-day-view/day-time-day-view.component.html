@@ -1,4 +1,9 @@
 <div class="app-day-time-day-view">
-    <app-weather-effect-sun></app-weather-effect-sun>
-    <app-weather-effect-cloud></app-weather-effect-cloud>
+    <div class="app-day-time-day-view__sun-container"
+         [ngStyle]="{
+            'bottom': sunPosition.y,
+            'left': sunPosition.x
+         }">
+        <app-weather-effect-sun ></app-weather-effect-sun>
+    </div>
 </div>

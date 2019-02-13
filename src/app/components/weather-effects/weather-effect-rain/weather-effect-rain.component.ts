@@ -15,6 +15,18 @@ export enum Overcast {
     heavy = 'heavy',
 }
 
+enum NumberOfDrops {
+    light = 200,
+    medium = 450,
+    heavy = 750,
+}
+
+enum NumberOfThroughDrops {
+    light = 5,
+    medium = 20,
+    heavy = 50,
+}
+
 @Component({
     selector: 'app-weather-effect-rain',
     templateUrl: './weather-effect-rain.component.html',
@@ -24,7 +36,7 @@ export enum Overcast {
 export class WeatherEffectRainComponent implements OnInit {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
-    @Input() overcast: Overcast = Overcast.heavy;
+    @Input() overcast: Overcast = Overcast.light;
 
     @ViewChild('rainCanvas') rainCanvasRef: ElementRef;
     @ViewChild('rainThroughCanvas') rainThroughCanvasRef: ElementRef;
@@ -34,26 +46,25 @@ export class WeatherEffectRainComponent implements OnInit {
 
     // private viewHeight = window.innerHeight;
     // private viewWidth = window.innerWidth;
-    private numberOfDrops = 750;
-    private numberOfThroughDrops = 50;
+    private numberOfDrops: number/* = 750*/;
+    private numberOfThroughDrops: number/* = 50*/;
 
     constructor(private ngZone: NgZone,
-                private changeDetectorRef: ChangeDetectorRef) { }
+                /*private changeDetectorRef: ChangeDetectorRef*/) { }
 
     ngOnInit() {
-        this.changeDetectorRef.detach();
+        // this.changeDetectorRef.detach();
         this.rainCanvas = this.rainCanvasRef.nativeElement;
         this.rainThroughCanvas = this.rainThroughCanvasRef.nativeElement;
+        this.numberOfDrops = NumberOfDrops[this.overcast];
+        this.numberOfThroughDrops = NumberOfThroughDrops[this.overcast];
 
         this.ngZone.runOutsideAngular(() => {
             this.makeItRain();
         });
     }
 
-    public isOvercast(type): boolean {
-        return this.overcast === Overcast[type];
-    }
-
+    // TODO: need different color for drops for night theme
     private makeItRain(): void {
         const rainContext = this.rainCanvas.getContext('2d');
         const rainThroughContext = this.rainThroughCanvas.getContext('2d');

@@ -1,5 +1,7 @@
 @import '../../../styles/variables.scss';
 
+$weather-card-height: 200px;
+
 :host {
     height: 100%;
     position: relative;
@@ -11,7 +13,7 @@
     background-color: $weather-card-background;
     border-radius: $border-radius-default;
     box-shadow: $box-shadow-default;
-    color: $color-cloud_sky_night_darker;
+    color: $color-cloud_sky_heavy_night_darker;
     contain: content;
     height: $weather-card-height;
     padding: $space-md;
@@ -57,7 +59,7 @@
         margin: 0 auto;
         width: 70%;
         height: 0;
-        border-top: 2px solid $color-cloud_sky_night_darker;
+        border-top: 2px solid $color-cloud_sky_heavy_night_darker;
         transform: rotate(25deg);
     }
     
