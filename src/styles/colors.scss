@@ -27,10 +27,10 @@ $color-cloud_sky_medium_day_lighter: rgba(253, 245, 230, 0.2);
 $color-cloud_sky_medium_day_darker: rgba(128, 128, 128, 0.3);
 $color-cloud_sky_heavy_day_lighter: rgba(253, 245, 230, 0.6); // #fdf5e6
 $color-cloud_sky_heavy_day_darker: rgba(128, 128, 128, 0.9); // #808080
-$color-cloud_sky_medium_night_lighter: rgba(16, 12, 5, 0.7);
-$color-cloud_sky_medium_night_darker: rgba(4, 4, 4, 0.6);
-$color-cloud_sky_heavy_night_lighter: rgba(16, 12, 5, 0.8);
-$color-cloud_sky_heavy_night_darker: rgba(4, 4, 4, 0.9);
+$color-cloud_sky_medium_night_lighter: rgba(16, 12, 5, 0.4);
+$color-cloud_sky_medium_night_darker: rgba(4, 4, 4, 0.5);
+$color-cloud_sky_heavy_night_lighter: rgba(16, 12, 5, 0.6);
+$color-cloud_sky_heavy_night_darker: rgba(4, 4, 4, 0.7);
 
 /* Sun */
 $color-sun: #FDB813;
@@ -54,3 +54,29 @@ $weather-card-background: rgba(255, 255, 255, 0.7);
 /* Button */
 $color-button: rgba(0, 121, 170, 0.5);
 $color-button-active: rgba(0, 196, 210, 0.8);
+
+/* Day-time backgrounds */
+$color-sky-00-01: #03102c; $color-sky-00-02: #010b17;
+$color-sky-01-01: #020111; $color-sky-01-02: #191621;
+$color-sky-02-01: #020111; $color-sky-02-02: #20202c;
+$color-sky-03-01: #020111; $color-sky-03-02: #3a3a52;
+$color-sky-04-01: #20202c; $color-sky-04-02: #515175;
+$color-sky-05-01: #40405c; $color-sky-05-02: #6f71aa; $color-sky-05-03: #8a76ab;
+$color-sky-06-01: #4a4969; $color-sky-06-02: #7072ab; $color-sky-06-03: #cd82a0;
+$color-sky-07-01: #757abf; $color-sky-07-02: #8583be; $color-sky-07-03: #eab0d1;
+$color-sky-08-01: #82addb; $color-sky-08-02: #ebb2b1;
+$color-sky-09-01: #94c5f8; $color-sky-09-02: #a6e6ff; $color-sky-09-03: #b1b5ea;
+$color-sky-10-01: #b7eaff; $color-sky-10-02: #94dfff;
+$color-sky-11-01: #9be2fe; $color-sky-11-02: #67d1fb;
+$color-sky-12-01: #90dffe; $color-sky-12-02: #38a3d1;
+$color-sky-13-01: #57c1eb; $color-sky-13-02: #246fa8;
+$color-sky-14-01: #2d91c2; $color-sky-14-02: #1e528e;
+$color-sky-15-01: #2473ab; $color-sky-15-02: #1e528e; $color-sky-15-03: #5b7983;
+$color-sky-16-01: #1e528e; $color-sky-16-02: #265889; $color-sky-16-03: #9da671;
+$color-sky-17-01: #1e528e; $color-sky-17-02: #728a7c; $color-sky-17-03: #e9ce5d;
+$color-sky-18-01: #154277; $color-sky-18-02: #576e71; $color-sky-18-03: #e1c45e; $color-sky-18-04: #b26339;
+$color-sky-19-01: #163C52; $color-sky-19-02: #4F4F47; $color-sky-19-03: #C5752D; $color-sky-19-04: #B7490F; $color-sky-19-05: #2F1107;
+$color-sky-20-01: #071B26; $color-sky-20-02: #071B26; $color-sky-20-03: #8A3B12; $color-sky-20-04: #240E03;
+$color-sky-21-01: #010A10; $color-sky-21-02: #59230B; $color-sky-21-03: #2F1107;
+$color-sky-22-01: #090401; $color-sky-22-02: #4B1D06;
+$color-sky-23-01: #00000c; $color-sky-23-02: #150800;

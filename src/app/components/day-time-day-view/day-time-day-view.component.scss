@@ -1,8 +1,10 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    contain: content;
+    display: block;
+    height: 100%;
     position: relative;
+    width: 100%;
 }
 
 .app-day-time-day-view {
@@ -17,6 +19,12 @@
     
     &__sun-container {
         position: absolute;
-        transition: all 1.0s ease-in-out;
+        transition: left 1.0s ease-in-out, bottom 1.0s ease-in-out, background 1.0s ease-in-out, transform 1.0s ease-in-out;
+    
+        transform: translateZ(0);
+        transform: translate3d(0, 0, 0);
+        transform-origin: left bottom;
+        will-change: left, bottom, transform;
+        //will-change: transform;
     }
 }

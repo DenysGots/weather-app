@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+    Component,
+    OnInit,
+} from '@angular/core';
+
+import { MainService } from '../../services/main.service';
 
 @Component({
   selector: 'app-forecast-cards-deck',
@@ -6,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forecast-cards-deck.component.scss']
 })
 export class ForecastCardsDeckComponent implements OnInit {
-  constructor() { }
+  constructor(private mainService: MainService) { }
 
   ngOnInit() { }
 }

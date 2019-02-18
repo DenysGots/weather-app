@@ -9,17 +9,7 @@ import {
     ViewChild,
 } from '@angular/core';
 
-export enum Overcast {
-    light = 'light',
-    medium = 'medium',
-    heavy = 'heavy',
-}
-
-enum NumberOfDrops {
-    light = 100,
-    medium = 300,
-    heavy = 500,
-}
+import { NumberOfSnowFlakes, Overcast } from '../../../interfaces/public-api';
 
 @Component({
     selector: 'app-weather-effect-snow',
@@ -38,7 +28,7 @@ export class WeatherEffectSnowComponent implements OnInit {
 
     // private viewWidth = window.innerWidth;
     // private viewHeight = window.innerHeight;
-    private numberOfDrops: number/* = 500*/;
+    private numberOfDrops: NumberOfSnowFlakes/* = 500*/;
 
     constructor(private ngZone: NgZone,
                 /*private changeDetectorRef: ChangeDetectorRef*/) { }
@@ -46,7 +36,7 @@ export class WeatherEffectSnowComponent implements OnInit {
     ngOnInit() {
         // this.changeDetectorRef.detach();
         this.snowCanvas = this.snowCanvasRef.nativeElement;
-        this.numberOfDrops = NumberOfDrops[this.overcast];
+        this.numberOfDrops = NumberOfSnowFlakes[this.overcast];
 
         this.ngZone.runOutsideAngular(() => {
             this.makeItSnow();

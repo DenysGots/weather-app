@@ -1,6 +1,6 @@
 @import '../../../../styles/variables.scss';
 
-$moon-dimension: 60px;
+$moon-dimension: 100px;
 
 // TODO: add moon phases with different box-shadow, according to data, if (any time left)
 
@@ -28,7 +28,7 @@ $moon-dimension: 60px;
         &:nth-child(1) {
             box-shadow: inset 6px -2px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
             height: (0.25 * $moon-dimension); //
-            left: (0.125 * $moon-dimension); //
+            left: (0.12 * $moon-dimension); //
             top: (0.3 * $moon-dimension); //
             width: (0.25 * $moon-dimension); //
         }
@@ -51,34 +51,34 @@ $moon-dimension: 60px;
 
         &:nth-child(4) {
             box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
-            height: (0.08 * $moon-dimension); //
+            height: (0.1 * $moon-dimension); //
             left: (0.25 * $moon-dimension); //
             top: (0.75 * $moon-dimension); //
-            width: (0.08 * $moon-dimension); //
+            width: (0.1 * $moon-dimension); //
         }
 
         &:nth-child(5) {
             box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
-            height: (0.08 * $moon-dimension); //
-            left: (0.44 * $moon-dimension); //
-            top: (0.095 * $moon-dimension); //
-            width: (0.08 * $moon-dimension); //
+            height: (0.1 * $moon-dimension); //
+            left: (0.5 * $moon-dimension); //
+            top: (0.1 * $moon-dimension); //
+            width: (0.1 * $moon-dimension); //
         }
 
         &:nth-child(6) {
             box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
-            height: (0.08 * $moon-dimension); //
+            height: (0.1 * $moon-dimension); //
             left: (0.57 * $moon-dimension); //
             top: (0.4 * $moon-dimension); //
-            width: (0.08 * $moon-dimension); //
+            width: (0.1 * $moon-dimension); //
         }
 
         &:nth-child(7) {
             box-shadow: inset 2.4px -0.8px 1px 1px $color-moon_crater_box-shadow, 0 0 5px 0 $color-moon_crater;
-            height: (0.08 * $moon-dimension); //
+            height: (0.1 * $moon-dimension); //
             left: (0.81 * $moon-dimension); //
             top: (0.5 * $moon-dimension); //
-            width: (0.08 * $moon-dimension); //
+            width: (0.1 * $moon-dimension); //
         }
     }
 }

@@ -1,19 +1,13 @@
-import {
-    Component,
-    Input,
-    OnInit
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-weather-effect-moon',
     templateUrl: './weather-effect-moon.component.html',
     styleUrls: ['./weather-effect-moon.component.scss']
 })
-export class WeatherEffectMoonComponent implements OnInit {
+export class WeatherEffectMoonComponent {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
 
     constructor() { }
-
-    ngOnInit() { }
 }

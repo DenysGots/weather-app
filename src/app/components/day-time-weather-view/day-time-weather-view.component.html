@@ -1,34 +1,39 @@
 <div class="app-day-time-weather-view" #weatherView>
-    <!--<app-weather-effect-rain [viewHeight]="viewHeight"-->
-                             <!--[viewWidth]="viewWidth"-->
-                             <!--overcast="medium"></app-weather-effect-rain>-->
-    
-    <!--<app-weather-effect-snow [viewHeight]="viewHeight"-->
-                             <!--[viewWidth]="viewWidth"-->
-                             <!--overcast="light"></app-weather-effect-snow>-->
-    
-    <!--<app-weather-effect-cloud overcast="medium"-->
-                              <!--timeOfDay="day"></app-weather-effect-cloud>-->
-    
-    <!--<app-weather-effect-stars [viewHeight]="viewHeight" -->
-                              <!--[viewWidth]="viewWidth"></app-weather-effect-stars>-->
-    
-    <!--<app-weather-effect-fog></app-weather-effect-fog>-->
-    
-    <!--<app-weather-effect-water-drops [viewHeight]="viewHeight" -->
-                                    <!--[viewWidth]="viewWidth"></app-weather-effect-water-drops>-->
-    
-    <!--<app-weather-effect-lightning2 [viewHeight]="viewHeight"-->
-                                   <!--[viewWidth]="viewWidth"></app-weather-effect-lightning2>-->
-    
-    <!--<app-day-time-day-view [viewHeight]="viewHeight"-->
-                           <!--[viewWidth]="viewWidth"></app-day-time-day-view>-->
-    
-    <app-day-time-night-view [viewHeight]="viewHeight"
+    <app-weather-effect-rain *ngIf="rainy"
+                             [viewHeight]="viewHeight"
                              [viewWidth]="viewWidth"
-                             withoutHeavyOvercast="true"></app-day-time-night-view>
+                             [overcast]="overcast"
+                             [timeOfDay]="timeOfDay"></app-weather-effect-rain>
     
-    <!-- TODO: move to day/night views -->
-    <!--<app-weather-effect-sun></app-weather-effect-sun>-->
-    <!--<app-weather-effect-moon></app-weather-effect-moon>-->
+    <app-weather-effect-snow *ngIf="snowy"
+                             [viewHeight]="viewHeight"
+                             [viewWidth]="viewWidth"
+                             [overcast]="overcast"></app-weather-effect-snow>
+    
+    <app-weather-effect-cloud *ngIf="cloudy"
+                              [overcast]="overcast"
+                              [timeOfDay]="timeOfDay"></app-weather-effect-cloud>
+    
+    <app-weather-effect-fog *ngIf="foggy"></app-weather-effect-fog>
+    
+    <app-weather-effect-water-drops *ngIf="addDropsOnScreen()"
+                                    [viewHeight]="viewHeight"
+                                    [viewWidth]="viewWidth"
+                                    [overcast]="overcast"
+                                    [currentBackground]="currentBackground"></app-weather-effect-water-drops>
+    
+    <app-weather-effect-lightning2 *ngIf="addLightning()"
+                                   [viewHeight]="viewHeight"
+                                   [viewWidth]="viewWidth"></app-weather-effect-lightning2>
+    
+    <app-day-time-day-view *ngIf="isTimeOfDay('day')"
+                           [viewHeight]="viewHeight"
+                           [viewWidth]="viewWidth"
+                           [dayLength]="dayLength"></app-day-time-day-view>
+    
+    <app-day-time-night-view *ngIf="isTimeOfDay('night')"
+                             [viewHeight]="viewHeight"
+                             [viewWidth]="viewWidth"
+                             [nightLength]="nightLength"
+                             [withoutHeavyOvercast]="withoutHeavyOvercast"></app-day-time-night-view>
 </div>

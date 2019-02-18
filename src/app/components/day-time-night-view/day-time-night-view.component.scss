@@ -1,8 +1,10 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    contain: content;
+    display: block;
+    height: 100%;
     position: relative;
+    width: 100%;
 }
 
 .app-day-time-night-view {
@@ -13,10 +15,17 @@
     
     //background-color: $color-night_sky;
     //background: radial-gradient(ellipse at bottom, rgb(9, 76, 114) 0%, rgb(1, 41, 63) 100%);
-    background: radial-gradient(ellipse at bottom, rgb(3, 16, 44) 0%, rgb(1, 11, 23) 100%);
+    background: radial-gradient(ellipse at bottom, #03102c 0%, #010b17 100%);
     
     &__moon-container {
         position: absolute;
-        transition: all 1.0s ease-in-out;
+        transition: all 0.1s ease-in-out;
+        z-index: $z-index-moon;
+
+        transform: translateZ(0);
+        transform: translate3d(0, 0, 0);
+        transform-origin: left bottom;
+        will-change: left, bottom, transform;
+        //will-change: transform;
     }
 }

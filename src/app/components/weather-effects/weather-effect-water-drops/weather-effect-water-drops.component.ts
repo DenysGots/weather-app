@@ -1,20 +1,25 @@
 import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     Input,
     OnInit,
 } from '@angular/core';
 
+import { DropsOnScreen, Overcast } from '../../../interfaces/public-api';
+
 @Component({
     selector: 'app-weather-effect-water-drops',
     templateUrl: './weather-effect-water-drops.component.html',
-    styleUrls: ['./weather-effect-water-drops.component.scss']
+    styleUrls: ['./weather-effect-water-drops.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeatherEffectWaterDropsComponent implements OnInit {
-    // TODO: import all possible backgrounds here and use them for drops background accordingly with main view
-
     @Input() viewHeight: number;
     @Input() viewWidth: number;
+    @Input() overcast: Overcast;
+    // TODO: must acquire current background class from main service and use it as drops background
+    @Input() currentBackground: string;
 
     public drops: any[] = [];
     public borders: any[] = [];
@@ -24,6 +29,7 @@ export class WeatherEffectWaterDropsComponent implements OnInit {
     constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
     ngOnInit() {
+        this.numberOfDrops = DropsOnScreen[this.overcast];
         this.generateDrops();
     }
 
@@ -45,6 +51,7 @@ export class WeatherEffectWaterDropsComponent implements OnInit {
 
                 const backgroundPosition = `${x * 100}% ${y * 100}%`;
                 const backgroundSize = `${this.viewHeight / 100 * 5}px ${this.viewWidth / 100 * 5}px`;
+                // const background = this.currentBackground;
 
                 const borderWidth = dropWidth - 4;
 

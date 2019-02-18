@@ -9,23 +9,12 @@ import {
     ViewChild,
 } from '@angular/core';
 
-export enum Overcast {
-    light = 'light',
-    medium = 'medium',
-    heavy = 'heavy',
-}
-
-enum NumberOfDrops {
-    light = 200,
-    medium = 450,
-    heavy = 750,
-}
-
-enum NumberOfThroughDrops {
-    light = 5,
-    medium = 20,
-    heavy = 50,
-}
+import {
+    NumberOfRainDrops,
+    NumberOfRainThroughDrops,
+    Overcast,
+    TimeOfDay,
+} from '../../../interfaces/public-api';
 
 @Component({
     selector: 'app-weather-effect-rain',
@@ -36,7 +25,8 @@ enum NumberOfThroughDrops {
 export class WeatherEffectRainComponent implements OnInit {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
-    @Input() overcast: Overcast = Overcast.light;
+    @Input() overcast: Overcast;
+    @Input() timeOfDay: TimeOfDay;
 
     @ViewChild('rainCanvas') rainCanvasRef: ElementRef;
     @ViewChild('rainThroughCanvas') rainThroughCanvasRef: ElementRef;
@@ -44,10 +34,8 @@ export class WeatherEffectRainComponent implements OnInit {
     public rainCanvas;
     public rainThroughCanvas;
 
-    // private viewHeight = window.innerHeight;
-    // private viewWidth = window.innerWidth;
-    private numberOfDrops: number/* = 750*/;
-    private numberOfThroughDrops: number/* = 50*/;
+    private numberOfDrops: NumberOfRainDrops/* = 750*/;
+    private numberOfThroughDrops: NumberOfRainThroughDrops/* = 50*/;
 
     constructor(private ngZone: NgZone,
                 /*private changeDetectorRef: ChangeDetectorRef*/) { }
@@ -56,8 +44,8 @@ export class WeatherEffectRainComponent implements OnInit {
         // this.changeDetectorRef.detach();
         this.rainCanvas = this.rainCanvasRef.nativeElement;
         this.rainThroughCanvas = this.rainThroughCanvasRef.nativeElement;
-        this.numberOfDrops = NumberOfDrops[this.overcast];
-        this.numberOfThroughDrops = NumberOfThroughDrops[this.overcast];
+        this.numberOfDrops = NumberOfRainDrops[this.overcast];
+        this.numberOfThroughDrops = NumberOfRainThroughDrops[this.overcast];
 
         this.ngZone.runOutsideAngular(() => {
             this.makeItRain();
@@ -83,7 +71,9 @@ export class WeatherEffectRainComponent implements OnInit {
                 this.gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.5)');
                 this.gradient.addColorStop(1, '#000');
 
-                // TODO: need gradient for rain, visible at both day/cloud/night themes
+                // TODO: need different gradients for rain, visible at both day/night themes
+                // Use timeOfDay input to differentiate this
+
                 // TODO: try this one, here and below
                 // gradient(linear,0% 0%,0% 100%, from(rgba(13,52,58,1) ), to(rgba(255,255,255,0.6)));
                 // or 'rgba(174, 194, 224, 0.5)'

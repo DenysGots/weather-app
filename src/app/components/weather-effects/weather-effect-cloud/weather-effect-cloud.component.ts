@@ -4,22 +4,11 @@ import {
     OnInit,
 } from '@angular/core';
 
-enum Overcast {
-    light = 'light',
-    medium = 'medium',
-    heavy = 'heavy',
-}
-
-enum NumberOfClouds {
-    light = 4,
-    medium = 8,
-    heavy = 12,
-}
-
-enum TimeOfDay {
-    day = 'day',
-    night = 'night'
-}
+import {
+    NumberOfClouds,
+    Overcast,
+    TimeOfDay,
+} from '../../../interfaces/public-api';
 
 @Component({
     selector: 'app-weather-effect-cloud',

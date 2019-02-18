@@ -1,6 +1,7 @@
 @import '../../../styles/variables.scss';
 
 :host {
+    display: block;
     height: 100%;
     position: relative;
     width: 100%;
@@ -13,4 +14,6 @@
     overflow: hidden;
     position: relative;
     width: 100%;
+    
+    // TODO: add transition for background change
 }

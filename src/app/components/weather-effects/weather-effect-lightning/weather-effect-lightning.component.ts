@@ -7,8 +7,6 @@ import {
 } from '@angular/core';
 import * as dat from 'dat.gui';
 
-import { WeatherEffectLightningService } from '../../../services/weather-effect-lightning.service';
-
 @Component({
     selector: 'app-weather-effect-lightning',
     templateUrl: './weather-effect-lightning.component.html',
@@ -22,7 +20,7 @@ export class WeatherEffectLightningComponent implements OnInit {
 
     public lightningCanvas;
 
-    constructor(private weatherEffectLightningService: WeatherEffectLightningService) { }
+    constructor() { }
 
     ngOnInit() {
         this.lightningCanvas = this.lightningCanvasRef.nativeElement;

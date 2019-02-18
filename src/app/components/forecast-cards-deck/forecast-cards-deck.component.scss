@@ -14,4 +14,17 @@
     justify-content: space-between;
     position: relative;
     width: 100%;
+    overflow: visible;
+    
+    &__change-day-week {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin-top: $space-md;
+        width: 100%;
+    
+        app-button {
+            margin: 0 $space-lg;
+        }
+    }
 }

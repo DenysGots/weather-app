@@ -5,6 +5,9 @@ import {
 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
+import { MainService } from '../../services/main.service';
+import { Overcast, TimeOfDay } from '../../interfaces/public-api';
+
 @Component({
     selector: 'app-control-panel',
     templateUrl: './control-panel.component.html',
@@ -20,7 +23,7 @@ export class ControlPanelComponent implements OnInit {
         // lastName: new FormControl(''),
     });
 
-    constructor() { }
+    constructor(private mainService: MainService) { }
 
     ngOnInit() { }
 }

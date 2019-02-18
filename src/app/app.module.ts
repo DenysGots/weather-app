@@ -8,6 +8,7 @@ import {
     MatCheckboxModule,
     MatExpansionModule,
     MatRadioModule,
+    MatSliderModule,
     MatSlideToggleModule,
 } from '@angular/material';
 import { TransferHttpCacheModule } from '@nguniversal/common';
@@ -46,15 +47,12 @@ import { WeatherEffectSnowComponent } from './components/weather-effects/weather
 import { WeatherEffectStarsComponent } from './components/weather-effects/weather-effect-stars/weather-effect-stars.component';
 import { WeatherEffectSunComponent } from './components/weather-effects/weather-effect-sun/weather-effect-sun.component';
 import { WeatherEffectWaterDropsComponent } from './components/weather-effects/weather-effect-water-drops/weather-effect-water-drops.component';
-import { WeatherTypeCloudyComponent } from './components/weather-types/weather-type-cloudy/weather-type-cloudy.component';
-import { WeatherTypeFoggyComponent } from './components/weather-types/weather-type-foggy/weather-type-foggy.component';
-import { WeatherTypeRainyComponent } from './components/weather-types/weather-type-rainy/weather-type-rainy.component';
-import { WeatherTypeSnowyComponent } from './components/weather-types/weather-type-snowy/weather-type-snowy.component';
 
 import { NumberToIterablePipe } from './pipes/numberToIterable.pipe';
 
 import { WindowService } from './services/window/window.service';
-import { WeatherEffectLightningService } from './services/weather-effect-lightning.service';
+import { MainService } from './services/main.service';
+import { StateService } from './services/state.service';
 
 // For AoT compilation:
 export function getWindow() {
@@ -85,10 +83,6 @@ export function getWindow() {
         WeatherEffectStarsComponent,
         WeatherEffectSunComponent,
         WeatherEffectWaterDropsComponent,
-        WeatherTypeCloudyComponent,
-        WeatherTypeFoggyComponent,
-        WeatherTypeRainyComponent,
-        WeatherTypeSnowyComponent,
     ],
     imports: [
         HttpClientModule,
@@ -109,6 +103,7 @@ export function getWindow() {
         MatCheckboxModule,
         MatExpansionModule,
         MatRadioModule,
+        MatSliderModule,
         MatSlideToggleModule,
     ],
     providers: [
@@ -116,7 +111,8 @@ export function getWindow() {
             provide: WindowService,
             useFactory: getWindow
         },
-        WeatherEffectLightningService,
+        MainService,
+        StateService,
     ],
     bootstrap: [AppComponent]
 })

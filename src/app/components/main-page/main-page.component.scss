@@ -26,10 +26,9 @@
     }
     
     &__day-time-view {
-        align-items: center;
-        display: flex;
-        height: 45vh;
-        justify-content: center;
+        display: block;
+        height: $main-view-height;
+        min-width: 45%;
         padding: 0 15%;
         position: relative;
         width: 100%;

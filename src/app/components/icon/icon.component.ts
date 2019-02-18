@@ -4,14 +4,7 @@ import {
     OnInit,
 } from '@angular/core';
 
-export enum IconSizes {
-    small = '12',
-    medium = '14',
-    extra = '18',
-    big = '22',
-    hero = '28',
-    extra_big = '36',
-}
+import { IconSizes } from '../../interfaces/public-api';
 
 @Component({
     selector: 'app-icon',

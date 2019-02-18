@@ -71,7 +71,7 @@ $stars-box-shadow-small: create-box-shadow(800);
 }
 
 :host {
-    contain: content;
+    //contain: content;
     position: relative;
 }
 
