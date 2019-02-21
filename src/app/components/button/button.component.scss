@@ -1,12 +1,13 @@
 @import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 :host {
     position: relative;
 }
 
 .app-button {
+    @include appearance(none);
     align-items: center;
-    appearance: none;
     background-color: $color-button;
     border: 1px solid $color-transparent;
     contain: content;
@@ -14,14 +15,17 @@
     justify-content: center;
     outline: none;
     position: relative;
+    transition: all 0.1s ease-in-out;
     
     &:hover {
         background-color: $color-button-active;
+        box-shadow: $box-shadow-hover;
     }
     
     &:active {
         background-color: $color-button-active;
         border: 1px solid $color-light_black;
+        box-shadow: $box-shadow-default;
     }
     
     &--circle {

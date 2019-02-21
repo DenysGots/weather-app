@@ -1,10 +1,10 @@
 <div class="app-weather-effect-water-drops__container">
-    
     <div class="app-weather-effect-water-drops">
     </div>
     
     <div *ngFor="let drop of drops"
          class="app-weather-effect-water-drops_drop"
+         [ngClass]="getCurrentBackgroundClass()"
          [ngStyle]="{
                 'top': drop.yPosition + 'px',
                 'left': drop.xPosition + 'px',
@@ -24,5 +24,4 @@
                 'height': border.dropHeight + 'px'
              }">
     </div>
-
 </div>

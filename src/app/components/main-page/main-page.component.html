@@ -1,4 +1,5 @@
-<main class="app-main-page">
+<main class="app-main-page"
+      [ngClass]="getCurrentBackgroundClass()">
     <section class="app-main-page__current-information">
         <app-forecast-current-information></app-forecast-current-information>
     </section>
@@ -14,4 +15,6 @@
     <aside class="app-main-page__control-panel">
         <app-control-panel></app-control-panel>
     </aside>
+    
+    <div class="app-main-page__blurred-background"></div>
 </main>

@@ -7,14 +7,13 @@
 }
 
 .app-main-page {
+    contain: content;
     height: auto;
     min-height: 100%;
     overflow: auto;
     position: relative;
     width: 100%;
-    
-    // TODO: delete, remove with background for each weather type and time of day - only lighter
-    background-color: $color-darker_gray;
+    z-index: $z-index-main-page;
     
     &__current-information {
         align-items: center;
@@ -23,6 +22,7 @@
         padding: $space-lg 10%;
         position: relative;
         width: 100%;
+        z-index: $z-index-main-page + 20;
     }
     
     &__day-time-view {
@@ -32,6 +32,7 @@
         padding: 0 15%;
         position: relative;
         width: 100%;
+        z-index: $z-index-main-page + 20;
     }
     
     &__cards-deck {
@@ -41,11 +42,24 @@
         padding: $space-lg 15%;
         position: relative;
         width: 100%;
+        z-index: $z-index-main-page + 20;
     }
     
     &__control-panel {
         position: absolute;
         right: $space-sm;
         top: $space-sm;
+        z-index: $z-index-main-page + 20;
+    }
+    
+    &__blurred-background {
+        background: rgba(255, 255, 255, 0.1);
+        filter: brightness(1.1) blur(50.0px);
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: $z-index-main-page + 10;
     }
 }

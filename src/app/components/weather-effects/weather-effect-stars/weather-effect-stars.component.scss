@@ -71,14 +71,16 @@ $stars-box-shadow-small: create-box-shadow(800);
 }
 
 :host {
-    //contain: content;
+    height: 100%;
     position: relative;
+    width: 100%;
 }
 
 .app-weather-effect-stars {
+    contain: layout style;
     height: 100%;
-    width: 100%;
     position: absolute;
+    width: 100%;
     z-index: $z-index-stars;
     
     &--large {

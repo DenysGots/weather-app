@@ -9,7 +9,6 @@ $weather-card-height: 200px;
 }
 
 .app-forecast-weather-card {
-    // TODO: add color with opacity ~0.7
     background-color: $weather-card-background;
     border-radius: $border-radius-default;
     box-shadow: $box-shadow-default;
@@ -18,7 +17,12 @@ $weather-card-height: 200px;
     height: $weather-card-height;
     padding: $space-md;
     position: relative;
+    transition: box-shadow 0.1s ease-in-out;
     width: 100%;
+    
+    &:hover {
+        box-shadow: $box-shadow-hover;
+    }
     
     &__block {
         padding: $space-xs 0;

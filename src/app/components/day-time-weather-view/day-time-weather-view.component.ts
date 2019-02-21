@@ -25,11 +25,11 @@ export class DayTimeWeatherViewComponent implements OnInit {
     public nightLength: number; // milliseconds
     public currentTime: number; // milliseconds since midnight
 
-    public withoutHeavyOvercast: boolean;
     public cloudy: boolean;
     public rainy: boolean;
     public snowy: boolean;
     public foggy: boolean;
+    public withoutHeavyOvercast: boolean;
 
     public viewHeight: number;
     public viewWidth: number;
@@ -73,5 +73,11 @@ export class DayTimeWeatherViewComponent implements OnInit {
 
     public addDropsOnScreen(): boolean {
         return this.foggy || this.rainy;
+    }
+
+    public getCurrentBackgroundClass(): any {
+        const currentBackgroundClass = {};
+        currentBackgroundClass[this.currentBackground] = true;
+        return currentBackgroundClass;
     }
 }

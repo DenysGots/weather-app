@@ -1,21 +1,26 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    Input,
-    OnInit,
 } from '@angular/core';
+
+import { MainService } from '../../services/main.service';
 
 @Component({
     selector: 'app-main-page',
     templateUrl: './main-page.component.html',
     styleUrls: ['./main-page.component.scss'],
-    // changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainPageComponent implements OnInit {
-    // TODO: get this from main service and apply this class + filter over as a page background
+export class MainPageComponent {
     public currentBackground: string;
 
-    constructor() { }
+    constructor(private mainService: MainService) {
+        this.currentBackground = mainService.currentBackground;
+    }
 
-    ngOnInit() { }
+    public getCurrentBackgroundClass(): any {
+        const currentBackgroundClass = {};
+        currentBackgroundClass[this.currentBackground] = true;
+        return currentBackgroundClass;
+    }
 }

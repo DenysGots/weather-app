@@ -27,6 +27,12 @@
     }
 }
 
+@mixin appearance($name) {
+    -webkit-appearance: $name;
+    -moz-appearance: $name;
+    appearance: $name;
+}
+
 //@mixin gradient($) {
 //
 //}

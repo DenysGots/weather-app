@@ -20,11 +20,8 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DayTimeDayViewComponent implements OnInit {
-    // TODO: animate background change (background-image: linear-gradient(#6af, #bdf);)
-
-    // Sun path travel length
     @Input() dayLength: number;
-    // TODO: Use this to define current sun position
+    @Input() nightLength: number;
     @Input() currentTime: number;
     @Input() viewHeight: number;
     @Input() viewWidth: number;
@@ -46,12 +43,11 @@ export class DayTimeDayViewComponent implements OnInit {
         this.endX = this.viewWidth + this.sunContainerSize;
         this.maxY = this.viewHeight - this.sunContainerSize;
 
-        // TODO: uncomment
-        // this.sunPosition = this.defineStartingPoint();
-        this.sunPosition = {
-            x: this.startX + 'px',
-            y: 0 + 'px',
-        };
+        this.defineStartingPoint();
+        // this.sunPosition = {
+        //     x: this.startX + 'px',
+        //     y: 0 + 'px',
+        // };
 
         // this.animateSun();
         this.ngZone.runOutsideAngular(() => {
@@ -70,17 +66,27 @@ export class DayTimeDayViewComponent implements OnInit {
         const a = -1 * b / (startX + endX);
         const c = b * startX * (startX / (startX + endX) - 1);
 
+        // TODO: try using transform translate instead of bottom/left, here and in day theme
+        // https://medium.com/outsystems-experts/flip-your-60-fps-animations-flip-em-good-372281598865
         return <Parabola>{ a, b, c };
     }
 
-    public defineStartingPoint(): CelestialPosition {
+    // TODO: test
+    public defineStartingPoint(): void {
         const parabolaParameters: Parabola = this.defineAnimationPath();
-        const dayLength = 86400000; // milliseconds
-        const pathLength = Math.abs(this.startX) + this.endX;
-        const x = this.currentTime * pathLength / dayLength + this.startX;
-        const y = parabolaParameters.a * Math.pow(x, 2) + parabolaParameters.b * x + parabolaParameters.c;
+        const viewPathLength = this.viewWidth;
+        const dx = Math.abs(this.currentTime - this.nightLength / 2);
 
-        return {
+        let x = dx * viewPathLength / this.dayLength + this.startX;
+        let y;
+
+        if (x < this.startX) {
+            x *= -1;
+        }
+
+        y = parabolaParameters.a * Math.pow(x, 2) + parabolaParameters.b * x + parabolaParameters.c;
+
+        this.sunPosition = {
             x: x + 'px',
             y: y + 'px',
         };
@@ -102,8 +108,8 @@ export class DayTimeDayViewComponent implements OnInit {
             x += dx;
             y = parabolaParameters.a * Math.pow(x, 2) + parabolaParameters.b * x + parabolaParameters.c;
 
-            currentPoint.x = x.toFixed(2) + 'px';
-            currentPoint.y = y.toFixed(2) + 'px';
+            currentPoint.x = x.toFixed(4) + 'px';
+            currentPoint.y = y.toFixed(4) + 'px';
 
             if (x <= animationLength) {
                 requestAnimationFrame(animate);

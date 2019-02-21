@@ -13,7 +13,10 @@
     height: 100%;
     overflow: hidden;
     position: relative;
+    transition: box-shadow 0.1s ease-in-out, background 10.0s ease-in-out;
     width: 100%;
     
-    // TODO: add transition for background change
+    &:hover {
+        box-shadow: $box-shadow-hover;
+    }
 }

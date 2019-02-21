@@ -18,7 +18,6 @@ export class WeatherEffectWaterDropsComponent implements OnInit {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
     @Input() overcast: Overcast;
-    // TODO: must acquire current background class from main service and use it as drops background
     @Input() currentBackground: string;
 
     public drops: any[] = [];
@@ -51,7 +50,6 @@ export class WeatherEffectWaterDropsComponent implements OnInit {
 
                 const backgroundPosition = `${x * 100}% ${y * 100}%`;
                 const backgroundSize = `${this.viewHeight / 100 * 5}px ${this.viewWidth / 100 * 5}px`;
-                // const background = this.currentBackground;
 
                 const borderWidth = dropWidth - 4;
 
@@ -74,5 +72,11 @@ export class WeatherEffectWaterDropsComponent implements OnInit {
                 this.changeDetectorRef.detectChanges();
             }, this.randomTimeout());
         }
+    }
+
+    public getCurrentBackgroundClass(): any {
+        const currentBackgroundClass = {};
+        currentBackgroundClass[this.currentBackground] = true;
+        return currentBackgroundClass;
     }
 }

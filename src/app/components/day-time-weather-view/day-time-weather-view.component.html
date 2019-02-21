@@ -1,4 +1,6 @@
-<div class="app-day-time-weather-view" #weatherView>
+<div #weatherView
+     class="app-day-time-weather-view"
+     [ngClass]="getCurrentBackgroundClass()">
     <app-weather-effect-rain *ngIf="rainy"
                              [viewHeight]="viewHeight"
                              [viewWidth]="viewWidth"
@@ -29,11 +31,15 @@
     <app-day-time-day-view *ngIf="isTimeOfDay('day')"
                            [viewHeight]="viewHeight"
                            [viewWidth]="viewWidth"
-                           [dayLength]="dayLength"></app-day-time-day-view>
+                           [currentTime]="currentTime"
+                           [dayLength]="dayLength"
+                           [nightLength]="nightLength"></app-day-time-day-view>
     
     <app-day-time-night-view *ngIf="isTimeOfDay('night')"
                              [viewHeight]="viewHeight"
                              [viewWidth]="viewWidth"
+                             [currentTime]="currentTime"
+                             [dayLength]="dayLength"
                              [nightLength]="nightLength"
                              [withoutHeavyOvercast]="withoutHeavyOvercast"></app-day-time-night-view>
 </div>

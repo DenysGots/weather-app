@@ -4,6 +4,9 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 
+import { HttpService } from './http.service';
+import { StateService } from './state.service';
+
 import { Overcast, TimeOfDay } from '../interfaces/public-api';
 
 @Injectable()
@@ -12,17 +15,18 @@ export class MainService implements OnInit {
     public timeOfDay: TimeOfDay = TimeOfDay.night;
 
     public dayLength: number = 50400000; // 14 hours in milliseconds
-    public nightLength: number = 3600000; // 10 hours in milliseconds
+    public nightLength: number = 36000000; // 10 hours in milliseconds
     public currentTime: number; // milliseconds since midnight
 
     public cloudy: boolean = false;
-    public rainy: boolean = false;
+    public rainy: boolean = true;
     public snowy: boolean = false;
     public foggy: boolean = false;
 
     public currentBackground: string;
 
-    constructor() {
+    constructor(private httpService: HttpService,
+                private stateService: StateService) {
         this.setTimeOfDay();
         this.getCurrentTime();
         this.defineSkyBackground();
@@ -31,7 +35,7 @@ export class MainService implements OnInit {
     ngOnInit () { }
 
     public resetParameters(): void {
-        // TODO: add logic to reset parameters to default (current state) ones
+        // TODO: add logic to reset parameters to default ones (get current state from StateService)
     }
 
     private setTimeOfDay(): void {
@@ -39,7 +43,6 @@ export class MainService implements OnInit {
         const dayHours = moment.duration(this.dayLength).asHours();
         const nightHours = moment.duration(this.nightLength).asHours();
         const isNight = (currentHour <= nightHours / 2) || (currentHour >= dayHours + nightHours / 2);
-
         this.timeOfDay = isNight ? TimeOfDay.night : TimeOfDay.day;
     }
 
@@ -63,5 +66,7 @@ export class MainService implements OnInit {
 
         adjustedHour = moment().hour(adjustedHour).format('HH');
         this.currentBackground = `app-sky-gradient-${adjustedHour}`;
+
+        console.log(this.currentBackground);
     }
 }

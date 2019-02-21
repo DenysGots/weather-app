@@ -43,19 +43,21 @@ $border-radius-default: 5px;
 
 /* Z-indexes */
 // TODO: move all z-indexes here
-$z-index-day-time-view: 0;
-$z-index-stars: 100;
-$z-index-sun: 200;
-$z-index-moon: 300;
-$z-index-clouds: 400;
-$z-index-lightning: 500;
-$z-index-rain: 600;
-$z-index-snow: 600;
-$z-index-fog: 700;
-$z-index-water-drops: 800;
+$z-index-main-page: 0;
+$z-index-day-time-view: 100;
+$z-index-stars: 200;
+$z-index-sun: 300;
+$z-index-moon: 400;
+$z-index-clouds: 500;
+$z-index-lightning: 600;
+$z-index-rain: 700;
+$z-index-snow: 700;
+$z-index-fog: 800;
+$z-index-water-drops: 900;
 
 /* Box-shadows */
 $box-shadow-default: 0 0 5px 0 $color-box-shadow;
+$box-shadow-hover: 0 0 10px 0 $color-box-shadow-hover;
 
 //@nui-shadow-elevated: 0 2px 10px 0 @nui-shadow-color;
 //@nui-shadow-elevated: 0 2px 10px 0 var(--nui-shadow-color, @nui-shadow-color);

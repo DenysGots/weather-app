@@ -50,10 +50,12 @@ import { WeatherEffectWaterDropsComponent } from './components/weather-effects/w
 
 import { NumberToIterablePipe } from './pipes/numberToIterable.pipe';
 
-import { WindowService } from './services/window/window.service';
+import { HttpService } from './services/http.service';
 import { MainService } from './services/main.service';
 import { StateService } from './services/state.service';
 
+// TODO: delete
+import { WindowService } from './services/window/window.service';
 // For AoT compilation:
 export function getWindow() {
     return window;
@@ -111,6 +113,7 @@ export function getWindow() {
             provide: WindowService,
             useFactory: getWindow
         },
+        HttpService,
         MainService,
         StateService,
     ],

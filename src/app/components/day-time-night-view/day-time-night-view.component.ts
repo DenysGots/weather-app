@@ -20,17 +20,16 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DayTimeNightViewComponent implements OnInit {
-    // Hides stars due to performance issues in combination with snow/rain animation
-    @Input() withoutHeavyOvercast: boolean;
-    // Moon path travel length
+    @Input() withoutHeavyOvercast: boolean; // Hides stars due to performance issues in combination with snow/rain animation
+    @Input() dayLength: number;
     @Input() nightLength: number;
-    // TODO: Use this to define current Moon position
     @Input() currentTime: number;
     @Input() viewHeight: number;
     @Input() viewWidth: number;
 
     public moonPosition: CelestialPosition;
 
+    // Move to public.api
     private moonContainerSize: number;
     private startX: number;
     private endX: number;
@@ -45,12 +44,11 @@ export class DayTimeNightViewComponent implements OnInit {
         this.endX = this.viewWidth + this.moonContainerSize;
         this.maxY = this.viewHeight/* - this.moonContainerSize*/;
 
-        // TODO: uncomment
-        // this.moonPosition = this.defineStartingPoint();
-        this.moonPosition = {
-            x: this.startX + 'px',
-            y: 0 + 'px',
-        };
+        this.defineStartingPoint();
+        // this.moonPosition = {
+        //     x: this.startX + 'px',
+        //     y: 0 + 'px',
+        // };
 
         // this.animateMoon();
         this.ngZone.runOutsideAngular(() => {
@@ -74,14 +72,24 @@ export class DayTimeNightViewComponent implements OnInit {
         return <Parabola>{ a, b, c };
     }
 
-    public defineStartingPoint(): CelestialPosition {
+    // TODO: test
+    public defineStartingPoint(): void {
         const parabolaParameters: Parabola = this.defineAnimationPath();
-        const dayLength = 86400000; // milliseconds
-        const pathLength = Math.abs(this.startX) + this.endX;
-        const x = this.currentTime * pathLength / dayLength + this.startX;
-        const y = parabolaParameters.a * Math.pow(x, 2) + parabolaParameters.b * x + parabolaParameters.c;
+        const viewPathLength = this.viewWidth;
+        const dx = (this.currentTime > this.nightLength / 2)
+            ? Math.abs(this.currentTime - this.dayLength - this.nightLength / 2)
+            : Math.abs(this.nightLength - this.currentTime);
 
-        return {
+        let x = dx * viewPathLength / this.nightLength + this.startX;
+        let y;
+
+        if (x < this.startX) {
+            x *= -1;
+        }
+
+        y = parabolaParameters.a * Math.pow(x, 2) + parabolaParameters.b * x + parabolaParameters.c;
+
+        this.moonPosition = {
             x: x + 'px',
             y: y + 'px',
         };
@@ -91,20 +99,19 @@ export class DayTimeNightViewComponent implements OnInit {
         const currentPoint = this.moonPosition;
         const animationTime = this.nightLength;
         const animationLength = this.viewWidth + this.moonContainerSize;
-        const startX = -1 * this.moonContainerSize;
         const dx = animationLength / animationTime;
         const parabolaParameters: Parabola = this.defineAnimationPath();
         const changeDetectorRef = this.changeDetectorRef;
 
-        let x = startX;
-        let y = 0;
+        let x = parseInt(currentPoint.x, 10);
+        let y = parseInt(currentPoint.y, 10);
 
         function animate() {
             x += dx;
             y = parabolaParameters.a * Math.pow(x, 2) + parabolaParameters.b * x + parabolaParameters.c;
 
-            currentPoint.x = x.toFixed(2) + 'px';
-            currentPoint.y = y.toFixed(2) + 'px';
+            currentPoint.x = x.toFixed(4) + 'px';
+            currentPoint.y = y.toFixed(4) + 'px';
 
             if (x <= animationLength) {
                 requestAnimationFrame(animate);
