@@ -21,6 +21,7 @@ $weather-card-height: 200px;
     width: 100%;
     
     &:hover {
+        background-color: $weather-card-background-hover;
         box-shadow: $box-shadow-hover;
     }
     

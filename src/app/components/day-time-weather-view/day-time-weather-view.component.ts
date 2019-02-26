@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
-import { Overcast, TimeOfDay } from '../../interfaces/public-api';
+import { Overcast, TimeOfDay, State } from '../../interfaces/public-api';
 
 @Component({
     selector: 'app-day-time-weather-view',
@@ -18,43 +18,44 @@ import { Overcast, TimeOfDay } from '../../interfaces/public-api';
     ],
 })
 export class DayTimeWeatherViewComponent implements OnInit {
-    public timeOfDay: TimeOfDay;
-    public overcast: Overcast;
-
-    public dayLength: number; // milliseconds
-    public nightLength: number; // milliseconds
-    public currentTime: number; // milliseconds since midnight
-
-    public cloudy: boolean;
-    public rainy: boolean;
-    public snowy: boolean;
-    public foggy: boolean;
-    public withoutHeavyOvercast: boolean;
+    // public timeOfDay: TimeOfDay;
+    // public overcast: Overcast;
+    // public dayLength: number;
+    // public nightLength: number;
+    // public currentTime: number;
+    // public cloudy: boolean;
+    // public rainy: boolean;
+    // public snowy: boolean;
+    // public foggy: boolean;
+    // public withoutHeavyOvercast: boolean;
+    // public currentBackground: string;
 
     public viewHeight: number;
     public viewWidth: number;
-
-    public currentBackground: string;
+    public currentState: State;
 
     @ViewChild('weatherView') weatherView: ElementRef;
 
     constructor(private elementRef: ElementRef,
                 private changeDetectorRef: ChangeDetectorRef,
                 private mainService: MainService) {
-        this.timeOfDay = mainService.timeOfDay;
-        this.overcast = mainService.overcast;
-        this.dayLength = mainService.dayLength;
-        this.nightLength = mainService.nightLength;
-        this.currentTime = mainService.currentTime;
-        this.cloudy = mainService.cloudy;
-        this.rainy = mainService.rainy;
-        this.snowy = mainService.snowy;
-        this.foggy = mainService.foggy;
-        this.currentBackground = mainService.currentBackground;
+        // this.timeOfDay = mainService.currentState.timeOfDay;
+        // this.overcast = mainService.currentState.overcast;
+        // this.dayLength = mainService.currentState.dayLength;
+        // this.nightLength = mainService.currentState.nightLength;
+        // this.currentTime = mainService.currentState.currentTime;
+        // this.cloudy = mainService.currentState.cloudy;
+        // this.rainy = mainService.currentState.rainy;
+        // this.snowy = mainService.currentState.snowy;
+        // this.foggy = mainService.currentState.foggy;
+        // this.currentBackground = mainService.currentState.currentBackground;
+
+        // TODO: this one must be emitted to weather-view
+        this.currentState = this.mainService.currentState;
     }
 
     ngOnInit() {
-        this.withoutHeavyOvercast = !(this.overcast && this.overcast === Overcast.heavy);
+        // this.withoutHeavyOvercast = !(this.currentState.overcast && this.currentState.overcast === Overcast.heavy);
 
         /* TODO: this ones are calculated wrongly in Firefox, needs to be fixed somehow */
         this.viewHeight = this.elementRef.nativeElement.offsetHeight;
@@ -64,20 +65,24 @@ export class DayTimeWeatherViewComponent implements OnInit {
     }
 
     public isTimeOfDay(timeOfDay) {
-        return this.timeOfDay === timeOfDay;
+        return this.currentState.timeOfDay === timeOfDay;
     }
 
     public addLightning(): boolean {
-        return this.rainy && this.overcast === Overcast.heavy;
+        return this.currentState.rainy && this.currentState.overcast === Overcast.heavy;
     }
 
     public addDropsOnScreen(): boolean {
-        return this.foggy || this.rainy;
+        return this.currentState.foggy || this.currentState.rainy;
     }
 
     public getCurrentBackgroundClass(): any {
         const currentBackgroundClass = {};
-        currentBackgroundClass[this.currentBackground] = true;
+        currentBackgroundClass[this.currentState.currentBackground] = true;
         return currentBackgroundClass;
+    }
+
+    public withoutHeavyOvercast(): boolean {
+        return !(this.currentState.overcast && this.currentState.overcast === Overcast.heavy);
     }
 }

@@ -7,66 +7,65 @@ import * as moment from 'moment';
 import { HttpService } from './http.service';
 import { StateService } from './state.service';
 
-import { Overcast, TimeOfDay } from '../interfaces/public-api';
+import { State, TimeOfDay } from '../interfaces/public-api';
 
 @Injectable()
 export class MainService implements OnInit {
-    public overcast: Overcast = Overcast.light;
-    public timeOfDay: TimeOfDay = TimeOfDay.night;
-
-    public dayLength: number = 50400000; // 14 hours in milliseconds
-    public nightLength: number = 36000000; // 10 hours in milliseconds
-    public currentTime: number; // milliseconds since midnight
-
-    public cloudy: boolean = false;
-    public rainy: boolean = true;
-    public snowy: boolean = false;
-    public foggy: boolean = false;
-
-    public currentBackground: string;
+    // TODO: must be emmited on change
+    public currentState: State;
 
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
+        this.currentState = Object.assign({}, this.stateService.currentState);
+        this.setCurrentTime();
         this.setTimeOfDay();
-        this.getCurrentTime();
         this.defineSkyBackground();
     }
 
     ngOnInit () { }
 
-    public resetParameters(): void {
-        // TODO: add logic to reset parameters to default ones (get current state from StateService)
-    }
-
-    private setTimeOfDay(): void {
-        const currentHour = moment().hour();
-        const dayHours = moment.duration(this.dayLength).asHours();
-        const nightHours = moment.duration(this.nightLength).asHours();
-        const isNight = (currentHour <= nightHours / 2) || (currentHour >= dayHours + nightHours / 2);
-        this.timeOfDay = isNight ? TimeOfDay.night : TimeOfDay.day;
-    }
-
-    private getCurrentTime(): void {
+    public setCurrentTime(): void {
         const currentTime = moment();
         const startOfDay = moment().startOf('hour').hour(0);
-        this.currentTime = moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
+        this.currentState.currentTime = moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
     }
 
-    private defineSkyBackground(): void {
+    public setTimeOfDay(): void {
+        // const currentHour = moment().hour();
+        const currentHour = moment.duration(this.currentState.currentTime).asHours();
+        const dayHours = moment.duration(this.currentState.dayLength).asHours();
+        const nightHours = moment.duration(this.currentState.nightLength).asHours();
+        const isNight = (currentHour <= nightHours / 2) || (currentHour >= dayHours + nightHours / 2);
+        this.currentState.timeOfDay = isNight ? TimeOfDay.night : TimeOfDay.day;
+    }
+
+    public defineSkyBackground(): void {
         // TODO: result must be emitted on hourly basis and subscribed by main/day/night/water drops components
         // TODO: if any time left, gradients must be generated every minute or so, instead of every hour
-        const currentHour = moment().hour();
+        // const currentHour = moment().hour();
+        const currentHour = moment.duration(this.currentState.currentTime).asHours();
+        const shouldAdjustCurrentHour =
+            this.currentState.dayLength / this.currentState.nightLength >= 1 ||
+            currentHour === 0 ||
+            currentHour === 12 ||
+            currentHour === 24;
+
         let adjustedHour;
 
-        adjustedHour = (this.dayLength / this.nightLength >= 1 || currentHour === 0 || currentHour === 12 || currentHour === 24)
+        adjustedHour = shouldAdjustCurrentHour
             ? currentHour
             : (currentHour < 12)
                 ? (currentHour - 1)
                 : (currentHour + 1);
 
         adjustedHour = moment().hour(adjustedHour).format('HH');
-        this.currentBackground = `app-sky-gradient-${adjustedHour}`;
+        this.currentState.currentBackground = `app-sky-gradient-${adjustedHour}`;
+    }
 
-        console.log(this.currentBackground);
+    public resetState(): void {
+        this.currentState = Object.assign({}, this.stateService.currentState);
+        this.setCurrentTime();
+        this.setTimeOfDay();
+        this.defineSkyBackground();
     }
 }

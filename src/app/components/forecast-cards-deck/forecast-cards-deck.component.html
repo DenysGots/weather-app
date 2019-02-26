@@ -1,14 +1,16 @@
 <div class="app-forecast-cards-deck">
-    <app-forecast-weather-card></app-forecast-weather-card>
-    <app-forecast-weather-card></app-forecast-weather-card>
-    <app-forecast-weather-card></app-forecast-weather-card>
-    <app-forecast-weather-card></app-forecast-weather-card>
-    <app-forecast-weather-card></app-forecast-weather-card>
-    <app-forecast-weather-card></app-forecast-weather-card>
-    <app-forecast-weather-card></app-forecast-weather-card>
+    <div class="app-forecast-cards-deck__hours">
+        <app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"
+                                   type="hour"></app-forecast-weather-card>
+    </div>
+    
+    <div class="app-forecast-cards-deck__days">
+        <app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"
+                                   type="day"></app-forecast-weather-card>
+    </div>
 </div>
 
-<div class="app-forecast-cards-deck__change-day-week">
+<div class="app-forecast-cards-deck__controls">
     <app-button buttonType="left" buttonSize="big" buttonShape="circle"></app-button>
     <app-button buttonType="minus" buttonSize="medium"></app-button>
     <app-button buttonType="home" buttonSize="big"></app-button>

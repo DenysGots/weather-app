@@ -1,28 +1,28 @@
 <div #weatherView
      class="app-day-time-weather-view"
      [ngClass]="getCurrentBackgroundClass()">
-    <app-weather-effect-rain *ngIf="rainy"
+    <app-weather-effect-rain *ngIf="currentState.rainy"
                              [viewHeight]="viewHeight"
                              [viewWidth]="viewWidth"
-                             [overcast]="overcast"
-                             [timeOfDay]="timeOfDay"></app-weather-effect-rain>
+                             [overcast]="currentState.overcast"
+                             [timeOfDay]="currentState.timeOfDay"></app-weather-effect-rain>
     
-    <app-weather-effect-snow *ngIf="snowy"
+    <app-weather-effect-snow *ngIf="currentState.snowy"
                              [viewHeight]="viewHeight"
                              [viewWidth]="viewWidth"
-                             [overcast]="overcast"></app-weather-effect-snow>
+                             [overcast]="currentState.overcast"></app-weather-effect-snow>
     
-    <app-weather-effect-cloud *ngIf="cloudy"
-                              [overcast]="overcast"
-                              [timeOfDay]="timeOfDay"></app-weather-effect-cloud>
+    <app-weather-effect-cloud *ngIf="currentState.cloudy"
+                              [overcast]="currentState.overcast"
+                              [timeOfDay]="currentState.timeOfDay"></app-weather-effect-cloud>
     
-    <app-weather-effect-fog *ngIf="foggy"></app-weather-effect-fog>
+    <app-weather-effect-fog *ngIf="currentState.foggy"></app-weather-effect-fog>
     
     <app-weather-effect-water-drops *ngIf="addDropsOnScreen()"
                                     [viewHeight]="viewHeight"
                                     [viewWidth]="viewWidth"
-                                    [overcast]="overcast"
-                                    [currentBackground]="currentBackground"></app-weather-effect-water-drops>
+                                    [overcast]="currentState.overcast"
+                                    [currentBackground]="currentState.currentBackground"></app-weather-effect-water-drops>
     
     <app-weather-effect-lightning2 *ngIf="addLightning()"
                                    [viewHeight]="viewHeight"
@@ -31,15 +31,15 @@
     <app-day-time-day-view *ngIf="isTimeOfDay('day')"
                            [viewHeight]="viewHeight"
                            [viewWidth]="viewWidth"
-                           [currentTime]="currentTime"
-                           [dayLength]="dayLength"
-                           [nightLength]="nightLength"></app-day-time-day-view>
+                           [currentTime]="currentState.currentTime"
+                           [dayLength]="currentState.dayLength"
+                           [nightLength]="currentState.nightLength"></app-day-time-day-view>
     
     <app-day-time-night-view *ngIf="isTimeOfDay('night')"
                              [viewHeight]="viewHeight"
                              [viewWidth]="viewWidth"
-                             [currentTime]="currentTime"
-                             [dayLength]="dayLength"
-                             [nightLength]="nightLength"
-                             [withoutHeavyOvercast]="withoutHeavyOvercast"></app-day-time-night-view>
+                             [currentTime]="currentState.currentTime"
+                             [dayLength]="currentState.dayLength"
+                             [nightLength]="currentState.nightLength"
+                             [withoutHeavyOvercast]="withoutHeavyOvercast()"></app-day-time-night-view>
 </div>

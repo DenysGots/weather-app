@@ -9,6 +9,21 @@ export interface CelestialPosition {
     y: string;
 }
 
+export interface State {
+    cloudy?: boolean;
+    rainy?: boolean;
+    snowy?: boolean;
+    foggy?: boolean;
+    overcast?: Overcast;
+    timeOfDay?: TimeOfDay; // day/night
+    dayLength?: number; // milliseconds
+    nightLength?: number; // milliseconds
+    currentTime?: number; // milliseconds since midnight
+    currentBackground?: string; // class
+}
+
+// TODO: add weather state, this one must be immutable, apart of by State service
+
 export enum TimeOfDay {
     day = 'day',
     night = 'night'

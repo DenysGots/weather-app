@@ -12,15 +12,16 @@ import { MainService } from '../../services/main.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent {
-    public currentBackground: string;
+    // public currentBackground: string;
 
     constructor(private mainService: MainService) {
-        this.currentBackground = mainService.currentBackground;
+        // this.currentBackground = mainService.currentState.currentBackground;
     }
 
     public getCurrentBackgroundClass(): any {
         const currentBackgroundClass = {};
-        currentBackgroundClass[this.currentBackground] = true;
+        // currentBackgroundClass[this.currentBackground] = true;
+        currentBackgroundClass[this.mainService.currentState.currentBackground] = true;
         return currentBackgroundClass;
     }
 }

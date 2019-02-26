@@ -12,6 +12,7 @@
     min-height: 100%;
     overflow: auto;
     position: relative;
+    transition: background 10.0s ease-in-out;
     width: 100%;
     z-index: $z-index-main-page;
     
@@ -47,8 +48,8 @@
     
     &__control-panel {
         position: absolute;
-        right: $space-sm;
-        top: $space-sm;
+        right: $space-lg;
+        top: $space-lg;
         z-index: $z-index-main-page + 20;
     }
     

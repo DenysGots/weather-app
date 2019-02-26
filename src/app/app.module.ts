@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
+    MatButtonModule,
     MatCheckboxModule,
     MatExpansionModule,
     MatRadioModule,
@@ -99,9 +100,11 @@ export function getWindow() {
             preloadingStrategy: PreloadAllModules,
         }),
         SharedModule,
+        FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         FontAwesomeModule,
+        MatButtonModule,
         MatCheckboxModule,
         MatExpansionModule,
         MatRadioModule,

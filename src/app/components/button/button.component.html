@@ -1,4 +1,5 @@
 <button class="app-button"
+        [attr.disabled]="isActive ? null : ''"
         [ngClass]="{
             'app-button--circle': isCircle(),
             'app-button--rectangle': isRectangle()

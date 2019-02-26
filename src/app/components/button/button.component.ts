@@ -39,6 +39,7 @@ export class ButtonComponent implements OnInit {
     @Input() buttonSize: ButtonSizes = ButtonSizes.medium;
     @Input() buttonShape: ButtonShapes = ButtonShapes.circle;
     @Input() buttonType: ButtonTypes;
+    @Input() isActive = true;
 
     // @HostBinding('class.app-button-circle') public isCircle: boolean;
     // @HostBinding('class.app-button-rectangle') public isRectangle: boolean;

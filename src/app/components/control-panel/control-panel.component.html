@@ -10,63 +10,64 @@
                     Click here
                 </mat-panel-description>
             </mat-expansion-panel-header>
+    
+            <form [formGroup]="controlForm">
+                <div class="app-control-panel__block">
+                    <p>Set custom settings</p>
+                    <mat-slide-toggle (change)="toggleControlPanel()">On/off</mat-slide-toggle>
+                </div>
             
-            <div class="app-control-panel__block">
-                <mat-slide-toggle>Set custom settings</mat-slide-toggle>
-            </div>
-        
-            <div class="app-control-panel__block">
-                <p>Time of day</p>
-                <mat-radio-group>
-                    <mat-radio-button value="time-of-day">Day</mat-radio-button>
-                    <mat-radio-button value="time-of-day">Night</mat-radio-button>
-                </mat-radio-group>
-                
-                <p>Set hour</p>
-                <mat-slider></mat-slider>
-            </div>
-        
-            <div class="app-control-panel__block">
-                <p>Rain</p>
-                <mat-radio-group>
-                    <mat-radio-button value="rain">Low</mat-radio-button>
-                    <mat-radio-button value="rain">Medium</mat-radio-button>
-                    <mat-radio-button value="rain">Heavy</mat-radio-button>
-                </mat-radio-group>
-            </div>
-        
-            <div class="app-control-panel__block">
-                <p>Snow</p>
-                <mat-radio-group>
-                    <mat-radio-button value="snow">Low</mat-radio-button>
-                    <mat-radio-button value="snow">Medium</mat-radio-button>
-                    <mat-radio-button value="snow">Heavy</mat-radio-button>
-                </mat-radio-group>
-            </div>
-        
-            <div class="app-control-panel__block">
-                <p>Clouds</p>
-                <mat-radio-group>
-                    <mat-radio-button value="clouds">Low</mat-radio-button>
-                    <mat-radio-button value="clouds">Medium</mat-radio-button>
-                    <mat-radio-button value="clouds">Heavy</mat-radio-button>
-                </mat-radio-group>
-            </div>
-        
-            <div class="app-control-panel__block">
-                <mat-slide-toggle>Fog</mat-slide-toggle>
-            </div>
-        
-            <div class="app-control-panel__block">
-                <mat-slide-toggle>Lightning</mat-slide-toggle>
-            </div>
-        
-            <div class="app-control-panel__block">
-                <mat-slide-toggle>Drops on screen</mat-slide-toggle>
-            </div>
+                <div class="app-control-panel__block">
+                    <p>Rain</p>
+                    <mat-slide-toggle formControlName="rainy"
+                                      (change)="overrideState()">On/off</mat-slide-toggle>
+                </div>
+            
+                <div class="app-control-panel__block">
+                    <p>Snow</p>
+                    <mat-slide-toggle formControlName="snowy"
+                                      (change)="overrideState()">On/off</mat-slide-toggle>
+                </div>
+            
+                <div class="app-control-panel__block">
+                    <p>Clouds</p>
+                    <mat-slide-toggle formControlName="cloudy"
+                                      (change)="overrideState()">On/off</mat-slide-toggle>
+                </div>
+    
+                <div class="app-control-panel__block">
+                    <p>Fog</p>
+                    <mat-slide-toggle formControlName="foggy"
+                                      (change)="overrideState()">Fog</mat-slide-toggle>
+                </div>
+    
+                <div class="app-control-panel__block">
+                    <p>Overcast</p>
+                    <mat-radio-group formControlName="overcast"
+                                     (change)="overrideState()">
+                        <mat-radio-button [value]="overcastEnum.light">Light</mat-radio-button>
+                        <mat-radio-button [value]="overcastEnum.medium">Medium</mat-radio-button>
+                        <mat-radio-button [value]="overcastEnum.heavy">Heavy</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+    
+                <div class="app-control-panel__block">
+                    <p>Time of day</p>
+                    <mat-slider formControlName="currentTime"
+                                [max]="24"
+                                [min]="0"
+                                [step]="1"
+                                [thumbLabel]="true"
+                                (change)="overrideState()">
+                    </mat-slider>
+                </div>
+            </form>
     
             <div class="app-control-panel__block">
-                <app-button buttonShape="rectangle">Reset settings</app-button>
+                <button mat-raised-button
+                        color="primary"
+                        [disabled]="!isActive"
+                        (click)="resetState()">Reset settings</button>
             </div>
         </mat-expansion-panel>
     </mat-accordion>

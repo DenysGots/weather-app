@@ -62,7 +62,9 @@ export class DayTimeDayViewComponent implements OnInit {
         const endX = this.endX;
         const maxY = this.maxY;
 
-        const b = (4 * maxY * (startX + endX)) / (-1 * Math.pow(viewWidth, 2) + 2 * viewWidth * (startX + endX) - 4 * startX * endX);
+        const b = (4 * maxY * (startX + endX)) /
+                  (-1 * Math.pow((viewWidth + startX), 2) +
+                  2 * (viewWidth + startX) * (startX + endX) - 4 * startX * endX);
         const a = -1 * b / (startX + endX);
         const c = b * startX * (startX / (startX + endX) - 1);
 
