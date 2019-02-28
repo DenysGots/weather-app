@@ -7,13 +7,20 @@
 }
 
 .app-forecast-cards-deck {
-    align-content: center;
     contain: content;
-    display: flex;
     height: 100%;
-    justify-content: space-between;
     position: relative;
     width: 100%;
+    
+    &__hours,
+    &__days {
+        align-content: center;
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+        position: relative;
+        width: 100%;
+    }
     
     &__controls {
         align-items: center;

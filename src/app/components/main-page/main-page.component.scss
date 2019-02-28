@@ -20,7 +20,7 @@
         align-items: center;
         display: flex;
         justify-content: center;
-        padding: $space-lg 10%;
+        padding: $space-lg 15%;
         position: relative;
         width: 100%;
         z-index: $z-index-main-page + 20;
@@ -48,8 +48,8 @@
     
     &__control-panel {
         position: absolute;
-        right: $space-lg;
-        top: $space-lg;
+        right: $space-xl;
+        top: $space-xl;
         z-index: $z-index-main-page + 20;
     }
     

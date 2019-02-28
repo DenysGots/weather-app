@@ -1,10 +1,12 @@
 <div class="app-forecast-cards-deck">
-    <div class="app-forecast-cards-deck__hours">
+    <div *ngIf="getCurrentMode('hours')"
+         class="app-forecast-cards-deck__hours">
         <app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"
                                    type="hour"></app-forecast-weather-card>
     </div>
     
-    <div class="app-forecast-cards-deck__days">
+    <div *ngIf="getCurrentMode('days')"
+         class="app-forecast-cards-deck__days">
         <app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"
                                    type="day"></app-forecast-weather-card>
     </div>

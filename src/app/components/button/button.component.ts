@@ -51,8 +51,8 @@ export class ButtonComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.size = ButtonSizes[this.buttonSize] + 'px';
-        this.fontSize = ButtonIconSizes[this.buttonSize] + 'px';
+        this.size = ButtonSizes[this.buttonSize];
+        this.fontSize = ButtonIconSizes[this.buttonSize];
         this.type = ButtonTypes[this.buttonType];
         // this.isCircle = this.buttonShape === ButtonShapes.circle;
         // this.isRectangle = this.buttonShape === ButtonShapes.rectangle;

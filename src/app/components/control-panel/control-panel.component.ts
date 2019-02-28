@@ -1,7 +1,4 @@
-import {
-    Component,
-    OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 
@@ -22,7 +19,7 @@ export class ControlPanelComponent implements OnInit {
     constructor(private mainService: MainService) { }
 
     ngOnInit() {
-        this.testingState = Object.assign({}, this.mainService.currentState);
+        this.testingState = {...this.mainService.currentState};
 
         this.controlForm = new FormGroup({
             overcast: new FormControl({value: this.testingState.overcast, disabled: !this.isActive}),
@@ -45,20 +42,21 @@ export class ControlPanelComponent implements OnInit {
     }
 
     public overrideState(): void {
-        // TODO: on currentTime change must somehow trigger CelestialPosition recalculate in day/night views
+        for (const prop of this.controlForm.value) {
+            this.testingState[prop] = this.controlForm.value[prop];
+        }
 
-        this.testingState = Object.assign({}, this.controlForm.value);
         this.testingState.currentTime = this.hoursToMilliseconds(this.controlForm.value.currentTime);
-        this.mainService.currentState = Object.assign({}, this.testingState);
+
+        this.mainService.currentState = {...this.testingState};
         this.mainService.setTimeOfDay();
         this.mainService.defineSkyBackground();
-
-        // TODO: emmit mainService
+        this.mainService.emitState(this.mainService.currentState);
     }
 
     public resetState(): void {
-        this.mainService.resetState();
-        this.testingState = Object.assign({}, this.mainService.currentState);
+        this.mainService.setCurrentState();
+        this.testingState = {...this.mainService.currentState};
     }
 
     public millisecondsToHours(time: number): number {
@@ -66,8 +64,8 @@ export class ControlPanelComponent implements OnInit {
     }
 
     public hoursToMilliseconds(time: number): number {
-        const currentTime = moment().hours(time).minutes(0).seconds(0).millisecond(0);
-        const startOfDay = moment().startOf('hour').hour(0);
+        const currentTime: moment.Moment = moment().hours(time).minutes(0).seconds(0).millisecond(0);
+        const startOfDay: moment.Moment = moment().startOf('hour').hours(0);
         return moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
     }
 }

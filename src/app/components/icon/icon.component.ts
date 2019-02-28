@@ -16,12 +16,12 @@ export class IconComponent implements OnInit {
     @Input() iconSize: IconSizes = IconSizes.medium;
 
     public iconUrl: string;
-    public size: string;
+    public size: number;
 
     constructor() { }
 
     ngOnInit() {
         this.iconUrl = `url(../../assets/img/weather_icons/animated/${this.iconType}.svg)`;
-        this.size = 2 * IconSizes[this.iconSize] + 'px';
+        this.size = 2 * IconSizes[this.iconSize];
     }
 }

@@ -6,10 +6,10 @@
          class="app-weather-effect-water-drops_drop"
          [ngClass]="getCurrentBackgroundClass()"
          [ngStyle]="{
-                'top': drop.yPosition + 'px',
-                'left': drop.xPosition + 'px',
-                'width': drop.dropWidth + 'px',
-                'height': drop.dropHeight + 'px',
+                'top.px': drop.yPosition,
+                'left.px': drop.xPosition,
+                'width.px': drop.dropWidth,
+                'height.px': drop.dropHeight,
                 'background-position': drop.backgroundPosition,
                 'background-size': drop.backgroundSize
              }">
@@ -18,10 +18,10 @@
     <div *ngFor="let border of borders"
          class="app-weather-effect-water-drops_border"
          [ngStyle]="{
-                'top': border.yPosition + 'px',
-                'left': border.xPosition + 'px',
-                'width': border.borderWidth + 'px',
-                'height': border.dropHeight + 'px'
+                'top.px': border.yPosition,
+                'left.px': border.xPosition,
+                'width.px': border.borderWidth,
+                'height.px': border.dropHeight
              }">
     </div>
 </div>

@@ -5,9 +5,9 @@
             'app-button--rectangle': isRectangle()
         }"
         [ngStyle]="{
-           'min-width': size,
-           'min-height': size,
-           'font-size': fontSize
+           'min-width.px': size,
+           'min-height.px': size,
+           'font-size.px': fontSize
         }">
     <fa-icon *ngIf="buttonType"
              [icon]="['fas', type]"></fa-icon>

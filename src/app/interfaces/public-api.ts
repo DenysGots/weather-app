@@ -29,6 +29,11 @@ export enum TimeOfDay {
     night = 'night'
 }
 
+export enum CardsDeckType {
+    hours = 'hours',
+    days = 'days',
+}
+
 export enum Overcast {
     light = 'light',
     medium = 'medium',
@@ -74,5 +79,5 @@ export enum IconSizes {
     extra_big = '36',
 }
 
-export const sunSize = 60;
+export const sunSize = 30;
 export const moonSize = 60;

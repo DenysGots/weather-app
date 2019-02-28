@@ -4,7 +4,11 @@ import {
     Component,
     Input,
     NgZone,
+    OnChanges,
+    OnDestroy,
     OnInit,
+    SimpleChanges,
+    ViewRef,
 } from '@angular/core';
 
 import {
@@ -19,7 +23,7 @@ import {
     styleUrls: ['./day-time-day-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DayTimeDayViewComponent implements OnInit {
+export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
     @Input() dayLength: number;
     @Input() nightLength: number;
     @Input() currentTime: number;
@@ -28,11 +32,11 @@ export class DayTimeDayViewComponent implements OnInit {
 
     public sunPosition: CelestialPosition;
 
-    // Move to public.api
     private sunContainerSize: number;
     private startX: number;
     private endX: number;
     private maxY: number;
+    private animation: any;
 
     constructor(private ngZone: NgZone,
                 private changeDetectorRef: ChangeDetectorRef) { }
@@ -43,11 +47,37 @@ export class DayTimeDayViewComponent implements OnInit {
         this.endX = this.viewWidth + this.sunContainerSize;
         this.maxY = this.viewHeight - this.sunContainerSize;
 
-        this.defineStartingPoint();
+        this.startAnimation();
+
+        // this.defineStartingPoint();
+        // // this.sunPosition = {
+        // //     x: this.startX + 'px',
+        // //     y: 0 + 'px',
+        // // };
+
+        // // this.animateSun();
+        // this.ngZone.runOutsideAngular(() => {
+        //     this.animateSun();
+        // });
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if ('currentTime' in changes && !changes.currentTime.firstChange) {
+            this.startAnimation();
+        }
+    }
+
+    public startAnimation(): void {
         // this.sunPosition = {
         //     x: this.startX + 'px',
         //     y: 0 + 'px',
         // };
+
+        if (this.animation) {
+            cancelAnimationFrame(this.animation);
+        }
+
+        this.defineStartingPoint();
 
         // this.animateSun();
         this.ngZone.runOutsideAngular(() => {
@@ -89,8 +119,8 @@ export class DayTimeDayViewComponent implements OnInit {
         y = parabolaParameters.a * Math.pow(x, 2) + parabolaParameters.b * x + parabolaParameters.c;
 
         this.sunPosition = {
-            x: x + 'px',
-            y: y + 'px',
+            x: x.toFixed(4),
+            y: y.toFixed(4),
         };
     }
 
@@ -98,29 +128,39 @@ export class DayTimeDayViewComponent implements OnInit {
         const currentPoint = this.sunPosition;
         const animationTime = this.dayLength;
         const animationLength = this.viewWidth + this.sunContainerSize;
-        const startX = -1 * this.sunContainerSize;
         const dx = animationLength / animationTime;
         const parabolaParameters: Parabola = this.defineAnimationPath();
         const changeDetectorRef = this.changeDetectorRef;
 
-        let x = startX;
-        let y = 0;
+        let animation = this.animation;
+        let x = parseInt(currentPoint.x, 10);
+        let y = parseInt(currentPoint.y, 10);
+
+        function detectChanges(): void {
+            if (!(<ViewRef>changeDetectorRef).destroyed) {
+                changeDetectorRef.detectChanges();
+            }
+        }
 
         function animate() {
             x += dx;
             y = parabolaParameters.a * Math.pow(x, 2) + parabolaParameters.b * x + parabolaParameters.c;
 
-            currentPoint.x = x.toFixed(4) + 'px';
-            currentPoint.y = y.toFixed(4) + 'px';
+            currentPoint.x = x.toFixed(4);
+            currentPoint.y = y.toFixed(4);
 
             if (x <= animationLength) {
-                requestAnimationFrame(animate);
+                animation = requestAnimationFrame(animate);
             }
 
-            changeDetectorRef.detectChanges();
+            detectChanges();
         }
 
-        requestAnimationFrame(animate);
-        changeDetectorRef.detectChanges();
+        animation = requestAnimationFrame(animate);
+        detectChanges();
+    }
+
+    ngOnDestroy() {
+        cancelAnimationFrame(this.animation);
     }
 }

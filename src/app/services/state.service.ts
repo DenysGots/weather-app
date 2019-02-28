@@ -26,7 +26,7 @@ export class StateService implements OnInit {
         dayLength: 50400000,
         nightLength: 36000000,
         cloudy: false,
-        rainy: true,
+        rainy: false,
         snowy: false,
         foggy: false,
     };

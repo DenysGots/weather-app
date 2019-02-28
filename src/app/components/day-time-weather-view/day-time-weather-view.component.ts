@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
-import { Overcast, TimeOfDay, State } from '../../interfaces/public-api';
+import { Overcast, State } from '../../interfaces/public-api';
 
 @Component({
     selector: 'app-day-time-weather-view',
@@ -18,18 +18,6 @@ import { Overcast, TimeOfDay, State } from '../../interfaces/public-api';
     ],
 })
 export class DayTimeWeatherViewComponent implements OnInit {
-    // public timeOfDay: TimeOfDay;
-    // public overcast: Overcast;
-    // public dayLength: number;
-    // public nightLength: number;
-    // public currentTime: number;
-    // public cloudy: boolean;
-    // public rainy: boolean;
-    // public snowy: boolean;
-    // public foggy: boolean;
-    // public withoutHeavyOvercast: boolean;
-    // public currentBackground: string;
-
     public viewHeight: number;
     public viewWidth: number;
     public currentState: State;
@@ -39,24 +27,13 @@ export class DayTimeWeatherViewComponent implements OnInit {
     constructor(private elementRef: ElementRef,
                 private changeDetectorRef: ChangeDetectorRef,
                 private mainService: MainService) {
-        // this.timeOfDay = mainService.currentState.timeOfDay;
-        // this.overcast = mainService.currentState.overcast;
-        // this.dayLength = mainService.currentState.dayLength;
-        // this.nightLength = mainService.currentState.nightLength;
-        // this.currentTime = mainService.currentState.currentTime;
-        // this.cloudy = mainService.currentState.cloudy;
-        // this.rainy = mainService.currentState.rainy;
-        // this.snowy = mainService.currentState.snowy;
-        // this.foggy = mainService.currentState.foggy;
-        // this.currentBackground = mainService.currentState.currentBackground;
+        this.mainService.currentStateSubject.subscribe((state: State) => {
+            this.currentState = state;
 
-        // TODO: this one must be emitted to weather-view
-        this.currentState = this.mainService.currentState;
+        });
     }
 
     ngOnInit() {
-        // this.withoutHeavyOvercast = !(this.currentState.overcast && this.currentState.overcast === Overcast.heavy);
-
         /* TODO: this ones are calculated wrongly in Firefox, needs to be fixed somehow */
         this.viewHeight = this.elementRef.nativeElement.offsetHeight;
         this.viewWidth = this.elementRef.nativeElement.offsetWidth;
