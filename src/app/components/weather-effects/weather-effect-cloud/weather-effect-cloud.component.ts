@@ -1,7 +1,9 @@
 import {
     Component,
     Input,
+    OnChanges,
     OnInit,
+    SimpleChanges,
 } from '@angular/core';
 
 import {
@@ -15,7 +17,7 @@ import {
     templateUrl: './weather-effect-cloud.component.html',
     styleUrls: ['./weather-effect-cloud.component.scss'],
 })
-export class WeatherEffectCloudComponent implements OnInit {
+export class WeatherEffectCloudComponent implements OnInit, OnChanges {
     @Input() public overcast: Overcast = Overcast.light;
     @Input() public timeOfDay: TimeOfDay = TimeOfDay.day;
 
@@ -25,6 +27,12 @@ export class WeatherEffectCloudComponent implements OnInit {
 
     ngOnInit() {
         this.numberOfClouds = NumberOfClouds[this.overcast];
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if ('overcast' in changes && !changes.overcast.firstChange) {
+            this.numberOfClouds = NumberOfClouds[this.overcast];
+        }
     }
 
     public isOvercast(type): boolean {

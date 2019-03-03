@@ -50,6 +50,7 @@ import { WeatherEffectSunComponent } from './components/weather-effects/weather-
 import { WeatherEffectWaterDropsComponent } from './components/weather-effects/weather-effect-water-drops/weather-effect-water-drops.component';
 
 import { NumberToIterablePipe } from './pipes/numberToIterable.pipe';
+import { TemperatureValuePipe } from './pipes/temperatureValuePipe.pipe';
 
 import { HttpService } from './services/http.service';
 import { MainService } from './services/main.service';
@@ -76,6 +77,7 @@ export function getWindow() {
         IconComponent,
         MainPageComponent,
         NumberToIterablePipe,
+        TemperatureValuePipe,
         WeatherEffectCloudComponent,
         WeatherEffectFogComponent,
         WeatherEffectLightning2Component,

@@ -79,5 +79,8 @@ export enum IconSizes {
     extra_big = '36',
 }
 
-export const sunSize = 30;
+export const spaceMd = 10;
+export const sunSize = 36;
 export const moonSize = 60;
+export const cardsDeckHeight = 200;
+export const cardWidth = 120;

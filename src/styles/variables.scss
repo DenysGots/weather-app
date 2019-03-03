@@ -3,7 +3,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i&subset=latin-ext');
 
 /* Scaffolding */
-$main-view-height: 45vh;
+$main-view-height: 44vh;
+$weather-card-height: 200px;
+$weather-card-width: 120px;
 
 /* Fonts */
 $font-default: 'Roboto', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -11,6 +13,7 @@ $font-color-default: $color-black;
 /* Font size */
 $font-size-small: 12px;
 $font-size-default: 14px;
+$font-size-middle: 16px;
 $font-size-extra: 18px;
 $font-size-big: 22px;
 $font-size-hero: 28px;
@@ -27,9 +30,12 @@ $font-weight-semibold: 600;
 $font-weight-bold: 800;
 
 /* Spaces */
+$space-xxs: 1px;
 $space-xs: 2px;
 $space-sm: 5px;
+$space-xsm: 7px;
 $space-md: 10px;
+$space-xmd: 12px;
 $space-lg: 15px;
 $space-xl: 30px;
 

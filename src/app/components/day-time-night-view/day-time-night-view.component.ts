@@ -104,13 +104,12 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
         return <Parabola>{ a, b, c };
     }
 
-    // TODO: test
     public defineStartingPoint(): void {
         const parabolaParameters: Parabola = this.defineAnimationPath();
         const viewPathLength = this.viewWidth;
         const dx = (this.currentTime > this.nightLength / 2)
             ? Math.abs(this.currentTime - this.dayLength - this.nightLength / 2)
-            : Math.abs(this.nightLength - this.currentTime);
+            : Math.abs(this.nightLength / 2 + this.currentTime);
 
         let x = dx * viewPathLength / this.nightLength + this.startX;
         let y;

@@ -29,7 +29,6 @@ export class DayTimeWeatherViewComponent implements OnInit {
                 private mainService: MainService) {
         this.mainService.currentStateSubject.subscribe((state: State) => {
             this.currentState = state;
-
         });
     }
 

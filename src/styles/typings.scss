@@ -1,19 +1,24 @@
 @import "variables.scss";
 
 /* Text */
+.app-text-size-small {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+}
+
 .app-text-size-default {
     font-size: $font-size-default;
+    line-height: $line-height-default;
+}
+
+.app-text-size-middle {
+    font-size: $font-size-middle;
     line-height: $line-height-default;
 }
 
 .app-text-size-extra {
     font-size: $font-size-extra;
     line-height: $line-height-extra;
-}
-
-.app-text-size-small {
-    font-size: $font-size-small;
-    line-height: $line-height-small;
 }
 
 .app-text-size-heading-default {
@@ -41,6 +46,10 @@
 
 .app-text-weight-bold {
     font-weight: $font-weight-bold;
+}
+
+.app-text-align-bottom {
+    vertical-align: bottom;
 }
 
 /* Sky backgrounds */

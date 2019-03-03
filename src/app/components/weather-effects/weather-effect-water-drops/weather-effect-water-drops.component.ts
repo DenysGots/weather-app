@@ -3,7 +3,10 @@ import {
     ChangeDetectorRef,
     Component,
     Input,
+    OnChanges,
     OnInit,
+    SimpleChanges,
+    ViewRef,
 } from '@angular/core';
 
 import { DropsOnScreen, Overcast } from '../../../interfaces/public-api';
@@ -14,7 +17,7 @@ import { DropsOnScreen, Overcast } from '../../../interfaces/public-api';
     styleUrls: ['./weather-effect-water-drops.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WeatherEffectWaterDropsComponent implements OnInit {
+export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
     @Input() overcast: Overcast;
@@ -32,11 +35,27 @@ export class WeatherEffectWaterDropsComponent implements OnInit {
         this.generateDrops();
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+        if ('overcast' in changes && !changes.overcast.firstChange) {
+            this.drops = [];
+            this.borders = [];
+            this.generateDrops();
+        }
+    }
+
     private randomTimeout(): number {
         return Math.random() * 10000;
     }
 
     private generateDrops(): void {
+        const changeDetectorRef = this.changeDetectorRef;
+
+        function detectChanges(): void {
+            if (!(<ViewRef>changeDetectorRef).destroyed) {
+                changeDetectorRef.detectChanges();
+            }
+        }
+
         for (let i = 0; i < this.numberOfDrops; i++) {
             setTimeout(() => {
                 const x = Math.random();
@@ -69,7 +88,7 @@ export class WeatherEffectWaterDropsComponent implements OnInit {
                     dropHeight,
                 });
 
-                this.changeDetectorRef.detectChanges();
+                detectChanges();
             }, this.randomTimeout());
         }
     }

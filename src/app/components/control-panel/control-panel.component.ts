@@ -42,21 +42,34 @@ export class ControlPanelComponent implements OnInit {
     }
 
     public overrideState(): void {
-        for (const prop of this.controlForm.value) {
-            this.testingState[prop] = this.controlForm.value[prop];
+        for (const prop in this.controlForm.value) {
+            if (this.controlForm.value.hasOwnProperty(prop)) {
+                this.testingState[prop] = this.controlForm.value[prop];
+            }
         }
 
         this.testingState.currentTime = this.hoursToMilliseconds(this.controlForm.value.currentTime);
-
         this.mainService.currentState = {...this.testingState};
         this.mainService.setTimeOfDay();
         this.mainService.defineSkyBackground();
-        this.mainService.emitState(this.mainService.currentState);
+        this.mainService.emitState();
     }
 
     public resetState(): void {
+        const newFormValue = {};
+
         this.mainService.setCurrentState();
+        this.mainService.emitState();
         this.testingState = {...this.mainService.currentState};
+
+        for (const prop in this.controlForm.value) {
+            if (this.controlForm.value.hasOwnProperty(prop)) {
+                newFormValue[prop] = this.testingState[prop];
+            }
+        }
+
+        newFormValue['currentTime'] = this.millisecondsToHours(this.testingState.currentTime);
+        this.controlForm.setValue(newFormValue);
     }
 
     public millisecondsToHours(time: number): number {

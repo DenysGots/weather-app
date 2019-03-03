@@ -5,7 +5,10 @@ import {
     ElementRef,
     Input,
     NgZone,
+    OnChanges,
+    OnDestroy,
     OnInit,
+    SimpleChanges,
     ViewChild,
 } from '@angular/core';
 
@@ -17,7 +20,7 @@ import { NumberOfSnowFlakes, Overcast } from '../../../interfaces/public-api';
     styleUrls: ['./weather-effect-snow.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WeatherEffectSnowComponent implements OnInit {
+export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
     @Input() overcast: Overcast = Overcast.light;
@@ -26,9 +29,8 @@ export class WeatherEffectSnowComponent implements OnInit {
 
     public snowCanvas;
 
-    // private viewWidth = window.innerWidth;
-    // private viewHeight = window.innerHeight;
-    private numberOfDrops: NumberOfSnowFlakes/* = 500*/;
+    private numberOfDrops: NumberOfSnowFlakes;
+    private animation: any;
 
     constructor(private ngZone: NgZone,
                 /*private changeDetectorRef: ChangeDetectorRef*/) { }
@@ -36,6 +38,20 @@ export class WeatherEffectSnowComponent implements OnInit {
     ngOnInit() {
         // this.changeDetectorRef.detach();
         this.snowCanvas = this.snowCanvasRef.nativeElement;
+        this.startAnimation();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if ('overcast' in changes && !changes.overcast.firstChange) {
+            this.startAnimation();
+        }
+    }
+
+    public startAnimation(): void {
+        if (this.animation) {
+            cancelAnimationFrame(this.animation);
+        }
+
         this.numberOfDrops = NumberOfSnowFlakes[this.overcast];
 
         this.ngZone.runOutsideAngular(() => {
@@ -53,12 +69,14 @@ export class WeatherEffectSnowComponent implements OnInit {
         const scale = 1.3;
         const mv = 20;
 
+        let animation = this.animation;
+
         function Flake() {
             this.draw = function() {
                 this.gradient = context.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
                 this.gradient.addColorStop(0, 'hsla(255, 255%, 255%, 1.0)');
                 this.gradient.addColorStop(0.5, 'hsla(255, 255%, 255%, 0.7)');
-                this.gradient.addColorStop(1, 'hsla(255, 255%, 255%, 0)');
+                this.gradient.addColorStop(1, 'hsla(255, 255%, 255%, 0.0)');
 
                 context.moveTo(this.x, this.y);
                 context.fillStyle = this.gradient;
@@ -90,7 +108,7 @@ export class WeatherEffectSnowComponent implements OnInit {
                 flake.draw();
             }
 
-            requestAnimationFrame(go);
+            animation = requestAnimationFrame(go);
         }
 
         this.snowCanvas.width = canvasWidth;
@@ -109,6 +127,12 @@ export class WeatherEffectSnowComponent implements OnInit {
             drops.push(flake);
         }
 
-        requestAnimationFrame(go);
+        animation = requestAnimationFrame(go);
+    }
+
+    ngOnDestroy() {
+        if (this.animation) {
+            cancelAnimationFrame(this.animation);
+        }
     }
 }

@@ -103,7 +103,6 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
         return <Parabola>{ a, b, c };
     }
 
-    // TODO: test
     public defineStartingPoint(): void {
         const parabolaParameters: Parabola = this.defineAnimationPath();
         const viewPathLength = this.viewWidth;
@@ -161,6 +160,8 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy() {
-        cancelAnimationFrame(this.animation);
+        if (this.animation) {
+            cancelAnimationFrame(this.animation);
+        }
     }
 }

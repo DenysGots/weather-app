@@ -1,7 +1,4 @@
-import {
-    Injectable,
-    OnInit,
-} from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as moment from 'moment';
 
@@ -33,8 +30,8 @@ export class MainService implements OnInit {
         this.defineSkyBackground();
     }
 
-    public emitState(state: State): void {
-        this.currentStateSource.next(state);
+    public emitState(): void {
+        this.currentStateSource.next(this.currentState);
     }
 
     public setCurrentTime(): void {

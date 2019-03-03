@@ -5,7 +5,10 @@ import {
     ElementRef,
     Input,
     NgZone,
+    OnChanges,
+    OnDestroy,
     OnInit,
+    SimpleChanges,
     ViewChild,
 } from '@angular/core';
 
@@ -22,7 +25,7 @@ import {
     styleUrls: ['./weather-effect-rain.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WeatherEffectRainComponent implements OnInit {
+export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
     @Input() overcast: Overcast;
@@ -34,8 +37,9 @@ export class WeatherEffectRainComponent implements OnInit {
     public rainCanvas;
     public rainThroughCanvas;
 
-    private numberOfDrops: NumberOfRainDrops/* = 750*/;
-    private numberOfThroughDrops: NumberOfRainThroughDrops/* = 50*/;
+    private numberOfDrops: NumberOfRainDrops;
+    private numberOfThroughDrops: NumberOfRainThroughDrops;
+    private animation: any;
 
     constructor(private ngZone: NgZone,
                 /*private changeDetectorRef: ChangeDetectorRef*/) { }
@@ -44,6 +48,20 @@ export class WeatherEffectRainComponent implements OnInit {
         // this.changeDetectorRef.detach();
         this.rainCanvas = this.rainCanvasRef.nativeElement;
         this.rainThroughCanvas = this.rainThroughCanvasRef.nativeElement;
+        this.startAnimation();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if ('overcast' in changes && !changes.overcast.firstChange) {
+            this.startAnimation();
+        }
+    }
+
+    public startAnimation(): void {
+        if (this.animation) {
+            cancelAnimationFrame(this.animation);
+        }
+
         this.numberOfDrops = NumberOfRainDrops[this.overcast];
         this.numberOfThroughDrops = NumberOfRainThroughDrops[this.overcast];
 
@@ -63,6 +81,8 @@ export class WeatherEffectRainComponent implements OnInit {
         const drops = [];
         const throughDrops = [];
         const mv = 20;
+
+        let animation = this.animation;
 
         function Drop() {
             this.draw = function() {
@@ -148,7 +168,7 @@ export class WeatherEffectRainComponent implements OnInit {
                 throughDrop.draw();
             }
 
-            requestAnimationFrame(go);
+            animation = requestAnimationFrame(go);
         }
 
         this.rainCanvas.width = canvasWidth;
@@ -178,6 +198,12 @@ export class WeatherEffectRainComponent implements OnInit {
             throughDrops.push(throughDrop);
         }
 
-        requestAnimationFrame(go);
+        animation = requestAnimationFrame(go);
+    }
+
+    ngOnDestroy() {
+        if (this.animation) {
+            cancelAnimationFrame(this.animation);
+        }
     }
 }

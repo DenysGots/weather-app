@@ -1,47 +1,60 @@
 <div class="app-forecast-current-information">
     <div class="app-forecast-current-information__block">
-        <!--<span class="">{{}}, {{}}</span>-->
         <span class="app-forecast-current-information__data app-text-size-heading-default">
-            Kyiv, Ukraine
+             {{ weatherState.location }}
         </span>
     </div>
     
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data app-text-size-extra">
-            19:47
+            <span class="app-forecast-current-information__data">
+                <i class="wi wi-time-4 app-text-size-heading-default"></i> {{ weatherState.timeCurrent }}
+            </span>
+            <span class="app-forecast-current-information__data">
+                {{ weatherState.dateCurrent }}
+            </span>
         </span>
     </div>
     
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
+            <!-- TODO: adjust current weather icon -->
             <i class="wi wi-day-rain-mix"></i>
         </span>
         <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
-            7&#176;C
+            <i class="wi wi-thermometer"></i> {{ weatherState.temperatureCurrent | TemperatureValuePipe }} <i class="wi wi-celsius"></i>
         </span>
     </div>
     
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data app-text-size-heading-default app-text-weight-semibold">
-            Partly cloudy
+            {{ weatherState.weatherDefinition }}
         </span>
     </div>
     
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data">
-            Feels like 7&#176;C
+            Feels like {{ weatherState.temperatureFeelsLike | TemperatureValuePipe }} <i class="wi wi-celsius app-text-size-extra"></i>
         </span>
         <span class="app-forecast-current-information__data">
-            Wind
+            <!-- TODO: adjust wind direction icon -->
+            Wind <i class="wi wi-wind wi-towards-se app-text-size-extra"></i> {{ weatherState.windSpeed + 'm/s' }}
         </span>
         <span class="app-forecast-current-information__data">
-            Humidity
+            Humidity {{ weatherState.humidityCurrent }} <i class="wi wi-humidity app-text-size-extra"></i>
         </span>
     </div>
     
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data">
-            UV index
+            UV index <i class="wi wi-hot app-text-size-extra"></i> {{ weatherState.uvIndex }}
+        </span>
+        <span class="app-forecast-current-information__data">
+            Air pressure <i class="wi wi-barometer app-text-size-extra"></i> {{ weatherState.airPressure + 'hPa' }}
+        </span>
+        <span class="app-forecast-current-information__data">
+            <!-- TODO: adjust moon phase icon -->
+            Moon phase <i class="wi wi-moon-alt-waning-crescent-4 app-text-size-extra app-text-align-bottom"></i>
         </span>
     </div>
 </div>

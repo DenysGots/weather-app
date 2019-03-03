@@ -1,11 +1,9 @@
 @import '../../../styles/variables.scss';
 
-$weather-card-height: 200px;
-
 :host {
     height: 100%;
     position: relative;
-    width: calc((100% - 2* #{$space-xs}) / 7 - #{$space-md} / 2);
+    width: 100%;
 }
 
 .app-forecast-weather-card {
@@ -15,10 +13,10 @@ $weather-card-height: 200px;
     color: $color-cloud_sky_heavy_night_darker;
     contain: content;
     height: $weather-card-height;
-    padding: $space-md;
+    padding: $space-md $space-md $space-md $space-lg;
     position: relative;
     transition: box-shadow 0.1s ease-in-out;
-    width: 100%;
+    width: $weather-card-width;
     
     &:hover {
         background-color: $weather-card-background-hover;
@@ -26,32 +24,32 @@ $weather-card-height: 200px;
     }
     
     &__block {
-        padding: $space-xs 0;
+        margin: $space-xxs 0;
         position: relative;
     
         &:first-of-type {
-            padding-top: 0;
+            margin-top: 0;
         }
     
         &:last-of-type {
-            padding-bottom: 0;
+            margin-bottom: 0;
         }
     }
     
     &__double-data-container {
         display: inline-block;
-        padding: 0 $space-lg;
+        margin: 0 $space-lg;
         position: relative;
         transform: rotate(-55deg);
     }
     
     &__double-data-content {
         &:first-of-type {
-            padding-bottom: $space-md;
+            margin-bottom: ($space-md + $space-xxs);
         }
     
         &:last-of-type {
-            padding-top: $space-md;
+            margin-top: $space-xmd;
         }
     }
     
