@@ -41,7 +41,6 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { WeatherEffectCloudComponent } from './components/weather-effects/weather-effect-cloud/weather-effect-cloud.component';
 import { WeatherEffectFogComponent } from './components/weather-effects/weather-effect-fog/weather-effect-fog.component';
 import { WeatherEffectLightningComponent } from './components/weather-effects/weather-effect-lightning/weather-effect-lightning.component';
-import { WeatherEffectLightning2Component } from './components/weather-effects/weather-effect-lightning2/weather-effect-lightning2.component';
 import { WeatherEffectMoonComponent } from './components/weather-effects/weather-effect-moon/weather-effect-moon.component';
 import { WeatherEffectRainComponent } from './components/weather-effects/weather-effect-rain/weather-effect-rain.component';
 import { WeatherEffectSnowComponent } from './components/weather-effects/weather-effect-snow/weather-effect-snow.component';
@@ -55,13 +54,6 @@ import { TemperatureValuePipe } from './pipes/temperatureValuePipe.pipe';
 import { HttpService } from './services/http.service';
 import { MainService } from './services/main.service';
 import { StateService } from './services/state.service';
-
-// TODO: delete
-import { WindowService } from './services/window/window.service';
-// For AoT compilation:
-export function getWindow() {
-    return window;
-}
 
 @NgModule({
     declarations: [
@@ -80,7 +72,6 @@ export function getWindow() {
         TemperatureValuePipe,
         WeatherEffectCloudComponent,
         WeatherEffectFogComponent,
-        WeatherEffectLightning2Component,
         WeatherEffectLightningComponent,
         WeatherEffectMoonComponent,
         WeatherEffectRainComponent,
@@ -114,10 +105,6 @@ export function getWindow() {
         MatSlideToggleModule,
     ],
     providers: [
-        {
-            provide: WindowService,
-            useFactory: getWindow
-        },
         HttpService,
         MainService,
         StateService,

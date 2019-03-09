@@ -22,6 +22,6 @@ export class IconComponent implements OnInit {
 
     ngOnInit() {
         this.iconUrl = `url(../../assets/img/weather_icons/animated/${this.iconType}.svg)`;
-        this.size = 2 * IconSizes[this.iconSize];
+        this.size = IconSizes[this.iconSize];
     }
 }

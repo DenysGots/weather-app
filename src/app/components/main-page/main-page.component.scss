@@ -12,7 +12,7 @@
     min-height: 100%;
     overflow: auto;
     position: relative;
-    transition: background 10.0s ease-in-out;
+    transition: background 1.0s ease-in-out;
     width: 100%;
     z-index: $z-index-main-page;
     
@@ -23,7 +23,7 @@
         padding: $space-lg 15%;
         position: relative;
         width: 100%;
-        z-index: $z-index-main-page + 20;
+        z-index: ($z-index-main-page + 30);
     }
     
     &__day-time-view {
@@ -33,7 +33,7 @@
         padding: 0 15%;
         position: relative;
         width: 100%;
-        z-index: $z-index-main-page + 20;
+        z-index: ($z-index-main-page + 30);
     }
     
     &__cards-deck {
@@ -44,24 +44,53 @@
         padding: $space-lg 15%;
         position: relative;
         width: 100%;
-        z-index: $z-index-main-page + 20;
+        z-index: ($z-index-main-page + 30);
     }
     
     &__control-panel {
         position: absolute;
         right: $space-xl;
         top: $space-xl;
-        z-index: $z-index-main-page + 20;
+        z-index: ($z-index-main-page + 30);
     }
     
-    &__blurred-background {
-        background: rgba(255, 255, 255, 0.1);
-        filter: brightness(1.1) blur(50.0px);
+    &__background {
         height: 100%;
         left: 0;
         position: absolute;
         top: 0;
         width: 100%;
-        z-index: $z-index-main-page + 10;
+    }
+    
+    &__blurred-background {
+        background: rgba(255, 255, 255, 0.1);
+        filter: brightness(1.1) blur(50.0px);
+        z-index: ($z-index-main-page + 20);
+    }
+    
+    &__fog-background {
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3) 100%);
+        filter: brightness(1.1) blur(5.0px);
+        z-index: ($z-index-main-page + 10);
+    }
+    
+    &__clouds-day-medium-background {
+        background: linear-gradient(25deg, $color-cloud_sky_medium_day_lighter 0%, $color-cloud_sky_medium_day_darker 100%);
+        z-index: ($z-index-main-page + 10);
+    }
+    
+    &__clouds-day-heavy-background {
+        background: linear-gradient(25deg, $color-cloud_sky_heavy_day_lighter 0%, $color-cloud_sky_heavy_day_darker 100%);
+        z-index: ($z-index-main-page + 10);
+    }
+    
+    &__clouds-night-medium-background {
+        background: linear-gradient(25deg, $color-cloud_sky_medium_night_lighter 0%, $color-cloud_sky_medium_night_darker 100%);
+        z-index: ($z-index-main-page + 10);
+    }
+    
+    &__clouds-night-heavy-background {
+        background: linear-gradient(25deg, $color-cloud_sky_heavy_night_lighter 0%, $color-cloud_sky_heavy_night_darker 100%);
+        z-index: ($z-index-main-page + 10);
     }
 }

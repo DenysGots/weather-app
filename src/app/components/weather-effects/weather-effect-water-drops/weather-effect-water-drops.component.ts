@@ -9,7 +9,14 @@ import {
     ViewRef,
 } from '@angular/core';
 
-import { DropsOnScreen, Overcast } from '../../../interfaces/public-api';
+import { MainService } from '../../../services/main.service';
+
+import {
+    DropsOnScreen,
+    Overcast,
+    State,
+    TimeOfDay,
+} from '../../../interfaces/public-api';
 
 @Component({
     selector: 'app-weather-effect-water-drops',
@@ -25,10 +32,16 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
 
     public drops: any[] = [];
     public borders: any[] = [];
+    public currentState: State;
 
     private numberOfDrops = 100;
 
-    constructor(private changeDetectorRef: ChangeDetectorRef) { }
+    constructor(private changeDetectorRef: ChangeDetectorRef,
+                private mainService: MainService) {
+        this.mainService.currentStateSubject.subscribe((state: State) => {
+            this.currentState = state;
+        });
+    }
 
     ngOnInit() {
         this.numberOfDrops = DropsOnScreen[this.overcast];
@@ -63,6 +76,7 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
 
                 const dropWidth = Math.random() * 11 + 6;
                 const dropHeight = dropWidth * ((Math.random() * 0.5) + 0.7);
+                const borderHeight = 0.95 * dropHeight;
 
                 const xPosition =  x * this.viewWidth;
                 const yPosition =  y * this.viewHeight;
@@ -85,7 +99,8 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
                     xPosition,
                     yPosition,
                     borderWidth,
-                    dropHeight,
+                    // dropHeight,
+                    borderHeight,
                 });
 
                 detectChanges();
@@ -95,7 +110,20 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
 
     public getCurrentBackgroundClass(): any {
         const currentBackgroundClass = {};
-        currentBackgroundClass[this.currentBackground] = true;
+        // currentBackgroundClass[this.currentBackground] = true;
+        currentBackgroundClass[this.currentState.currentBackground] = true;
         return currentBackgroundClass;
+    }
+
+    public isOvercast(type): boolean {
+        return this.currentState.overcast === Overcast[type];
+    }
+
+    public isTimeOfDay(time): boolean {
+        return this.currentState.timeOfDay === TimeOfDay[time];
+    }
+
+    public isWeather(weather: string): boolean {
+        return this.currentState[weather];
     }
 }

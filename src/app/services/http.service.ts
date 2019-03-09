@@ -1,13 +1,10 @@
-import {
-    Injectable,
-    OnInit,
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
-export class HttpService implements OnInit {
+export class HttpService {
     constructor() { }
 
-    ngOnInit () { }
+    // TODO: implement request to weather aggregators
 
     // TODO: implement web socket connection with server here
 }

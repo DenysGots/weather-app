@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     ViewChild,
@@ -16,7 +17,8 @@ import {
 @Component({
     selector: 'app-forecast-cards-deck',
     templateUrl: './forecast-cards-deck.component.html',
-    styleUrls: ['./forecast-cards-deck.component.scss']
+    styleUrls: ['./forecast-cards-deck.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForecastCardsDeckComponent implements AfterViewInit {
     public currentMode: CardsDeckType = CardsDeckType.hours;

@@ -4,6 +4,11 @@ import {
 } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
+import {
+    Overcast,
+    State,
+    TimeOfDay,
+} from '../../interfaces/public-api';
 
 @Component({
     selector: 'app-main-page',
@@ -12,11 +17,29 @@ import { MainService } from '../../services/main.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent {
-    constructor(private mainService: MainService) { }
+    public currentState: State;
+
+    constructor(private mainService: MainService) {
+        this.mainService.currentStateSubject.subscribe((state: State) => {
+            this.currentState = state;
+        });
+    }
 
     public getCurrentBackgroundClass(): any {
         const currentBackgroundClass = {};
-        currentBackgroundClass[this.mainService.currentState.currentBackground] = true;
+        currentBackgroundClass[this.currentState.currentBackground] = true;
         return currentBackgroundClass;
+    }
+
+    public isOvercast(type): boolean {
+        return this.currentState.overcast === Overcast[type];
+    }
+
+    public isTimeOfDay(time): boolean {
+        return this.currentState.timeOfDay === TimeOfDay[time];
+    }
+
+    public isWeather(weather: string): boolean {
+        return this.currentState[weather];
     }
 }

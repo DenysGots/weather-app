@@ -1,12 +1,11 @@
-import {NgModule} from '@angular/core';
-import {ServerModule, ServerTransferStateModule} from '@angular/platform-server';
-import {ModuleMapLoaderModule} from '@nguniversal/module-map-ngfactory-loader';
+import { NgModule } from '@angular/core';
+import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
+import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UniversalInterceptorService } from './modules/shared/interceptors/universal-interceptor.service';
-import { WindowService } from './services/window/window.service';
 
 @NgModule({
   imports: [
@@ -26,10 +25,6 @@ import { WindowService } from './services/window/window.service';
       useClass: UniversalInterceptorService,
       multi: true // <-- important (you can have many interceptors)
     },
-    {
-      provide: WindowService,
-      useClass: WindowService
-    }
   ]
 })
 export class AppServerModule {}

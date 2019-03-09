@@ -1,9 +1,6 @@
 <div class="app-weather-effect-water-drops__container">
-    <div class="app-weather-effect-water-drops">
-    </div>
-    
     <div *ngFor="let drop of drops"
-         class="app-weather-effect-water-drops_drop"
+         class="app-weather-effect-water-drops__drop"
          [ngClass]="getCurrentBackgroundClass()"
          [ngStyle]="{
                 'top.px': drop.yPosition,
@@ -13,15 +10,42 @@
                 'background-position': drop.backgroundPosition,
                 'background-size': drop.backgroundSize
              }">
+        <div *ngIf="isWeather('foggy')"
+             class="app-weather-effect-water-drops__background app-weather-effect-water-drops__fog-background">
+        </div>
+    
+        <div *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('day')"
+             class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-day-medium-background">
+        </div>
+    
+        <div *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('day')"
+             class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-day-heavy-background">
+        </div>
+    
+        <div *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('night')"
+             class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-night-medium-background">
+        </div>
+    
+        <div *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('night')"
+             class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-night-heavy-background">
+        </div>
+    
+        <div *ngIf="isWeather('cloudy')"
+             class="app-weather-effect-water-drops__background app-weather-effect-water-drops__cloud-background"
+             [ngStyle]="{
+                'background-position': drop.backgroundPosition,
+                'background-size': drop.backgroundSize
+             }">
+        </div>
     </div>
     
     <div *ngFor="let border of borders"
-         class="app-weather-effect-water-drops_border"
+         class="app-weather-effect-water-drops__border"
          [ngStyle]="{
                 'top.px': border.yPosition,
                 'left.px': border.xPosition,
                 'width.px': border.borderWidth,
-                'height.px': border.dropHeight
+                'height.px': border.borderHeight
              }">
     </div>
 </div>

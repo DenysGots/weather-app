@@ -16,5 +16,25 @@
         <app-control-panel></app-control-panel>
     </aside>
     
-    <div class="app-main-page__blurred-background"></div>
+    <div class="app-main-page__background app-main-page__blurred-background"></div>
+    
+    <div *ngIf="isWeather('foggy')"
+         class="app-main-page__background app-main-page__fog-background">
+    </div>
+    
+    <div *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('day')"
+         class="app-main-page__background app-main-page__clouds-day-medium-background">
+    </div>
+    
+    <div *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('day')"
+         class="app-main-page__background app-main-page__clouds-day-heavy-background">
+    </div>
+    
+    <div *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('night')"
+         class="app-main-page__background app-main-page__clouds-night-medium-background">
+    </div>
+    
+    <div *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('night')"
+         class="app-main-page__background app-main-page__clouds-night-heavy-background">
+    </div>
 </main>

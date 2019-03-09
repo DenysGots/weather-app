@@ -1,32 +1,43 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as moment from 'moment';
 
 import { HttpService } from './http.service';
 import { StateService } from './state.service';
 
-import { State, TimeOfDay } from '../interfaces/public-api';
+import {
+    State,
+    TimeOfDay,
+    WeatherState,
+} from '../interfaces/public-api';
 
 @Injectable()
-export class MainService implements OnInit {
+export class MainService {
     public currentState: State;
+    public weatherState: WeatherState;
     public currentStateSubject: Observable<State>;
+    public weatherStateSubject: Observable<WeatherState>;
 
     private currentStateSource: BehaviorSubject<State>;
+    private weatherStateSource: BehaviorSubject<WeatherState>;
 
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
         this.setCurrentState();
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.currentStateSubject = this.currentStateSource.asObservable();
+        this.weatherStateSource = new BehaviorSubject(this.weatherState);
+        this.weatherStateSubject = this.weatherStateSource.asObservable();
     }
-
-    ngOnInit () { }
 
     public setCurrentState(): void {
         this.currentState = {...this.stateService.currentState};
+        this.weatherState = {...this.stateService.weatherState};
+        this.setCurrentTimeString();
         this.setCurrentTime();
+        this.setCurrentDate();
         this.setTimeOfDay();
+        this.setLocation();
         this.defineSkyBackground();
     }
 
@@ -34,10 +45,26 @@ export class MainService implements OnInit {
         this.currentStateSource.next(this.currentState);
     }
 
+    // TODO: add method to add location/timeCurrent/dateCurrent to weatherState, remove this fields from stateService
+
+    public setCurrentDate(): void {
+        this.currentState.currentDate = moment().format('D MMM YYYY');
+    }
+
+    public setLocation(): void {
+        // TODO: use latitude/ longitude OR IP address to get location
+        // console.log(navigator.geolocation.getCurrentPosition);
+        // https://stackoverflow.com/questions/391979/how-to-get-clients-ip-address-using-javascript
+    }
+
     public setCurrentTime(): void {
         const currentTime: moment.Moment = moment();
         const startOfDay: moment.Moment = moment().startOf('hour').hours(0);
         this.currentState.currentTime = moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
+    }
+
+    public setCurrentTimeString(): void {
+        this.currentState.currentTimeString = moment().format('HH:MM');
     }
 
     public setTimeOfDay(): void {

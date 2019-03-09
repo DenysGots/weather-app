@@ -73,7 +73,7 @@ export class ControlPanelComponent implements OnInit {
     }
 
     public millisecondsToHours(time: number): number {
-        return moment.duration(time).asHours();
+        return moment.duration(time).hours();
     }
 
     public hoursToMilliseconds(time: number): number {

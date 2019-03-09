@@ -24,9 +24,9 @@
                                     [overcast]="currentState.overcast"
                                     [currentBackground]="currentState.currentBackground"></app-weather-effect-water-drops>
     
-    <app-weather-effect-lightning2 *ngIf="addLightning()"
-                                   [viewHeight]="viewHeight"
-                                   [viewWidth]="viewWidth"></app-weather-effect-lightning2>
+    <app-weather-effect-lightning *ngIf="addLightning()"
+                                  [viewHeight]="viewHeight"
+                                  [viewWidth]="viewWidth"></app-weather-effect-lightning>
     
     <app-day-time-day-view *ngIf="isTimeOfDay('day')"
                            [viewHeight]="viewHeight"

@@ -52,16 +52,20 @@
     vertical-align: bottom;
 }
 
+.app-text-align-text-bottom {
+    vertical-align: text-bottom;
+}
+
 /* Sky backgrounds */
 /* Taken from https://codepen.io/billyysea/pen/whjbK by Billy */
-//.sky-gradient-00, .sky-gradient-24 { background: #00000c; }
-.app-sky-gradient-00, .app-sky-gradient-24 { background: radial-gradient(ellipse at bottom, $color-sky-00-01 0%, $color-sky-00-02 100%); }
+//.app-sky-gradient-00, .app-sky-gradient-24 { background: #00000c; }
+.app-sky-gradient-00, .app-sky-gradient-24 { background: radial-gradient(ellipse at bottom, $color-sky-00-01 20%, $color-sky-00-02 100%); }
 //.app-sky-gradient-01 { background: linear-gradient(to bottom, $color-sky-01-01 85%, $color-sky-01-02 100%); }
-.app-sky-gradient-01 { background: radial-gradient(ellipse at bottom, $color-sky-01-02 10%, $color-sky-01-01 100%); }
+.app-sky-gradient-01 { background: radial-gradient(ellipse at bottom, $color-sky-01-02 20%, $color-sky-01-01 100%); }
 //.app-sky-gradient-02 { background: linear-gradient(to bottom, $color-sky-02-01 60%, $color-sky-02-02 100%); }
-.app-sky-gradient-02 { background: radial-gradient(ellipse at bottom, $color-sky-02-02 10%, $color-sky-02-01 100%); }
+.app-sky-gradient-02 { background: radial-gradient(ellipse at bottom, $color-sky-02-02 20%, $color-sky-02-01 100%); }
 //.app-sky-gradient-03 { background: linear-gradient(to bottom, $color-sky-03-01 10%, $color-sky-03-02 100%); }
-.app-sky-gradient-03 { background: radial-gradient(ellipse at bottom, $color-sky-03-02 10%, $color-sky-03-01 100%); }
+.app-sky-gradient-03 { background: radial-gradient(ellipse at bottom, $color-sky-03-02 20%, $color-sky-03-01 100%); }
 //.app-sky-gradient-04 { background: linear-gradient(to bottom, $color-sky-04-01 0%, $color-sky-04-02 100%); }
 .app-sky-gradient-04 { background: linear-gradient(to bottom, $color-sky-04-01 0%, $color-sky-04-02 100%); }
 .app-sky-gradient-05 { background: linear-gradient(to bottom, $color-sky-05-01 0%, $color-sky-05-02 80%, $color-sky-05-03 100%); }
