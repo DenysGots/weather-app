@@ -1,7 +1,7 @@
 # Nest + Angular Universal Starter
 
-A minimal [**Nest**](https://github.com/nestjs/nest) and Angular starter for Universal using the 
-[Angular CLI](https://github.com/angular/angular-cli). If you're looking for the Angular Universal repo go to 
+A minimal [**Nest**](https://github.com/nestjs/nest) and Angular starter for Universal using the
+[Angular CLI](https://github.com/angular/angular-cli). If you're looking for the Angular Universal repo go to
 [angular/universal](https://github.com/angular/universal).
 
 ## Getting Started
@@ -17,7 +17,7 @@ to enable Lazy Loading.
 ### Build Time Prerendering Vs. Server Side Rendering(ssr)
 This repo demonstrates the use of 2 different forms of Server Side Rendering.
 
-**Prerender** 
+**Prerender**
 * Happens at build time
 * Renders your application and replaces the dist index.html with a version rendered at the route `/`.
 
@@ -34,9 +34,9 @@ This repo demonstrates the use of 2 different forms of Server Side Rendering.
 * `npm start` which will run `ng serve`.
 
 ### Production (also for testing SSR/Pre-rendering locally)
-*`npm run build:ssr && npm run serve:ssr`
+*`npm run build:ssr && npm run serve:ssr` // `npm run helper:test-build`
   - Compiles your application and spins up a Nest server to serve
-your Universal application on `http://localhost:4000`.
+your Universal application on `http://localhost:5400`.
 
 *`npm run build:prerender && npm run serve:prerender`
   - Compiles your application and prerenders your

@@ -59,7 +59,7 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
 
     public startAnimation(): void {
         if (this.animation) {
-            cancelAnimationFrame(this.animation);
+            window.cancelAnimationFrame(this.animation);
         }
 
         this.numberOfDrops = NumberOfRainDrops[this.overcast];
@@ -168,7 +168,7 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
                 throughDrop.draw();
             }
 
-            animation = requestAnimationFrame(go);
+            animation = window.requestAnimationFrame(go);
         }
 
         this.rainCanvas.width = canvasWidth;
@@ -198,12 +198,12 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
             throughDrops.push(throughDrop);
         }
 
-        animation = requestAnimationFrame(go);
+        animation = window.requestAnimationFrame(go);
     }
 
     ngOnDestroy() {
         if (this.animation) {
-            cancelAnimationFrame(this.animation);
+            window.cancelAnimationFrame(this.animation);
         }
     }
 }

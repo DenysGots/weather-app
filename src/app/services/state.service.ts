@@ -20,9 +20,9 @@ export class StateService {
         rainy: false,
         snowy: false,
         foggy: false,
-        location: 'Kyiv, Ukraine', // TODO: must be added by main service
-        currentTimeString: '19:00', // TODO: must be added by main service
-        currentDate: '5 Mar 2019', // TODO: must be added by main service
+        // location: 'Kyiv, Ukraine', // TODO: must be added by main service
+        // currentTimeString: '19:00', // TODO: must be added by main service
+        // currentDate: '5 Mar 2019', // TODO: must be added by main service
     };
 
     public weatherState: WeatherState = {

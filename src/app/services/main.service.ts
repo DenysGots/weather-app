@@ -52,9 +52,9 @@ export class MainService {
     }
 
     public setLocation(): void {
-        // TODO: use latitude/ longitude OR IP address to get location
-        // console.log(navigator.geolocation.getCurrentPosition);
-        // https://stackoverflow.com/questions/391979/how-to-get-clients-ip-address-using-javascript
+        this.httpService.getLocation(locationData => {
+            this.currentState.location = `${locationData.geobytescapital}, ${locationData.geobytescountry}`;
+        });
     }
 
     public setCurrentTime(): void {

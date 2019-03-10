@@ -74,7 +74,7 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
         // };
 
         if (this.animation) {
-            cancelAnimationFrame(this.animation);
+            window.cancelAnimationFrame(this.animation);
         }
 
         this.defineStartingPoint();
@@ -149,19 +149,19 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
             currentPoint.y = y.toFixed(4);
 
             if (x <= animationLength) {
-                animation = requestAnimationFrame(animate);
+                animation = window.requestAnimationFrame(animate);
             }
 
             detectChanges();
         }
 
-        animation = requestAnimationFrame(animate);
+        animation = window.requestAnimationFrame(animate);
         detectChanges();
     }
 
     ngOnDestroy() {
         if (this.animation) {
-            cancelAnimationFrame(this.animation);
+            window.cancelAnimationFrame(this.animation);
         }
     }
 }

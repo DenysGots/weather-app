@@ -49,7 +49,7 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
 
     public startAnimation(): void {
         if (this.animation) {
-            cancelAnimationFrame(this.animation);
+            window.cancelAnimationFrame(this.animation);
         }
 
         this.numberOfDrops = NumberOfSnowFlakes[this.overcast];
@@ -108,7 +108,7 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
                 flake.draw();
             }
 
-            animation = requestAnimationFrame(go);
+            animation = window.requestAnimationFrame(go);
         }
 
         this.snowCanvas.width = canvasWidth;
@@ -127,12 +127,12 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
             drops.push(flake);
         }
 
-        animation = requestAnimationFrame(go);
+        animation = window.requestAnimationFrame(go);
     }
 
     ngOnDestroy() {
         if (this.animation) {
-            cancelAnimationFrame(this.animation);
+            window.cancelAnimationFrame(this.animation);
         }
     }
 }

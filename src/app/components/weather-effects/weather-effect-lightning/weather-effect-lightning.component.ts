@@ -5,6 +5,7 @@ import {
     ElementRef,
     Input,
     NgZone,
+    OnDestroy,
     OnInit,
     ViewChild,
 } from '@angular/core';
@@ -16,13 +17,14 @@ import _isNil from 'lodash/isNil';
     styleUrls: ['./weather-effect-lightning.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WeatherEffectLightningComponent implements OnInit {
+export class WeatherEffectLightningComponent implements OnInit, OnDestroy {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
 
     @ViewChild('lightning') lightningRef: ElementRef;
 
     public lightningElement;
+    private animation: any;
 
     constructor(private ngZone: NgZone,
                 private changeDetectorRef: ChangeDetectorRef) { }
@@ -45,6 +47,7 @@ export class WeatherEffectLightningComponent implements OnInit {
 
         let lightTimeCurrent = 0;
         let lightTimeTotal = 0;
+        let animation = this.animation;
 
         this.lightningElement.width = canvasWidth;
         this.lightningElement.height = canvasHeight;
@@ -147,9 +150,13 @@ export class WeatherEffectLightningComponent implements OnInit {
 
         function loop() {
             animateLightning();
-            requestAnimationFrame(loop);
+            animation = window.requestAnimationFrame(loop);
         }
 
-        requestAnimationFrame(loop);
+        animation = window.requestAnimationFrame(loop);
+    }
+
+    ngOnDestroy() {
+        window.cancelAnimationFrame(this.animation);
     }
 }

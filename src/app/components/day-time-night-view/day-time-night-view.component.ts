@@ -48,6 +48,39 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
         this.endX = this.viewWidth + this.moonContainerSize;
         this.maxY = this.viewHeight/* - this.moonContainerSize*/;
 
+        /* TODO: this works, move to help service, supply as variable, rewrite all RAFs recheck on windows once in a while */
+        // https://gist.github.com/paulirish/1579671
+        (function() {
+            const vendors = ['ms', 'moz', 'webkit', 'o'];
+            let lastTime = 0;
+
+            for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+                window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame']
+                    || window[vendors[x] + 'CancelRequestAnimationFrame'];
+            }
+
+            if (!window.requestAnimationFrame) {
+                window.requestAnimationFrame = function (callback) {
+                    const currTime = new Date().getTime();
+                    const timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    const id = window.setTimeout(function () {
+                            callback(currTime + timeToCall);
+                        },
+                        timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id;
+                };
+            }
+
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function (id) {
+                    clearTimeout(id);
+                };
+            }
+        }());
+        /*  */
+
         this.startAnimation();
 
         // this.defineStartingPoint();
@@ -75,7 +108,7 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
         // };
 
         if (this.animation) {
-            cancelAnimationFrame(this.animation);
+            window.cancelAnimationFrame(this.animation);
         }
 
         this.defineStartingPoint();
@@ -152,19 +185,19 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
             currentPoint.y = y.toFixed(4);
 
             if (x <= animationLength) {
-                animation = requestAnimationFrame(animate);
+                animation = window.requestAnimationFrame(animate);
             } else {
-                cancelAnimationFrame(animation);
+                window.cancelAnimationFrame(animation);
             }
 
             detectChanges();
         }
 
-        animation = requestAnimationFrame(animate);
+        animation = window.requestAnimationFrame(animate);
         detectChanges();
     }
 
     ngOnDestroy() {
-        cancelAnimationFrame(this.animation);
+        window.cancelAnimationFrame(this.animation);
     }
 }
