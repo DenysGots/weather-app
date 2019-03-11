@@ -34,7 +34,7 @@ This repo demonstrates the use of 2 different forms of Server Side Rendering.
 * `npm start` which will run `ng serve`.
 
 ### Production (also for testing SSR/Pre-rendering locally)
-*`npm run build:ssr && npm run serve:ssr` // `npm run helper:test-build`
+*`npm run helper:build` (`npm run build:ssr && npm run serve:ssr`)
   - Compiles your application and spins up a Nest server to serve
 your Universal application on `http://localhost:5400`.
 

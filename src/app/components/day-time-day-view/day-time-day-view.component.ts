@@ -11,6 +11,8 @@ import {
     ViewRef,
 } from '@angular/core';
 
+import { HelpersService } from '../../services/helpers.service';
+
 import {
     CelestialPosition,
     Parabola,
@@ -37,9 +39,11 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
     private endX: number;
     private maxY: number;
     private animation: any;
+    private customWindowAnimationFrame: any;
 
     constructor(private ngZone: NgZone,
-                private changeDetectorRef: ChangeDetectorRef) { }
+                private changeDetectorRef: ChangeDetectorRef,
+                private helpersService: HelpersService) { }
 
     ngOnInit() {
         this.sunContainerSize = sunSize;
@@ -73,8 +77,10 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
         //     y: 0 + 'px',
         // };
 
+        this.customWindowAnimationFrame = this.helpersService.setRequestAnimationFrame();
+
         if (this.animation) {
-            window.cancelAnimationFrame(this.animation);
+            this.customWindowAnimationFrame.customCancelAnimationFrame(this.animation);
         }
 
         this.defineStartingPoint();
@@ -130,6 +136,7 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
         const dx = animationLength / animationTime;
         const parabolaParameters: Parabola = this.defineAnimationPath();
         const changeDetectorRef = this.changeDetectorRef;
+        const customWindowAnimationFrame = this.customWindowAnimationFrame;
 
         let animation = this.animation;
         let x = parseInt(currentPoint.x, 10);
@@ -149,19 +156,21 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
             currentPoint.y = y.toFixed(4);
 
             if (x <= animationLength) {
-                animation = window.requestAnimationFrame(animate);
+                animation = customWindowAnimationFrame.customRequestAnimationFrame(animate);
+            } else {
+                customWindowAnimationFrame.customCancelAnimationFrame(animation);
             }
 
             detectChanges();
         }
 
-        animation = window.requestAnimationFrame(animate);
+        animation = customWindowAnimationFrame.customRequestAnimationFrame(animate);
         detectChanges();
     }
 
     ngOnDestroy() {
         if (this.animation) {
-            window.cancelAnimationFrame(this.animation);
+            this.customWindowAnimationFrame.customCancelAnimationFrame(this.animation);
         }
     }
 }

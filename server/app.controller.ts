@@ -1,35 +1,24 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    HttpService,
+} from '@nestjs/common';
 
 @Controller('home')
 export class AppController {
-    constructor() {
-        console.log('Testing connection Server 1');
+    constructor(private readonly httpService: HttpService) {
+        console.log('Server: connected');
     }
 
-    @Get()
-    testServer(): any {
-        console.log('Testing connection Server Get 2');
-    }
+    // TODO: implement request to weather aggregators
+    @Get('weather')
+    getLocation(): any {
+        // TODO: change to Post, use location to get and return weather
+        console.log('Server: Get weather');
 
-    // TODO: delete
-    @Get('api/speakers')
-    findAllSpeakers(): any[] {
-        return [
-            {
-                name: 'Name Dudeman',
-                talk: 'Angular for your face',
-                image: 'http://via.placeholder.com/50x50',
-            },
-            {
-                name: 'Some Person',
-                talk: 'High-five typescript',
-                image: 'http://via.placeholder.com/50x50',
-            },
-            {
-                name: 'Samwise Gamgee',
-                talk: 'Lord of the Angular',
-                image: 'http://via.placeholder.com/50x50',
-            },
-        ];
+        // const getLocationUrl = 'http://gd.geobytes.com/GetCityDetails?callback=?';
+        // this.httpService.get(getLocationUrl).subscribe(data => console.log(data));
+
+        return 'Getting weather...';
     }
 }

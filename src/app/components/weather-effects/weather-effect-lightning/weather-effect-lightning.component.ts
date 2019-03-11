@@ -11,6 +11,8 @@ import {
 } from '@angular/core';
 import _isNil from 'lodash/isNil';
 
+import { HelpersService } from '../../../services/helpers.service';
+
 @Component({
     selector: 'app-weather-effect-lightning',
     templateUrl: './weather-effect-lightning.component.html',
@@ -25,13 +27,16 @@ export class WeatherEffectLightningComponent implements OnInit, OnDestroy {
 
     public lightningElement;
     private animation: any;
+    private customWindowAnimationFrame: any;
 
     constructor(private ngZone: NgZone,
-                private changeDetectorRef: ChangeDetectorRef) { }
+                private changeDetectorRef: ChangeDetectorRef,
+                private helpersService: HelpersService) { }
 
     ngOnInit() {
         this.changeDetectorRef.detach();
         this.lightningElement = this.lightningRef.nativeElement;
+        this.customWindowAnimationFrame = this.helpersService.setRequestAnimationFrame();
 
         this.ngZone.runOutsideAngular(() => {
             this.makeItLight();
@@ -44,6 +49,7 @@ export class WeatherEffectLightningComponent implements OnInit, OnDestroy {
         const canvasWidth = this.viewWidth;
         const canvasHeight = this.viewHeight;
         const lightning = [];
+        const customWindowAnimationFrame = this.customWindowAnimationFrame;
 
         let lightTimeCurrent = 0;
         let lightTimeTotal = 0;
@@ -150,13 +156,15 @@ export class WeatherEffectLightningComponent implements OnInit, OnDestroy {
 
         function loop() {
             animateLightning();
-            animation = window.requestAnimationFrame(loop);
+            animation = customWindowAnimationFrame.customRequestAnimationFrame(loop);
         }
 
-        animation = window.requestAnimationFrame(loop);
+        animation = customWindowAnimationFrame.customRequestAnimationFrame(loop);
     }
 
     ngOnDestroy() {
-        window.cancelAnimationFrame(this.animation);
+        if (this.animation) {
+            this.customWindowAnimationFrame.customCancelAnimationFrame(this.animation);
+        }
     }
 }

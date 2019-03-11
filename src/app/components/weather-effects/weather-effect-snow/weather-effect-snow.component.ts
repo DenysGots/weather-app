@@ -12,6 +12,8 @@ import {
     ViewChild,
 } from '@angular/core';
 
+import { HelpersService } from '../../../services/helpers.service';
+
 import { NumberOfSnowFlakes, Overcast } from '../../../interfaces/public-api';
 
 @Component({
@@ -31,8 +33,10 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
 
     private numberOfDrops: NumberOfSnowFlakes;
     private animation: any;
+    private customWindowAnimationFrame: any;
 
     constructor(private ngZone: NgZone,
+                private helpersService: HelpersService,
                 /*private changeDetectorRef: ChangeDetectorRef*/) { }
 
     ngOnInit() {
@@ -48,8 +52,10 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     public startAnimation(): void {
+        this.customWindowAnimationFrame = this.helpersService.setRequestAnimationFrame();
+
         if (this.animation) {
-            window.cancelAnimationFrame(this.animation);
+            this.customWindowAnimationFrame.customCancelAnimationFrame(this.animation);
         }
 
         this.numberOfDrops = NumberOfSnowFlakes[this.overcast];
@@ -68,6 +74,7 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
         const drops = [];
         const scale = 1.3;
         const mv = 20;
+        const customWindowAnimationFrame = this.customWindowAnimationFrame;
 
         let animation = this.animation;
 
@@ -108,7 +115,7 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
                 flake.draw();
             }
 
-            animation = window.requestAnimationFrame(go);
+            animation = customWindowAnimationFrame.customRequestAnimationFrame(go);
         }
 
         this.snowCanvas.width = canvasWidth;
@@ -127,12 +134,12 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
             drops.push(flake);
         }
 
-        animation = window.requestAnimationFrame(go);
+        animation = customWindowAnimationFrame.customRequestAnimationFrame(go);
     }
 
     ngOnDestroy() {
         if (this.animation) {
-            window.cancelAnimationFrame(this.animation);
+            this.customWindowAnimationFrame.customCancelAnimationFrame(this.animation);
         }
     }
 }

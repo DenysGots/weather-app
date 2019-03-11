@@ -19,8 +19,8 @@
     "serve:prerender": "cd dist/browser && http-server -p 8080",
     "serve:ssr": "node dist/server",
     "server:watch": "nodemon",
-    "helper:build-1": "npm run build:ssr && npm run serve:ssr && http-server",
     "helper:build": "npm run build:ssr && npm run serve:ssr",
+    "helper:build_2": "npm run build:ssr && npm run serve:ssr && http-server",
     "helper:test-build": "ng build && ng run nest-nguniversal-demo:server && npm run webpack:server && npm run serve:ssr && http-server"
   },
   "pre-commit": [],

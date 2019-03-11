@@ -5,44 +5,27 @@ import * as $ from 'jquery';
 
 @Injectable()
 export class HttpService {
-    // TODO: implement request to weather aggregators
-    // TODO: implement web socket connection with server here
+    // TODO: implement web socket connection with server here to trigger weather aggregators on interval
 
-    constructor(private http: HttpClient) {
-        this.testServer();
-    }
+    constructor(private http: HttpClient) { }
 
     public getLocation(handleLocation) {
-        // TODO: move to server, CORS not allows requests
-        // TODO: use latitude/ longitude OR IP address to get location
-        // console.log(navigator.geolocation.getCurrentPosition);
-        // https://stackoverflow.com/questions/391979/how-to-get-clients-ip-address-using-javascript
-
-        // const httpOptions = {
-        //     reportProgress: true,
-        //     // responseType: 'text',
-        //     headers: new HttpHeaders({
-        //         'Content-Type':  'application/json',
-        //         'Access-Control-Allow-Origin': '*',
-        //     })
-        // };
-        //
-        // return this.http.get(this.getLocationUrl, httpOptions);
-
         const getLocationUrl = 'http://gd.geobytes.com/GetCityDetails?callback=?';
-        // $.getJSON(getLocationUrl, data => handleLocation(data));
+        $.getJSON(getLocationUrl, data => handleLocation(data));
     }
 
-    public testServer() {
+    public getWeather() {
         const serverURL = 'home';
+        const routURL = 'weather';
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type':  'application/json'
             })
         };
 
-        console.log('Testing connection Client 1');
+        console.log('Client: get weather');
 
-        this.http.get(serverURL, httpOptions);
+        // TODO: change to Post and pass in current location
+        return this.http.get(`${serverURL}/${routURL}`, httpOptions);
     }
 }

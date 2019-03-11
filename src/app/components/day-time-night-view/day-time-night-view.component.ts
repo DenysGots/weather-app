@@ -11,6 +11,8 @@ import {
     ViewRef,
 } from '@angular/core';
 
+import { HelpersService } from '../../services/helpers.service';
+
 import {
     CelestialPosition,
     moonSize,
@@ -38,48 +40,17 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
     private endX: number;
     private maxY: number;
     private animation: any;
+    private customWindowAnimationFrame: any;
 
     constructor(private ngZone: NgZone,
-                private changeDetectorRef: ChangeDetectorRef) { }
+                private changeDetectorRef: ChangeDetectorRef,
+                private helpersService: HelpersService) { }
 
     ngOnInit() {
         this.moonContainerSize = moonSize;
         this.startX = -1 * this.moonContainerSize/* / 1.12*/;
         this.endX = this.viewWidth + this.moonContainerSize;
         this.maxY = this.viewHeight/* - this.moonContainerSize*/;
-
-        /* TODO: this works, move to help service, supply as variable, rewrite all RAFs recheck on windows once in a while */
-        // https://gist.github.com/paulirish/1579671
-        (function() {
-            const vendors = ['ms', 'moz', 'webkit', 'o'];
-            let lastTime = 0;
-
-            for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-                window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
-                window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame']
-                    || window[vendors[x] + 'CancelRequestAnimationFrame'];
-            }
-
-            if (!window.requestAnimationFrame) {
-                window.requestAnimationFrame = function (callback) {
-                    const currTime = new Date().getTime();
-                    const timeToCall = Math.max(0, 16 - (currTime - lastTime));
-                    const id = window.setTimeout(function () {
-                            callback(currTime + timeToCall);
-                        },
-                        timeToCall);
-                    lastTime = currTime + timeToCall;
-                    return id;
-                };
-            }
-
-            if (!window.cancelAnimationFrame) {
-                window.cancelAnimationFrame = function (id) {
-                    clearTimeout(id);
-                };
-            }
-        }());
-        /*  */
 
         this.startAnimation();
 
@@ -107,8 +78,10 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
         //     y: 0 + 'px',
         // };
 
+        this.customWindowAnimationFrame = this.helpersService.setRequestAnimationFrame();
+
         if (this.animation) {
-            window.cancelAnimationFrame(this.animation);
+            this.customWindowAnimationFrame.customCancelAnimationFrame(this.animation);
         }
 
         this.defineStartingPoint();
@@ -166,6 +139,7 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
         const dx = animationLength / animationTime;
         const parabolaParameters: Parabola = this.defineAnimationPath();
         const changeDetectorRef = this.changeDetectorRef;
+        const customWindowAnimationFrame = this.customWindowAnimationFrame;
 
         let animation = this.animation;
         let x = parseInt(currentPoint.x, 10);
@@ -185,19 +159,21 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
             currentPoint.y = y.toFixed(4);
 
             if (x <= animationLength) {
-                animation = window.requestAnimationFrame(animate);
+                animation = customWindowAnimationFrame.customRequestAnimationFrame(animate);
             } else {
-                window.cancelAnimationFrame(animation);
+                customWindowAnimationFrame.customCancelAnimationFrame(animation);
             }
 
             detectChanges();
         }
 
-        animation = window.requestAnimationFrame(animate);
+        animation = customWindowAnimationFrame.customRequestAnimationFrame(animate);
         detectChanges();
     }
 
     ngOnDestroy() {
-        window.cancelAnimationFrame(this.animation);
+        if (this.animation) {
+            this.customWindowAnimationFrame.customCancelAnimationFrame(this.animation);
+        }
     }
 }
