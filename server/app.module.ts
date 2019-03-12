@@ -1,7 +1,14 @@
-import { Module, HttpModule } from '@nestjs/common';
+import {
+    HttpModule,
+    MiddlewareConsumer,
+    Module,
+    NestModule,
+    RequestMethod,
+} from '@nestjs/common';
 import { join } from 'path';
 import { AngularUniversalModule, applyDomino } from '@nestjs/ng-universal';
 import { AppController } from './app.controller';
+import { AppMiddleware } from './app.middleware';
 
 const BROWSER_DIR = join(process.cwd(), 'dist/browser');
 applyDomino(global, join(BROWSER_DIR, 'index.html'));
@@ -16,4 +23,10 @@ applyDomino(global, join(BROWSER_DIR, 'index.html'));
     ],
     controllers: [AppController],
 })
-export class ApplicationModule {}
+export class ApplicationModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer
+            .apply(AppMiddleware)
+            .forRoutes({ path: 'weather', method: RequestMethod.GET });
+    }
+}
