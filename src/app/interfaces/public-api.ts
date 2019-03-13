@@ -46,6 +46,12 @@ export interface WeatherState {
     moonPhase?: MoonPhases;
 }
 
+export interface Location {
+    longitude: number;
+    latitude: number;
+}
+
+/* Enums */
 export enum WeatherTypes {
     dayClear = 'day',
     dayLightClouds = 'cloudy-day-1',
@@ -104,7 +110,7 @@ export enum WindDirections {
 }
 
 export enum MoonPhases {
-    new = 'wi-moon-alt-new',
+    newMoon = 'wi-moon-alt-new',
     waxingCrescent = 'wi-moon-alt-waxing-crescent-4',
     waxingGibbous = 'wi-moon-alt-waxing-gibbous-3',
     full = 'wi-moon-alt-full',
@@ -112,7 +118,6 @@ export enum MoonPhases {
     waningCrescent = 'wi-moon-alt-waning-crescent-3',
 }
 
-/* Enums */
 export enum TimeOfDay {
     day = 'day',
     night = 'night'

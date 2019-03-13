@@ -51,7 +51,7 @@ import { WeatherEffectWaterDropsComponent } from './components/weather-effects/w
 import { NumberToIterablePipe } from './pipes/numberToIterable.pipe';
 import { TemperatureValuePipe } from './pipes/temperatureValuePipe.pipe';
 
-import { HelpersService } from './services/helpers.service';
+import { HelpersService, WINDOW_PROVIDERS } from './services/helpers.service';
 import { HttpService } from './services/http.service';
 import { MainService } from './services/main.service';
 import { StateService } from './services/state.service';
@@ -110,6 +110,7 @@ import { StateService } from './services/state.service';
         HttpService,
         MainService,
         StateService,
+        WINDOW_PROVIDERS,
     ],
     bootstrap: [ AppComponent ]
 })

@@ -23,7 +23,7 @@ export class MainService {
 
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
-        this.getWeatherInformation();
+        // this.getWeather();
         this.setCurrentState();
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.currentStateSubject = this.currentStateSource.asObservable();
@@ -38,7 +38,7 @@ export class MainService {
         this.setCurrentTime();
         this.setCurrentDate();
         this.setTimeOfDay();
-        this.setLocation();
+        this.getLocation();
         this.defineSkyBackground();
     }
 
@@ -50,13 +50,13 @@ export class MainService {
         this.currentState.currentDate = moment().format('D MMM YYYY');
     }
 
-    public setLocation(): void {
+    public getLocation(): void {
         this.httpService.getLocation(locationData => {
             this.currentState.location = `${locationData.geobytescapital}, ${locationData.geobytescountry}`;
         });
     }
 
-    public getWeatherInformation(): void {
+    public getWeather(): void {
         // TODO: finish this method
         this.httpService.getWeather().subscribe(data => console.log(data));
     }
