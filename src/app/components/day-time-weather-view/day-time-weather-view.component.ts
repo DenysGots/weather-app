@@ -1,9 +1,9 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     OnInit,
     ViewChild,
-    ElementRef,
 } from '@angular/core';
 
 import { MainService } from '../../services/main.service';

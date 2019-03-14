@@ -17,6 +17,8 @@ export class AppService {
     public getLocation(locationDto: LocationDto) {
         // this.httpService.get(this.geoBytesGetLocationUrl).subscribe(data => console.log(data));
 
+        console.log('Server: Getting location 2');
+
         let getLocationUrl = this.accuWeatherGetLocationUrl;
         getLocationUrl += `?apikey=${this.accuWeatherApikey}&q=${locationDto.latitude}%${locationDto.longitude}`;
         this.httpService.get(getLocationUrl).subscribe(data => console.log(data));
@@ -25,6 +27,7 @@ export class AppService {
     public getWeather(cityDto: any): any {
         // TODO: implement request to weather aggregators
 
+        console.log('Server: Getting weather 2');
         // const getAccuWeatherForecast = 'http://gd.geobytes.com/GetCityDetails?callback=?';
         // this.httpService.get(getAccuWeatherForecast).subscribe(data => console.log(data));
     }

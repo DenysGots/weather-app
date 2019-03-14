@@ -10,7 +10,7 @@ import { WINDOW } from '../services/helpers.service';
 export class HttpService {
     // TODO: implement web socket connection with server here to trigger weather aggregators on interval
 
-    private currentPosition: Location;
+    private currentPosition: Location = <Location>{};
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type':  'application/json'
@@ -24,26 +24,34 @@ export class HttpService {
         // const getLocationUrl = 'http://gd.geobytes.com/GetCityDetails?callback=?';
         // $.getJSON(getLocationUrl, data => handleLocation(data));
 
-        const serverURL = 'home';
+        const serverURL = 'http://localhost:5400';
         const routURL = 'location';
 
-        if ('navigator' in this.window) {
-            this.window.navigator.geolocation.getCurrentPosition(position => {
+        // console.log(this.window);
+        // console.log(this.window.navigator);
+        // console.log(this.window.navigator.geolocation);
+        console.log(window.navigator);
+
+        // if ('navigator' in this.window) {
+            window.navigator.geolocation.getCurrentPosition(position => {
                 this.currentPosition.longitude = position.coords.longitude;
                 this.currentPosition.latitude = position.coords.latitude;
             });
-        }
+        // }
 
-        return this.http.post(`${serverURL}/${routURL}`, this.currentPosition, this.httpOptions);
+        console.log('Client: get location', JSON.stringify(this.currentPosition));
+
+        return this.http.post(`${serverURL}/${routURL}`, JSON.stringify(this.currentPosition), this.httpOptions);
+        // return this.http.post(`${routURL}`, this.currentPosition, this.httpOptions);
     }
 
     public getWeather() {
-        const serverURL = 'home';
+        const serverURL = 'http://localhost:5400';
         const routURL = 'weather';
 
         console.log('Client: get weather');
 
         // TODO: change to Post and pass in current location
-        return this.http.get(`${serverURL}/${routURL}`, this.httpOptions);
+        return this.http.post(`${serverURL}/${routURL}`, JSON.stringify({}), this.httpOptions);
     }
 }

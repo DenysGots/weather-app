@@ -11,21 +11,23 @@ export interface LocationDto {
 
 import { AppService } from './app.service';
 
-@Controller('home')
+// @Controller('home')
+@Controller()
 export class AppController {
     constructor(private readonly appService: AppService) {
         console.log('Server: connected');
     }
 
-    @Post('location')
-    public async getLocation(@Body() locationDto: LocationDto) {
-        console.log(locationDto);
-        this.appService.getLocation(locationDto);
-    }
-
     @Post('weather')
     public async getWeather(@Body() cityDto: any) {
+        console.log('Server: Getting weather 1', cityDto);
         this.appService.getWeather(cityDto);
+    }
+
+    @Post('location')
+    public async getLocation(@Body() locationDto: LocationDto) {
+        console.log('Server: Getting location 1', locationDto);
+        this.appService.getLocation(locationDto);
     }
 
     // getLocation(): any {

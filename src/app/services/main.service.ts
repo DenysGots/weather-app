@@ -23,7 +23,6 @@ export class MainService {
 
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
-        // this.getWeather();
         this.setCurrentState();
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.currentStateSubject = this.currentStateSource.asObservable();
@@ -34,11 +33,12 @@ export class MainService {
     public setCurrentState(): void {
         this.currentState = {...this.stateService.currentState};
         this.weatherState = {...this.stateService.weatherState};
+        this.getWeather();
+        this.getLocation();
         this.setCurrentTimeString();
         this.setCurrentTime();
         this.setCurrentDate();
         this.setTimeOfDay();
-        this.getLocation();
         this.defineSkyBackground();
     }
 

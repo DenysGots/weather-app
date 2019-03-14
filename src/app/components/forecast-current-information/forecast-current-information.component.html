@@ -4,7 +4,7 @@
              {{ currentState.location }}
         </span>
     </div>
-    
+
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data app-text-size-extra">
             <span class="app-forecast-current-information__data">
@@ -16,25 +16,26 @@
             </span>
         </span>
     </div>
-    
+
     <div class="app-forecast-current-information__block">
-        <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
-            <app-icon [iconType]="weatherState.weatherType"
-                      iconSize="big"></app-icon>
-        </span>
+        <!-- TODO: uncomment! -->
+        <!--<span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">-->
+            <!--<app-icon [iconType]="weatherState.weatherType"-->
+                      <!--iconSize="big"></app-icon>-->
+        <!--</span>-->
         <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
             <i class="wi wi-thermometer"></i>
             {{ weatherState.temperatureCurrent | TemperatureValuePipe }}
             <i class="wi wi-celsius"></i>
         </span>
     </div>
-    
+
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data app-text-size-heading-default app-text-weight-semibold">
             {{ weatherState.weatherDefinition }}
         </span>
     </div>
-    
+
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data">
             Feels like
@@ -53,7 +54,7 @@
             <i class="wi wi-humidity app-text-size-extra"></i>
         </span>
     </div>
-    
+
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data">
             UV index
