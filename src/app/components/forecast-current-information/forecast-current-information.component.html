@@ -18,11 +18,10 @@
     </div>
 
     <div class="app-forecast-current-information__block">
-        <!-- TODO: uncomment! -->
-        <!--<span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">-->
-            <!--<app-icon [iconType]="weatherState.weatherType"-->
-                      <!--iconSize="big"></app-icon>-->
-        <!--</span>-->
+        <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
+            <app-icon [iconType]="weatherState.weatherType"
+                      iconSize="big"></app-icon>
+        </span>
         <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
             <i class="wi wi-thermometer"></i>
             {{ weatherState.temperatureCurrent | TemperatureValuePipe }}

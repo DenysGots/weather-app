@@ -14,12 +14,11 @@
             {{ weatherState.dateCurrent }}
         </span>
     </div>
-
-    <!-- TODO: uncomment! -->
-    <!--<div class="app-forecast-weather-card__block">-->
-        <!--<app-icon [iconType]="weatherState.weatherType"-->
-                  <!--iconSize="big"></app-icon>-->
-    <!--</div>-->
+    
+    <div class="app-forecast-weather-card__block">
+        <app-icon [iconType]="weatherState.weatherType"
+                  iconSize="big"></app-icon>
+    </div>
 
     <div *ngIf="isCurrentType('hours')"
          class="app-forecast-weather-card__block">

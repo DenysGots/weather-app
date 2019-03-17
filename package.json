@@ -20,7 +20,6 @@
     "serve:ssr": "node dist/server",
     "server:watch": "nodemon",
     "helper:build": "npm run build:ssr && npm run serve:ssr",
-    "helper:build_2": "npm run build:ssr && npm run serve:ssr && http-server",
     "helper:test-build": "ng build && ng run nest-nguniversal-demo:server && npm run webpack:server && npm run serve:ssr && http-server"
   },
   "pre-commit": [],
@@ -68,8 +67,8 @@
     "ng2-dragula": "2.1.0",
     "pouchdb-browser": "^7.0.0",
     "reflect-metadata": "^0.1.12",
-    "rxjs": "6.3.3",
-    "rxjs-compat": "^6.3.3",
+    "rxjs": "~6.2.2",
+    "rxjs-compat": "~6.2.2",
     "sass": "^1.15.1",
     "socket.io": "^2.1.1",
     "tslib": "^1.9.0",

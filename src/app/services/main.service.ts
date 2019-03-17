@@ -33,8 +33,8 @@ export class MainService {
     public setCurrentState(): void {
         this.currentState = {...this.stateService.currentState};
         this.weatherState = {...this.stateService.weatherState};
-        this.getWeather();
         this.getLocation();
+        // this.getWeather();
         this.setCurrentTimeString();
         this.setCurrentTime();
         this.setCurrentDate();
@@ -53,12 +53,13 @@ export class MainService {
     public getLocation(): void {
         this.httpService.getLocation(locationData => {
             this.currentState.location = `${locationData.geobytescapital}, ${locationData.geobytescountry}`;
+            this.getWeather();
         });
     }
 
     public getWeather(): void {
         // TODO: finish this method
-        this.httpService.getWeather().subscribe(data => console.log(data));
+        this.httpService.getWeather().subscribe(data => console.log('Received weather: ', data));
     }
 
     public setCurrentTime(): void {

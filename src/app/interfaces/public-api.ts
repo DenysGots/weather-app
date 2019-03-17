@@ -46,9 +46,15 @@ export interface WeatherState {
     moonPhase?: MoonPhases;
 }
 
-export interface Location {
+export interface Position {
     longitude: number;
     latitude: number;
+}
+
+export interface Location {
+    countryCode: string;
+    country: string;
+    city: string;
 }
 
 /* Enums */
