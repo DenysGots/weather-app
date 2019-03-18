@@ -5,36 +5,25 @@ import * as moment from 'moment';
 import { HttpService } from './http.service';
 import { StateService } from './state.service';
 
-import {
-    State,
-    TimeOfDay,
-    WeatherState,
-} from '../interfaces/public-api';
+import { State, TimeOfDay } from '../interfaces/public-api';
 
 @Injectable()
 export class MainService {
     public currentState: State;
-    public weatherState: WeatherState;
     public currentStateSubject: Observable<State>;
-    public weatherStateSubject: Observable<WeatherState>;
 
     private currentStateSource: BehaviorSubject<State>;
-    private weatherStateSource: BehaviorSubject<WeatherState>;
 
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
         this.setCurrentState();
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.currentStateSubject = this.currentStateSource.asObservable();
-        this.weatherStateSource = new BehaviorSubject(this.weatherState);
-        this.weatherStateSubject = this.weatherStateSource.asObservable();
     }
 
     public setCurrentState(): void {
         this.currentState = {...this.stateService.currentState};
-        this.weatherState = {...this.stateService.weatherState};
         this.getLocation();
-        // this.getWeather();
         this.setCurrentTimeString();
         this.setCurrentTime();
         this.setCurrentDate();
@@ -42,7 +31,7 @@ export class MainService {
         this.defineSkyBackground();
     }
 
-    public emitState(): void {
+    public emitCurrentState(): void {
         this.currentStateSource.next(this.currentState);
     }
 
@@ -58,8 +47,15 @@ export class MainService {
     }
 
     public getWeather(): void {
-        // TODO: finish this method
-        this.httpService.getWeather().subscribe(data => console.log('Received weather: ', data));
+        this.httpService.getWeather().subscribe(weatherData => {
+            console.log('Received weather: ', weatherData);
+
+            // TODO: filter data from unnecessary info in StateService and emmit it as WeatherState
+            this.stateService.adjustReceivedData(weatherData);
+
+            // TODO: uncomment
+            // this.emitCurrentState();
+        });
     }
 
     public setCurrentTime(): void {

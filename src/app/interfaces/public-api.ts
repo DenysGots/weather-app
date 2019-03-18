@@ -11,15 +11,6 @@ export interface CelestialPosition {
 }
 
 export interface State {
-    /* TODO: move to weather state */
-    cloudy?: boolean;
-    rainy?: boolean;
-    snowy?: boolean;
-    foggy?: boolean;
-    overcast?: Overcast;
-    currentBackground?: string; // as class to apply
-    /* */
-
     timeOfDay?: TimeOfDay; // day or night
     dayLength?: number; // milliseconds
     nightLength?: number; // milliseconds
@@ -27,9 +18,13 @@ export interface State {
     location?: string;
     currentTimeString?: string; // '19:00' TODO: use Moment for generating this string
     currentDate?: string; // '5 Mar 2019 TODO: use Moment for generating this string
-}
+    currentBackground?: string; // as class to apply
 
-export interface WeatherState {
+    cloudy?: boolean;
+    rainy?: boolean;
+    snowy?: boolean;
+    foggy?: boolean;
+    overcast?: Overcast;
     weatherType?: WeatherTypes;
     weatherDefinition?: WeatherDefinitions;
     temperatureCurrent?: number;

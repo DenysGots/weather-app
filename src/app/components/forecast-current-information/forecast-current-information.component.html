@@ -19,37 +19,37 @@
 
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
-            <app-icon [iconType]="weatherState.weatherType"
+            <app-icon [iconType]="currentState.weatherType"
                       iconSize="big"></app-icon>
         </span>
         <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
             <i class="wi wi-thermometer"></i>
-            {{ weatherState.temperatureCurrent | TemperatureValuePipe }}
+            {{ currentState.temperatureCurrent | TemperatureValuePipe }}
             <i class="wi wi-celsius"></i>
         </span>
     </div>
 
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data app-text-size-heading-default app-text-weight-semibold">
-            {{ weatherState.weatherDefinition }}
+            {{ currentState.weatherDefinition }}
         </span>
     </div>
 
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data">
             Feels like
-            {{ weatherState.temperatureFeelsLike | TemperatureValuePipe }}
+            {{ currentState.temperatureFeelsLike | TemperatureValuePipe }}
             <i class="wi wi-celsius app-text-size-extra"></i>
         </span>
         <span class="app-forecast-current-information__data">
             Wind
             <i class="wi wi-wind app-text-size-extra app-text-align-text-bottom"
                [ngClass]="getWeatherIconClass('windDirection')"></i>
-            {{ weatherState.windSpeed + 'm/s' }}
+            {{ currentState.windSpeed + 'm/s' }}
         </span>
         <span class="app-forecast-current-information__data">
             Humidity
-            {{ weatherState.humidityCurrent }}
+            {{ currentState.humidityCurrent }}
             <i class="wi wi-humidity app-text-size-extra"></i>
         </span>
     </div>
@@ -58,12 +58,12 @@
         <span class="app-forecast-current-information__data">
             UV index
             <i class="wi wi-hot app-text-size-extra"></i>
-            {{ weatherState.uvIndex }}
+            {{ currentState.uvIndex }}
         </span>
         <span class="app-forecast-current-information__data">
             Air pressure
             <i class="wi wi-barometer app-text-size-extra"></i>
-            {{ weatherState.airPressure + 'hPa' }}
+            {{ currentState.airPressure + 'hPa' }}
         </span>
         <span class="app-forecast-current-information__data">
             Moon phase

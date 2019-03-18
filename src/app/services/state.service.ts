@@ -5,7 +5,6 @@ import {
     Overcast,
     State,
     WeatherDefinitions,
-    WeatherState,
     WeatherTypes,
     WindDirections,
 } from '../interfaces/public-api';
@@ -20,12 +19,6 @@ export class StateService {
         rainy: false,
         snowy: false,
         foggy: false,
-        // location: 'Kyiv, Ukraine', // TODO: must be added by main service
-        // currentTimeString: '19:00', // TODO: must be added by main service
-        // currentDate: '5 Mar 2019', // TODO: must be added by main service
-    };
-
-    public weatherState: WeatherState = {
         weatherType: WeatherTypes.dayLightClouds,
         weatherDefinition: WeatherDefinitions.dayLightClouds,
         temperatureCurrent: 19,
@@ -43,4 +36,9 @@ export class StateService {
     };
 
     constructor() { }
+
+    public adjustReceivedData(weatherData: any) {
+        // TODO: transform received data into currentState: State
+        // TODO: update State interface
+    }
 }

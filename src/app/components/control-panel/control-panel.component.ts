@@ -52,14 +52,14 @@ export class ControlPanelComponent implements OnInit {
         this.mainService.currentState = {...this.testingState};
         this.mainService.setTimeOfDay();
         this.mainService.defineSkyBackground();
-        this.mainService.emitState();
+        this.mainService.emitCurrentState();
     }
 
     public resetState(): void {
         const newFormValue = {};
 
         this.mainService.setCurrentState();
-        this.mainService.emitState();
+        this.mainService.emitCurrentState();
         this.testingState = {...this.mainService.currentState};
 
         for (const prop in this.controlForm.value) {

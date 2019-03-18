@@ -1,19 +1,9 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { merge, Observable, Subject } from 'rxjs';
-import { concatMap } from 'rxjs/operators/concatMap';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators/map';
 import { switchMap } from 'rxjs/operators/switchMap';
 
-export interface PositionDto {
-    longitude: number;
-    latitude: number;
-}
-
-export interface LocationDto {
-    countryCode: string;
-    country: string;
-    city: string;
-}
+import { LocationDto, PositionDto } from './public-api';
 
 @Injectable()
 export class AppService {
@@ -38,7 +28,6 @@ export class AppService {
         this.weatherStateSubject = this.weatherStateSource.asObservable();
     }
 
-    // TODO: implement request to weather aggregators
     public getWeather(locationDto: LocationDto) {
         let getLocationKeyUrl = this.accuWeatherGetLocationKeyUrl;
         let getFiveDaysWeatherUrl =  this.accuWeatherGetFiveDaysWeatherUrl;
@@ -48,55 +37,29 @@ export class AppService {
 
         getLocationKeyUrl += `${locationDto.countryCode}/search?apikey=${this.accuWeatherApikey}&q=${locationDto.city}`;
 
-        // TODO: delete
-        // return this.httpService.get(getLocationKeyUrl).subscribe(locationData => {
-        //     locationKey = locationData.data[0].Key;
-        //
-        //     getFiveDaysWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
-        //     getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
-        //
-        //     const fiveDaysWeather = this.httpService
-        //         .get(getFiveDaysWeatherUrl)
-        //         .pipe(map(weatherData => weatherData.data));
-        //
-        //     const twelveHoursWeather = this.httpService
-        //         .get(getTwelveHoursWeatherUrl)
-        //         .pipe(map(weatherData => weatherData.data));
-        //
-        //     // merge(fiveDaysWeather, twelveHoursWeather).subscribe(weatherData => this.weatherStateSource.next(weatherData));
-        //     return merge(fiveDaysWeather, twelveHoursWeather);
-        // });
-
-        // TODO: uncomment, test
-        // return this.httpService
-        //     .get(getLocationKeyUrl)
-        //     .pipe(switchMap(locationData => {
-        //         locationKey = locationData.data[0].Key;
-        //
-        //         getFiveDaysWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
-        //         getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
-        //         getTenDaysWeatherUrl += `key=${this.apixuApikey}&q=${locationDto.city}&days=10`;
-        //
-        //         const fiveDaysWeather = this.httpService
-        //             .get(getFiveDaysWeatherUrl)
-        //             .pipe(map(weatherData => weatherData.data));
-        //
-        //         const twelveHoursWeather = this.httpService
-        //             .get(getTwelveHoursWeatherUrl)
-        //             .pipe(map(weatherData => weatherData.data));
-        //
-        //         const tenDaysWeather = this.httpService
-        //             .get(getTenDaysWeatherUrl)
-        //             .pipe(map(weatherData => weatherData.data));
-        //
-        //         return merge(fiveDaysWeather, twelveHoursWeather, tenDaysWeather);
-        //     }));
-
-        // TODO: for testing, delete
-        getTenDaysWeatherUrl += `key=${this.apixuApikey}&q=${locationDto.city}&days=10`;
         return this.httpService
-            .get(getTenDaysWeatherUrl)
-            .pipe(map(weatherData => weatherData.data));
+            .get(getLocationKeyUrl)
+            .pipe(switchMap(locationData => {
+                locationKey = locationData.data[0].Key;
+
+                getFiveDaysWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
+                getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
+                getTenDaysWeatherUrl += `key=${this.apixuApikey}&q=${locationDto.city}&days=10`;
+
+                const fiveDaysWeather = this.httpService
+                    .get(getFiveDaysWeatherUrl)
+                    .pipe(map(weatherData => weatherData.data));
+
+                const twelveHoursWeather = this.httpService
+                    .get(getTwelveHoursWeatherUrl)
+                    .pipe(map(weatherData => weatherData.data));
+
+                const tenDaysWeather = this.httpService
+                    .get(getTenDaysWeatherUrl)
+                    .pipe(map(weatherData => weatherData.data));
+
+                return combineLatest(tenDaysWeather, fiveDaysWeather, twelveHoursWeather);
+            }));
     }
 
     public getLocation(positionDto: PositionDto) {
@@ -105,7 +68,7 @@ export class AppService {
         let getLocationUrl = this.accuWeatherGetLocationUrl;
         getLocationUrl += `?apikey=${this.accuWeatherApikey}&q=${positionDto.latitude}%${positionDto.longitude}`;
 
-        // TODO: this works without data, by current IP? get location from here
+        // TODO: this works without data, by current IP? can get location from here
         this.httpService.get(getLocationUrl).subscribe(data => console.log(data));
     }
 }
