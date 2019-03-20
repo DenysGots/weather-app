@@ -16,6 +16,7 @@ export class MainService {
 
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
+        this.getLocation();
         this.setCurrentState();
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.currentStateSubject = this.currentStateSource.asObservable();
@@ -23,7 +24,7 @@ export class MainService {
 
     public setCurrentState(): void {
         this.currentState = {...this.stateService.currentState};
-        this.getLocation();
+        // this.getLocation();
         this.setCurrentTimeString();
         this.setCurrentTime();
         this.setCurrentDate();
@@ -31,6 +32,7 @@ export class MainService {
         this.defineSkyBackground();
     }
 
+    // TODO: move all to State Service
     public emitCurrentState(): void {
         this.currentStateSource.next(this.currentState);
     }
@@ -50,8 +52,8 @@ export class MainService {
         this.httpService.getWeather().subscribe(weatherData => {
             console.log('Received weather: ', weatherData);
 
-            // TODO: filter data from unnecessary info in StateService and emmit it as WeatherState
             this.stateService.adjustReceivedData(weatherData);
+            this.setCurrentState();
 
             // TODO: uncomment
             // this.emitCurrentState();

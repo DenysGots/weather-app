@@ -43,7 +43,7 @@ export class AppService {
                 locationKey = locationData.data[0].Key;
 
                 getFiveDaysWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
-                getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
+                getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}&language=en&details=true&metric=true`;
                 getTenDaysWeatherUrl += `key=${this.apixuApikey}&q=${locationDto.city}&days=10`;
 
                 const fiveDaysWeather = this.httpService

@@ -47,7 +47,7 @@ export interface HoursForecast {
     temperatureCurrent?: number;
     windSpeed?: number;
     windDirection?: WindDirections;
-    airPressure?: number;
+    uvIndex?: number;
 }
 
 export interface DaysForecast {
@@ -202,6 +202,10 @@ export const cardWidth = 120;
 /* Weather APIs data */
 /* Apixu weather codes */
 export const ApixuWeatherCodes = {
+    dayClear: [1000],
+
+    nightClear: [1000],
+
     fogCodes: [1030, 1135, 1147],
 
     cloudsCodes: {
@@ -460,5 +464,32 @@ export const ApixuWeatherCodes = {
     1282: {
         day: 'Moderate or heavy snow with thunder',
         night: 'Moderate or heavy snow with thunder',
+    },
+};
+
+/* AccuWeather icons codes */
+export const AccuWeatherCodes = {
+    dayClear: [1, 2, 30, 31],
+
+    nightClear: [33, 34],
+
+    fogCodes: [11],
+
+    cloudsCodes: {
+        light: [3, 4, 21, 35, 36],
+        medium: [5, 6, 20, 32, 37],
+        heavy: [7, 8, 19, 38],
+    },
+
+    rainCodes: {
+        light: [12, 13, 39],
+        medium: [14, 18, 40],
+        heavy: [15, 16, 17, 41, 42],
+    },
+
+    snowCodes: {
+        light: [23],
+        medium: [22, 24, 29, 26, 43],
+        heavy: [25, 44],
     },
 };
