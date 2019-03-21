@@ -42,21 +42,21 @@ export interface State {
 
 export interface HoursForecast {
     hourTime?: string; // '12:00' TODO: use Moment for generating this string
-    weatherType?: WeatherTypes; // for icon generation
+    weatherTypeHour?: WeatherTypes; // for icon generation
     humidityCurrent?: number;
     temperatureCurrent?: number;
-    windSpeed?: number;
-    windDirection?: WindDirections;
-    uvIndex?: number;
+    windSpeedCurrent?: number;
+    windDirectionCurrent?: WindDirections;
+    uvIndexCurrent?: number;
 }
 
 export interface DaysForecast {
     dayDate?: string;  // '5 Mar' TODO: use Moment for generating this string
-    weatherType?: WeatherTypes; // for icon generation
+    weatherTypeDay?: WeatherTypes; // for icon generation
     temperatureMin?: number;
     temperatureMax?: number;
-    humidityMin?: number;
-    humidityMax?: number;
+    humidity?: number;
+    uvIndex?: number;
 }
 
 export interface Position {

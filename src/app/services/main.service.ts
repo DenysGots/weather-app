@@ -17,7 +17,10 @@ export class MainService {
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
         this.getLocation();
+
+        // TODO: is this needed?
         this.setCurrentState();
+
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.currentStateSubject = this.currentStateSource.asObservable();
     }
@@ -53,10 +56,10 @@ export class MainService {
             console.log('Received weather: ', weatherData);
 
             this.stateService.adjustReceivedData(weatherData);
-            this.setCurrentState();
 
-            // TODO: uncomment
-            // this.emitCurrentState();
+            this.currentState = {...this.stateService.currentState};
+            this.setCurrentState();
+            this.emitCurrentState();
         });
     }
 

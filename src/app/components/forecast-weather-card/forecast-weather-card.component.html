@@ -2,8 +2,8 @@
     <div *ngIf="isCurrentType('hours')"
          class="app-forecast-weather-card__block">
         <span class="app-text-size-extra app-text-weight-semibold">
-            <i class="wi wi-time-4 app-text-size-extra"></i>
-            {{ weatherState.timeCurrent }}
+            <i class="wi wi-time-4 app-text-size-extra app-text-align-text-bottom"></i>
+            {{ hourTime }}
         </span>
     </div>
 
@@ -11,12 +11,12 @@
          class="app-forecast-weather-card__block">
         <span class="app-text-size-extra app-text-weight-semibold">
             <i class="wi wi-time-4 app-text-size-extra"></i>
-            {{ weatherState.dateCurrent }}
+            {{ dayDate }}
         </span>
     </div>
     
     <div class="app-forecast-weather-card__block">
-        <app-icon [iconType]="weatherState.weatherType"
+        <app-icon [iconType]="weatherTypeHour || weatherTypeDay"
                   iconSize="big"></app-icon>
     </div>
 
@@ -25,18 +25,18 @@
         <div class="app-forecast-weather-card__double-data-container">
             <div class="app-forecast-weather-card__double-data-content">
                 <span class="app-forecast-weather-card__double-data app-text-weight-semibold">
-                    <i class="wi wi-humidity"></i>
-                    {{ weatherState.humidityCurrent }}
+                    <i class="wi wi-thermometer"></i>
+                    {{ temperatureCurrent | TemperatureValuePipe }}
+                    <i class="wi wi-celsius app-text-size-extra"></i>
                 </span>
             </div>
-
+    
             <div class="app-forecast-weather-card__double-data-divider"></div>
-
+    
             <div class="app-forecast-weather-card__double-data-content">
                 <span class="app-forecast-weather-card__double-data app-text-weight-semibold">
-                    <i class="wi wi-thermometer"></i>
-                    {{ weatherState.temperatureCurrent | TemperatureValuePipe }}
-                    <i class="wi wi-celsius app-text-size-extra"></i>
+                    <i class="wi wi-humidity app-text-size-extra"></i>
+                    {{ humidityCurrent }}
                 </span>
             </div>
         </div>
@@ -47,8 +47,10 @@
         <div class="app-forecast-weather-card__double-data-container">
             <div class="app-forecast-weather-card__double-data-content">
                 <span class="app-forecast-weather-card__double-data app-text-weight-semibold">
-                    <i class="wi wi-wind wi-towards-se app-text-size-extra"></i>
-                    {{ weatherState.windSpeed}}
+                    <!-- TODO: adjust wind direction -->
+                    <i class="wi wi-wind app-text-size-extra app-text-align-text-bottom"
+                       [ngClass]="getWindDirectionIconClass()"></i>
+                    {{ windSpeedCurrent}}
                 </span>
             </div>
 
@@ -56,8 +58,8 @@
 
             <div class="app-forecast-weather-card__double-data-content">
                 <span class="app-forecast-weather-card__double-data app-text-weight-semibold">
-                    <i class="wi wi-barometer app-text-size-extra"></i>
-                    {{ weatherState.airPressure}}
+                    <i class="wi wi-hot app-text-size-extra"></i>
+                    {{ uvIndexCurrent }}
                 </span>
             </div>
         </div>
@@ -69,7 +71,7 @@
             <div class="app-forecast-weather-card__double-data-content">
                 <span class="app-forecast-weather-card__double-data app-text-weight-semibold">
                     <i class="wi wi-thermometer"></i>
-                    {{ weatherState.temperatureMin | TemperatureValuePipe }}
+                    {{ temperatureMin | TemperatureValuePipe }}
                     <i class="wi wi-celsius app-text-size-extra"></i>
                 </span>
             </div>
@@ -79,7 +81,7 @@
             <div class="app-forecast-weather-card__double-data-content">
                 <span class="app-forecast-weather-card__double-data app-text-weight-semibold">
                     <i class="wi wi-thermometer"></i>
-                    {{ weatherState.temperatureMax | TemperatureValuePipe }}
+                    {{ temperatureMax | TemperatureValuePipe }}
                     <i class="wi wi-celsius app-text-size-extra"></i>
                 </span>
             </div>
@@ -91,8 +93,8 @@
         <div class="app-forecast-weather-card__double-data-container">
             <div class="app-forecast-weather-card__double-data-content">
                 <span class="app-forecast-weather-card__double-data app-text-weight-semibold">
-                    <i class="wi wi-humidity"></i>
-                    {{ weatherState.humidityMin }}
+                    <i class="wi wi-humidity app-text-size-extra"></i>
+                    {{ humidity }}
                 </span>
             </div>
 
@@ -100,8 +102,8 @@
 
             <div class="app-forecast-weather-card__double-data-content">
                 <span class="app-forecast-weather-card__double-data app-text-weight-semibold">
-                    <i class="wi wi-humidity"></i>
-                    {{ weatherState.humidityMax }}
+                    <i class="wi wi-hot app-text-size-extra"></i>
+                    {{ uvIndex }}
                 </span>
             </div>
         </div>

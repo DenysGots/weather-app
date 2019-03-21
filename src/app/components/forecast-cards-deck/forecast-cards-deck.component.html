@@ -1,3 +1,26 @@
+<!--<div #forecastCardsDeck-->
+     <!--class="app-forecast-cards-deck">-->
+    <!--<div class="app-forecast-cards-deck__container"-->
+         <!--[ngStyle]="{'top.px': cardsDeckTopPosition}">-->
+        <!--<div class="app-forecast-cards-deck__cards-container">-->
+            <!--<div #forecastCardsDeckContainer-->
+                 <!--class="app-forecast-cards-deck__hours"-->
+                 <!--[ngStyle]="{'left.px': hoursCardsDeckLeftPosition}">-->
+                <!--<app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"-->
+                                           <!--[type]="cardsDeckType.hours"></app-forecast-weather-card>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!---->
+        <!--<div class="app-forecast-cards-deck__cards-container">-->
+            <!--<div class="app-forecast-cards-deck__days"-->
+                 <!--[ngStyle]="{'left.px': daysCardsDeckLeftPosition}">-->
+                <!--<app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"-->
+                                           <!--[type]="cardsDeckType.days"></app-forecast-weather-card>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
 <div #forecastCardsDeck
      class="app-forecast-cards-deck">
     <div class="app-forecast-cards-deck__container"
@@ -6,16 +29,29 @@
             <div #forecastCardsDeckContainer
                  class="app-forecast-cards-deck__hours"
                  [ngStyle]="{'left.px': hoursCardsDeckLeftPosition}">
-                <app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"
-                                           [type]="cardsDeckType.hours"></app-forecast-weather-card>
+                <app-forecast-weather-card *ngFor="let card of currentState.hoursForecast"
+                                           [type]="cardsDeckType.hours"
+                                           [hourTime]="card.hourTime"
+                                           [weatherTypeHour]="card.weatherTypeHour"
+                                           [humidityCurrent]="card.humidityCurrent"
+                                           [temperatureCurrent]="card.temperatureCurrent"
+                                           [windSpeedCurrent]="card.windSpeedCurrent"
+                                           [windDirectionCurrent]="card.windDirectionCurrent"
+                                           [uvIndexCurrent]="card.uvIndexCurrent"></app-forecast-weather-card>
             </div>
         </div>
         
         <div class="app-forecast-cards-deck__cards-container">
             <div class="app-forecast-cards-deck__days"
                  [ngStyle]="{'left.px': daysCardsDeckLeftPosition}">
-                <app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"
-                                           [type]="cardsDeckType.days"></app-forecast-weather-card>
+                <app-forecast-weather-card *ngFor="let card of currentState.daysForecast"
+                                           [type]="cardsDeckType.days"
+                                           [dayDate]="card.dayDate"
+                                           [weatherTypeDay]="card.weatherTypeDay"
+                                           [temperatureMin]="card.temperatureMin"
+                                           [temperatureMax]="card.temperatureMax"
+                                           [humidity]="card.humidity"
+                                           [uvIndex]="card.uvIndex"></app-forecast-weather-card>
             </div>
         </div>
     </div>

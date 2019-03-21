@@ -2,6 +2,8 @@ import { Injectable, ClassProvider, FactoryProvider, InjectionToken, PLATFORM_ID
 import { isPlatformBrowser } from '@angular/common';
 import * as moment from 'moment';
 
+import { MoonPhases } from '../interfaces/public-api';
+
 @Injectable()
 export class HelpersService {
     constructor() { }
@@ -78,6 +80,43 @@ export class HelpersService {
         };
 
         return customWindowAnimationFrame;
+    }
+
+    // taken from https://gist.github.com/endel/dfe6bb2fbe679781948c by endel and mrorigo
+    public calculateMoonPhase(): MoonPhases {
+        const phases = [
+            'newMoon',
+            'waxingCrescent',
+            'waxingGibbous',
+            'full',
+            'waningGibbous',
+            'waningCrescent',
+        ];
+        const currentDate = moment();
+        const day = currentDate.day();
+
+        let year = currentDate.year();
+        let month = currentDate.month();
+
+        if (month < 3) {
+            year -= 1;
+            month += 12;
+        }
+
+        month += 1;
+
+        const c = 365.25 * year;
+        const e = 30.6 * month;
+        let jd = (c + e + day - 694039.09) / 29.5305882; // jd is total days elapsed, divided by the moon cycle
+        let b = Math.trunc(jd); // int(jd) -> b, take integer part of jd
+        jd -= b; // subtract integer part to leave fractional part of original jd
+        b = Math.round(jd * 6); // scale fraction from 0-8 and round
+
+        if (b >= 6) {
+            b = 0;
+        } // 0 and 8 are the same so turn 6 into 0
+
+        return MoonPhases[phases[b]];
     }
 }
 

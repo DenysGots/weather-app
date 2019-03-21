@@ -12,15 +12,17 @@ import {
     CardsDeckType,
     cardWidth,
     spaceMd,
+    State,
 } from '../../interfaces/public-api';
 
 @Component({
     selector: 'app-forecast-cards-deck',
     templateUrl: './forecast-cards-deck.component.html',
     styleUrls: ['./forecast-cards-deck.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForecastCardsDeckComponent implements AfterViewInit {
+    public currentState: State;
     public currentMode: CardsDeckType = CardsDeckType.hours;
     public cardsDeckType = CardsDeckType;
     public numberOfCards = 24;
@@ -35,7 +37,9 @@ export class ForecastCardsDeckComponent implements AfterViewInit {
     @ViewChild('forecastCardsDeckContainer') private forecastCardsDeckContainer: ElementRef;
 
     constructor(private mainService: MainService) {
-        // TODO: import weather state here and pass weather info to cards
+        this.mainService.currentStateSubject.subscribe((state: State) => {
+            this.currentState = state;
+        });
     }
 
     ngAfterViewInit() {

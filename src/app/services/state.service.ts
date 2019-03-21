@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
+import { HelpersService } from './helpers.service';
+
 import {
-    AccuWeatherCodes,
     ApixuWeatherCodes,
     DaysForecast,
     HoursForecast,
@@ -14,48 +15,6 @@ import {
     WeatherTypes,
     WindDirections,
 } from '../interfaces/public-api';
-
-// export interface State {
-//     dayLength?: number;   // done
-//     nightLength?: number;   // done
-//     cloudy?: boolean;   // done
-//     rainy?: boolean;   // done
-//     snowy?: boolean;   // done
-//     foggy?: boolean;   // done
-//     overcast?: Overcast;   // done
-//     weatherType?: WeatherTypes;   // done
-//     weatherDefinition?: WeatherDefinitions;   // done
-//     temperatureCurrent?: number;   // done
-//     temperatureFeelsLike?: number;   // done
-//     humidityCurrent?: number;   // done
-//     uvIndex?: number;   // done
-//     airPressure?: number;   // done
-//     windSpeed?: number;   // done
-//     windDirection?: WindDirections;
-//     moonPhase?: MoonPhases;   // TODO: find api to import this
-//
-//     hoursForecast?: HoursForecast[];   // TODO
-//     daysForecast?: DaysForecast[];   // TODO
-// }
-
-// export interface HoursForecast {
-//     hourTime?: string; // '12:00' TODO: use Moment for generating this string
-//     weatherType?: WeatherTypes; // for icon generation
-//     humidityCurrent?: number;
-//     temperatureCurrent?: number;
-//     windSpeed?: number;
-//     windDirection?: WindDirections;
-//     airPressure?: number;
-// }
-
-// export interface DaysForecast {
-//     dayDate?: string;  // '5 Mar' TODO: use Moment for generating this string
-//     weatherType?: WeatherTypes; // for icon generation
-//     temperatureMin?: number;
-//     temperatureMax?: number;
-//     humidityMin?: number;
-//     humidityMax?: number;
-// }
 
 @Injectable()
 export class StateService {
@@ -76,21 +35,19 @@ export class StateService {
         uvIndex: 3,
         airPressure: 745,
         windDirection: WindDirections.northEast,
-        moonPhase: MoonPhases.waningCrescent,  // TODO: get this from some API
+        moonPhase: MoonPhases.waningCrescent,
     };
 
-    constructor() { }
+    constructor(private helpersService: HelpersService) { }
 
     // TODO: move partly logic to server, copy interfaces to server
     public adjustReceivedData(weatherData: any): void {
-        // TODO: transform received data into currentState
-
         this.currentState.dayLength = this.setDayLength(weatherData[0].forecast.forecastday[0].astro);
         this.currentState.nightLength = this.setNightLength();
         this.currentState.humidityCurrent = weatherData[0].current.humidity;
         this.currentState.temperatureCurrent = weatherData[0].current.temp_c;
         this.currentState.temperatureFeelsLike = weatherData[0].current.feelslike_c;
-        this.currentState.airPressure = weatherData[0].current.pressure_mb / 1.333;
+        this.currentState.airPressure = Math.trunc(weatherData[0].current.pressure_mb / 1.333);
         this.currentState.uvIndex = weatherData[0].current.uv;
         this.currentState.windSpeed = weatherData[0].current.wind_kph;
         this.currentState.weatherDefinition = weatherData[0].current.condition.text;
@@ -100,9 +57,8 @@ export class StateService {
         this.currentState.snowy = this.isSnow(weatherData[0].current.condition.code);
         this.currentState.timeOfDay = this.setTimeOfDay();
         this.currentState.weatherType = this.setWeatherTypeApixu(weatherData[0].current.condition.code);
-        this.currentState.windDirection = this.setWindDirectionApixu(weatherData[0].current.wind_degree);
-        this.currentState.moonPhase = this.setMoonPhase(); // TODO
-
+        this.currentState.windDirection = this.setWindDirection(weatherData[0].current.wind_degree);
+        this.currentState.moonPhase = this.helpersService.calculateMoonPhase();
         this.currentState.hoursForecast = this.setHoursForecast(weatherData[2]);
         this.currentState.daysForecast = this.setDaysForecast(weatherData[0].forecast.forecastday);
 
@@ -152,8 +108,8 @@ export class StateService {
     public setDayLength(astroData): number {
         let sunRiseTime: moment.Moment;
         let sunSetTime: moment.Moment;
-        let sunRise = astroData.sunrise; // "06:04 AM"
-        let sunSet = astroData.sunset; // "06:08 PM"
+        let sunRise = astroData.sunrise;
+        let sunSet = astroData.sunset;
 
         sunRise = sunRise.split('');
         sunRise.splice(sunRise.indexOf(':'), 1);
@@ -163,9 +119,12 @@ export class StateService {
         sunSet.splice(sunSet.indexOf(':'), 1);
         sunSet.splice(sunSet.indexOf(' '), 3);
 
-        sunRiseTime = moment().hours(sunRise.slice(0, 2).join('')).minutes(sunRise.slice(2, 2).join(''));
-        sunSetTime = moment().hours(sunSet.slice(0, 2).join('')).minutes(sunSet.slice(2, 2).join(''));
-
+        sunRiseTime = moment()
+            .hours(parseInt(sunRise.slice(0, 2).join(''), 10))
+            .minutes(parseInt(sunRise.slice(2, 2).join(''), 10));
+        sunSetTime = moment()
+            .hours(parseInt(sunSet.slice(0, 2).join(''), 10) + 12)
+            .minutes(parseInt(sunSet.slice(2, 2).join(''), 10));
 
         return moment.duration(sunSetTime.diff(sunRiseTime)).as('milliseconds');
     }
@@ -280,40 +239,80 @@ export class StateService {
         }
     }
 
-    public setWindDirectionApixu(windAngle): WindDirections {
-        // TODO
-    }
+    // TODO: this doesn't work, needs fixing
+    public setWindDirection(windAngle): WindDirections {
+        function calculateBoundaries(angle) {
+            const delta = 45 / 2;
+            return (windAngle >= (angle - delta)) && (windAngle < (angle + delta));
+        }
 
-    public setWindDirectionAccuWeather(windAngle): WindDirections {
-        // TODO
-    }
+        switch (windAngle) {
+            case calculateBoundaries(0) || calculateBoundaries(360):
+                return WindDirections.north;
+                break;
 
-    public setMoonPhase(): MoonPhases {
-        // TODO: apply as calculator, not API
+            case calculateBoundaries(45):
+                return WindDirections.north;
+                break;
+
+            case calculateBoundaries(90):
+                return WindDirections.north;
+                break;
+
+            case calculateBoundaries(135):
+                return WindDirections.north;
+                break;
+
+            case calculateBoundaries(180):
+                return WindDirections.north;
+                break;
+
+            case calculateBoundaries(225):
+                return WindDirections.north;
+                break;
+
+            case calculateBoundaries(270):
+                return WindDirections.north;
+                break;
+
+            case calculateBoundaries(315):
+                return WindDirections.north;
+                break;
+
+            default:
+                return WindDirections.north;
+        }
     }
 
     public setHoursForecast(hoursData): HoursForecast[] {
-        const hoursForecast: HoursForecast[];
-
-        hoursForecast = hoursData.map(hourData => {
+        return hoursData.map(hourData => {
             const weatherType: WeatherTypes = this.setWeatherTypeAccuWeather(hourData.WeatherIcon);
-            const windDirection: WindDirections = this.setWindDirectionAccuWeather(hourData.Wind.Direction.Degrees);
+            const windDirection: WindDirections = this.setWindDirection(hourData.Wind.Direction.Degrees);
 
             return {
-                hourTime: moment(hourData.DateTime).format('HH:MM'),
-                weatherType: weatherType,
+                hourTime: moment(hourData.DateTime).minutes(0).format('HH:MM'), // TODO: check this
+                weatherTypeHour: weatherType,
                 humidityCurrent: hourData.RelativeHumidity,
                 temperatureCurrent: hourData.Temperature.Value,
-                windSpeed: hourData.Wind.Speed.Value,
-                windDirection: windDirection,
-                uvIndex: hourData.UVIndex,
+                windSpeedCurrent: hourData.Wind.Speed.Value,
+                windDirectionCurrent: windDirection,
+                uvIndexCurrent: hourData.UVIndex,
             };
         });
-
-        return hoursForecast;
     }
 
     public setDaysForecast(daysData): DaysForecast[] {
-        // TODO
+        return daysData.map(dayData => {
+            const weatherType: WeatherTypes =  this.setWeatherTypeApixu(dayData.day.condition.code);
+
+            return  {
+                dayDate: moment(dayData.date).format('D MMM'),
+                weatherTypeDay: weatherType,
+                temperatureMin: dayData.day.mintemp_c,
+                temperatureMax: dayData.day.maxtemp_c,
+                humidity: dayData.day.avghumidity,
+                uvIndex: dayData.day.uv,
+            };
+        });
     }
 }
