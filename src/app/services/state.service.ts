@@ -20,30 +20,33 @@ import {
 export class StateService {
     public currentState: State = {
         overcast: Overcast.light,
-        dayLength: 50400000,
-        nightLength: 36000000,
+        // dayLength: 50400000,
+        // nightLength: 36000000,
         cloudy: false,
         rainy: false,
         snowy: false,
         foggy: false,
         weatherType: WeatherTypes.dayLightClouds,
-        weatherDefinition: WeatherDefinitions.dayLightClouds,
-        temperatureCurrent: 19,
-        temperatureFeelsLike: 14,
-        humidityCurrent: 5,
-        windSpeed: 4.5,
-        uvIndex: 3,
-        airPressure: 745,
+        // weatherDefinition: WeatherDefinitions.dayLightClouds,
+        // temperatureCurrent: 19,
+        // temperatureFeelsLike: 14,
+        // humidityCurrent: 5,
+        // windSpeed: 4.5,
+        // uvIndex: 3,
+        // airPressure: 745,
         windDirection: WindDirections.northEast,
         moonPhase: MoonPhases.waningCrescent,
+        currentTime: 12 * 60 * 60 * 1000,
     };
 
     constructor(private helpersService: HelpersService) { }
 
-    // TODO: move partly logic to server, copy interfaces to server
+    // TODO: move partly logic to server, copy interfaces to shared folder and reuse on client/server
     public adjustReceivedData(weatherData: any): void {
+        this.currentState.currentTime = this.setCurrentTime();
         this.currentState.dayLength = this.setDayLength(weatherData[0].forecast.forecastday[0].astro);
         this.currentState.nightLength = this.setNightLength();
+        this.currentState.timeOfDay = this.setTimeOfDay();
         this.currentState.humidityCurrent = weatherData[0].current.humidity;
         this.currentState.temperatureCurrent = weatherData[0].current.temp_c;
         this.currentState.temperatureFeelsLike = weatherData[0].current.feelslike_c;
@@ -55,8 +58,7 @@ export class StateService {
         this.currentState.cloudy = this.isCloud(weatherData[0].current.condition.code);
         this.currentState.rainy = this.isRain(weatherData[0].current.condition.code);
         this.currentState.snowy = this.isSnow(weatherData[0].current.condition.code);
-        this.currentState.timeOfDay = this.setTimeOfDay();
-        this.currentState.weatherType = this.setWeatherTypeApixu(weatherData[0].current.condition.code);
+        this.currentState.weatherType = this.setWeatherTypeAccuWeather(weatherData[3][0].WeatherIcon);
         this.currentState.windDirection = this.setWindDirection(weatherData[0].current.wind_degree);
         this.currentState.moonPhase = this.helpersService.calculateMoonPhase();
         this.currentState.hoursForecast = this.setHoursForecast(weatherData[2]);
@@ -133,6 +135,13 @@ export class StateService {
         return 86400000 - this.currentState.dayLength;
     }
 
+    public setCurrentTime(): number {
+        // TODO: after moving to server use time from currentInformation instead of moment()
+        const currentTime: moment.Moment = moment();
+        const startOfDay: moment.Moment = moment().startOf('hour').hours(0);
+        return moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
+    }
+
     private setTimeOfDay(): TimeOfDay {
         const currentHour: number = moment.duration(this.currentState.currentTime).hours();
         const dayHours: number = moment.duration(this.currentState.dayLength).hours();
@@ -141,47 +150,104 @@ export class StateService {
         return isNight ? TimeOfDay.night : TimeOfDay.day;
     }
 
-    public setWeatherTypeApixu(code): WeatherTypes {
+    public setWeatherTypeApixu(code: number): WeatherTypes {
+        function compareCodes(codes: any[]) {
+            return codes.some(elem => code === elem);
+        }
+
+        // TODO: move codes arrays to public-api weather APIs codes
+        switch (true) {
+            case compareCodes([1000 || 1030 || 1135 || 1147]):
+                return WeatherTypes.dayClear;
+                break;
+
+            case compareCodes([1003]):
+                return WeatherTypes.dayLightClouds;
+                break;
+
+            case compareCodes([1006]):
+                return WeatherTypes.dayMediumClouds;
+                break;
+
+            case compareCodes([1009]):
+                return WeatherTypes.dayHeavyClouds;
+                break;
+
+            case compareCodes([1063, 1072, 1150, 1153, 1180, 1198, 1240, 1273]):
+                return WeatherTypes.dayLightRain;
+                break;
+
+            case compareCodes([1168, 1186, 1189, 1201, 1243, 1276]):
+                return WeatherTypes.dayMediumRain;
+                break;
+
+            case compareCodes([1087, 1171, 1192, 1195, 1246]):
+                return WeatherTypes.dayHeavyRain;
+                break;
+
+            case compareCodes([1066, 1069, 1204, 1210, 1213, 1249, 1255, 1261, 1279]):
+                return WeatherTypes.dayLightSnow;
+                break;
+
+            case compareCodes([1207, 1216, 1219, 1237, 1252, 1258, 1264, 1282]):
+                return WeatherTypes.dayMediumSnow;
+                break;
+
+            case compareCodes([1114, 1117, 1222, 1225]):
+                return WeatherTypes.dayHeavySnow;
+                break;
+
+            default:
+                return WeatherTypes.dayClear;
+        }
+    }
+
+    public setWeatherTypeAccuWeather(code: number): WeatherTypes {
         const timeOfDay = this.currentState.timeOfDay;
 
-        switch (code) {
-            case 1000 || 1030 || 1135 || 1147:
+        function compareCodes(codes: any[]) {
+            return codes.some(elem => code === elem);
+        }
+
+        // TODO: move codes arrays to public-api weather APIs codes
+        switch (true) {
+            case compareCodes([1, 2, 30, 31, 33, 34, 11]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayClear : WeatherTypes.nightClear;
                 break;
 
-            case 1003:
+            case compareCodes([3, 4, 21, 35, 36]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightClouds : WeatherTypes.nightLightClouds;
                 break;
 
-            case 1006:
+            case compareCodes([5, 6, 20, 32, 37]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumClouds : WeatherTypes.nightMediumClouds;
                 break;
 
-            case 1009:
+            case compareCodes([7, 8, 19, 38]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavyClouds : WeatherTypes.dayHeavyClouds;
                 break;
 
-            case 1063 || 1072 || 1150 || 1153 || 1180 || 1198 || 1240 || 1273:
+            case compareCodes([12, 13, 39]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightRain : WeatherTypes.nightLightRain;
                 break;
 
-            case 1168 || 1186 || 1189 || 1201 || 1243 || 1276:
+            case compareCodes([14, 18, 40]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumRain : WeatherTypes.nightMediumRain;
                 break;
 
-            case 1087 || 1171 || 1192 || 1195 || 1246:
+            case compareCodes([15, 16, 17, 41, 42]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavyRain : WeatherTypes.nightHeavyRain;
                 break;
 
-            case 1066 || 1069 || 1204 || 1210 || 1213 || 1249 || 1255 || 1261 || 1279:
+            case compareCodes([23]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightSnow : WeatherTypes.nightLightSnow;
                 break;
 
-            case 1207 || 1216 || 1219 || 1237 || 1252 || 1258 || 1264 || 1282:
+            case compareCodes([22, 24, 29, 26, 43]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumSnow : WeatherTypes.nightMediumSnow;
                 break;
 
-            case 1114 || 1117 || 1222 || 1225:
+            case compareCodes([25, 44]):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavySnow : WeatherTypes.nightHeavySnow;
                 break;
 
@@ -190,93 +256,43 @@ export class StateService {
         }
     }
 
-    public setWeatherTypeAccuWeather(code): WeatherTypes {
-        const timeOfDay = this.currentState.timeOfDay;
-
-        switch (code) {
-            case 1 || 2 || 30 || 31 || 33 || 34 || 11:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayClear : WeatherTypes.nightClear;
-                break;
-
-            case 3 || 4 || 21 || 35 || 36:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightClouds : WeatherTypes.nightLightClouds;
-                break;
-
-            case 5 || 6 || 20 || 32 || 37:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumClouds : WeatherTypes.nightMediumClouds;
-                break;
-
-            case 7 || 8 || 19 || 38:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavyClouds : WeatherTypes.dayHeavyClouds;
-                break;
-
-            case 12 || 13 || 39:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightRain : WeatherTypes.nightLightRain;
-                break;
-
-            case 14 || 18 || 40:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumRain : WeatherTypes.nightMediumRain;
-                break;
-
-            case 15 || 16 || 17 || 41 || 42:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavyRain : WeatherTypes.nightHeavyRain;
-                break;
-
-            case 23:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightSnow : WeatherTypes.nightLightSnow;
-                break;
-
-            case 22 || 24 || 29 || 26 || 43:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumSnow : WeatherTypes.nightMediumSnow;
-                break;
-
-            case 25 || 44:
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavySnow : WeatherTypes.nightHeavySnow;
-                break;
-
-            default:
-                return WeatherTypes.dayClear;
-        }
-    }
-
-    // TODO: this doesn't work, needs fixing
     public setWindDirection(windAngle): WindDirections {
         function calculateBoundaries(angle) {
             const delta = 45 / 2;
             return (windAngle >= (angle - delta)) && (windAngle < (angle + delta));
         }
 
-        switch (windAngle) {
+        switch (calculateBoundaries(windAngle)) {
             case calculateBoundaries(0) || calculateBoundaries(360):
                 return WindDirections.north;
                 break;
 
             case calculateBoundaries(45):
-                return WindDirections.north;
+                return WindDirections.northEast;
                 break;
 
             case calculateBoundaries(90):
-                return WindDirections.north;
+                return WindDirections.east;
                 break;
 
             case calculateBoundaries(135):
-                return WindDirections.north;
+                return WindDirections.eastSouth;
                 break;
 
             case calculateBoundaries(180):
-                return WindDirections.north;
+                return WindDirections.south;
                 break;
 
             case calculateBoundaries(225):
-                return WindDirections.north;
+                return WindDirections.southWest;
                 break;
 
             case calculateBoundaries(270):
-                return WindDirections.north;
+                return WindDirections.west;
                 break;
 
             case calculateBoundaries(315):
-                return WindDirections.north;
+                return WindDirections.westNorth;
                 break;
 
             default:
@@ -290,7 +306,7 @@ export class StateService {
             const windDirection: WindDirections = this.setWindDirection(hourData.Wind.Direction.Degrees);
 
             return {
-                hourTime: moment(hourData.DateTime).minutes(0).format('HH:MM'), // TODO: check this
+                hourTime: moment(hourData.DateTime).minutes(0).format('HH:mm'),
                 weatherTypeHour: weatherType,
                 humidityCurrent: hourData.RelativeHumidity,
                 temperatureCurrent: hourData.Temperature.Value,

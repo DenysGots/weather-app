@@ -19,22 +19,64 @@ export class ControlPanelComponent implements OnInit {
     constructor(private mainService: MainService) { }
 
     ngOnInit() {
-        this.testingState = {...this.mainService.currentState};
+        this.getState();
 
         this.controlForm = new FormGroup({
-            overcast: new FormControl({value: this.testingState.overcast, disabled: !this.isActive}),
-            cloudy: new FormControl({value: this.testingState.cloudy, disabled: !this.isActive}),
-            rainy: new FormControl({value: this.testingState.rainy, disabled: !this.isActive}),
-            snowy: new FormControl({value: this.testingState.snowy, disabled: !this.isActive}),
-            foggy: new FormControl({value: this.testingState.foggy, disabled: !this.isActive}),
-            currentTime: new FormControl({value: this.millisecondsToHours(this.testingState.currentTime), disabled: !this.isActive}),
+            overcast: new FormControl({
+                value: this.testingState.overcast,
+                disabled: !this.isActive
+            }),
+            cloudy: new FormControl({
+                value: this.testingState.cloudy,
+                disabled: !this.isActive
+            }),
+            rainy: new FormControl({
+                value: this.testingState.rainy,
+                disabled: !this.isActive
+            }),
+            snowy: new FormControl({
+                value: this.testingState.snowy,
+                disabled: !this.isActive
+            }),
+            foggy: new FormControl({
+                value: this.testingState.foggy,
+                disabled: !this.isActive
+            }),
+            currentTime: new FormControl({
+                value: this.millisecondsToHours(this.testingState.currentTime),
+                disabled: !this.isActive
+            }),
         });
     }
 
+    public getState(): void {
+        this.testingState = {...this.mainService.currentState};
+    }
+
+    public setFormValues(): void {
+        const newFormValue = {};
+
+        for (const prop in this.controlForm.value) {
+            if (this.controlForm.value.hasOwnProperty(prop)) {
+                newFormValue[prop] = this.testingState[prop];
+            }
+        }
+
+        newFormValue['currentTime'] = this.millisecondsToHours(this.testingState.currentTime);
+        this.controlForm.setValue(newFormValue);
+    }
+
     public toggleControlPanel() {
+        this.getState();
+        this.setFormValues();
+
         this.isActive = !this.isActive;
 
         (this.isActive) ? this.controlForm.enable() : this.controlForm.disable();
+
+        console.log('isActive: ', this.isActive);
+        console.log('controlForm: ', this.controlForm);
+
 
         if (!this.isActive) {
             this.resetState();
@@ -56,20 +98,22 @@ export class ControlPanelComponent implements OnInit {
     }
 
     public resetState(): void {
-        const newFormValue = {};
+        // const newFormValue = {};
 
+        this.mainService.getCurrentState();
         this.mainService.setCurrentState();
         this.mainService.emitCurrentState();
-        this.testingState = {...this.mainService.currentState};
+        this.getState();
+        this.setFormValues();
 
-        for (const prop in this.controlForm.value) {
-            if (this.controlForm.value.hasOwnProperty(prop)) {
-                newFormValue[prop] = this.testingState[prop];
-            }
-        }
-
-        newFormValue['currentTime'] = this.millisecondsToHours(this.testingState.currentTime);
-        this.controlForm.setValue(newFormValue);
+        // for (const prop in this.controlForm.value) {
+        //     if (this.controlForm.value.hasOwnProperty(prop)) {
+        //         newFormValue[prop] = this.testingState[prop];
+        //     }
+        // }
+        //
+        // newFormValue['currentTime'] = this.millisecondsToHours(this.testingState.currentTime);
+        // this.controlForm.setValue(newFormValue);
     }
 
     public millisecondsToHours(time: number): number {

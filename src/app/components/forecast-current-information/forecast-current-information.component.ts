@@ -9,6 +9,7 @@ import { State } from '../../interfaces/public-api';
     styleUrls: ['./forecast-current-information.component.scss']
 })
 export class ForecastCurrentInformationComponent {
+    // TODO: change info on Weather Card click
     // TODO: reset state on Weather Card click / Home click
 
     public currentState: State;
@@ -17,6 +18,10 @@ export class ForecastCurrentInformationComponent {
         this.mainService.currentStateSubject.subscribe((state: State) => {
             this.currentState = state;
         });
+    }
+
+    public getWeatherIcon() {
+        return this.currentState.weatherType;
     }
 
     public getWeatherIconClass(weatherField: string): any {

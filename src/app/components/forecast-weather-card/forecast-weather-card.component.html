@@ -2,7 +2,7 @@
     <div *ngIf="isCurrentType('hours')"
          class="app-forecast-weather-card__block">
         <span class="app-text-size-extra app-text-weight-semibold">
-            <i class="wi wi-time-4 app-text-size-extra app-text-align-text-bottom"></i>
+            <i class="wi wi-time-4 app-text-size-extra"></i>
             {{ hourTime }}
         </span>
     </div>
@@ -47,7 +47,6 @@
         <div class="app-forecast-weather-card__double-data-container">
             <div class="app-forecast-weather-card__double-data-content">
                 <span class="app-forecast-weather-card__double-data app-text-weight-semibold">
-                    <!-- TODO: adjust wind direction -->
                     <i class="wi wi-wind app-text-size-extra app-text-align-text-bottom"
                        [ngClass]="getWindDirectionIconClass()"></i>
                     {{ windSpeedCurrent}}

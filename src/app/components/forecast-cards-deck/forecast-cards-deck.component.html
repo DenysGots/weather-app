@@ -26,7 +26,9 @@
     <div class="app-forecast-cards-deck__container"
          [ngStyle]="{'top.px': cardsDeckTopPosition}">
         <div class="app-forecast-cards-deck__cards-container">
-            <div #forecastCardsDeckContainer
+            <!--*ngIf="isForecastDataPresent('hoursForecast')"
+            #forecastCardsDeckHoursContainer-->
+            <div #forecastCardsDeckContainers
                  class="app-forecast-cards-deck__hours"
                  [ngStyle]="{'left.px': hoursCardsDeckLeftPosition}">
                 <app-forecast-weather-card *ngFor="let card of currentState.hoursForecast"
@@ -42,7 +44,10 @@
         </div>
         
         <div class="app-forecast-cards-deck__cards-container">
-            <div class="app-forecast-cards-deck__days"
+            <!--*ngIf="isForecastDataPresent('daysForecast')"
+            #forecastCardsDeckDaysContainer-->
+            <div #forecastCardsDeckContainers
+                 class="app-forecast-cards-deck__days"
                  [ngStyle]="{'left.px': daysCardsDeckLeftPosition}">
                 <app-forecast-weather-card *ngFor="let card of currentState.daysForecast"
                                            [type]="cardsDeckType.days"

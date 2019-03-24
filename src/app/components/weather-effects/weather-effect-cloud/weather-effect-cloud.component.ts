@@ -5,6 +5,12 @@ import {
     OnInit,
     SimpleChanges,
 } from '@angular/core';
+import {
+    animate,
+    style,
+    transition,
+    trigger,
+} from '@angular/animations';
 
 import {
     NumberOfClouds,
@@ -16,6 +22,17 @@ import {
     selector: 'app-weather-effect-cloud',
     templateUrl: './weather-effect-cloud.component.html',
     styleUrls: ['./weather-effect-cloud.component.scss'],
+    animations: [
+        trigger('enterLeaveTrigger', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('1s', style({ opacity: 1 })),
+            ]),
+            transition(':leave', [
+                animate('1s', style({ opacity: 0 }))
+            ])
+        ]),
+    ],
 })
 export class WeatherEffectCloudComponent implements OnInit, OnChanges {
     @Input() public overcast: Overcast = Overcast.light;

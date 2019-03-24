@@ -17,17 +17,17 @@ export class MainService {
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
         this.getLocation();
-
-        // TODO: is this needed?
+        this.getCurrentState();
         this.setCurrentState();
-
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.currentStateSubject = this.currentStateSource.asObservable();
     }
 
-    public setCurrentState(): void {
+    public getCurrentState(): void {
         this.currentState = {...this.stateService.currentState};
-        // this.getLocation();
+    }
+
+    public setCurrentState(): void {
         this.setCurrentTimeString();
         this.setCurrentTime();
         this.setCurrentDate();
@@ -35,7 +35,18 @@ export class MainService {
         this.defineSkyBackground();
     }
 
-    // TODO: move all to State Service
+    public getWeather(): void {
+        this.httpService.getWeather().subscribe(weatherData => {
+            console.log('Received weather: ', weatherData);
+
+            this.stateService.adjustReceivedData(weatherData);
+            this.getCurrentState();
+            this.setCurrentState();
+            this.emitCurrentState();
+        });
+    }
+
+    // TODO: move all methods to State Service, possibly to Server
     public emitCurrentState(): void {
         this.currentStateSource.next(this.currentState);
     }
@@ -51,18 +62,6 @@ export class MainService {
         });
     }
 
-    public getWeather(): void {
-        this.httpService.getWeather().subscribe(weatherData => {
-            console.log('Received weather: ', weatherData);
-
-            this.stateService.adjustReceivedData(weatherData);
-
-            this.currentState = {...this.stateService.currentState};
-            this.setCurrentState();
-            this.emitCurrentState();
-        });
-    }
-
     public setCurrentTime(): void {
         const currentTime: moment.Moment = moment();
         const startOfDay: moment.Moment = moment().startOf('hour').hours(0);
@@ -70,7 +69,7 @@ export class MainService {
     }
 
     public setCurrentTimeString(): void {
-        this.currentState.currentTimeString = moment().format('HH:MM');
+        this.currentState.currentTimeString = moment().format('HH:mm');
     }
 
     public setTimeOfDay(): void {

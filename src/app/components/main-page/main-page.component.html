@@ -1,14 +1,17 @@
 <main class="app-main-page"
       [ngClass]="getCurrentBackgroundClass()">
-    <section class="app-main-page__current-information">
+    <section @enterLeaveTrigger
+             class="app-main-page__current-information">
         <app-forecast-current-information></app-forecast-current-information>
     </section>
     
-    <section class="app-main-page__day-time-view">
+    <section @enterLeaveTrigger
+             class="app-main-page__day-time-view">
         <app-day-time-weather-view></app-day-time-weather-view>
     </section>
     
-    <section class="app-main-page__cards-deck">
+    <section @enterLeaveTrigger
+             class="app-main-page__cards-deck">
         <app-forecast-cards-deck></app-forecast-cards-deck>
     </section>
     
@@ -16,25 +19,31 @@
         <app-control-panel></app-control-panel>
     </aside>
     
-    <div class="app-main-page__background app-main-page__blurred-background"></div>
+    <div @enterLeaveTrigger
+         class="app-main-page__background app-main-page__blurred-background"></div>
     
-    <div *ngIf="isWeather('foggy')"
+    <div @enterLeaveTrigger
+         *ngIf="isWeather('foggy')"
          class="app-main-page__background app-main-page__fog-background">
     </div>
     
-    <div *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('day')"
+    <div @enterLeaveTrigger
+         *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('day')"
          class="app-main-page__background app-main-page__clouds-day-medium-background">
     </div>
     
-    <div *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('day')"
+    <div @enterLeaveTrigger
+         *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('day')"
          class="app-main-page__background app-main-page__clouds-day-heavy-background">
     </div>
     
-    <div *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('night')"
+    <div @enterLeaveTrigger
+         *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('night')"
          class="app-main-page__background app-main-page__clouds-night-medium-background">
     </div>
     
-    <div *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('night')"
+    <div @enterLeaveTrigger
+         *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('night')"
          class="app-main-page__background app-main-page__clouds-night-heavy-background">
     </div>
 </main>

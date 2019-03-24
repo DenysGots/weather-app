@@ -8,6 +8,12 @@ import {
     SimpleChanges,
     ViewRef,
 } from '@angular/core';
+import {
+    animate,
+    style,
+    transition,
+    trigger,
+} from '@angular/animations';
 
 import { MainService } from '../../../services/main.service';
 
@@ -23,6 +29,17 @@ import {
     templateUrl: './weather-effect-water-drops.component.html',
     styleUrls: ['./weather-effect-water-drops.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('enterLeaveTrigger', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('1s', style({ opacity: 1 })),
+            ]),
+            transition(':leave', [
+                animate('1s', style({ opacity: 0 }))
+            ])
+        ]),
+    ],
 })
 export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
     @Input() viewHeight: number;
@@ -110,7 +127,6 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
 
     public getCurrentBackgroundClass(): any {
         const currentBackgroundClass = {};
-        // currentBackgroundClass[this.currentBackground] = true;
         currentBackgroundClass[this.currentState.currentBackground] = true;
         return currentBackgroundClass;
     }

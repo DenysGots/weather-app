@@ -1,8 +1,8 @@
 # Weather App
 * clone, run `npm i`, run `npm run helper:build` and open browser on `http://localhost:5400`
 
-# Basic reused project:
-## Nest + Angular Universal Starter
+## Basic used project:
+### Nest + Angular Universal Starter
 
 A minimal [**Nest**](https://github.com/nestjs/nest) and Angular starter for Universal using the
 [Angular CLI](https://github.com/angular/angular-cli). If you're looking for the Angular Universal repo go to
@@ -48,4 +48,9 @@ applications files, spinning up a demo http-server so you can view it on `http:/
   - **Note**: To deploy your static site to a static hosting platform you will have to deploy the `dist/browser`
 folder, rather than the usual `dist`
 
-# Reused libraries:
+## Used libraries:
+### Weather APIs:
+* https://developer.accuweather.com/
+* https://www.apixu.com/
+### Weather effects libraries and examples:
+*

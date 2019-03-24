@@ -5,6 +5,12 @@ import {
     OnInit,
     ViewChild,
 } from '@angular/core';
+import {
+    animate,
+    style,
+    transition,
+    trigger,
+} from '@angular/animations';
 
 import { MainService } from '../../services/main.service';
 import { Overcast, State } from '../../interfaces/public-api';
@@ -14,7 +20,15 @@ import { Overcast, State } from '../../interfaces/public-api';
     templateUrl: './day-time-weather-view.component.html',
     styleUrls: ['./day-time-weather-view.component.scss'],
     animations: [
-        // TODO: add animation here for components: for ngIfs ease-in-out
+        trigger('enterLeaveTrigger', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('1s', style({ opacity: 1 })),
+            ]),
+            transition(':leave', [
+                animate('1s', style({ opacity: 0 }))
+            ])
+        ]),
     ],
 })
 export class DayTimeWeatherViewComponent implements OnInit {

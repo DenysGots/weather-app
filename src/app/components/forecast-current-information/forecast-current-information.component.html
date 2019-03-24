@@ -19,7 +19,7 @@
 
     <div class="app-forecast-current-information__block">
         <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
-            <app-icon [iconType]="currentState.weatherType"
+            <app-icon [iconType]="getWeatherIcon()"
                       iconSize="big"></app-icon>
         </span>
         <span class="app-forecast-current-information__data app-text-size-heading-hero app-text-weight-semibold">
@@ -45,7 +45,7 @@
             Wind
             <i class="wi wi-wind app-text-size-extra app-text-align-text-bottom"
                [ngClass]="getWeatherIconClass('windDirection')"></i>
-            {{ currentState.windSpeed + 'm/s' }}
+            {{ currentState.windSpeed + ' m/s' }}
         </span>
         <span class="app-forecast-current-information__data">
             Humidity
@@ -63,7 +63,7 @@
         <span class="app-forecast-current-information__data">
             Air pressure
             <i class="wi wi-barometer app-text-size-extra"></i>
-            {{ currentState.airPressure + 'mmHg' }}
+            {{ currentState.airPressure + ' mmHg' }}
         </span>
         <span class="app-forecast-current-information__data">
             Moon phase

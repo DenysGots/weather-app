@@ -1,41 +1,49 @@
 <div #weatherView
      class="app-day-time-weather-view"
      [ngClass]="getCurrentBackgroundClass()">
-    <app-weather-effect-rain *ngIf="currentState.rainy"
+    <app-weather-effect-rain @enterLeaveTrigger
+                             *ngIf="currentState.rainy"
                              [viewHeight]="viewHeight"
                              [viewWidth]="viewWidth"
                              [overcast]="currentState.overcast"
                              [timeOfDay]="currentState.timeOfDay"></app-weather-effect-rain>
     
-    <app-weather-effect-snow *ngIf="currentState.snowy"
+    <app-weather-effect-snow @enterLeaveTrigger
+                             *ngIf="currentState.snowy"
                              [viewHeight]="viewHeight"
                              [viewWidth]="viewWidth"
                              [overcast]="currentState.overcast"></app-weather-effect-snow>
     
-    <app-weather-effect-cloud *ngIf="currentState.cloudy"
+    <app-weather-effect-cloud @enterLeaveTrigger
+                              *ngIf="currentState.cloudy"
                               [overcast]="currentState.overcast"
                               [timeOfDay]="currentState.timeOfDay"></app-weather-effect-cloud>
     
-    <app-weather-effect-fog *ngIf="currentState.foggy"></app-weather-effect-fog>
+    <app-weather-effect-fog @enterLeaveTrigger
+                            *ngIf="currentState.foggy"></app-weather-effect-fog>
     
-    <app-weather-effect-water-drops *ngIf="addDropsOnScreen()"
+    <app-weather-effect-water-drops @enterLeaveTrigger
+                                    *ngIf="addDropsOnScreen()"
                                     [viewHeight]="viewHeight"
                                     [viewWidth]="viewWidth"
                                     [overcast]="currentState.overcast"
                                     [currentBackground]="currentState.currentBackground"></app-weather-effect-water-drops>
     
-    <app-weather-effect-lightning *ngIf="addLightning()"
+    <app-weather-effect-lightning @enterLeaveTrigger
+                                  *ngIf="addLightning()"
                                   [viewHeight]="viewHeight"
                                   [viewWidth]="viewWidth"></app-weather-effect-lightning>
     
-    <app-day-time-day-view *ngIf="isTimeOfDay('day')"
+    <app-day-time-day-view @enterLeaveTrigger
+                           *ngIf="isTimeOfDay('day')"
                            [viewHeight]="viewHeight"
                            [viewWidth]="viewWidth"
                            [currentTime]="currentState.currentTime"
                            [dayLength]="currentState.dayLength"
                            [nightLength]="currentState.nightLength"></app-day-time-day-view>
     
-    <app-day-time-night-view *ngIf="isTimeOfDay('night')"
+    <app-day-time-night-view @enterLeaveTrigger
+                             *ngIf="isTimeOfDay('night')"
                              [viewHeight]="viewHeight"
                              [viewWidth]="viewWidth"
                              [currentTime]="currentState.currentTime"
