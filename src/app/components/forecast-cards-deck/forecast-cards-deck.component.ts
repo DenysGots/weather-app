@@ -13,6 +13,7 @@ import {
     CardsDeckType,
     cardWidth,
     spaceMd,
+    spaceSm,
     State,
 } from '../../interfaces/public-api';
 
@@ -84,42 +85,70 @@ export class ForecastCardsDeckComponent implements AfterViewInit {
 
         // TODO: not working, needs to be fixed
 
-        if (this.forecastCardsDeckContainers) {
-            if (this.forecastCardsDeckContainers[0]) {
-                this.deckHoursContainerWidth = this.forecastCardsDeckContainers[0].nativeElement.offsetWidth;
-                console.log('deckHoursContainerWidth: ', this.deckHoursContainerWidth);
-            }
+        // if (this.forecastCardsDeckContainers) {
+        //     console.log(this.forecastCardsDeckContainers);
+        //     console.log(this.forecastCardsDeckContainers.toArray());
+        //     console.log(this.forecastCardsDeckContainers.toArray()[0]);
+        //     console.log(this.forecastCardsDeckContainers.toArray()[0].nativeElement);
+        //     console.log(this.forecastCardsDeckContainers.toArray()[0].nativeElement.offsetWidth);
+        //
+        //     if (this.forecastCardsDeckContainers.toArray()[0]) {
+        //         this.deckHoursContainerWidth = this.forecastCardsDeckContainers.toArray()[0].nativeElement.offsetWidth;
+        //         console.log('deckHoursContainerWidth: ', this.deckHoursContainerWidth);
+        //     }
+        //
+        //     if (this.forecastCardsDeckContainers.toArray()[1]) {
+        //         this.deckDaysContainerWidth = this.forecastCardsDeckContainers.toArray()[1].nativeElement.offsetWidth;
+        //         console.log('deckDaysContainerWidth: ', this.deckDaysContainerWidth);
+        //     }
+        // }
 
-            console.log(this.forecastCardsDeckHoursContainer);
+        this.deckHoursContainerWidth = this.numberOfHoursCards * cardWidth + (this.numberOfHoursCards - 1) * spaceSm * 2;
+        this.deckDaysContainerWidth = this.numberOfDaysCards * cardWidth + (this.numberOfDaysCards - 1) * spaceSm * 2;
 
-            if (this.forecastCardsDeckContainers[1]) {
-                this.deckDaysContainerWidth = this.forecastCardsDeckContainers[1].nativeElement.offsetWidth;
-                console.log('deckDaysContainerWidth: ', this.deckDaysContainerWidth);
-            }
-
-            console.log(this.forecastCardsDeckDaysContainer);
-        }
+        console.log('deckHoursContainerWidth: ', this.deckHoursContainerWidth);
+        console.log('deckDaysContainerWidth: ', this.deckDaysContainerWidth);
     }
 
     public goLeft() {
         this.currentMode === CardsDeckType.hours
             ? this.hoursCardsDeckLeftPosition <= -1 * cardWidth
-                ? this.hoursCardsDeckLeftPosition += cardWidth
-                : this.hoursCardsDeckLeftPosition = 0
+            ? this.hoursCardsDeckLeftPosition += (cardWidth + spaceSm * 2)
+            : this.hoursCardsDeckLeftPosition = 0
             : this.daysCardsDeckLeftPosition <= -1 * cardWidth
-                ? this.daysCardsDeckLeftPosition += cardWidth
-                : this.daysCardsDeckLeftPosition = 0;
+            ? this.daysCardsDeckLeftPosition += (cardWidth + spaceSm * 2)
+            : this.daysCardsDeckLeftPosition = 0;
     }
 
     public goRight() {
         this.currentMode === CardsDeckType.hours
             ? this.hoursCardsDeckLeftPosition > -1 * (this.deckHoursContainerWidth - this.deckWidth)
-                ? this.hoursCardsDeckLeftPosition -= cardWidth
-                : this.hoursCardsDeckLeftPosition = -1 * (this.deckHoursContainerWidth - this.deckWidth)
+            ? this.hoursCardsDeckLeftPosition -= (cardWidth + spaceSm * 2)
+            : this.hoursCardsDeckLeftPosition = -1 * (this.deckHoursContainerWidth - this.deckWidth)
             : this.daysCardsDeckLeftPosition > -1 * (this.deckDaysContainerWidth - this.deckWidth)
-                ? this.daysCardsDeckLeftPosition -= cardWidth
-                : this.daysCardsDeckLeftPosition = -1 * (this.deckDaysContainerWidth - this.deckWidth);
+            ? this.daysCardsDeckLeftPosition -= (cardWidth + spaceSm * 2)
+            : this.daysCardsDeckLeftPosition = -1 * (this.deckDaysContainerWidth - this.deckWidth);
     }
+
+    // public goLeft() {
+    //     this.currentMode === CardsDeckType.hours
+    //         ? this.hoursCardsDeckLeftPosition <= -1 * cardWidth
+    //             ? this.hoursCardsDeckLeftPosition += cardWidth
+    //             : this.hoursCardsDeckLeftPosition = 0
+    //         : this.daysCardsDeckLeftPosition <= -1 * cardWidth
+    //             ? this.daysCardsDeckLeftPosition += cardWidth
+    //             : this.daysCardsDeckLeftPosition = 0;
+    // }
+    //
+    // public goRight() {
+    //     this.currentMode === CardsDeckType.hours
+    //         ? this.hoursCardsDeckLeftPosition > -1 * (this.deckHoursContainerWidth - this.deckWidth)
+    //             ? this.hoursCardsDeckLeftPosition -= cardWidth
+    //             : this.hoursCardsDeckLeftPosition = -1 * (this.deckHoursContainerWidth - this.deckWidth)
+    //         : this.daysCardsDeckLeftPosition > -1 * (this.deckDaysContainerWidth - this.deckWidth)
+    //             ? this.daysCardsDeckLeftPosition -= cardWidth
+    //             : this.daysCardsDeckLeftPosition = -1 * (this.deckDaysContainerWidth - this.deckWidth);
+    // }
 
     public goToHoursView() {
         this.currentMode = CardsDeckType.hours;

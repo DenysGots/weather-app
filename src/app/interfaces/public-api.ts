@@ -193,6 +193,7 @@ export enum IconSizes {
 }
 
 /* Variables */
+export const spaceSm = 5;
 export const spaceMd = 10;
 export const sunSize = 36;
 export const moonSize = 60;

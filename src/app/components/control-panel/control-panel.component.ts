@@ -74,10 +74,6 @@ export class ControlPanelComponent implements OnInit {
 
         (this.isActive) ? this.controlForm.enable() : this.controlForm.disable();
 
-        console.log('isActive: ', this.isActive);
-        console.log('controlForm: ', this.controlForm);
-
-
         if (!this.isActive) {
             this.resetState();
         }
@@ -98,22 +94,11 @@ export class ControlPanelComponent implements OnInit {
     }
 
     public resetState(): void {
-        // const newFormValue = {};
-
         this.mainService.getCurrentState();
         this.mainService.setCurrentState();
         this.mainService.emitCurrentState();
         this.getState();
         this.setFormValues();
-
-        // for (const prop in this.controlForm.value) {
-        //     if (this.controlForm.value.hasOwnProperty(prop)) {
-        //         newFormValue[prop] = this.testingState[prop];
-        //     }
-        // }
-        //
-        // newFormValue['currentTime'] = this.millisecondsToHours(this.testingState.currentTime);
-        // this.controlForm.setValue(newFormValue);
     }
 
     public millisecondsToHours(time: number): number {

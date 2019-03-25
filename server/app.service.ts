@@ -1,10 +1,12 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { combineLatest, Observable, Subject, timer } from 'rxjs';
+import { combineLatest, Observable, Subject, timer, iif, throwError, of } from 'rxjs';
 import { delayWhen } from 'rxjs/operators/delayWhen';
 import { map } from 'rxjs/operators/map';
 import { retryWhen } from 'rxjs/operators/retryWhen';
 import { switchMap } from 'rxjs/operators/switchMap';
+import { concatMap } from 'rxjs/operators/concatMap';
 import { tap } from 'rxjs/operators/tap';
+import { delay } from 'rxjs/operators/delay';
 
 import { LocationDto, PositionDto } from './public-api';
 
@@ -33,6 +35,18 @@ export class AppService {
     }
 
     public getWeather(locationDto: LocationDto) {
+        const retryPipeline =
+            retryWhen(error => error.pipe(
+                concatMap((e, i) =>
+                    iif(
+                        () => i > 10,
+                        throwError(e),
+                        of(e).pipe(delay(3000)),
+                    )
+                ),
+                tap(() => console.log('Request error, retrying...', error)),
+            ));
+
         let getLocationKeyUrl = this.accuWeatherGetLocationKeyUrl;
         let getCurrentWeatherUrl = this.accuWeatherGetCurrentWeatherUrl;
         let getFiveDaysWeatherUrl =  this.accuWeatherGetFiveDaysWeatherUrl;
@@ -57,58 +71,64 @@ export class AppService {
                         .get(getCurrentWeatherUrl)
                         .pipe(
                             map(weatherData => weatherData.data),
-                            retryWhen(error => error
-                                .pipe(
-                                    delayWhen(() => timer(3000)),
-                                    tap(() => console.log('Current weather request error, retrying...'))
-                                )
-                            ),
+                            retryPipeline,
+                            // retryWhen(error => error
+                            //     .pipe(
+                            //         delayWhen(() => timer(5000)),
+                            //         tap(() => console.log('Current weather request error, retrying...', error))
+                            //     )
+                            // ),
                         );
 
                     const fiveDaysWeather = this.httpService
                         .get(getFiveDaysWeatherUrl)
                         .pipe(
                             map(weatherData => weatherData.data),
-                            retryWhen(error => error
-                                .pipe(
-                                    delayWhen(() => timer(3000)),
-                                    tap(() => console.log('Five days weather request error, retrying...'))
-                                )
-                            )
+                            retryPipeline,
+                            // retryWhen(error => error
+                            //     .pipe(
+                            //         delayWhen(() => timer(5000)),
+                            //         tap(() => console.log('Five days weather request error, retrying...', error)),
+                            //         take(5),
+                            //     )
+                            // ),
                         );
 
                     const twelveHoursWeather = this.httpService
                         .get(getTwelveHoursWeatherUrl)
                         .pipe(
                             map(weatherData => weatherData.data),
-                            retryWhen(error => error
-                                .pipe(
-                                    delayWhen(() => timer(3000)),
-                                    tap(() => console.log('Twelve hours weather request error, retrying...'))
-                                )
-                            )
+                            retryPipeline,
+                            // retryWhen(error => error
+                            //     .pipe(
+                            //         delayWhen(() => timer(5000)),
+                            //         tap(() => console.log('Twelve hours weather request error, retrying...', error))
+                            //     )
+                            // )
                         );
 
                     const tenDaysWeather = this.httpService
                         .get(getTenDaysWeatherUrl)
                         .pipe(
                             map(weatherData => weatherData.data),
-                            retryWhen(error => error
-                                .pipe(
-                                    delayWhen(() => timer(3000)),
-                                    tap(() => console.log('Ten days weather request error, retrying...'))
-                                )
-                            )
+                            retryPipeline,
+                            // retryWhen(error => error
+                            //     .pipe(
+                            //         delayWhen(() => timer(5000)),
+                            //         tap(() => console.log('Ten days weather request error, retrying...', error))
+                            //     )
+                            // ),
                         );
 
                     return combineLatest(tenDaysWeather, fiveDaysWeather, twelveHoursWeather, currentWeather);
                 }),
-                retryWhen(error => error
-                    .pipe(
-                        delayWhen(() => timer(3000)),
-                        tap(() => console.log('Location request error, retrying...'))
-                    )
-                )
+                retryPipeline,
+                // retryWhen(error => error
+                //     .pipe(
+                //         delayWhen(() => timer(5000)),
+                //         tap(() => console.log('Location request error, retrying...', error))
+                //     )
+                // ),
             );
     }
 

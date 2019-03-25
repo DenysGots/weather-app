@@ -18,6 +18,7 @@ import {
 
 @Injectable()
 export class StateService {
+    // TODO: this initial values must be here, so control panel will initialize without errors
     public currentState: State = {
         overcast: Overcast.light,
         // dayLength: 50400000,
