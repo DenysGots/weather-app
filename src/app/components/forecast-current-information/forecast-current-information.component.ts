@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
-import { State } from '../../interfaces/public-api';
+import { State, WeatherTypes } from '../../interfaces/public-api';
 
 @Component({
     selector: 'app-forecast-current-information',
@@ -21,7 +21,7 @@ export class ForecastCurrentInformationComponent {
     }
 
     public getWeatherIcon() {
-        return this.currentState.weatherType;
+        return this.currentState.weatherType ? this.currentState.weatherType : WeatherTypes.dayClear;
     }
 
     public getWeatherIconClass(weatherField: string): any {

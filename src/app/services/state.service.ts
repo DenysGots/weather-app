@@ -18,27 +18,7 @@ import {
 
 @Injectable()
 export class StateService {
-    // TODO: this initial values must be here, so control panel will initialize without errors
-    public currentState: State = {
-        overcast: Overcast.light,
-        // dayLength: 50400000,
-        // nightLength: 36000000,
-        cloudy: false,
-        rainy: false,
-        snowy: false,
-        foggy: false,
-        weatherType: WeatherTypes.dayLightClouds,
-        // weatherDefinition: WeatherDefinitions.dayLightClouds,
-        // temperatureCurrent: 19,
-        // temperatureFeelsLike: 14,
-        // humidityCurrent: 5,
-        // windSpeed: 4.5,
-        // uvIndex: 3,
-        // airPressure: 745,
-        windDirection: WindDirections.northEast,
-        moonPhase: MoonPhases.waningCrescent,
-        currentTime: 12 * 60 * 60 * 1000,
-    };
+    public currentState: State = <State>{};
 
     constructor(private helpersService: HelpersService) { }
 
@@ -72,6 +52,7 @@ export class StateService {
         return ApixuWeatherCodes.fogCodes.indexOf(code) !== -1;
     }
 
+    // TODO: test all weather, clouds and overcast settings
     public isCloud(code): boolean {
         for (const prop in ApixuWeatherCodes.cloudsCodes) {
             if (ApixuWeatherCodes.cloudsCodes.hasOwnProperty(prop)
@@ -81,6 +62,7 @@ export class StateService {
             }
         }
 
+        this.currentState.overcast = Overcast.light;
         return false;
     }
 
@@ -143,12 +125,16 @@ export class StateService {
         return moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
     }
 
-    private setTimeOfDay(): TimeOfDay {
+    public setTimeOfDay(): TimeOfDay {
         const currentHour: number = moment.duration(this.currentState.currentTime).hours();
         const dayHours: number = moment.duration(this.currentState.dayLength).hours();
         const nightHours: number = moment.duration(this.currentState.nightLength).hours();
         const isNight: boolean = (currentHour <= nightHours / 2) || (currentHour >= dayHours + nightHours / 2);
         return isNight ? TimeOfDay.night : TimeOfDay.day;
+    }
+
+    public setOvercats() {
+
     }
 
     public setWeatherTypeApixu(code: number): WeatherTypes {
