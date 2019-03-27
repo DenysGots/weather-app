@@ -11,7 +11,7 @@ import {
     Overcast,
     State,
     TimeOfDay,
-} from '../../interfaces/public-api';
+} from '../../../../shared/public-api';
 
 @Component({
     selector: 'app-main-page',

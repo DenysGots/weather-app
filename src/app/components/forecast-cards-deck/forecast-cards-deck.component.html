@@ -1,34 +1,9 @@
-<!--<div #forecastCardsDeck-->
-     <!--class="app-forecast-cards-deck">-->
-    <!--<div class="app-forecast-cards-deck__container"-->
-         <!--[ngStyle]="{'top.px': cardsDeckTopPosition}">-->
-        <!--<div class="app-forecast-cards-deck__cards-container">-->
-            <!--<div #forecastCardsDeckContainer-->
-                 <!--class="app-forecast-cards-deck__hours"-->
-                 <!--[ngStyle]="{'left.px': hoursCardsDeckLeftPosition}">-->
-                <!--<app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"-->
-                                           <!--[type]="cardsDeckType.hours"></app-forecast-weather-card>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!---->
-        <!--<div class="app-forecast-cards-deck__cards-container">-->
-            <!--<div class="app-forecast-cards-deck__days"-->
-                 <!--[ngStyle]="{'left.px': daysCardsDeckLeftPosition}">-->
-                <!--<app-forecast-weather-card *ngFor="let value of numberOfCards | NumberToIterablePipe"-->
-                                           <!--[type]="cardsDeckType.days"></app-forecast-weather-card>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-
 <div #forecastCardsDeck
      class="app-forecast-cards-deck">
     <div class="app-forecast-cards-deck__container"
          [ngStyle]="{'top.px': cardsDeckTopPosition}">
         <div class="app-forecast-cards-deck__cards-container">
-            <!--*ngIf="isForecastDataPresent('hoursForecast')"
-            #forecastCardsDeckHoursContainer-->
-            <div #forecastCardsDeckContainers
+            <div #forecastCardsDeckHoursContainer
                  class="app-forecast-cards-deck__hours"
                  [ngStyle]="{'left.px': hoursCardsDeckLeftPosition}">
                 <app-forecast-weather-card *ngFor="let card of currentState.hoursForecast"
@@ -44,9 +19,7 @@
         </div>
         
         <div class="app-forecast-cards-deck__cards-container">
-            <!--*ngIf="isForecastDataPresent('daysForecast')"
-            #forecastCardsDeckDaysContainer-->
-            <div #forecastCardsDeckContainers
+            <div #forecastCardsDeckDaysContainer
                  class="app-forecast-cards-deck__days"
                  [ngStyle]="{'left.px': daysCardsDeckLeftPosition}">
                 <app-forecast-weather-card *ngFor="let card of currentState.daysForecast"

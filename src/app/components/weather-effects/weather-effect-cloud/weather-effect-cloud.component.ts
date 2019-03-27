@@ -16,7 +16,7 @@ import {
     NumberOfClouds,
     Overcast,
     TimeOfDay,
-} from '../../../interfaces/public-api';
+} from '../../../../../shared/public-api';
 
 @Component({
     selector: 'app-weather-effect-cloud',

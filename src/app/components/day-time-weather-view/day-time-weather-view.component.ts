@@ -13,7 +13,7 @@ import {
 } from '@angular/animations';
 
 import { MainService } from '../../services/main.service';
-import { Overcast, State } from '../../interfaces/public-api';
+import { Overcast, State } from '../../../../shared/public-api';
 
 @Component({
     selector: 'app-day-time-weather-view',

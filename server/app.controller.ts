@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 
 import { AppService } from './app.service';
-import { LocationDto, PositionDto } from './public-api';
+import { LocationDto, PositionDto } from '../shared/public-api';
 
 @Controller()
 export class AppController {

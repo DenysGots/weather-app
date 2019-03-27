@@ -4,14 +4,13 @@ import * as moment from 'moment';
 import { HelpersService } from './helpers.service';
 
 import {
+    AccuWeatherCodes,
     ApixuWeatherCodes,
     DaysForecast,
     HoursForecast,
-    MoonPhases,
     Overcast,
     State,
     TimeOfDay,
-    WeatherDefinitions,
     WeatherTypes,
     WindDirections,
 } from '../interfaces/public-api';
@@ -23,6 +22,7 @@ export class StateService {
     constructor(private helpersService: HelpersService) { }
 
     // TODO: move partly logic to server, copy interfaces to shared folder and reuse on client/server
+    // TODO: get from LocalStorage on init, if any, save to LocalStorage on receiving from server
     public adjustReceivedData(weatherData: any): void {
         this.currentState.currentTime = this.setCurrentTime();
         this.currentState.dayLength = this.setDayLength(weatherData[0].forecast.forecastday[0].astro);
@@ -52,7 +52,6 @@ export class StateService {
         return ApixuWeatherCodes.fogCodes.indexOf(code) !== -1;
     }
 
-    // TODO: test all weather, clouds and overcast settings
     public isCloud(code): boolean {
         for (const prop in ApixuWeatherCodes.cloudsCodes) {
             if (ApixuWeatherCodes.cloudsCodes.hasOwnProperty(prop)
@@ -133,54 +132,49 @@ export class StateService {
         return isNight ? TimeOfDay.night : TimeOfDay.day;
     }
 
-    public setOvercats() {
-
-    }
-
     public setWeatherTypeApixu(code: number): WeatherTypes {
         function compareCodes(codes: any[]) {
             return codes.some(elem => code === elem);
         }
 
-        // TODO: move codes arrays to public-api weather APIs codes
         switch (true) {
-            case compareCodes([1000 || 1030 || 1135 || 1147]):
+            case compareCodes(ApixuWeatherCodes.dayClearCodes):
                 return WeatherTypes.dayClear;
                 break;
 
-            case compareCodes([1003]):
+            case compareCodes(ApixuWeatherCodes.dayLightCloudsCodes):
                 return WeatherTypes.dayLightClouds;
                 break;
 
-            case compareCodes([1006]):
+            case compareCodes(ApixuWeatherCodes.dayMediumCloudsCodes):
                 return WeatherTypes.dayMediumClouds;
                 break;
 
-            case compareCodes([1009]):
+            case compareCodes(ApixuWeatherCodes.dayHeavyCloudsCodes):
                 return WeatherTypes.dayHeavyClouds;
                 break;
 
-            case compareCodes([1063, 1072, 1150, 1153, 1180, 1198, 1240, 1273]):
+            case compareCodes(ApixuWeatherCodes.dayLightRainCodes):
                 return WeatherTypes.dayLightRain;
                 break;
 
-            case compareCodes([1168, 1186, 1189, 1201, 1243, 1276]):
+            case compareCodes(ApixuWeatherCodes.dayMediumRainCodes):
                 return WeatherTypes.dayMediumRain;
                 break;
 
-            case compareCodes([1087, 1171, 1192, 1195, 1246]):
+            case compareCodes(ApixuWeatherCodes.dayHeavyRainCodes):
                 return WeatherTypes.dayHeavyRain;
                 break;
 
-            case compareCodes([1066, 1069, 1204, 1210, 1213, 1249, 1255, 1261, 1279]):
+            case compareCodes(ApixuWeatherCodes.dayLightSnowCodes):
                 return WeatherTypes.dayLightSnow;
                 break;
 
-            case compareCodes([1207, 1216, 1219, 1237, 1252, 1258, 1264, 1282]):
+            case compareCodes(ApixuWeatherCodes.dayMediumSnowCodes):
                 return WeatherTypes.dayMediumSnow;
                 break;
 
-            case compareCodes([1114, 1117, 1222, 1225]):
+            case compareCodes(ApixuWeatherCodes.dayHeavySnowCodes):
                 return WeatherTypes.dayHeavySnow;
                 break;
 
@@ -196,45 +190,44 @@ export class StateService {
             return codes.some(elem => code === elem);
         }
 
-        // TODO: move codes arrays to public-api weather APIs codes
         switch (true) {
-            case compareCodes([1, 2, 30, 31, 33, 34, 11]):
+            case compareCodes(AccuWeatherCodes.clearCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayClear : WeatherTypes.nightClear;
                 break;
 
-            case compareCodes([3, 4, 21, 35, 36]):
+            case compareCodes(AccuWeatherCodes.lightCloudsCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightClouds : WeatherTypes.nightLightClouds;
                 break;
 
-            case compareCodes([5, 6, 20, 32, 37]):
+            case compareCodes(AccuWeatherCodes.mediumCloudsCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumClouds : WeatherTypes.nightMediumClouds;
                 break;
 
-            case compareCodes([7, 8, 19, 38]):
+            case compareCodes(AccuWeatherCodes.heavyCloudsCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavyClouds : WeatherTypes.dayHeavyClouds;
                 break;
 
-            case compareCodes([12, 13, 39]):
+            case compareCodes(AccuWeatherCodes.lightRainCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightRain : WeatherTypes.nightLightRain;
                 break;
 
-            case compareCodes([14, 18, 40]):
+            case compareCodes(AccuWeatherCodes.mediumRainCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumRain : WeatherTypes.nightMediumRain;
                 break;
 
-            case compareCodes([15, 16, 17, 41, 42]):
+            case compareCodes(AccuWeatherCodes.heavyRainCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavyRain : WeatherTypes.nightHeavyRain;
                 break;
 
-            case compareCodes([23]):
+            case compareCodes(AccuWeatherCodes.lightSnowCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightSnow : WeatherTypes.nightLightSnow;
                 break;
 
-            case compareCodes([22, 24, 29, 26, 43]):
+            case compareCodes(AccuWeatherCodes.mediumSnowCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumSnow : WeatherTypes.nightMediumSnow;
                 break;
 
-            case compareCodes([25, 44]):
+            case compareCodes(AccuWeatherCodes.heavySnowCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavySnow : WeatherTypes.nightHeavySnow;
                 break;
 

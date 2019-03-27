@@ -71,6 +71,31 @@ export interface Location {
 }
 
 /* Enums */
+export enum ButtonSizes {
+    small = '15',
+    medium = '30',
+    big = '40',
+}
+
+export enum ButtonIconSizes {
+    small = '10',
+    medium = '14',
+    big = '22',
+}
+
+export enum ButtonTypes {
+    left = 'angle-left',
+    right = 'angle-right',
+    plus = 'plus',
+    minus = 'minus',
+    home = 'home',
+}
+
+export enum ButtonShapes {
+    circle = 'circle',
+    rectangle = 'rectangle',
+}
+
 export enum WeatherTypes {
     dayClear = 'day',
     dayLightClouds = 'cloudy-day-1',
@@ -226,6 +251,26 @@ export const ApixuWeatherCodes = {
         medium: [1207, 1216, 1219, 1237, 1252, 1258, 1264, 1282],
         heavy: [1114, 1117, 1222, 1225],
     },
+
+    dayClearCodes: [1000, 1030, 1135, 1147],
+
+    dayLightCloudsCodes: [1003],
+
+    dayMediumCloudsCodes: [1006],
+
+    dayHeavyCloudsCodes: [1009],
+
+    dayLightRainCodes: [1063, 1072, 1150, 1153, 1180, 1198, 1240, 1273],
+
+    dayMediumRainCodes: [1168, 1186, 1189, 1201, 1243, 1276],
+
+    dayHeavyRainCodes: [1087, 1171, 1192, 1195, 1246],
+
+    dayLightSnowCodes: [1066, 1069, 1204, 1210, 1213, 1249, 1255, 1261, 1279],
+
+    dayMediumSnowCodes: [1207, 1216, 1219, 1237, 1252, 1258, 1264, 1282],
+
+    dayHeavySnowCodes: [1114, 1117, 1222, 1225],
 
     1000: {
         day: 'Sunny',
@@ -493,4 +538,24 @@ export const AccuWeatherCodes = {
         medium: [22, 24, 29, 26, 43],
         heavy: [25, 44],
     },
+
+    clearCodes: [1, 2, 30, 31, 33, 34, 11],
+
+    lightCloudsCodes: [3, 4, 21, 35, 36],
+
+    mediumCloudsCodes: [5, 6, 20, 32, 37],
+
+    heavyCloudsCodes: [7, 8, 19, 38],
+
+    lightRainCodes: [12, 13, 39],
+
+    mediumRainCodes: [14, 18, 40],
+
+    heavyRainCodes: [15, 16, 17, 41, 42],
+
+    lightSnowCodes: [23],
+
+    mediumSnowCodes: [22, 24, 29, 26, 43],
+
+    heavySnowCodes: [25, 44],
 };

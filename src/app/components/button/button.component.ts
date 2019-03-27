@@ -1,34 +1,15 @@
 import {
     Component,
-    HostBinding,
     Input,
     OnInit,
 } from '@angular/core';
 
-enum ButtonSizes {
-    small = '15',
-    medium = '30',
-    big = '40',
-}
-
-enum ButtonIconSizes {
-    small = '10',
-    medium = '14',
-    big = '22',
-}
-
-enum ButtonTypes {
-    left = 'angle-left',
-    right = 'angle-right',
-    plus = 'plus',
-    minus = 'minus',
-    home = 'home',
-}
-
-export enum ButtonShapes {
-    circle = 'circle',
-    rectangle = 'rectangle',
-}
+import {
+    ButtonIconSizes,
+    ButtonShapes,
+    ButtonSizes,
+    ButtonTypes,
+} from '../../../../shared/public-api';
 
 @Component({
     selector: 'app-button',
@@ -41,9 +22,6 @@ export class ButtonComponent implements OnInit {
     @Input() buttonType: ButtonTypes;
     @Input() isActive = true;
 
-    // @HostBinding('class.app-button-circle') public isCircle: boolean;
-    // @HostBinding('class.app-button-rectangle') public isRectangle: boolean;
-
     public size: string;
     public type: string;
     public fontSize: string;
@@ -54,8 +32,6 @@ export class ButtonComponent implements OnInit {
         this.size = ButtonSizes[this.buttonSize];
         this.fontSize = ButtonIconSizes[this.buttonSize];
         this.type = ButtonTypes[this.buttonType];
-        // this.isCircle = this.buttonShape === ButtonShapes.circle;
-        // this.isRectangle = this.buttonShape === ButtonShapes.rectangle;
     }
 
     public isCircle(): boolean {

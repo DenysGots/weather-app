@@ -14,7 +14,7 @@ import {
 
 import { HelpersService } from '../../../services/helpers.service';
 
-import { NumberOfSnowFlakes, Overcast } from '../../../interfaces/public-api';
+import { NumberOfSnowFlakes, Overcast } from '../../../../../shared/public-api';
 
 @Component({
     selector: 'app-weather-effect-snow',

@@ -1,10 +1,11 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
-    QueryList,
+    OnInit,
     ViewChild,
-    ViewChildren,
 } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
@@ -15,14 +16,15 @@ import {
     spaceMd,
     spaceSm,
     State,
-} from '../../interfaces/public-api';
+} from '../../../../shared/public-api';
 
 @Component({
     selector: 'app-forecast-cards-deck',
     templateUrl: './forecast-cards-deck.component.html',
     styleUrls: ['./forecast-cards-deck.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ForecastCardsDeckComponent implements AfterViewInit {
+export class ForecastCardsDeckComponent implements OnInit, AfterViewInit {
     public currentState: State;
     public currentMode: CardsDeckType = CardsDeckType.hours;
     public cardsDeckType = CardsDeckType;
@@ -39,12 +41,16 @@ export class ForecastCardsDeckComponent implements AfterViewInit {
     private deckDaysContainerWidth: number;
 
     @ViewChild('forecastCardsDeck') private forecastCardsDeck: ElementRef;
+    @ViewChild('forecastCardsDeckHoursContainer') private forecastCardsDeckHoursContainer: ElementRef;
+    @ViewChild('forecastCardsDeckDaysContainer') private forecastCardsDeckDaysContainer: ElementRef;
 
-    @ViewChildren('forecastCardsDeckContainers') private forecastCardsDeckContainers: QueryList<ElementRef>;
+    constructor(private changeDetectorRef: ChangeDetectorRef,
+                private mainService: MainService) { }
 
-    constructor(private mainService: MainService) {
+    ngOnInit() {
         this.mainService.currentStateSubject.subscribe((state: State) => {
             this.currentState = state;
+            this.changeDetectorRef.detectChanges();
             this.setNumbersOfCards();
             this.setContainersWidth();
         });
@@ -65,8 +71,13 @@ export class ForecastCardsDeckComponent implements AfterViewInit {
     }
 
     public setContainersWidth(): void {
-        this.deckHoursContainerWidth = this.numberOfHoursCards * cardWidth + (this.numberOfHoursCards - 1) * spaceSm * 2;
-        this.deckDaysContainerWidth = this.numberOfDaysCards * cardWidth + (this.numberOfDaysCards - 1) * spaceSm * 2;
+        if (this.forecastCardsDeckHoursContainer) {
+            this.deckHoursContainerWidth = this.forecastCardsDeckHoursContainer.nativeElement.offsetWidth;
+        }
+
+        if (this.forecastCardsDeckDaysContainer) {
+            this.deckDaysContainerWidth = this.forecastCardsDeckDaysContainer.nativeElement.offsetWidth;
+        }
     }
 
     public goLeft() {

@@ -1,5 +1,3 @@
-// TODO: move to shared
-
 export interface LocationDto {
     countryCode: string;
     country: string;

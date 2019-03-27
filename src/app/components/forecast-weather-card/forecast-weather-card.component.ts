@@ -8,7 +8,7 @@ import {
     CardsDeckType,
     WeatherTypes,
     WindDirections,
-} from '../../interfaces/public-api';
+} from '../../../../shared/public-api';
 
 @Component({
     selector: 'app-forecast-weather-card',

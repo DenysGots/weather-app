@@ -8,7 +8,7 @@ import { concatMap } from 'rxjs/operators/concatMap';
 import { tap } from 'rxjs/operators/tap';
 import { delay } from 'rxjs/operators/delay';
 
-import { LocationDto, PositionDto } from './public-api';
+import { LocationDto, PositionDto } from '../shared/public-api';
 
 @Injectable()
 export class AppService {

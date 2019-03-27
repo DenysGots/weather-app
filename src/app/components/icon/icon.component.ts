@@ -6,7 +6,7 @@ import {
     SimpleChanges,
 } from '@angular/core';
 
-import { IconSizes } from '../../interfaces/public-api';
+import { IconSizes } from '../../../../shared/public-api';
 
 @Component({
     selector: 'app-icon',

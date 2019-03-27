@@ -34,7 +34,8 @@
              *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('night')"
              class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-night-heavy-background">
         </div>
-    
+        
+        <!-- TODO: remove this and try fog blurred background instead -->
         <div @enterLeaveTrigger
              *ngIf="isWeather('cloudy')"
              class="app-weather-effect-water-drops__background app-weather-effect-water-drops__cloud-background"

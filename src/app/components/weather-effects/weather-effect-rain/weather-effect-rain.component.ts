@@ -19,7 +19,7 @@ import {
     NumberOfRainThroughDrops,
     Overcast,
     TimeOfDay,
-} from '../../../interfaces/public-api';
+} from '../../../../../shared/public-api';
 
 @Component({
     selector: 'app-weather-effect-rain',

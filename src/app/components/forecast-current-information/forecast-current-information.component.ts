@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
-import { State, WeatherTypes } from '../../interfaces/public-api';
+import { State, WeatherTypes } from '../../../../shared/public-api';
 
 @Component({
     selector: 'app-forecast-current-information',
@@ -9,9 +9,6 @@ import { State, WeatherTypes } from '../../interfaces/public-api';
     styleUrls: ['./forecast-current-information.component.scss']
 })
 export class ForecastCurrentInformationComponent {
-    // TODO: change info on Weather Card click
-    // TODO: reset state on Weather Card click / Home click
-
     public currentState: State;
 
     constructor(private mainService: MainService) {

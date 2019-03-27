@@ -17,7 +17,7 @@ import {
     CelestialPosition,
     Parabola,
     sunSize,
-} from '../../interfaces/public-api';
+} from '../../../../shared/public-api';
 
 @Component({
     selector: 'app-day-time-day-view',
