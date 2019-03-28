@@ -42,6 +42,9 @@ import {
     ],
 })
 export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
+    // TODO: get sun/moon position, time of day, sun/moon size and hide drops with *ngIf if they overlaps sun/moon
+    // TODO: emit sun/moon position via main service
+
     @Input() viewHeight: number;
     @Input() viewWidth: number;
     @Input() overcast: Overcast;

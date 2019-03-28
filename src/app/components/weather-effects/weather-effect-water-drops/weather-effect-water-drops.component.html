@@ -11,7 +11,7 @@
                 'background-size': drop.backgroundSize
              }">
         <div @enterLeaveTrigger
-             *ngIf="isWeather('foggy')"
+             *ngIf="isWeather('foggy') || isWeather('cloudy')"
              class="app-weather-effect-water-drops__background app-weather-effect-water-drops__fog-background">
         </div>
     
@@ -36,14 +36,14 @@
         </div>
         
         <!-- TODO: remove this and try fog blurred background instead -->
-        <div @enterLeaveTrigger
-             *ngIf="isWeather('cloudy')"
-             class="app-weather-effect-water-drops__background app-weather-effect-water-drops__cloud-background"
-             [ngStyle]="{
-                'background-position': drop.backgroundPosition,
-                'background-size': drop.backgroundSize
-             }">
-        </div>
+        <!--<div @enterLeaveTrigger-->
+             <!--*ngIf="isWeather('cloudy')"-->
+             <!--class="app-weather-effect-water-drops__background app-weather-effect-water-drops__cloud-background"-->
+             <!--[ngStyle]="{-->
+                <!--'background-position': drop.backgroundPosition,-->
+                <!--'background-size': drop.backgroundSize-->
+             <!--}">-->
+        <!--</div>-->
     </div>
     
     <div *ngFor="let border of borders"

@@ -50,6 +50,8 @@ export class DayTimeWeatherViewComponent implements OnInit {
         /* TODO: this ones are calculated wrongly in Firefox, needs to be fixed somehow */
         this.viewHeight = this.elementRef.nativeElement.offsetHeight;
         this.viewWidth = this.elementRef.nativeElement.offsetWidth;
+        // console.log(this.elementRef.nativeElement.offsetHeight, this.elementRef.nativeElement.offsetWidth);
+        // console.log(this.weatherView.nativeElement.offsetHeight, this.weatherView.nativeElement.offsetWidth);
         this.changeDetectorRef.detectChanges();
         /*  */
     }
