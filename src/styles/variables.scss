@@ -6,6 +6,8 @@
 $main-view-height: 43vh;
 $weather-card-height: 200px;
 $weather-card-width: 120px;
+$sun-dimension: 60px;
+$moon-dimension: 100px;
 
 /* Fonts */
 $font-default: 'Roboto', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -49,7 +51,6 @@ $line-fat: 4px;
 $border-radius-default: 5px;
 
 /* Z-indexes */
-// TODO: move all z-indexes here
 $z-index-main-page: 0;
 $z-index-day-time-view: 100;
 $z-index-stars: 200;

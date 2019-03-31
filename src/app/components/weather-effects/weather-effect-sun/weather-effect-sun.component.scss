@@ -1,8 +1,6 @@
 @import '../../../../styles/variables.scss';
 @import '../../../../styles/mixins.scss';
 
-$sun-dimension: 60px;
-
 /* Sun animation */
 @include keyframes(sun-rays-animation) {
     0% { @include transform(rotate(0deg)); }
@@ -32,7 +30,7 @@ $sun-dimension: 60px;
     width: $sun-dimension;
     z-index: $z-index-sun;
     
-    // TODO: this one must change from dusk/dawn (more red) to midday (current white) themes
+    // TODO: this one must change from dusk/dawn (more red) to midday (current white)
     //background-color: $color-sun;
     //background-color: $color-white;
     //background: radial-gradient(ellipse at center, #f90 0%,#fc0 60%,#ff0 100%);

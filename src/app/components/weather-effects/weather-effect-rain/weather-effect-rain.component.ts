@@ -76,7 +76,7 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
         });
     }
 
-    // TODO: need different color for drops for night theme
+    // TODO: need different b-g color for drops for night theme
     private makeItRain(): void {
         const rainContext = this.rainCanvas.getContext('2d');
         const rainThroughContext = this.rainThroughCanvas.getContext('2d');
@@ -112,7 +112,7 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
                 rainContext.closePath();
                 rainContext.fill();
 
-                // TODO: add arcs on start and end, if Time => make as real from drops
+                // TODO: add arc on start/end
                 // context.moveTo(this.x - this.width / 2, this.y);
                 // context.lineTo(this.x, this.y - this.height);
                 // context.lineTo(this.x + this.width / 2, this.y);

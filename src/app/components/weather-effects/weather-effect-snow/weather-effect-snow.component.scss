@@ -9,15 +9,6 @@
     width: 100%;
     z-index: $z-index-snow;
 
-    //// TODO: need 2-3 different layers for different types of snow heaviness
-    //&__background {
-    //    background: $color-snow_wall;
-    //    height: 100%;
-    //    position: absolute;
-    //    width: 100%;
-    //    z-index: 810;
-    //}
-
     &__canvas {
         height: 100%;
         position: absolute;

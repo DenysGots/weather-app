@@ -46,7 +46,7 @@ export class MainService {
         });
     }
 
-    // TODO: move all methods to State Service, possibly to Server
+    // TODO: move all methods to State Service/Server
     public emitCurrentState(): void {
         this.currentStateSource.next(this.currentState);
     }
@@ -81,8 +81,8 @@ export class MainService {
     }
 
     public defineSkyBackground(): void {
-        // TODO: result must be emitted on hourly basis and subscribed by main/day/night/water drops components
-        // TODO: if any time left, gradients must be generated every minute or so, instead of every hour
+        // TODO: result must be emitted on change of current hour
+        // TODO: gradient must change smoothly on a linear relationship as a function of time
 
         const currentHour: number = moment.duration(this.currentState.currentTime).hours();
         const shouldAdjustCurrentHour: boolean =

@@ -29,9 +29,6 @@
     }
 
     &__drop {
-        // TODO: change for realtime background from above
-        //background: no-repeat url("https://i.imgur.com/xQdYC7x.jpg");
-        //background-size: (100vh /100 * 5) (100vw /100 * 5);
         border-radius: 50%;
         //filter: brightness(1.2) blur(0.5px);
         filter: brightness(1.2) blur(0.5px) opacity(80%);
@@ -43,10 +40,7 @@
 
     &__border {
         border-radius: 50%;
-        
-        //Adjust to be shown only on bottom
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
-        
         //filter: brightness(1.2) blur(0.5px);
         filter: brightness(1.2) blur(0.5px) opacity(70%);
         margin-left: 2px;

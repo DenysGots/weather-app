@@ -47,13 +47,12 @@ export class DayTimeWeatherViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        /* TODO: this ones are calculated wrongly in Firefox, needs to be fixed somehow */
+        // TODO: test in Firefox
         this.viewHeight = this.elementRef.nativeElement.offsetHeight;
         this.viewWidth = this.elementRef.nativeElement.offsetWidth;
         // console.log(this.elementRef.nativeElement.offsetHeight, this.elementRef.nativeElement.offsetWidth);
         // console.log(this.weatherView.nativeElement.offsetHeight, this.weatherView.nativeElement.offsetWidth);
         this.changeDetectorRef.detectChanges();
-        /*  */
     }
 
     public isTimeOfDay(timeOfDay) {

@@ -22,7 +22,7 @@ export class ControlPanelComponent implements OnInit {
     public testingState: State = <State>{};
     public isActive = false;
 
-    // TODO: this initial values must be here, so control panel will initialize without errors
+    // This initial values must be here, so control panel will initialize itself without errors
     public mockStateData: State = {
         cloudy: false,
         rainy: false,

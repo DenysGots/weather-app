@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as $ from 'jquery';
+import * as io from 'socket.io-client';
 
 import { Location, Position } from '../interfaces/public-api';
 
@@ -32,7 +33,7 @@ export class HttpService {
             handleLocation(locationData);
         });
 
-        // TODO: window object is undefined with AOT, need some fix for this
+        // TODO: window object is undefined with AOT, needs to be fixed
         // const serverURL = 'http://localhost:5400';
         // const routURL = 'location';
         // window.navigator.geolocation.getCurrentPosition(position => {

@@ -136,7 +136,7 @@ export class AppService {
         let getLocationUrl = this.accuWeatherGetLocationUrl;
         getLocationUrl += `?apikey=${this.accuWeatherApikey}&q=${positionDto.latitude}%${positionDto.longitude}`;
 
-        // TODO: this works without data, by current IP? can get location from here
+        // TODO: this works without request data
         this.httpService.get(getLocationUrl).subscribe(data => console.log(data));
     }
 }

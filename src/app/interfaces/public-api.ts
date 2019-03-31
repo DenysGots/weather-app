@@ -16,10 +16,9 @@ export interface State {
     nightLength?: number; // milliseconds
     currentTime?: number; // milliseconds since midnight
     location?: string;
-    currentTimeString?: string; // '19:00' TODO: use Moment for generating this string
-    currentDate?: string; // '5 Mar 2019' TODO: use Moment for generating this string
-    currentBackground?: string; // as class to apply
-
+    currentTimeString?: string; // '19:00'
+    currentDate?: string; // '5 Mar 2019'
+    currentBackground?: string; // as a class to apply
     cloudy?: boolean;
     rainy?: boolean;
     snowy?: boolean;
@@ -35,13 +34,12 @@ export interface State {
     windSpeed?: number;
     windDirection?: WindDirections; // for icon generation
     moonPhase?: MoonPhases; // for icon generation
-
     hoursForecast?: HoursForecast[];
     daysForecast?: DaysForecast[];
 }
 
 export interface HoursForecast {
-    hourTime?: string; // '12:00' TODO: use Moment for generating this string
+    hourTime?: string; // '12:00'
     weatherTypeHour?: WeatherTypes; // for icon generation
     humidityCurrent?: number;
     temperatureCurrent?: number;
@@ -51,7 +49,7 @@ export interface HoursForecast {
 }
 
 export interface DaysForecast {
-    dayDate?: string;  // '5 Mar' TODO: use Moment for generating this string
+    dayDate?: string;  // '5 Mar'
     weatherTypeDay?: WeatherTypes; // for icon generation
     temperatureMin?: number;
     temperatureMax?: number;

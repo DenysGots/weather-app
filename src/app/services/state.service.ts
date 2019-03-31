@@ -39,7 +39,7 @@ export class StateService {
         this.currentState.cloudy = this.isCloud(weatherData[0].current.condition.code);
         this.currentState.rainy = this.isRain(weatherData[0].current.condition.code);
         this.currentState.snowy = this.isSnow(weatherData[0].current.condition.code);
-        this.currentState.weatherType = this.setWeatherTypeAccuWeather(weatherData[3][0].WeatherIcon);
+        this.currentState.weatherType = this.setWeatherTypeAccuWeather(weatherData[3][0].WeatherIcon, this.currentState.timeOfDay);
         this.currentState.windDirection = this.setWindDirection(weatherData[0].current.wind_degree);
         this.currentState.moonPhase = this.helpersService.calculateMoonPhase();
         this.currentState.hoursForecast = this.setHoursForecast(weatherData[2]);
@@ -117,15 +117,17 @@ export class StateService {
         return 86400000 - this.currentState.dayLength;
     }
 
-    public setCurrentTime(): number {
+    public setCurrentTime(time?: string): number {
         // TODO: after moving to server use time from currentInformation instead of moment()
-        const currentTime: moment.Moment = moment();
+        const currentTime: moment.Moment = time ? moment(time) : moment();
         const startOfDay: moment.Moment = moment().startOf('hour').hours(0);
         return moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
     }
 
-    public setTimeOfDay(): TimeOfDay {
-        const currentHour: number = moment.duration(this.currentState.currentTime).hours();
+    public setTimeOfDay(date?: string): TimeOfDay {
+        const currentHour: number = date
+            ? moment.duration(this.setCurrentTime(date)).hours()
+            : moment.duration(this.currentState.currentTime).hours();
         const dayHours: number = moment.duration(this.currentState.dayLength).hours();
         const nightHours: number = moment.duration(this.currentState.nightLength).hours();
         const isNight: boolean = (currentHour <= nightHours / 2) || (currentHour >= dayHours + nightHours / 2);
@@ -183,9 +185,7 @@ export class StateService {
         }
     }
 
-    public setWeatherTypeAccuWeather(code: number): WeatherTypes {
-        const timeOfDay = this.currentState.timeOfDay;
-
+    public setWeatherTypeAccuWeather(code: number, timeOfDay: TimeOfDay): WeatherTypes {
         function compareCodes(codes: any[]) {
             return codes.some(elem => code === elem);
         }
@@ -282,7 +282,8 @@ export class StateService {
 
     public setHoursForecast(hoursData): HoursForecast[] {
         return hoursData.map(hourData => {
-            const weatherType: WeatherTypes = this.setWeatherTypeAccuWeather(hourData.WeatherIcon);
+            const timeOfDay: TimeOfDay = this.setTimeOfDay(hourData.DateTime);
+            const weatherType: WeatherTypes = this.setWeatherTypeAccuWeather(hourData.WeatherIcon, timeOfDay);
             const windDirection: WindDirections = this.setWindDirection(hourData.Wind.Direction.Degrees);
 
             return {

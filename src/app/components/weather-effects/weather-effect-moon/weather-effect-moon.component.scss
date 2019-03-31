@@ -1,9 +1,5 @@
 @import '../../../../styles/variables.scss';
 
-$moon-dimension: 100px;
-
-// TODO: add moon phases with different box-shadow, according to data, if (any time left)
-
 :host {
     contain: content;
 }
@@ -95,10 +91,6 @@ $moon-dimension: 100px;
 //    position: absolute;
 //    width: 200px;
 //    z-index: 200;
-//
-//    // TODO: remove this, must be handled by day-time-view
-//    left: 50%;
-//    top: 50%;
 //
 //    &_crater {
 //        background: $color-moon_crater;

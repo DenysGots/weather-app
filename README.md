@@ -1,56 +1,23 @@
 # Weather App
-* clone, run `npm i`, run `npm run helper:build` and open browser on `http://localhost:5400`
-
-## Basic used project:
-### Nest + Angular Universal Starter
-
-A minimal [**Nest**](https://github.com/nestjs/nest) and Angular starter for Universal using the
-[Angular CLI](https://github.com/angular/angular-cli). If you're looking for the Angular Universal repo go to
-[angular/universal](https://github.com/angular/universal).
-
-## Getting Started
-
-This demo is built following the [Angular-CLI Wiki guide](https://github.com/angular/angular-cli/wiki/stories-universal-rendering)
-
-We're utilizing packages from the [Angular Universal @nguniversal](https://github.com/angular/universal) repo,
-such as [ng-module-map-ngfactory-loader](https://github.com/angular/universal/modules/module-map-ngfactory-loader)
-to enable Lazy Loading.
+Simple weather widget
+* clone
+* run `npm i`
+* run `npm run helper:build`
+* open browser on `http://localhost:5400`
 
 ---
 
-### Build Time Prerendering Vs. Server Side Rendering(ssr)
-This repo demonstrates the use of 2 different forms of Server Side Rendering.
-
-**Prerender**
-* Happens at build time
-* Renders your application and replaces the dist index.html with a version rendered at the route `/`.
-
-**Server-Side Rendering(ssr)**
-* Happens at runtime
-* Uses `ngExpressEngine` to render your application on the fly at the requested url.
-
----
-
-### Installation
-* `npm i`
-
-### Development (Client-side only rendering)
-* `npm start` which will run `ng serve`.
-
-### Production (also for testing SSR/Pre-rendering locally)
-*`npm run helper:build` (`npm run build:ssr && npm run serve:ssr`)
-  - Compiles your application and spins up a Nest server to serve
-your Universal application on `http://localhost:5400`.
-
-*`npm run build:prerender && npm run serve:prerender`
-  - Compiles your application and prerenders your
-applications files, spinning up a demo http-server so you can view it on `http://localhost:8080`
-  - **Note**: To deploy your static site to a static hosting platform you will have to deploy the `dist/browser`
-folder, rather than the usual `dist`
-
-## Used libraries:
+## Used technologies and projects:
+### General:
+* Angular 7, Nest 5, Typescript 3.1.6, RxJS 6, Sass, Moment.js, Angular Material
+### Scaffolding:
+* https://github.com/kamilmysliwiec/universal-nest
 ### Weather APIs:
 * https://developer.accuweather.com/
 * https://www.apixu.com/
-### Weather effects libraries and examples:
-*
+### Weather effects:
+* https://codepen.io/angiebadfox/pen/RRdQAb
+* https://codepen.io/tmrDevelops/pen/PPgjwz
+* https://gist.github.com/endel/dfe6bb2fbe679781948c
+* https://codepen.io/Nvagelis/pen/yaQGAL
+* https://codepen.io/billyysea/pen/whjbK

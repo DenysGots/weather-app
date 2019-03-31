@@ -104,7 +104,7 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
         const a = -1 * b / (startX + endX);
         const c = b * startX * (startX / (startX + endX) - 1);
 
-        // TODO: try using transform translate instead of bottom/left, here and in day theme
+        // TODO: try implementing transform translate instead of bottom/left, here and in night theme
         // https://medium.com/outsystems-experts/flip-your-60-fps-animations-flip-em-good-372281598865
         return <Parabola>{ a, b, c };
     }
