@@ -3,13 +3,13 @@ Simple weather widget
 * clone
 * run `npm i`
 * run `npm run helper:build`
-* open browser on `http://localhost:5400`
+* open browser at `http://localhost:5400`
 
 ---
 
 ## Used technologies and projects:
 ### General:
-* Angular 7, Nest 5, Typescript 3.1.6, RxJS 6, Sass, Moment.js, Angular Material
+* Angular 7, NestJS 5, Typescript 3.1.6, RxJS 6, Sass, Moment.js, Angular Material
 ### Scaffolding:
 * https://github.com/kamilmysliwiec/universal-nest
 ### Weather APIs:
