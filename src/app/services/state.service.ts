@@ -18,12 +18,13 @@ import {
 @Injectable()
 export class StateService {
     public currentState: State = <State>{};
+    public locationData: any;
 
     constructor(private helpersService: HelpersService) { }
 
-    // TODO: move partly logic to server, copy interfaces to shared folder and reuse on client/server
     // TODO: get from LocalStorage on init, if any, save to LocalStorage on receiving from server
     public adjustReceivedData(weatherData: any): void {
+        this.currentState.location = this.setLocation();
         this.currentState.currentTime = this.setCurrentTime();
         this.currentState.dayLength = this.setDayLength(weatherData[0].forecast.forecastday[0].astro);
         this.currentState.nightLength = this.setNightLength();
@@ -48,6 +49,7 @@ export class StateService {
         console.log(this.currentState);
     }
 
+    /* TODO: move logic to server */
     public isFog(code): boolean {
         return ApixuWeatherCodes.fogCodes.indexOf(code) !== -1;
     }
@@ -311,5 +313,10 @@ export class StateService {
                 uvIndex: dayData.day.uv,
             };
         });
+    }
+    /* */
+
+    public setLocation(): string {
+        return `${this.locationData.geobytescapital}, ${this.locationData.geobytescountry}`;
     }
 }

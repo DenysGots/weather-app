@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import * as _cloneDeep from 'lodash/cloneDeep';
 import * as moment from 'moment';
 
 import { HttpService } from './http.service';
@@ -23,16 +24,11 @@ export class MainService {
         this.currentStateSubject = this.currentStateSource.asObservable();
     }
 
-    public getCurrentState(): void {
-        this.currentState = {...this.stateService.currentState};
-    }
-
-    public setCurrentState(): void {
-        this.setCurrentTimeString();
-        this.setCurrentTime();
-        this.setCurrentDate();
-        this.setTimeOfDay();
-        this.defineSkyBackground();
+    public getLocation(): void {
+        this.httpService.getLocation(locationData => {
+            this.stateService.locationData = locationData;
+            this.getWeather();
+        });
     }
 
     public getWeather(): void {
@@ -46,20 +42,26 @@ export class MainService {
         });
     }
 
-    // TODO: move all methods to State Service/Server
+    public getCurrentState(): void {
+        this.currentState = _cloneDeep(this.stateService.currentState);
+    }
+
+    // TODO: move and call on State service
+    public setCurrentState(): void {
+        this.setCurrentTimeString();
+        this.setCurrentTime();
+        this.setCurrentDate();
+        this.setTimeOfDay();
+        this.defineSkyBackground();
+    }
+
     public emitCurrentState(): void {
         this.currentStateSource.next(this.currentState);
     }
 
+    // TODO: move this methods to State service
     public setCurrentDate(): void {
         this.currentState.currentDate = moment().format('D MMM YYYY');
-    }
-
-    public getLocation(): void {
-        this.httpService.getLocation(locationData => {
-            this.currentState.location = `${locationData.geobytescapital}, ${locationData.geobytescountry}`;
-            this.getWeather();
-        });
     }
 
     public setCurrentTime(): void {
