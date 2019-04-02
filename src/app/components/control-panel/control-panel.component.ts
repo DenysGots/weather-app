@@ -127,7 +127,6 @@ export class ControlPanelComponent implements OnInit {
 
     public resetState(): void {
         this.mainService.getCurrentState();
-        this.mainService.setCurrentState();
         this.mainService.emitCurrentState();
         this.getState();
         this.setFormValues();

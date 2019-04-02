@@ -23,28 +23,47 @@ export class StateService {
     constructor(private helpersService: HelpersService) { }
 
     // TODO: get from LocalStorage on init, if any, save to LocalStorage on receiving from server
-    public adjustReceivedData(weatherData: any): void {
+    // public adjustReceivedData(weatherData: any): void {
+    //
+    //     /* TODO: move logic to server */
+    //     this.currentState.currentTime = this.setCurrentTime();
+    //     this.currentState.dayLength = this.setDayLength(weatherData[0].forecast.forecastday[0].astro);
+    //     this.currentState.nightLength = this.setNightLength();
+    //     this.currentState.timeOfDay = this.setTimeOfDay();
+    //     this.currentState.humidityCurrent = weatherData[0].current.humidity;
+    //     this.currentState.temperatureCurrent = weatherData[0].current.temp_c;
+    //     this.currentState.temperatureFeelsLike = weatherData[0].current.feelslike_c;
+    //     this.currentState.airPressure = Math.trunc(weatherData[0].current.pressure_mb / 1.333);
+    //     this.currentState.uvIndex = weatherData[0].current.uv;
+    //     this.currentState.windSpeed = weatherData[0].current.wind_kph;
+    //     this.currentState.weatherDefinition = weatherData[0].current.condition.text;
+    //     this.currentState.foggy = this.isFog(weatherData[0].current.condition.code);
+    //     this.currentState.cloudy = this.isCloud(weatherData[0].current.condition.code);
+    //     this.currentState.rainy = this.isRain(weatherData[0].current.condition.code);
+    //     this.currentState.snowy = this.isSnow(weatherData[0].current.condition.code);
+    //     this.currentState.weatherType = this.setWeatherTypeAccuWeather(weatherData[3][0].WeatherIcon, this.currentState.timeOfDay);
+    //     this.currentState.windDirection = this.setWindDirection(weatherData[0].current.wind_degree);
+    //     this.currentState.hoursForecast = this.setHoursForecast(weatherData[2]);
+    //     this.currentState.daysForecast = this.setDaysForecast(weatherData[0].forecast.forecastday);
+    //     /* */
+    //
+    //     this.currentState.location = this.setLocation();
+    //     this.currentState.currentDate = this.setCurrentDate();
+    //     this.currentState.currentTimeString = this.setCurrentTimeString();
+    //     this.currentState.currentBackground = this.defineSkyBackground();
+    //     this.currentState.moonPhase = this.helpersService.calculateMoonPhase();
+    //
+    //     console.log(this.currentState);
+    // }
+
+    public adjustReceivedData(weatherData: State): void {
+
+        this.currentState = weatherData;
         this.currentState.location = this.setLocation();
-        this.currentState.currentTime = this.setCurrentTime();
-        this.currentState.dayLength = this.setDayLength(weatherData[0].forecast.forecastday[0].astro);
-        this.currentState.nightLength = this.setNightLength();
-        this.currentState.timeOfDay = this.setTimeOfDay();
-        this.currentState.humidityCurrent = weatherData[0].current.humidity;
-        this.currentState.temperatureCurrent = weatherData[0].current.temp_c;
-        this.currentState.temperatureFeelsLike = weatherData[0].current.feelslike_c;
-        this.currentState.airPressure = Math.trunc(weatherData[0].current.pressure_mb / 1.333);
-        this.currentState.uvIndex = weatherData[0].current.uv;
-        this.currentState.windSpeed = weatherData[0].current.wind_kph;
-        this.currentState.weatherDefinition = weatherData[0].current.condition.text;
-        this.currentState.foggy = this.isFog(weatherData[0].current.condition.code);
-        this.currentState.cloudy = this.isCloud(weatherData[0].current.condition.code);
-        this.currentState.rainy = this.isRain(weatherData[0].current.condition.code);
-        this.currentState.snowy = this.isSnow(weatherData[0].current.condition.code);
-        this.currentState.weatherType = this.setWeatherTypeAccuWeather(weatherData[3][0].WeatherIcon, this.currentState.timeOfDay);
-        this.currentState.windDirection = this.setWindDirection(weatherData[0].current.wind_degree);
+        this.currentState.currentDate = this.setCurrentDate();
+        this.currentState.currentTimeString = this.setCurrentTimeString();
+        this.currentState.currentBackground = this.defineSkyBackground();
         this.currentState.moonPhase = this.helpersService.calculateMoonPhase();
-        this.currentState.hoursForecast = this.setHoursForecast(weatherData[2]);
-        this.currentState.daysForecast = this.setDaysForecast(weatherData[0].forecast.forecastday);
 
         console.log(this.currentState);
     }
@@ -318,5 +337,49 @@ export class StateService {
 
     public setLocation(): string {
         return `${this.locationData.geobytescapital}, ${this.locationData.geobytescountry}`;
+    }
+
+    public setCurrentDate(): string {
+        return moment().format('D MMM YYYY');
+    }
+
+    public setCurrentTimeString(): string {
+        return moment().format('HH:mm');
+    }
+
+    public defineSkyBackground(): string {
+        // TODO: result must be emitted on change of current hour
+        // TODO: gradient must change smoothly on a linear relationship as a function of time
+
+        const currentHour: number = moment.duration(this.currentState.currentTime).hours();
+        const shouldAdjustCurrentHour: boolean =
+            this.currentState.dayLength / this.currentState.nightLength >= 1 ||
+            currentHour === 0 ||
+            currentHour === 12 ||
+            currentHour === 24;
+
+        let adjustedHour: number;
+        let adjustedHourFormatted: string;
+
+        adjustedHour = shouldAdjustCurrentHour
+            ? currentHour
+            : (currentHour < 12)
+                ? (currentHour - 1)
+                : (currentHour + 1);
+
+        adjustedHourFormatted = moment().hour(adjustedHour).format('HH');
+        return `app-sky-gradient-${adjustedHourFormatted}`;
+    }
+
+    public saveStateToLocalStorage(): void {
+        if (this.helpersService.isStorageAvailable('localStorage')) {
+            localStorage.setItem('lastSavedWeatherState', JSON.stringify(this.currentState));
+        }
+    }
+
+    public getStateFromLocalStorage(): State {
+        return (this.helpersService.isStorageAvailable('localStorage'))
+            ? JSON.parse(localStorage.getItem('lastSavedWeatherState'))
+            : this.currentState;
     }
 }

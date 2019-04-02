@@ -82,7 +82,7 @@ export class HelpersService {
         return customWindowAnimationFrame;
     }
 
-    // taken from https://gist.github.com/endel/dfe6bb2fbe679781948c by endel and mrorigo
+    // Taken from https://gist.github.com/endel/dfe6bb2fbe679781948c by endel and mrorigo
     public calculateMoonPhase(): MoonPhases {
         const phases = [
             'newMoon',
@@ -117,6 +117,27 @@ export class HelpersService {
         } // 0 and 8 are the same so turn 6 into 0
 
         return MoonPhases[phases[b]];
+    }
+
+    // Taken from: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+    public isStorageAvailable(type) {
+        let storage;
+
+        try {
+            storage = window[type];
+            const x = '__storage_test__';
+            storage.setItem(x, x);
+            storage.removeItem(x);
+            return true;
+        } catch (e) {
+            return e instanceof DOMException && (
+                    e.code === 22 ||
+                    e.code === 1014 ||
+                    e.name === 'QuotaExceededError' ||
+                    e.name === 'NS_ERROR_DOM_QUOTA_REACHED'
+                ) &&
+                (storage && storage.length !== 0);
+        }
     }
 }
 
