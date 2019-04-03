@@ -17,11 +17,7 @@ export class MainService {
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
         this.getLocation();
-
-        // TODO: change method to get state from LS, if present
-        // this.getCurrentState();
-        this.currentState = _cloneDeep(this.stateService.getStateFromLocalStorage());
-
+        this.currentState = this.stateService.getStateFromLocalStorage();
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.currentStateSubject = this.currentStateSource.asObservable();
     }
@@ -35,8 +31,6 @@ export class MainService {
 
     public getWeather(): void {
         this.httpService.getWeather().subscribe(weatherData => {
-            console.log('Received weather: ', weatherData);
-
             this.stateService.adjustReceivedData(weatherData);
             this.stateService.saveStateToLocalStorage();
             this.getCurrentState();

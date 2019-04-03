@@ -176,8 +176,13 @@ export class AppService {
         weatherState.overcast = this.overcast;
         weatherState.weatherType = this.setWeatherTypeAccuWeather(weatherData[3][0].WeatherIcon, weatherState.timeOfDay);
         weatherState.windDirection = this.setWindDirection(weatherData[0].current.wind_degree);
-        weatherState.hoursForecast = this.setHoursForecast(weatherData[2], weatherState.dayLength, weatherState.nightLength, weatherState.currentTime);
         weatherState.daysForecast = this.setDaysForecast(weatherData[0].forecast.forecastday);
+        weatherState.hoursForecast = this.setHoursForecast(
+            weatherData[2],
+            weatherState.dayLength,
+            weatherState.nightLength,
+            weatherState.currentTime
+        );
 
         return weatherState;
     }
