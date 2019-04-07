@@ -17,11 +17,9 @@
         position: absolute;
         transition: left 0.1s ease-in-out, bottom 0.1s ease-in-out, transform 0.1s ease-in-out;
         z-index: $z-index-moon;
-
         transform: translateZ(0);
         transform: translate3d(0, 0, 0);
         transform-origin: left bottom;
         will-change: left, bottom, transform;
-        //will-change: transform;
     }
 }

@@ -11,9 +11,11 @@ import {
     ViewRef,
 } from '@angular/core';
 
+import { MainService } from '../../services/main.service';
 import { HelpersService } from '../../services/helpers.service';
 
 import {
+    CelestialData,
     CelestialPosition,
     moonSize,
     Parabola,
@@ -44,6 +46,7 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
 
     constructor(private ngZone: NgZone,
                 private changeDetectorRef: ChangeDetectorRef,
+                private mainService: MainService,
                 private helpersService: HelpersService) { }
 
     ngOnInit() {
@@ -92,7 +95,7 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    // Parabolic path is defined as 'y = a * x^ 2 + b * x + c'
+    // Parabolic path is defined as 'y = a * x^2 + b * x + c'
     public defineAnimationPath(): Parabola {
         const viewWidth = this.viewWidth;
         const startX = this.startX;
@@ -130,6 +133,8 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
             x: x.toFixed(4),
             y: y.toFixed(4),
         };
+
+        this.mainService.setCelestialData(<CelestialData>{celestial: this.moonPosition});
     }
 
     public animateMoon(): void {

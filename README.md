@@ -18,6 +18,9 @@ Simple weather widget
 ### Weather effects:
 * https://codepen.io/angiebadfox/pen/RRdQAb
 * https://codepen.io/tmrDevelops/pen/PPgjwz
-* https://gist.github.com/endel/dfe6bb2fbe679781948c
+* https://github.com/mourner/suncalc
 * https://codepen.io/Nvagelis/pen/yaQGAL
 * https://codepen.io/billyysea/pen/whjbK
+### Icons:
+* https://erikflowers.github.io/weather-icons/
+* https://www.amcharts.com/free-animated-svg-weather-icons/

@@ -5,9 +5,29 @@ export interface Parabola {
     c: number;
 }
 
+export interface CelestialData {
+    celestial: CelestialPosition;
+}
+
 export interface CelestialPosition {
     x: string;
     y: string;
+}
+
+export interface WaterDrop {
+    yPosition;
+    xPosition;
+    dropWidth;
+    dropHeight;
+    backgroundPosition;
+    backgroundSize;
+}
+
+export interface WaterDropBorder {
+    xPosition;
+    yPosition;
+    borderWidth;
+    borderHeight;
 }
 
 export interface State {
@@ -154,9 +174,11 @@ export enum WindDirections {
 export enum MoonPhases {
     newMoon = 'wi-moon-alt-new',
     waxingCrescent = 'wi-moon-alt-waxing-crescent-4',
+    firstQuarter = 'wi-moon-alt-first-quarter',
     waxingGibbous = 'wi-moon-alt-waxing-gibbous-3',
     full = 'wi-moon-alt-full',
     waningGibbous = 'wi-moon-alt-waning-gibbous-4',
+    thirdQuarter = 'wi-moon-alt-third-quarter',
     waningCrescent = 'wi-moon-alt-waning-crescent-3',
 }
 

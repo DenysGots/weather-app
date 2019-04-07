@@ -1,6 +1,7 @@
 import { Injectable, ClassProvider, FactoryProvider, InjectionToken, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import * as moment from 'moment';
+import * as sunCalc from 'sunCalc';
 
 import { MoonPhases } from '../interfaces/public-api';
 
@@ -82,41 +83,64 @@ export class HelpersService {
         return customWindowAnimationFrame;
     }
 
-    // Taken from https://gist.github.com/endel/dfe6bb2fbe679781948c by endel and mrorigo
+    // Taken from https://github.com/mourner/suncalc by mourner
     public calculateMoonPhase(): MoonPhases {
         const phases = [
             'newMoon',
             'waxingCrescent',
+            'firstQuarter',
             'waxingGibbous',
             'full',
             'waningGibbous',
+            'thirdQuarter',
             'waningCrescent',
         ];
-        const currentDate = moment();
-        const day = currentDate.day();
 
-        let year = currentDate.year();
-        let month = currentDate.month();
+        const phase = sunCalc.getMoonIllumination(moment()).phase;
+        let phaseString;
 
-        if (month < 3) {
-            year -= 1;
-            month += 12;
+        function phaseInRange(start: number, end: number): boolean {
+            return phase >= start && phase < end;
         }
 
-        month += 1;
+        switch (true) {
+            case phaseInRange(0, 0.125):
+                phaseString = MoonPhases[phases[0]];
+                break;
 
-        const c = 365.25 * year;
-        const e = 30.6 * month;
-        let jd = (c + e + day - 694039.09) / 29.5305882; // jd is total days elapsed, divided by the moon cycle
-        let b = Math.trunc(jd); // int(jd) -> b, take integer part of jd
-        jd -= b; // subtract integer part to leave fractional part of original jd
-        b = Math.round(jd * 6); // scale fraction from 0-8 and round
+            case phaseInRange(0.125, 0.25):
+                phaseString = MoonPhases[phases[1]];
+                break;
 
-        if (b >= 6) {
-            b = 0;
-        } // 0 and 8 are the same so turn 6 into 0
+            case phaseInRange(0.25, 0.375):
+                phaseString = MoonPhases[phases[2]];
+                break;
 
-        return MoonPhases[phases[b]];
+            case phaseInRange(0.375, 0.5):
+                phaseString = MoonPhases[phases[3]];
+                break;
+
+            case phaseInRange(0.5, 0.625):
+                phaseString = MoonPhases[phases[4]];
+                break;
+
+            case phaseInRange(0.625, 0.75):
+                phaseString = MoonPhases[phases[5]];
+                break;
+
+            case phaseInRange(0.75, 0.875):
+                phaseString = MoonPhases[phases[6]];
+                break;
+
+            case phaseInRange(0.875, 1):
+                phaseString = MoonPhases[phases[7]];
+                break;
+
+            default:
+                return MoonPhases[phases[0]];
+        }
+
+        return phaseString;
     }
 
     // Taken from: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API

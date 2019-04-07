@@ -13,7 +13,6 @@ import {
     MatSlideToggleModule,
 } from '@angular/material';
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { DragulaModule } from 'ng2-dragula';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -83,7 +82,6 @@ import { StateService } from './services/state.service';
     ],
     imports: [
         HttpClientModule,
-        DragulaModule.forRoot(),
         // Add .withServerTransition() to support Universal rendering.
         // The application ID can be any identifier which is unique on
         // the page.

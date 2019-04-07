@@ -5,21 +5,26 @@ import * as _cloneDeep from 'lodash/cloneDeep';
 import { HttpService } from './http.service';
 import { StateService } from './state.service';
 
-import { State } from '../interfaces/public-api';
+import { CelestialData, State } from '../../../shared/public-api';
 
 @Injectable()
 export class MainService {
     public currentState: State;
+    public celestialData: CelestialData;
     public currentStateSubject: Observable<State>;
+    public celestialDataSubject: Observable<CelestialData>;
 
     private currentStateSource: BehaviorSubject<State>;
+    private celestialDataSource: BehaviorSubject<CelestialData>;
 
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
         this.getLocation();
         this.currentState = this.stateService.getStateFromLocalStorage();
         this.currentStateSource = new BehaviorSubject(this.currentState);
+        this.celestialDataSource = new BehaviorSubject(this.celestialData);
         this.currentStateSubject = this.currentStateSource.asObservable();
+        this.celestialDataSubject = this.celestialDataSource.asObservable();
     }
 
     public getLocation(): void {
@@ -44,5 +49,10 @@ export class MainService {
 
     public emitCurrentState(): void {
         this.currentStateSource.next(this.currentState);
+    }
+
+    public setCelestialData(celestial: CelestialData) {
+        this.celestialData = celestial;
+        this.celestialDataSource.next(this.celestialData);
     }
 }

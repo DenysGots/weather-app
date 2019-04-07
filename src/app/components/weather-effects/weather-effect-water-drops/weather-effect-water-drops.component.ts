@@ -18,10 +18,14 @@ import {
 import { MainService } from '../../../services/main.service';
 
 import {
+    CelestialData,
     DropsOnScreen,
+    moonSize,
     Overcast,
     State,
     TimeOfDay,
+    WaterDrop,
+    WaterDropBorder,
 } from '../../../../../shared/public-api';
 
 @Component({
@@ -42,17 +46,15 @@ import {
     ],
 })
 export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
-    // TODO: get sun/moon position, time of day, sun/moon size and hide drops with *ngIf if they overlaps sun/moon
-    // TODO: emit sun/moon position via main service
-
     @Input() viewHeight: number;
     @Input() viewWidth: number;
     @Input() overcast: Overcast;
     @Input() currentBackground: string;
 
-    public drops: any[] = [];
-    public borders: any[] = [];
+    public drops: WaterDrop[] = [];
+    public borders: WaterDropBorder[] = [];
     public currentState: State;
+    public adjustedCelestialData: {[key: string]: number} = {};
 
     private numberOfDrops = 100;
 
@@ -60,6 +62,11 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
                 private mainService: MainService) {
         this.mainService.currentStateSubject.subscribe((state: State) => {
             this.currentState = state;
+        });
+
+        this.mainService.celestialDataSubject.subscribe((data: CelestialData) => {
+            this.adjustCelestialPosition(data);
+            this.changeDetectorRef.detectChanges();
         });
     }
 
@@ -72,6 +79,7 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
         if ('overcast' in changes && !changes.overcast.firstChange) {
             this.drops = [];
             this.borders = [];
+            this.numberOfDrops = DropsOnScreen[this.overcast];
             this.generateDrops();
         }
     }
@@ -119,7 +127,6 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
                     xPosition,
                     yPosition,
                     borderWidth,
-                    // dropHeight,
                     borderHeight,
                 });
 
@@ -144,5 +151,42 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
 
     public isWeather(weather: string): boolean {
         return this.currentState[weather];
+    }
+
+    public adjustCelestialPosition(data: CelestialData): void {
+        this.adjustedCelestialData = {};
+
+        if (data && 'celestial' in data) {
+            for (const prop in data.celestial) {
+                if (data.celestial.hasOwnProperty(prop)) {
+                    this.adjustedCelestialData[prop] = parseInt(data.celestial[prop], 10);
+                }
+            }
+        }
+    }
+
+    public shouldRenderDrop(drop: WaterDrop): boolean {
+        const celestial = this.adjustedCelestialData;
+        const yPosition = this.viewHeight - drop.yPosition - drop.dropHeight;
+
+        return celestial
+            ? (
+                (drop.xPosition > celestial.x + moonSize || drop.xPosition + drop.dropWidth < celestial.x)
+                &&
+                (yPosition > celestial.y || yPosition + drop.dropHeight < celestial.y - moonSize)
+            ) : true;
+    }
+
+    public shouldRenderDropBorder(border: WaterDropBorder): boolean {
+        const celestial = this.adjustedCelestialData;
+        const yPosition = this.viewHeight - border.yPosition - border.borderHeight;
+
+        return celestial
+            ? (
+                (border.xPosition > celestial.x + moonSize || border.xPosition + border.borderWidth < celestial.x)
+                &&
+                (yPosition > celestial.y || yPosition + border.borderHeight < celestial.y - moonSize)
+            )
+            : true;
     }
 }
