@@ -50,10 +50,7 @@ import { WeatherEffectWaterDropsComponent } from './components/weather-effects/w
 import { NumberToIterablePipe } from './pipes/numberToIterable.pipe';
 import { TemperatureValuePipe } from './pipes/temperatureValuePipe.pipe';
 
-import { HelpersService, WINDOW_PROVIDERS } from './services/helpers.service';
-import { HttpService } from './services/http.service';
-import { MainService } from './services/main.service';
-import { StateService } from './services/state.service';
+import { WINDOW_PROVIDERS } from './services/helpers.service';
 
 @NgModule({
     declarations: [
@@ -104,13 +101,11 @@ import { StateService } from './services/state.service';
         MatSlideToggleModule,
     ],
     providers: [
-        HelpersService,
-        HttpService,
-        MainService,
-        StateService,
         WINDOW_PROVIDERS,
     ],
-    bootstrap: [ AppComponent ]
+    bootstrap: [
+        AppComponent,
+    ]
 })
 export class AppModule {
     constructor() {

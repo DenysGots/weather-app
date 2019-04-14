@@ -9,9 +9,10 @@ Simple weather widget
 
 ## Used technologies and projects:
 ### General:
-* Angular 7, NestJS 5, Typescript 3.1.6, RxJS 6, Sass, Moment.js, Angular Material
+* Angular 7, NestJS 5, Typescript, RxJS 6, Sass, Moment.js, Angular Material
 ### Scaffolding:
 * https://github.com/kamilmysliwiec/universal-nest
+* https://github.com/necolas/normalize.css/
 ### Weather APIs:
 * https://developer.accuweather.com/
 * https://www.apixu.com/
@@ -21,6 +22,7 @@ Simple weather widget
 * https://github.com/mourner/suncalc
 * https://codepen.io/Nvagelis/pen/yaQGAL
 * https://codepen.io/billyysea/pen/whjbK
+* https://github.com/jshakes/moontonight
 ### Icons:
 * https://erikflowers.github.io/weather-icons/
 * https://www.amcharts.com/free-animated-svg-weather-icons/

@@ -4,7 +4,7 @@
             'bottom.px': moonPosition.y,
             'left.px': moonPosition.x
          }">
-        <app-weather-effect-moon></app-weather-effect-moon>
+        <app-weather-effect-moon [moonPhase]="moonPhase"></app-weather-effect-moon>
     </div>
     <app-weather-effect-stars *ngIf="withoutHeavyOvercast"></app-weather-effect-stars>
 </div>

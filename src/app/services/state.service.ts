@@ -5,7 +5,9 @@ import { HelpersService } from './helpers.service';
 
 import { State } from '../interfaces/public-api';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class StateService {
     public currentState: State = <State>{};
     public locationData: any;
@@ -36,9 +38,6 @@ export class StateService {
     }
 
     public defineSkyBackground(): string {
-        // TODO: result must be emitted on change of current hour
-        // TODO: gradient must change smoothly on a linear relationship as a function of time
-
         const currentHour: number = moment.duration(this.currentState.currentTime).hours();
         const shouldAdjustCurrentHour: boolean =
             this.currentState.dayLength / this.currentState.nightLength >= 1 ||

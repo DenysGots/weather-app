@@ -22,10 +22,10 @@ import {
     DropsOnScreen,
     moonSize,
     Overcast,
+    spaceMd,
     State,
     TimeOfDay,
     WaterDrop,
-    WaterDropBorder,
 } from '../../../../../shared/public-api';
 
 @Component({
@@ -52,7 +52,6 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
     @Input() currentBackground: string;
 
     public drops: WaterDrop[] = [];
-    public borders: WaterDropBorder[] = [];
     public currentState: State;
     public adjustedCelestialData: {[key: string]: number} = {};
 
@@ -78,7 +77,6 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         if ('overcast' in changes && !changes.overcast.firstChange) {
             this.drops = [];
-            this.borders = [];
             this.numberOfDrops = DropsOnScreen[this.overcast];
             this.generateDrops();
         }
@@ -104,7 +102,11 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
 
                 const dropWidth = Math.random() * 11 + 6;
                 const dropHeight = dropWidth * ((Math.random() * 0.5) + 0.7);
-                const borderHeight = 0.95 * dropHeight;
+
+                // TODO: test and adjust this
+                const borderWidth = dropWidth - 4;
+                // const borderHeight = 0.95 * dropHeight;
+                const borderHeight = 0.94 * dropHeight;
 
                 const xPosition =  x * this.viewWidth;
                 const yPosition =  y * this.viewHeight;
@@ -112,22 +114,15 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
                 const backgroundPosition = `${x * 100}% ${y * 100}%`;
                 const backgroundSize = `${this.viewHeight / 100 * 5}px ${this.viewWidth / 100 * 5}px`;
 
-                const borderWidth = dropWidth - 4;
-
                 this.drops.push({
                     xPosition,
                     yPosition,
                     dropWidth,
                     dropHeight,
-                    backgroundPosition,
-                    backgroundSize,
-                });
-
-                this.borders.push({
-                    xPosition,
-                    yPosition,
                     borderWidth,
                     borderHeight,
+                    backgroundPosition,
+                    backgroundSize,
                 });
 
                 detectChanges();
@@ -165,28 +160,16 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
         }
     }
 
+    // TODO: needs testing and adjustment. Add flag to drops array to test true/false and mute check below to see all drops on screen
     public shouldRenderDrop(drop: WaterDrop): boolean {
         const celestial = this.adjustedCelestialData;
         const yPosition = this.viewHeight - drop.yPosition - drop.dropHeight;
 
         return celestial
             ? (
-                (drop.xPosition > celestial.x + moonSize || drop.xPosition + drop.dropWidth < celestial.x)
+                (drop.xPosition > celestial.x + moonSize + spaceMd || drop.xPosition + drop.dropWidth < celestial.x - spaceMd)
                 &&
-                (yPosition > celestial.y || yPosition + drop.dropHeight < celestial.y - moonSize)
+                (yPosition > celestial.y + spaceMd || yPosition + drop.dropHeight < celestial.y - moonSize - spaceMd)
             ) : true;
-    }
-
-    public shouldRenderDropBorder(border: WaterDropBorder): boolean {
-        const celestial = this.adjustedCelestialData;
-        const yPosition = this.viewHeight - border.yPosition - border.borderHeight;
-
-        return celestial
-            ? (
-                (border.xPosition > celestial.x + moonSize || border.xPosition + border.borderWidth < celestial.x)
-                &&
-                (yPosition > celestial.y || yPosition + border.borderHeight < celestial.y - moonSize)
-            )
-            : true;
     }
 }

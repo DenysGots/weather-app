@@ -7,7 +7,9 @@ import { Location, Position } from '../interfaces/public-api';
 
 import { WINDOW } from '../services/helpers.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class HttpService {
     // TODO: implement web socket connection with server here to trigger weather aggregators on interval
 

@@ -49,15 +49,16 @@
         </div>
     </ng-container>
     
-    <ng-container *ngFor="let border of borders">
-        <div *ngIf="shouldRenderDropBorder(border)"
+    <ng-container *ngFor="let drop of drops">
+        <!--<div *ngIf="shouldRenderDropBorder(border)"-->
+        <div *ngIf="shouldRenderDrop(drop)"
              @enterLeaveTrigger
              class="app-weather-effect-water-drops__border"
              [ngStyle]="{
-                'top.px': border.yPosition,
-                'left.px': border.xPosition,
-                'width.px': border.borderWidth,
-                'height.px': border.borderHeight
+                'top.px': drop.yPosition,
+                'left.px': drop.xPosition,
+                'width.px': drop.borderWidth,
+                'height.px': drop.borderHeight
              }">
         </div>
     </ng-container>

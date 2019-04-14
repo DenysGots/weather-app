@@ -17,6 +17,7 @@ import { HelpersService } from '../../services/helpers.service';
 import {
     CelestialData,
     CelestialPosition,
+    MoonPhases,
     moonSize,
     Parabola,
 } from '../../../../shared/public-api';
@@ -34,6 +35,7 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
     @Input() currentTime: number;
     @Input() viewHeight: number;
     @Input() viewWidth: number;
+    @Input() moonPhase: MoonPhases;
 
     public moonPosition: CelestialPosition;
 

@@ -19,15 +19,10 @@ export interface WaterDrop {
     xPosition;
     dropWidth;
     dropHeight;
-    backgroundPosition;
-    backgroundSize;
-}
-
-export interface WaterDropBorder {
-    xPosition;
-    yPosition;
     borderWidth;
     borderHeight;
+    backgroundPosition;
+    backgroundSize;
 }
 
 export interface State {

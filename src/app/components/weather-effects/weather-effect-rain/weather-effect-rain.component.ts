@@ -56,7 +56,13 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if ('overcast' in changes && !changes.overcast.firstChange) {
+        if ('overcast' in changes && !changes.overcast.firstChange
+            ||
+            'timeOfDay' in changes && !changes.timeOfDay.firstChange) {
+            if (this.animation) {
+                this.customWindowAnimationFrame.customCancelAnimationFrame(this.animation);
+            }
+
             this.startAnimation();
         }
     }
@@ -84,26 +90,36 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
         const numberOfThroughDrops = this.numberOfThroughDrops;
         const canvasWidth = this.viewWidth;
         const canvasHeight = this.viewHeight;
+        const customWindowAnimationFrame = this.customWindowAnimationFrame;
+        const timeOfDay = this.timeOfDay;
         const drops = [];
         const throughDrops = [];
         const mv = 20;
-        const customWindowAnimationFrame = this.customWindowAnimationFrame;
 
         let animation = this.animation;
 
         function Drop() {
             this.draw = function() {
                 this.gradient = rainContext.createLinearGradient(1.5 * this.x, this.y, 1.5 * this.x, this.y + this.height);
-                this.gradient.addColorStop(0, '#a1c6cc');
-                this.gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.5)');
-                this.gradient.addColorStop(1, '#000');
+                // this.gradient.addColorStop(0, '#a1c6cc');
+                // this.gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.5)');
+                // this.gradient.addColorStop(1, '#000');
 
                 // TODO: need different gradients for rain, visible at both day/night themes
-                // Use timeOfDay input to differentiate this
-
                 // TODO: try this one, here and below
-                // gradient(linear,0% 0%,0% 100%, from(rgba(13,52,58,1) ), to(rgba(255,255,255,0.6)));
-                // or 'rgba(174, 194, 224, 0.5)'
+                // gradient(linear,0% 0%,0% 100%, from(#0d343a), to(rgba(255,255,255,0.6)));
+                // or 'rgba(174, 194, 224, 0.5)' (#aec2e0)
+                // or #5E3933, rgba(255, 255, 255, 0.5), #fff (original -> inverted)
+
+                if (timeOfDay === TimeOfDay.day) {
+                    this.gradient.addColorStop(0, '#a1c6cc');
+                    this.gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.5)');
+                    this.gradient.addColorStop(1, '#000');
+                } else if (timeOfDay === TimeOfDay.night) {
+                    this.gradient.addColorStop(0, '#0d343a');
+                    this.gradient.addColorStop(0.5, '#aec2e0');
+                    this.gradient.addColorStop(1, '#fff');
+                }
 
                 rainContext.beginPath();
                 rainContext.moveTo(this.x, this.y);
@@ -125,10 +141,22 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
         function ThroughDrop() {
             this.draw = function() {
                 this.gradient = rainThroughContext.createLinearGradient(0, this.y, 0, this.y + this.length);
-                // this.gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
-                // this.gradient.addColorStop(1, `rgba(255, 255, 255, ${this.opacity})`);
-                this.gradient.addColorStop(0, `rgba(0, 0, 0, ${this.opacity})`);
-                this.gradient.addColorStop(1, '#000');
+                //// this.gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+                //// this.gradient.addColorStop(1, `rgba(255, 255, 255, ${this.opacity})`);
+
+                // this.gradient.addColorStop(0, `rgba(0, 0, 0, ${this.opacity})`);
+                // this.gradient.addColorStop(1, '#000');
+
+                // TODO: test and adjust
+                if (timeOfDay === TimeOfDay.day) {
+                    this.gradient.addColorStop(0, `rgba(0, 0, 0, ${this.opacity})`);
+                    this.gradient.addColorStop(1, '#000');
+                } else if (timeOfDay === TimeOfDay.night) {
+                    this.gradient.addColorStop(0, `rgba(13, 52, 58, ${this.opacity})`);
+                    this.gradient.addColorStop(0.5, '#aec2e0');
+                    this.gradient.addColorStop(1, '#fff');
+                }
+
                 rainThroughContext.beginPath();
                 rainThroughContext.fillStyle = this.gradient;
                 rainThroughContext.fillRect(this.x, this.y, 1, this.length);

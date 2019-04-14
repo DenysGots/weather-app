@@ -7,7 +7,9 @@ import { StateService } from './state.service';
 
 import { CelestialData, State } from '../../../shared/public-api';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class MainService {
     public currentState: State;
     public celestialData: CelestialData;

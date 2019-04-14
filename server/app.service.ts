@@ -28,21 +28,16 @@ export class AppService {
     public weatherStateSubject: Observable<any>;
 
     private weatherStateSource: Subject<any>;
-
+    private overcast: Overcast;
     private accuWeatherApikey = 'rpu3K5yQuA9IogpqOTDmX9hTEWXKnI0I';
     private apixuApikey = 'abcf9bd6ce4b40b29d7170831191703';
-
     private accuWeatherGetLocationUrl = 'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search';
     private accuWeatherGetLocationKeyUrl = 'http://dataservice.accuweather.com/locations/v1/cities/';
     private accuWeatherGetFiveDaysWeatherUrl = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
     private accuWeatherGetTwelveHoursWeatherUrl = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/{locationKey}';
     private accuWeatherGetCurrentWeatherUrl = 'http://dataservice.accuweather.com/currentconditions/v1/';
-
     private apixuGetTenDaysWeatherUrl = 'http://api.apixu.com/v1/forecast.json?';
-
     private geoBytesGetLocationUrl = 'http://gd.geobytes.com/GetCityDetails?callback=?';
-
-    private overcast: Overcast;
 
     constructor(private readonly httpService: HttpService) {
         this.weatherStateSource = new Subject();
@@ -52,8 +47,6 @@ export class AppService {
     public getLocation(positionDto: PositionDto) {
         let getLocationUrl = this.accuWeatherGetLocationUrl;
         getLocationUrl += `?apikey=${this.accuWeatherApikey}&q=${positionDto.latitude}%${positionDto.longitude}`;
-
-        // TODO: this works without request data
         this.httpService.get(getLocationUrl).subscribe(data => console.log(data));
     }
 

@@ -5,7 +5,9 @@ import * as sunCalc from 'sunCalc';
 
 import { MoonPhases } from '../interfaces/public-api';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class HelpersService {
     constructor() { }
 
