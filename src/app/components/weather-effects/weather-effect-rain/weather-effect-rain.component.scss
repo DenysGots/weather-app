@@ -9,22 +9,6 @@
     width: 100%;
     z-index: $z-index-rain;
 
-    //&__background-lighter {
-    //    background: $color-rain_wall-lighter;
-    //    height: 100%;
-    //    position: absolute;
-    //    width: 100%;
-    //    z-index: 810;
-    //}
-    //
-    //&__background-darker {
-    //    background: $color-rain_wall-darker;
-    //    height: 100%;
-    //    position: absolute;
-    //    width: 100%;
-    //    z-index: 810;
-    //}
-
     &__canvas {
         height: 100%;
         position: absolute;

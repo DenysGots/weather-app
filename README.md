@@ -5,6 +5,8 @@ Simple weather widget
 * run `npm run helper:build`
 * open browser at `http://localhost:5400`
 
+Note: AccuWeather API has a limit of 50 calls/day under a Limited Trial
+
 ---
 
 ## Used technologies and projects:
@@ -23,8 +25,12 @@ Simple weather widget
 * https://codepen.io/Nvagelis/pen/yaQGAL
 * https://codepen.io/billyysea/pen/whjbK
 * https://github.com/jshakes/moontonight
+* https://codepen.io/billyysea/pen/whjbK by Billy
 ### Icons:
 * https://erikflowers.github.io/weather-icons/
 * https://www.amcharts.com/free-animated-svg-weather-icons/
-
-Note: AccuWeather API has a limit of 50 calls/day under a Limited Trial
+### Helpers
+* https://github.com/milosdjakonovic/requestAnimationFrame-polyfill/blob/master/rafPolyfill.js
+* https://gist.github.com/paulirish/1579671
+* https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+* https://brianflove.com/2018/01/11/angular-window-provider

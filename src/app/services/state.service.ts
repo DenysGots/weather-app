@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
+import * as _isNil from 'lodash/isNil';
 
 import { HelpersService } from './helpers.service';
 
@@ -30,12 +31,9 @@ export class StateService {
         this.currentState.currentTimeString = this.setCurrentTimeString();
         this.currentState.currentBackground = this.defineSkyBackground();
         this.currentState.moonPhase = this.helpersService.calculateMoonPhase();
-
-        console.log(this.currentState);
     }
 
     public setLocation(): string {
-        // return `${this.locationData.geobytescapital}, ${this.locationData.geobytescountry}`;
         return `${this.locationData.city}, ${this.locationData.country}`;
     }
 
@@ -75,17 +73,9 @@ export class StateService {
     }
 
     public getInitialState(): void {
-        // let weatherState: State;
-        // if (this.helpersService.isStorageAvailable('localStorage') && localStorage.getItem('lastSavedWeatherState')) {
-        //     weatherState = JSON.parse(localStorage.getItem('lastSavedWeatherState'));
-        // } else {
-        //     weatherState = this.setMockedState();
-        //     console.log(weatherState);
-        // }
-        // this.currentState = weatherState ? weatherState : this.currentState;
-
-        // // TODO: test
-        const isStateSavedInLocalStorage: boolean = this.helpersService.isStorageAvailable('localStorage') && localStorage.getItem('lastSavedWeatherState');
+        const isStateSavedInLocalStorage: boolean =
+            this.helpersService.isStorageAvailable('localStorage') &&
+            !_isNil(localStorage.getItem('lastSavedWeatherState'));
 
         this.currentState = isStateSavedInLocalStorage
             ? JSON.parse(localStorage.getItem('lastSavedWeatherState'))

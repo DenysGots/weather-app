@@ -11,7 +11,7 @@ import { IconSizes } from '../../../../shared/public-api';
 @Component({
     selector: 'app-icon',
     templateUrl: './icon.component.html',
-    styleUrls: ['./icon.component.scss']
+    styleUrls: ['./icon.component.scss'],
 })
 export class IconComponent implements OnInit, OnChanges {
     @Input() iconType: string;

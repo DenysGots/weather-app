@@ -67,8 +67,6 @@ export class WeatherEffectLightningComponent implements OnInit, OnDestroy {
             lightningContext.fillStyle = `rgba(0, 0, 0, ${random(1, 30) / 100})`;
             lightningContext.fillRect(0, 0, canvasWidth, canvasHeight);
             lightningContext.globalCompositeOperation = 'source-over';
-
-            // lightningContext.clearRect(0, 0, canvasWidth, canvasHeight);
         }
 
         function createLightning() {
@@ -148,7 +146,7 @@ export class WeatherEffectLightningComponent implements OnInit, OnDestroy {
             if (lightTimeCurrent >= lightTimeTotal) {
                 createLightning();
                 lightTimeCurrent = 0;
-                lightTimeTotal = 200;  // rand(100, 200)
+                lightTimeTotal = 200;
             }
 
             drawLightning();

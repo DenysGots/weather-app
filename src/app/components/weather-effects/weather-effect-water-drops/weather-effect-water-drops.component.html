@@ -37,20 +37,10 @@
                  *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('night')"
                  class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-night-heavy-background">
             </div>
-            
-            <!--<div @enterLeaveTrigger-->
-                 <!--*ngIf="isWeather('cloudy')"-->
-                 <!--class="app-weather-effect-water-drops__background app-weather-effect-water-drops__cloud-background"-->
-                 <!--[ngStyle]="{-->
-                    <!--'background-position': drop.backgroundPosition,-->
-                    <!--'background-size': drop.backgroundSize-->
-                 <!--}">-->
-            <!--</div>-->
         </div>
     </ng-container>
     
     <ng-container *ngFor="let drop of drops">
-        <!--<div *ngIf="shouldRenderDropBorder(border)"-->
         <div *ngIf="shouldRenderDrop(drop)"
              @enterLeaveTrigger
              class="app-weather-effect-water-drops__border"

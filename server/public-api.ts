@@ -3,10 +3,3 @@ export interface LocationDto {
     country: string;
     city: string;
 }
-
-// export interface PositionDto {
-//     // longitude: number;
-//     // latitude: number;
-//     lon: number;
-//     lat: number;
-// }

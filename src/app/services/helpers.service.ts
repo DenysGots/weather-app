@@ -1,9 +1,15 @@
-import { Injectable, ClassProvider, FactoryProvider, InjectionToken, PLATFORM_ID } from '@angular/core';
+import {
+    ClassProvider,
+    FactoryProvider,
+    Injectable,
+    InjectionToken,
+    PLATFORM_ID,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import * as moment from 'moment';
 import * as sunCalc from 'sunCalc';
 
-import { MoonPhases } from '../interfaces/public-api';
+import { MoonPhases } from '../../../shared/public-api';
 
 @Injectable({
     providedIn: 'root',
@@ -97,7 +103,6 @@ export class HelpersService {
             'thirdQuarter',
             'waningCrescent',
         ];
-
         const phase = sunCalc.getMoonIllumination(moment()).phase;
         let phaseString;
 

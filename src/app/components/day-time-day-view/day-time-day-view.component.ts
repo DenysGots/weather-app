@@ -53,19 +53,7 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
         this.startX = -1 * this.sunContainerSize/* / 1.12*/;
         this.endX = this.viewWidth + this.sunContainerSize;
         this.maxY = this.viewHeight - this.sunContainerSize;
-
         this.startAnimation();
-
-        // this.defineStartingPoint();
-        // // this.sunPosition = {
-        // //     x: this.startX + 'px',
-        // //     y: 0 + 'px',
-        // // };
-
-        // // this.animateSun();
-        // this.ngZone.runOutsideAngular(() => {
-        //     this.animateSun();
-        // });
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -75,11 +63,6 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public startAnimation(): void {
-        // this.sunPosition = {
-        //     x: this.startX + 'px',
-        //     y: 0 + 'px',
-        // };
-
         this.customWindowAnimationFrame = this.helpersService.setRequestAnimationFrame();
 
         if (this.animation) {
@@ -88,7 +71,6 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
 
         this.defineStartingPoint();
 
-        // this.animateSun();
         this.ngZone.runOutsideAngular(() => {
             this.animateSun();
         });
@@ -107,8 +89,6 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
         const a = -1 * b / (startX + endX);
         const c = b * startX * (startX / (startX + endX) - 1);
 
-        // TODO: try implementing transform translate instead of bottom/left, here and in night theme
-        // https://medium.com/outsystems-experts/flip-your-60-fps-animations-flip-em-good-372281598865
         return <Parabola>{ a, b, c };
     }
 
@@ -170,6 +150,7 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         animation = customWindowAnimationFrame.customRequestAnimationFrame(animate);
+
         detectChanges();
     }
 

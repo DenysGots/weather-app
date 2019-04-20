@@ -103,9 +103,7 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
                 const dropWidth = Math.random() * 11 + 6;
                 const dropHeight = dropWidth * ((Math.random() * 0.5) + 0.7);
 
-                // TODO: test and adjust this
                 const borderWidth = dropWidth - 4;
-                // const borderHeight = 0.95 * dropHeight;
                 const borderHeight = 0.94 * dropHeight;
 
                 const xPosition =  x * this.viewWidth;
@@ -160,7 +158,6 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
         }
     }
 
-    // TODO: needs testing and adjustment. Add flag to drops array to test true/false and mute check below to see all drops on screen
     public shouldRenderDrop(drop: WaterDrop): boolean {
         const celestial = this.adjustedCelestialData;
         const yPosition = this.viewHeight - drop.yPosition - drop.dropHeight;

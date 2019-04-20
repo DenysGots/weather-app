@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     Input,
@@ -45,11 +44,9 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
     private customWindowAnimationFrame: any;
 
     constructor(private ngZone: NgZone,
-                private helpersService: HelpersService,
-                /*private changeDetectorRef: ChangeDetectorRef*/) { }
+                private helpersService: HelpersService) { }
 
     ngOnInit() {
-        // this.changeDetectorRef.detach();
         this.rainCanvas = this.rainCanvasRef.nativeElement;
         this.rainThroughCanvas = this.rainThroughCanvasRef.nativeElement;
         this.startAnimation();
@@ -82,7 +79,6 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
         });
     }
 
-    // TODO: need different b-g color for drops for night theme
     private makeItRain(): void {
         const rainContext = this.rainCanvas.getContext('2d');
         const rainThroughContext = this.rainThroughCanvas.getContext('2d');
@@ -101,15 +97,6 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
         function Drop() {
             this.draw = function() {
                 this.gradient = rainContext.createLinearGradient(1.5 * this.x, this.y, 1.5 * this.x, this.y + this.height);
-                // this.gradient.addColorStop(0, '#a1c6cc');
-                // this.gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.5)');
-                // this.gradient.addColorStop(1, '#000');
-
-                // TODO: need different gradients for rain, visible at both day/night themes
-                // TODO: try this one, here and below
-                // gradient(linear,0% 0%,0% 100%, from(#0d343a), to(rgba(255,255,255,0.6)));
-                // or 'rgba(174, 194, 224, 0.5)' (#aec2e0)
-                // or #5E3933, rgba(255, 255, 255, 0.5), #fff (original -> inverted)
 
                 if (timeOfDay === TimeOfDay.day) {
                     this.gradient.addColorStop(0, '#a1c6cc');
@@ -127,27 +114,13 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
                 rainContext.fillRect(this.x, this.y, this.width, this.height);
                 rainContext.closePath();
                 rainContext.fill();
-
-                // TODO: add arc on start/end
-                // context.moveTo(this.x - this.width / 2, this.y);
-                // context.lineTo(this.x, this.y - this.height);
-                // context.lineTo(this.x + this.width / 2, this.y);
-                // context.arc(this.x, this.y, this.width, 0, Math.PI, true);
-                // context.closePath();
-                // context.fill();
             };
         }
 
         function ThroughDrop() {
             this.draw = function() {
                 this.gradient = rainThroughContext.createLinearGradient(0, this.y, 0, this.y + this.length);
-                //// this.gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
-                //// this.gradient.addColorStop(1, `rgba(255, 255, 255, ${this.opacity})`);
 
-                // this.gradient.addColorStop(0, `rgba(0, 0, 0, ${this.opacity})`);
-                // this.gradient.addColorStop(1, '#000');
-
-                // TODO: test and adjust
                 if (timeOfDay === TimeOfDay.day) {
                     this.gradient.addColorStop(0, `rgba(0, 0, 0, ${this.opacity})`);
                     this.gradient.addColorStop(1, '#000');
@@ -228,8 +201,6 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
             throughDrop.y = random(0, canvasHeight);
             throughDrop.length = Math.floor(random(1, 830));
             throughDrop.opacity = Math.random() * 0.2;
-            // throughDrop.xs = random(-2, 2);
-            // throughDrop.ys = random(10, 20);
             throughDrops.push(throughDrop);
         }
 

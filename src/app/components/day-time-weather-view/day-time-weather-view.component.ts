@@ -13,6 +13,7 @@ import {
 } from '@angular/animations';
 
 import { MainService } from '../../services/main.service';
+
 import { Overcast, State } from '../../../../shared/public-api';
 
 @Component({
@@ -47,11 +48,8 @@ export class DayTimeWeatherViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        // TODO: test in Firefox
         this.viewHeight = this.elementRef.nativeElement.offsetHeight;
         this.viewWidth = this.elementRef.nativeElement.offsetWidth;
-        // console.log(this.elementRef.nativeElement.offsetHeight, this.elementRef.nativeElement.offsetWidth);
-        // console.log(this.weatherView.nativeElement.offsetHeight, this.weatherView.nativeElement.offsetWidth);
         this.changeDetectorRef.detectChanges();
     }
 

@@ -53,22 +53,10 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit() {
         this.moonContainerSize = moonSize;
-        this.startX = -1 * this.moonContainerSize/* / 1.12*/;
+        this.startX = -1 * this.moonContainerSize;
         this.endX = this.viewWidth + this.moonContainerSize;
-        this.maxY = this.viewHeight/* - this.moonContainerSize*/;
-
+        this.maxY = this.viewHeight;
         this.startAnimation();
-
-        // this.defineStartingPoint();
-        // this.moonPosition = {
-        //     x: this.startX + 'px',
-        //     y: 0 + 'px',
-        // };
-
-        // // this.animateMoon();
-        // this.ngZone.runOutsideAngular(() => {
-        //     this.animateMoon();
-        // });
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -78,11 +66,6 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public startAnimation(): void {
-        // this.moonPosition = {
-        //     x: this.startX + 'px',
-        //     y: 0 + 'px',
-        // };
-
         this.customWindowAnimationFrame = this.helpersService.setRequestAnimationFrame();
 
         if (this.animation) {
@@ -91,7 +74,6 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
 
         this.defineStartingPoint();
 
-        // this.animateMoon();
         this.ngZone.runOutsideAngular(() => {
             this.animateMoon();
         });
@@ -110,8 +92,6 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
         const a = -1 * b / (startX + endX);
         const c = b * startX * (startX / (startX + endX) - 1);
 
-        // TODO: try implementing transform translate instead of bottom/left, here and in day theme
-        // https://medium.com/outsystems-experts/flip-your-60-fps-animations-flip-em-good-372281598865
         return <Parabola>{ a, b, c };
     }
 
@@ -175,6 +155,7 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         animation = customWindowAnimationFrame.customRequestAnimationFrame(animate);
+
         detectChanges();
     }
 

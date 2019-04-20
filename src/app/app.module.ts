@@ -18,9 +18,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faAngleLeft,
     faAngleRight,
-    faPlus,
-    faMinus,
     faHome,
+    faMinus,
+    faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { AppComponent } from './app.component';
@@ -112,9 +112,9 @@ export class AppModule {
         library.add(
             faAngleLeft,
             faAngleRight,
-            faPlus,
+            faHome,
             faMinus,
-            faHome
+            faPlus
         );
     }
 }

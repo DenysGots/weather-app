@@ -1,6 +1,12 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { combineLatest, Observable, Subject, timer, iif, throwError, of } from 'rxjs';
-import { delayWhen } from 'rxjs/operators/delayWhen';
+import {
+    combineLatest,
+    iif,
+    Observable,
+    of,
+    Subject,
+    throwError,
+} from 'rxjs';
 import { map } from 'rxjs/operators/map';
 import { retryWhen } from 'rxjs/operators/retryWhen';
 import { switchMap } from 'rxjs/operators/switchMap';
@@ -16,7 +22,6 @@ import {
     HoursForecast,
     LocationDto,
     Overcast,
-    /*PositionDto,*/
     State,
     TimeOfDay,
     WeatherTypes,
@@ -31,25 +36,16 @@ export class AppService {
     private overcast: Overcast;
     private accuWeatherApikey = 'rpu3K5yQuA9IogpqOTDmX9hTEWXKnI0I';
     private apixuApikey = 'abcf9bd6ce4b40b29d7170831191703';
-    private accuWeatherGetLocationUrl = 'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search';
     private accuWeatherGetLocationKeyUrl = 'http://dataservice.accuweather.com/locations/v1/cities/';
     private accuWeatherGetFiveDaysWeatherUrl = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
     private accuWeatherGetTwelveHoursWeatherUrl = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/{locationKey}';
     private accuWeatherGetCurrentWeatherUrl = 'http://dataservice.accuweather.com/currentconditions/v1/';
     private apixuGetTenDaysWeatherUrl = 'http://api.apixu.com/v1/forecast.json?';
-    private geoBytesGetLocationUrl = 'http://gd.geobytes.com/GetCityDetails?callback=?';
 
     constructor(private readonly httpService: HttpService) {
         this.weatherStateSource = new Subject();
         this.weatherStateSubject = this.weatherStateSource.asObservable();
     }
-
-    // public getLocation(positionDto: PositionDto) {
-    //     let getLocationUrl = this.accuWeatherGetLocationUrl;
-    //     // getLocationUrl += `?apikey=${this.accuWeatherApikey}&q=${positionDto.latitude}%${positionDto.longitude}`;
-    //     getLocationUrl += `?apikey=${this.accuWeatherApikey}&q=${positionDto.lat}%${positionDto.lon}`;
-    //     this.httpService.get(getLocationUrl).subscribe(data => console.log(data));
-    // }
 
     public getWeather(locationDto: LocationDto) {
         const retryPipeline =
@@ -61,7 +57,7 @@ export class AppService {
                         of(e).pipe(delay(3000)),
                     )
                 ),
-                // tap(() => console.log('Request error, retrying...', error)),
+                tap(() => console.log('Request error, retrying...', error)),
             ));
 
         let getLocationKeyUrl = this.accuWeatherGetLocationKeyUrl;
@@ -79,29 +75,16 @@ export class AppService {
                 switchMap(locationData => {
                     locationKey = locationData.data[0].Key;
 
-                    console.log(locationKey);
-
                     getCurrentWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
                     getFiveDaysWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
                     getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}&language=en&details=true&metric=true`;
                     getTenDaysWeatherUrl += `key=${this.apixuApikey}&q=${locationDto.city}&days=10`;
-
-                    console.log(getCurrentWeatherUrl);
-                    console.log(getFiveDaysWeatherUrl);
-                    console.log(getTwelveHoursWeatherUrl);
-                    console.log(getTenDaysWeatherUrl);
 
                     const currentWeather = this.httpService
                         .get(getCurrentWeatherUrl)
                         .pipe(
                             map(weatherData => weatherData.data),
                             retryPipeline,
-                            // retryWhen(error => error
-                            //     .pipe(
-                            //         delayWhen(() => timer(5000)),
-                            //         tap(() => console.log('Current weather request error, retrying...', error))
-                            //     )
-                            // ),
                         );
 
                     const fiveDaysWeather = this.httpService
@@ -109,13 +92,6 @@ export class AppService {
                         .pipe(
                             map(weatherData => weatherData.data),
                             retryPipeline,
-                            // retryWhen(error => error
-                            //     .pipe(
-                            //         delayWhen(() => timer(5000)),
-                            //         tap(() => console.log('Five days weather request error, retrying...', error)),
-                            //         take(5),
-                            //     )
-                            // ),
                         );
 
                     const twelveHoursWeather = this.httpService
@@ -123,12 +99,6 @@ export class AppService {
                         .pipe(
                             map(weatherData => weatherData.data),
                             retryPipeline,
-                            // retryWhen(error => error
-                            //     .pipe(
-                            //         delayWhen(() => timer(5000)),
-                            //         tap(() => console.log('Twelve hours weather request error, retrying...', error))
-                            //     )
-                            // )
                         );
 
                     const tenDaysWeather = this.httpService
@@ -136,23 +106,11 @@ export class AppService {
                         .pipe(
                             map(weatherData => weatherData.data),
                             retryPipeline,
-                            // retryWhen(error => error
-                            //     .pipe(
-                            //         delayWhen(() => timer(5000)),
-                            //         tap(() => console.log('Ten days weather request error, retrying...', error))
-                            //     )
-                            // ),
                         );
 
                     return combineLatest(tenDaysWeather, fiveDaysWeather, twelveHoursWeather, currentWeather);
                 }),
                 retryPipeline,
-                // retryWhen(error => error
-                //     .pipe(
-                //         delayWhen(() => timer(5000)),
-                //         tap(() => console.log('Location request error, retrying...', error))
-                //     )
-                // ),
             );
     }
 

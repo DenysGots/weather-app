@@ -13,11 +13,11 @@ import {
 @Component({
     selector: 'app-forecast-weather-card',
     templateUrl: './forecast-weather-card.component.html',
-    styleUrls: ['./forecast-weather-card.component.scss']
+    styleUrls: ['./forecast-weather-card.component.scss'],
 })
 export class ForecastWeatherCardComponent implements OnInit {
     @Input() type: CardsDeckType;
-    /* Hour forecast */
+    /* Hours forecast */
     @Input() hourTime: string;
     @Input() weatherTypeHour: WeatherTypes;
     @Input() humidityCurrent: number;
@@ -25,7 +25,7 @@ export class ForecastWeatherCardComponent implements OnInit {
     @Input() windSpeedCurrent: number;
     @Input() windDirectionCurrent: WindDirections;
     @Input() uvIndexCurrent: number;
-    /* Day forecast */
+    /* Days forecast */
     @Input() dayDate: string;
     @Input() weatherTypeDay: WeatherTypes;
     @Input() temperatureMin: number;

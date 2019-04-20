@@ -23,22 +23,13 @@
 
 .app-weather-effect-sun {
     animation: sunpulse 2s alternate infinite;
+    background: radial-gradient(ellipse at center, $color-light_gray 0%, $color-dirty_white 60%, $color-white 100%);
     border-radius: 50%;
     height: $sun-dimension;
     opacity: 1.0;
     position: absolute;
     width: $sun-dimension;
     z-index: $z-index-sun;
-    
-    // TODO: this one must change from dusk/dawn (more red) to midday (current white)
-    //background-color: $color-sun;
-    //background-color: $color-white;
-    //background: radial-gradient(ellipse at center, #f90 0%,#fc0 60%,#ff0 100%);
-    background: radial-gradient(ellipse at center, $color-light_gray 0%, $color-dirty_white 60%, $color-white 100%);
-    
-    // TODO: remove this, handled by animation
-    //box-shadow: 0 0 40px 15px $color-sun;
-    //box-shadow: 0 0 60px 20px $color-white;
     
     &__ray-box {
         @include animation(sun-rays-animation, 120s, linear, infinite);
@@ -48,7 +39,6 @@
     }
     
     &__ray {
-        // TODO: move to variables
         background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0) 80%);
         border-radius: 50% 50% 0 0;
         filter: brightness(1.2) blur(5.0px);

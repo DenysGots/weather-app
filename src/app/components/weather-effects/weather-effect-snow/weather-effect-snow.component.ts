@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ElementRef,
     Input,
@@ -36,11 +35,9 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
     private customWindowAnimationFrame: any;
 
     constructor(private ngZone: NgZone,
-                private helpersService: HelpersService,
-                /*private changeDetectorRef: ChangeDetectorRef*/) { }
+                private helpersService: HelpersService) { }
 
     ngOnInit() {
-        // this.changeDetectorRef.detach();
         this.snowCanvas = this.snowCanvasRef.nativeElement;
         this.startAnimation();
     }

@@ -3,6 +3,7 @@ import {
     Component,
     Input,
 } from '@angular/core';
+
 import { MoonPhases } from '../../../../../shared/public-api';
 
 @Component({
@@ -60,6 +61,7 @@ export class WeatherEffectMoonComponent {
         }
 
         moonPhaseClass[moonPhaseClassString] = true;
+
         return moonPhaseClass;
     }
 }

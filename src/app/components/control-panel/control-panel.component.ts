@@ -16,7 +16,7 @@ import {
 @Component({
     selector: 'app-control-panel',
     templateUrl: './control-panel.component.html',
-    styleUrls: ['./control-panel.component.scss']
+    styleUrls: ['./control-panel.component.scss'],
 })
 export class ControlPanelComponent implements OnInit {
     public controlForm: FormGroup;
@@ -166,7 +166,7 @@ export class ControlPanelComponent implements OnInit {
     }
 
     private hoursToMilliseconds(time: number): number {
-        const currentTime: moment.Moment = moment().hours(time).minutes(0).seconds(0).millisecond(0);
+        const currentTime: moment.Moment = moment().hours(time);
         const startOfDay: moment.Moment = moment().startOf('hour').hours(0);
         return moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
     }
