@@ -25,7 +25,7 @@ Note: AccuWeather API has a limit of 50 calls/day under a Limited Trial
 * https://codepen.io/Nvagelis/pen/yaQGAL
 * https://codepen.io/billyysea/pen/whjbK
 * https://github.com/jshakes/moontonight
-* https://codepen.io/billyysea/pen/whjbK by Billy
+* https://codepen.io/billyysea/pen/whjbK
 ### Icons:
 * https://erikflowers.github.io/weather-icons/
 * https://www.amcharts.com/free-animated-svg-weather-icons/
