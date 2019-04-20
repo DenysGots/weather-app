@@ -3,7 +3,16 @@ import * as moment from 'moment';
 
 import { HelpersService } from './helpers.service';
 
-import { State } from '../interfaces/public-api';
+import {
+    DaysForecast,
+    HoursForecast,
+    Overcast,
+    State,
+    TimeOfDay,
+    WeatherDefinitions,
+    WeatherTypes,
+    WindDirections,
+} from '../../../shared/public-api';
 
 @Injectable({
     providedIn: 'root',
@@ -26,7 +35,8 @@ export class StateService {
     }
 
     public setLocation(): string {
-        return `${this.locationData.geobytescapital}, ${this.locationData.geobytescountry}`;
+        // return `${this.locationData.geobytescapital}, ${this.locationData.geobytescountry}`;
+        return `${this.locationData.city}, ${this.locationData.country}`;
     }
 
     public setCurrentDate(): string {
@@ -64,13 +74,55 @@ export class StateService {
         }
     }
 
-    public getStateFromLocalStorage(): State {
-        let weatherState: State;
+    public getInitialState(): void {
+        // let weatherState: State;
+        // if (this.helpersService.isStorageAvailable('localStorage') && localStorage.getItem('lastSavedWeatherState')) {
+        //     weatherState = JSON.parse(localStorage.getItem('lastSavedWeatherState'));
+        // } else {
+        //     weatherState = this.setMockedState();
+        //     console.log(weatherState);
+        // }
+        // this.currentState = weatherState ? weatherState : this.currentState;
 
-        if (this.helpersService.isStorageAvailable('localStorage') && localStorage.getItem('lastSavedWeatherState')) {
-            weatherState = JSON.parse(localStorage.getItem('lastSavedWeatherState'));
-        }
+        // // TODO: test
+        const isStateSavedInLocalStorage: boolean = this.helpersService.isStorageAvailable('localStorage') && localStorage.getItem('lastSavedWeatherState');
 
-        return weatherState ? weatherState : this.currentState;
+        this.currentState = isStateSavedInLocalStorage
+            ? JSON.parse(localStorage.getItem('lastSavedWeatherState'))
+            : this.setMockedState();
+    }
+
+    public setMockedState(): State {
+        const currentDate = this.setCurrentDate();
+        const currentTimeString = this.setCurrentTimeString();
+        const moonPhase = this.helpersService.calculateMoonPhase();
+
+        return <State>{
+            timeOfDay: TimeOfDay.day,
+            dayLength: 43200000,
+            nightLength: 43200000,
+            currentTime: 43200000,
+            location: 'Kyiv, Ukraine',
+            currentTimeString: currentTimeString,
+            currentDate: currentDate,
+            currentBackground: `app-sky-gradient-12`,
+            cloudy: true,
+            rainy: false,
+            snowy: false,
+            foggy: false,
+            overcast: Overcast.light,
+            weatherType: WeatherTypes.dayClear,
+            weatherDefinition: WeatherDefinitions.dayClear,
+            temperatureCurrent: 20,
+            temperatureFeelsLike: 25,
+            humidityCurrent: 10,
+            uvIndex: 1,
+            airPressure: 750,
+            windSpeed: 1,
+            windDirection: WindDirections.eastSouth,
+            moonPhase: moonPhase,
+            hoursForecast: <HoursForecast>[],
+            daysForecast: <DaysForecast>[],
+        };
     }
 }

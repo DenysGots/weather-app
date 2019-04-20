@@ -26,3 +26,5 @@ Simple weather widget
 ### Icons:
 * https://erikflowers.github.io/weather-icons/
 * https://www.amcharts.com/free-animated-svg-weather-icons/
+
+Note: AccuWeather API has a limit of 50 calls/day under a Limited Trial

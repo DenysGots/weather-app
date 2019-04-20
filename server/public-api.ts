@@ -4,7 +4,9 @@ export interface LocationDto {
     city: string;
 }
 
-export interface PositionDto {
-    longitude: number;
-    latitude: number;
-}
+// export interface PositionDto {
+//     // longitude: number;
+//     // latitude: number;
+//     lon: number;
+//     lat: number;
+// }

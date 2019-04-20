@@ -94,3 +94,48 @@
         z-index: ($z-index-main-page + 10);
     }
 }
+
+@media (max-width: 1024px) {
+    .app-main-page {
+        &__current-information {
+            padding: $space-md $space-sm;
+        }
+        
+        &__day-time-view {
+            padding: 0 $space-sm;
+        }
+        
+        &__cards-deck {
+            padding: $space-md $space-sm;
+        }
+    }
+}
+
+@media (max-width: 420px) {
+    .app-main-page {
+        &__current-information {
+            height: 100vh;
+            padding: $space-sm $space-xs;
+        }
+        
+        &__day-time-view {
+            height: 100vh;
+            left: 0;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            z-index: ($z-index-main-page + 20);
+        }
+        
+        &__cards-deck {
+            align-items: flex-start;
+            height: 100vh;
+            padding: 0 $space-xs $space-sm $space-xs;
+        }
+    
+        &__control-panel {
+            display: none;
+        }
+    }
+}

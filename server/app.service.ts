@@ -16,7 +16,7 @@ import {
     HoursForecast,
     LocationDto,
     Overcast,
-    PositionDto,
+    /*PositionDto,*/
     State,
     TimeOfDay,
     WeatherTypes,
@@ -44,11 +44,12 @@ export class AppService {
         this.weatherStateSubject = this.weatherStateSource.asObservable();
     }
 
-    public getLocation(positionDto: PositionDto) {
-        let getLocationUrl = this.accuWeatherGetLocationUrl;
-        getLocationUrl += `?apikey=${this.accuWeatherApikey}&q=${positionDto.latitude}%${positionDto.longitude}`;
-        this.httpService.get(getLocationUrl).subscribe(data => console.log(data));
-    }
+    // public getLocation(positionDto: PositionDto) {
+    //     let getLocationUrl = this.accuWeatherGetLocationUrl;
+    //     // getLocationUrl += `?apikey=${this.accuWeatherApikey}&q=${positionDto.latitude}%${positionDto.longitude}`;
+    //     getLocationUrl += `?apikey=${this.accuWeatherApikey}&q=${positionDto.lat}%${positionDto.lon}`;
+    //     this.httpService.get(getLocationUrl).subscribe(data => console.log(data));
+    // }
 
     public getWeather(locationDto: LocationDto) {
         const retryPipeline =
@@ -60,7 +61,7 @@ export class AppService {
                         of(e).pipe(delay(3000)),
                     )
                 ),
-                tap(() => console.log('Request error, retrying...', error)),
+                // tap(() => console.log('Request error, retrying...', error)),
             ));
 
         let getLocationKeyUrl = this.accuWeatherGetLocationKeyUrl;
@@ -78,10 +79,17 @@ export class AppService {
                 switchMap(locationData => {
                     locationKey = locationData.data[0].Key;
 
+                    console.log(locationKey);
+
                     getCurrentWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
                     getFiveDaysWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
                     getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}&language=en&details=true&metric=true`;
                     getTenDaysWeatherUrl += `key=${this.apixuApikey}&q=${locationDto.city}&days=10`;
+
+                    console.log(getCurrentWeatherUrl);
+                    console.log(getFiveDaysWeatherUrl);
+                    console.log(getTwelveHoursWeatherUrl);
+                    console.log(getTenDaysWeatherUrl);
 
                     const currentWeather = this.httpService
                         .get(getCurrentWeatherUrl)

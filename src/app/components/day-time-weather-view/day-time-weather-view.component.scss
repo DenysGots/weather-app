@@ -20,3 +20,15 @@
         box-shadow: $box-shadow-hover;
     }
 }
+
+@media (max-width: 420px) {
+    .app-day-time-weather-view {
+        border-radius: 0;
+        box-shadow: none;
+        transition: none;
+        
+        &:hover {
+            box-shadow: none;
+        }
+    }
+}

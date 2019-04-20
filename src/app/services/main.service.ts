@@ -21,12 +21,14 @@ export class MainService {
 
     constructor(private httpService: HttpService,
                 private stateService: StateService) {
-        this.getLocation();
-        this.currentState = this.stateService.getStateFromLocalStorage();
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.celestialDataSource = new BehaviorSubject(this.celestialData);
         this.currentStateSubject = this.currentStateSource.asObservable();
         this.celestialDataSubject = this.celestialDataSource.asObservable();
+        this.stateService.getInitialState();
+        this.getCurrentState();
+        this.emitCurrentState();
+        this.getLocation();
     }
 
     public getLocation(): void {

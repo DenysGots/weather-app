@@ -47,3 +47,23 @@
         }
     }
 }
+
+@media (max-width: 420px) {
+    .app-forecast-current-information {
+        &__block {
+            margin: $space-lg 0;
+        
+            &:first-of-type {
+                margin-top: $space-xl;
+            }
+        
+            &:last-of-type {
+                margin-bottom: $space-xl;
+            }
+        }
+    
+        &__data {
+            margin: 0 $space-xs;
+        }
+    }
+}
