@@ -12,7 +12,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run serve:ssr",
     "build": "ng build",
     "lint": "ng lint nest-nguniversal-demo",
     "build:client-and-server-bundles": "ng build --prod && ng run nest-nguniversal-demo:server:production",
@@ -25,7 +25,7 @@
     "server:watch": "nodemon",
     "helper:build": "npm run build:ssr && npm run serve:ssr",
     "helper:test-build": "ng build && ng run nest-nguniversal-demo:server && npm run webpack:server && npm run serve:ssr && http-server",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "npm run build:ssr"
   },
   "pre-commit": [],
   "private": true,

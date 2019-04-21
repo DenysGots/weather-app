@@ -11,6 +11,6 @@ async function bootstrap() {
     maxAge: 3600,
   });
   // await app.listen(5400);
-  await app.listen('https://app-simple-weather.herokuapp.com/');
+  await app.listen(process.env.PORT || 8080);
 }
 bootstrap().catch(err => console.error(err));
