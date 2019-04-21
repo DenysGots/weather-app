@@ -115,7 +115,7 @@
     .app-main-page {
         &__current-information {
             height: 100vh;
-            padding: $space-sm $space-xs;
+            padding: $space-sm 0;
         }
         
         &__day-time-view {
