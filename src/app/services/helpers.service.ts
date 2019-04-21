@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import * as moment from 'moment';
-import * as sunCalc from 'sunCalc';
+import * as sunCalc from 'suncalc';
 
 import { MoonPhases } from '../../../shared/public-api';
 
