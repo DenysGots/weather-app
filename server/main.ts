@@ -10,6 +10,7 @@ async function bootstrap() {
     methods: 'GET',
     maxAge: 3600,
   });
-  await app.listen(5400);
+  // await app.listen(5400);
+  await app.listen('https://app-simple-weather.herokuapp.com/');
 }
 bootstrap().catch(err => console.error(err));

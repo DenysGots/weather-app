@@ -9,7 +9,8 @@ import { Location } from '../interfaces/public-api';
 })
 export class HttpService {
     private currentLocation: Location = <Location>{};
-    private serverURL = 'http://localhost:5400';
+    // private serverURL = 'http://localhost:5400';
+    private serverURL = 'https://app-simple-weather.herokuapp.com/';
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type':  'application/json'
