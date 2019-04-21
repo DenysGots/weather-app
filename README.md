@@ -1,11 +1,17 @@
 # Weather App
 Simple weather widget
+
+Deployed on Heroku:
+http://app-simple-weather.herokuapp.com/
+
+Note: used AccuWeather API has a limit of 50 calls/day due to Limited Trial
+
+Start local server:
 * clone
 * run `npm i`
+* change serverURL of HttpService to `http://localhost:5400`
 * run `npm run helper:build`
 * open browser at `http://localhost:5400`
-
-Note: AccuWeather API has a limit of 50 calls/day under a Limited Trial
 
 ---
 
