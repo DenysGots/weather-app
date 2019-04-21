@@ -1,6 +1,10 @@
 {
   "name": "weather_app",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "engines": {
+    "node": "10.14.0",
+    "npm": "6.4.1"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -20,12 +24,16 @@
     "serve:ssr": "node dist/server",
     "server:watch": "nodemon",
     "helper:build": "npm run build:ssr && npm run serve:ssr",
-    "helper:test-build": "ng build && ng run nest-nguniversal-demo:server && npm run webpack:server && npm run serve:ssr && http-server"
+    "helper:test-build": "ng build && ng run nest-nguniversal-demo:server && npm run webpack:server && npm run serve:ssr && http-server",
+    "postinstall": "ng build --aot --prod",
+    "heroku-postbuild": "ng build --prod"
   },
   "pre-commit": [],
   "private": true,
   "dependencies": {
     "@angular/animations": "^7.1.1",
+    "@angular/cli": "7.1.0",
+    "@angular/compiler-cli": "7.1.1",
     "@angular/cdk": "^7.3.0",
     "@angular/common": "7.1.1",
     "@angular/compiler": "7.1.1",
@@ -88,6 +96,7 @@
     "codelyzer": "4.4.4",
     "concurrently": "^3.5.1",
     "cpy-cli": "2.0.0",
+    "enhanced-resolve": "^3.3.0",
     "express": "4.16.3",
     "http-server": "0.11.1",
     "mini-css-extract-plugin": "^0.6.0",
