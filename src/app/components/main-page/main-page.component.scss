@@ -120,12 +120,12 @@
         
         &__day-time-view {
             backface-visibility: hidden;
-            bottom: 0;
+            height: 100vh;
             left: 0;
             padding: 0;
             position: fixed;
             top: 0;
-            width: 100%;
+            width: 100vw;
             z-index: ($z-index-main-page + 20);
         }
         
