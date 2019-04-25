@@ -1,5 +1,5 @@
 # Weather App
-Simple weather widget
+Simple weather widget, desktop and mobile layout
 
 Deployed on Heroku:
 http://app-simple-weather.herokuapp.com/

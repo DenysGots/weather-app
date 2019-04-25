@@ -130,8 +130,7 @@
         
         &__cards-deck {
             align-items: flex-start;
-            height: 100vh;
-            padding: 0 $space-xs $space-sm $space-xs;
+            padding: $space-lg $space-xs;
         }
     
         &__control-panel {
