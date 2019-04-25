@@ -119,10 +119,11 @@
         }
         
         &__day-time-view {
+            backface-visibility: hidden;
             height: 100vh;
             left: 0;
             padding: 0;
-            position: fixed;
+            position: sticky;
             top: 0;
             width: 100vw;
             z-index: ($z-index-main-page + 20);
@@ -130,7 +131,8 @@
         
         &__cards-deck {
             align-items: flex-start;
-            padding: $space-lg $space-xs;
+            height: 50vh;
+            padding: 0 $space-xs $space-sm $space-xs;
         }
     
         &__control-panel {
