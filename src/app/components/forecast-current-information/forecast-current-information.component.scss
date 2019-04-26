@@ -50,6 +50,15 @@
 
 @media (max-width: 420px) {
     .app-forecast-current-information {
+        background: none;
+        border-radius: 0;
+        box-shadow: none;
+    
+        &:hover {
+            background: none;
+            box-shadow: none;
+        }
+        
         &__block {
             margin: $space-lg 0;
         
