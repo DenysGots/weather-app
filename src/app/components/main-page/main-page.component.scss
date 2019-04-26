@@ -133,7 +133,7 @@
         
         &__cards-deck {
             align-items: flex-start;
-            bottom: (100% + $space-sm);
+            bottom: calc(100% + #{$space-sm});
             height: auto;
             left: 0;
             padding: 0 $space-xs $space-sm $space-xs;
