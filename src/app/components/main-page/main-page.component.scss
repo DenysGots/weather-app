@@ -113,16 +113,14 @@
 
 @media (max-width: 420px) {
     .app-main-page {
-        height: 100vh;
-        
         &__current-information {
-            height: auto;
+            height: 100vh;
             padding: $space-sm 0;
         }
         
         &__day-time-view {
             backface-visibility: hidden;
-            height: 100vh;
+            height: 100%;
             left: 0;
             padding: 0;
             position: fixed;
@@ -133,11 +131,8 @@
         
         &__cards-deck {
             align-items: flex-start;
-            bottom: calc(100% + #{$space-sm});
-            height: auto;
             left: 0;
-            padding: 0 $space-xs $space-sm $space-xs;
-            position: fixed;
+            padding: 0 $space-xs $space-xs $space-xs;
         }
     
         &__control-panel {
