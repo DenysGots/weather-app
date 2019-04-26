@@ -113,8 +113,10 @@
 
 @media (max-width: 420px) {
     .app-main-page {
+        height: 100vh;
+        
         &__current-information {
-            height: 100vh;
+            height: auto;
             padding: $space-sm 0;
         }
         
@@ -131,8 +133,11 @@
         
         &__cards-deck {
             align-items: flex-start;
-            height: 50vh;
+            bottom: 0;
+            height: auto;
+            left: 0;
             padding: 0 $space-xs $space-sm $space-xs;
+            position: fixed;
         }
     
         &__control-panel {
