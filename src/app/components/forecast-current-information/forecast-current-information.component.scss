@@ -48,7 +48,7 @@
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 420px), (max-height: 420px) and (orientation: landscape) {
     .app-forecast-current-information {
         background: none;
         border-radius: 0;

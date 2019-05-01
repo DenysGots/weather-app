@@ -65,7 +65,7 @@
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 420px), (max-height: 420px) and (orientation: landscape) {
     :host {
         height: auto;
     }
