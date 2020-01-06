@@ -3,7 +3,6 @@ import * as moment from 'moment';
 import * as _isNil from 'lodash/isNil';
 
 import { HelpersService } from './helpers.service';
-
 import {
     DaysForecast,
     HoursForecast,
@@ -12,7 +11,7 @@ import {
     TimeOfDay,
     WeatherDefinitions,
     WeatherTypes,
-    WindDirections,
+    WindDirections
 } from '../../../shared/public-api';
 
 @Injectable({
@@ -112,7 +111,7 @@ export class StateService {
             windDirection: WindDirections.eastSouth,
             moonPhase: moonPhase,
             hoursForecast: <HoursForecast>[],
-            daysForecast: <DaysForecast>[],
+            daysForecast: <DaysForecast>[]
         };
     }
 }

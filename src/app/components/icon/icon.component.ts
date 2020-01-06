@@ -3,7 +3,7 @@ import {
     Input,
     OnChanges,
     OnInit,
-    SimpleChanges,
+    SimpleChanges
 } from '@angular/core';
 
 import { IconSizes } from '../../../../shared/public-api';
@@ -19,8 +19,6 @@ export class IconComponent implements OnInit, OnChanges {
 
     public iconUrl: string;
     public size: number;
-
-    constructor() { }
 
     ngOnInit() {
         this.setIconUrl();

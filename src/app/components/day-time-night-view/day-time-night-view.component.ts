@@ -8,11 +8,11 @@ import {
     OnDestroy,
     OnInit,
     SimpleChanges,
-    ViewRef,
+    ViewRef
 } from '@angular/core';
 
-import { MainService } from '../../services/main.service';
 import { HelpersService } from '../../services/helpers.service';
+import { MainService } from '../../services/main.service';
 
 import {
     CelestialData,
@@ -46,10 +46,12 @@ export class DayTimeNightViewComponent implements OnInit, OnChanges, OnDestroy {
     private animation: any;
     private customWindowAnimationFrame: any;
 
-    constructor(private ngZone: NgZone,
-                private changeDetectorRef: ChangeDetectorRef,
-                private mainService: MainService,
-                private helpersService: HelpersService) { }
+    constructor(
+        private ngZone: NgZone,
+        private changeDetectorRef: ChangeDetectorRef,
+        private mainService: MainService,
+        private helpersService: HelpersService
+    ) {}
 
     ngOnInit() {
         this.moonContainerSize = moonSize;

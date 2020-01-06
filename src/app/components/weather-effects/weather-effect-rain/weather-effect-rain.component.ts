@@ -8,7 +8,7 @@ import {
     OnDestroy,
     OnInit,
     SimpleChanges,
-    ViewChild,
+    ViewChild
 } from '@angular/core';
 
 import { HelpersService } from '../../../services/helpers.service';
@@ -17,7 +17,7 @@ import {
     NumberOfRainDrops,
     NumberOfRainThroughDrops,
     Overcast,
-    TimeOfDay,
+    TimeOfDay
 } from '../../../../../shared/public-api';
 
 @Component({
@@ -32,8 +32,8 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
     @Input() overcast: Overcast;
     @Input() timeOfDay: TimeOfDay;
 
-    @ViewChild('rainCanvas') rainCanvasRef: ElementRef;
-    @ViewChild('rainThroughCanvas') rainThroughCanvasRef: ElementRef;
+    @ViewChild('rainCanvas', {static: false}) rainCanvasRef: ElementRef;
+    @ViewChild('rainThroughCanvas', {static: false}) rainThroughCanvasRef: ElementRef;
 
     public rainCanvas;
     public rainThroughCanvas;
@@ -43,8 +43,10 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
     private animation: any;
     private customWindowAnimationFrame: any;
 
-    constructor(private ngZone: NgZone,
-                private helpersService: HelpersService) { }
+    constructor(
+        private ngZone: NgZone,
+        private helpersService: HelpersService
+    ) {}
 
     ngOnInit() {
         this.rainCanvas = this.rainCanvasRef.nativeElement;

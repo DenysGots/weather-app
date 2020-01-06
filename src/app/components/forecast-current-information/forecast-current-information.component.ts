@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
-
 import { State, WeatherTypes } from '../../../../shared/public-api';
 
 @Component({

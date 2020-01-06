@@ -3,7 +3,7 @@ import {
     FactoryProvider,
     Injectable,
     InjectionToken,
-    PLATFORM_ID,
+    PLATFORM_ID
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import * as moment from 'moment';
@@ -15,8 +15,6 @@ import { MoonPhases } from '../../../shared/public-api';
     providedIn: 'root',
 })
 export class HelpersService {
-    constructor() { }
-
     // Taken from:
     // https://github.com/milosdjakonovic/requestAnimationFrame-polyfill/blob/master/rafPolyfill.js by milosdjakonovic
     // and https://gist.github.com/paulirish/1579671 by paulirish
@@ -101,7 +99,7 @@ export class HelpersService {
             'full',
             'waningGibbous',
             'thirdQuarter',
-            'waningCrescent',
+            'waningCrescent'
         ];
         const phase = sunCalc.getMoonIllumination(moment()).phase;
         let phaseString;
@@ -182,10 +180,6 @@ export abstract class WindowRef {
 }
 
 export class BrowserWindowRef extends WindowRef {
-    constructor() {
-        super();
-    }
-
     get nativeWindow(): Window | Object {
         return window;
     }

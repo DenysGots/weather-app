@@ -3,15 +3,14 @@ import {
     animate,
     style,
     transition,
-    trigger,
+    trigger
 } from '@angular/animations';
 
 import { MainService } from '../../services/main.service';
-
 import {
     Overcast,
     State,
-    TimeOfDay,
+    TimeOfDay
 } from '../../../../shared/public-api';
 
 @Component({

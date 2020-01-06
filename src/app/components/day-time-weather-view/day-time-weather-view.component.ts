@@ -1,16 +1,16 @@
 import {
+    animate,
+    style,
+    transition,
+    trigger,
+} from '@angular/animations';
+import {
     ChangeDetectorRef,
     Component,
     ElementRef,
     OnInit,
     ViewChild,
 } from '@angular/core';
-import {
-    animate,
-    style,
-    transition,
-    trigger,
-} from '@angular/animations';
 
 import { MainService } from '../../services/main.service';
 
@@ -37,11 +37,13 @@ export class DayTimeWeatherViewComponent implements OnInit {
     public viewWidth: number;
     public currentState: State;
 
-    @ViewChild('weatherView') weatherView: ElementRef;
+    @ViewChild('weatherView', {static: false}) weatherView: ElementRef;
 
-    constructor(private elementRef: ElementRef,
-                private changeDetectorRef: ChangeDetectorRef,
-                private mainService: MainService) {
+    constructor(
+        private elementRef: ElementRef,
+        private changeDetectorRef: ChangeDetectorRef,
+        private mainService: MainService
+    ) {
         this.mainService.currentStateSubject.subscribe((state: State) => {
             this.currentState = state;
         });

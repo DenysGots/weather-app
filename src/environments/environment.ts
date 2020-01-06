@@ -4,6 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
+    config: 'dev',
     production: false,
-    prerenderUrl: 'http://localhost:5400'
+    usedHost: 'http://localhost:5400'
 };

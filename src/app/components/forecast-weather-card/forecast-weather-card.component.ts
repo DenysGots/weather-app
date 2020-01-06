@@ -1,13 +1,13 @@
 import {
     Input,
     Component,
-    OnInit,
+    OnInit
 } from '@angular/core';
 
 import {
     CardsDeckType,
     WeatherTypes,
-    WindDirections,
+    WindDirections
 } from '../../../../shared/public-api';
 
 @Component({
@@ -32,8 +32,6 @@ export class ForecastWeatherCardComponent implements OnInit {
     @Input() temperatureMax: number;
     @Input() humidity: number;
     @Input() uvIndex: number;
-
-    constructor() { }
 
     ngOnInit() { }
 

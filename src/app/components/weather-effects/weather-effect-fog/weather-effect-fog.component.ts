@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './weather-effect-fog.component.html',
     styleUrls: ['./weather-effect-fog.component.scss']
 })
-export class WeatherEffectFogComponent {
-    constructor() { }
-}
+export class WeatherEffectFogComponent {}

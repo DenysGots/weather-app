@@ -5,7 +5,7 @@ import {
     Component,
     ElementRef,
     OnInit,
-    ViewChild,
+    ViewChild
 } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
@@ -41,12 +41,14 @@ export class ForecastCardsDeckComponent implements OnInit, AfterViewInit {
     private deckHoursContainerWidth: number;
     private deckDaysContainerWidth: number;
 
-    @ViewChild('forecastCardsDeck') private forecastCardsDeck: ElementRef;
-    @ViewChild('forecastCardsDeckHoursContainer') private forecastCardsDeckHoursContainer: ElementRef;
-    @ViewChild('forecastCardsDeckDaysContainer') private forecastCardsDeckDaysContainer: ElementRef;
+    @ViewChild('forecastCardsDeck', {static: false}) private forecastCardsDeck: ElementRef;
+    @ViewChild('forecastCardsDeckHoursContainer', {static: false}) private forecastCardsDeckHoursContainer: ElementRef;
+    @ViewChild('forecastCardsDeckDaysContainer', {static: false}) private forecastCardsDeckDaysContainer: ElementRef;
 
-    constructor(private changeDetectorRef: ChangeDetectorRef,
-                private mainService: MainService) { }
+    constructor(
+        private changeDetectorRef: ChangeDetectorRef,
+        private mainService: MainService
+    ) {}
 
     ngOnInit() {
         this.mainService.currentStateSubject.subscribe((state: State) => {

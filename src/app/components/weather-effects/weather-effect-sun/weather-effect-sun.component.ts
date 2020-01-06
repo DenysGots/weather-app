@@ -1,7 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    Input,
+    Input
 } from '@angular/core';
 
 @Component({
@@ -13,6 +13,4 @@ import {
 export class WeatherEffectSunComponent {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
-
-    constructor() { }
 }

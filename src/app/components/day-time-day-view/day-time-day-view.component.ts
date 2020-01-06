@@ -8,11 +8,11 @@ import {
     OnDestroy,
     OnInit,
     SimpleChanges,
-    ViewRef,
+    ViewRef
 } from '@angular/core';
 
-import { MainService } from '../../services/main.service';
 import { HelpersService } from '../../services/helpers.service';
+import { MainService } from '../../services/main.service';
 
 import {
     CelestialData,
@@ -43,14 +43,16 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
     private animation: any;
     private customWindowAnimationFrame: any;
 
-    constructor(private ngZone: NgZone,
-                private changeDetectorRef: ChangeDetectorRef,
-                private mainService: MainService,
-                private helpersService: HelpersService) { }
+    constructor(
+        private ngZone: NgZone,
+        private changeDetectorRef: ChangeDetectorRef,
+        private mainService: MainService,
+        private helpersService: HelpersService
+    ) {}
 
     ngOnInit() {
         this.sunContainerSize = sunSize;
-        this.startX = -1 * this.sunContainerSize/* / 1.12*/;
+        this.startX = -1 * this.sunContainerSize;
         this.endX = this.viewWidth + this.sunContainerSize;
         this.maxY = this.viewHeight - this.sunContainerSize;
         this.startAnimation();
@@ -84,8 +86,8 @@ export class DayTimeDayViewComponent implements OnInit, OnChanges, OnDestroy {
         const maxY = this.maxY;
 
         const b = (4 * maxY * (startX + endX)) /
-                  (-1 * Math.pow((viewWidth + startX), 2) +
-                  2 * (viewWidth + startX) * (startX + endX) - 4 * startX * endX);
+            (-1 * Math.pow((viewWidth + startX), 2) +
+            2 * (viewWidth + startX) * (startX + endX) - 4 * startX * endX);
         const a = -1 * b / (startX + endX);
         const c = b * startX * (startX / (startX + endX) - 1);
 

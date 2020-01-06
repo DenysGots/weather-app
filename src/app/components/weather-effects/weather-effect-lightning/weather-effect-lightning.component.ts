@@ -7,8 +7,9 @@ import {
     NgZone,
     OnDestroy,
     OnInit,
-    ViewChild,
+    ViewChild
 } from '@angular/core';
+
 import _isNil from 'lodash/isNil';
 
 import { HelpersService } from '../../../services/helpers.service';
@@ -23,15 +24,17 @@ export class WeatherEffectLightningComponent implements OnInit, OnDestroy {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
 
-    @ViewChild('lightning') lightningRef: ElementRef;
+    @ViewChild('lightning', {static: false}) lightningRef: ElementRef;
 
     public lightningElement;
     private animation: any;
     private customWindowAnimationFrame: any;
 
-    constructor(private ngZone: NgZone,
-                private changeDetectorRef: ChangeDetectorRef,
-                private helpersService: HelpersService) { }
+    constructor(
+        private ngZone: NgZone,
+        private changeDetectorRef: ChangeDetectorRef,
+        private helpersService: HelpersService
+    ) {}
 
     ngOnInit() {
         this.changeDetectorRef.detach();

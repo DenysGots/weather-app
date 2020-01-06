@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { cloneDeep } from 'lodash/fp';
 import { BehaviorSubject, Observable } from 'rxjs';
-import * as _cloneDeep from 'lodash/cloneDeep';
 
-import { HttpService } from './http.service';
-import { StateService } from './state.service';
+import { Injectable } from '@angular/core';
 
 import { CelestialData, State } from '../../../shared/public-api';
+import { HttpService } from './http.service';
+import { StateService } from './state.service';
 
 @Injectable({
     providedIn: 'root',
@@ -19,36 +19,43 @@ export class MainService {
     private currentStateSource: BehaviorSubject<State>;
     private celestialDataSource: BehaviorSubject<CelestialData>;
 
-    constructor(private httpService: HttpService,
-                private stateService: StateService) {
+    constructor(
+        private httpService: HttpService,
+        private stateService: StateService
+    ) {
         this.currentStateSource = new BehaviorSubject(this.currentState);
         this.celestialDataSource = new BehaviorSubject(this.celestialData);
         this.currentStateSubject = this.currentStateSource.asObservable();
         this.celestialDataSubject = this.celestialDataSource.asObservable();
         this.stateService.getInitialState();
-        this.getCurrentState();
+        this.setCurrentState();
         this.emitCurrentState();
-        this.getLocation();
+        // this.getLocation();
+        // this.httpService.testConnection();
+        this.getWeather();
     }
 
-    public getLocation(): void {
-        this.httpService.getLocation(locationData => {
-            this.stateService.locationData = locationData;
-            this.getWeather();
-        });
-    }
+    // public getLocation(): void {
+    //     this.httpService.getLocation(locationData => {
+    //         this.stateService.locationData = locationData;
+    //         this.getWeather();
+    //     });
+    //
+    //     this.getWeather();
+    // }
 
     public getWeather(): void {
-        this.httpService.getWeather().subscribe(weatherData => {
-            this.stateService.adjustReceivedData(weatherData);
-            this.stateService.saveStateToLocalStorage();
-            this.getCurrentState();
-            this.emitCurrentState();
-        });
+        this.httpService.getWeather()
+            .subscribe(weatherData => {
+                this.stateService.adjustReceivedData(weatherData);
+                this.stateService.saveStateToLocalStorage();
+                this.setCurrentState();
+                this.emitCurrentState();
+            });
     }
 
-    public getCurrentState(): void {
-        this.currentState = _cloneDeep(this.stateService.currentState);
+    public setCurrentState(): void {
+        this.currentState = cloneDeep(this.stateService.currentState);
     }
 
     public emitCurrentState(): void {

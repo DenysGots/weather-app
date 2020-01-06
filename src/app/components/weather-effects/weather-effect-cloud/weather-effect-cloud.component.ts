@@ -3,19 +3,19 @@ import {
     Input,
     OnChanges,
     OnInit,
-    SimpleChanges,
+    SimpleChanges
 } from '@angular/core';
 import {
     animate,
     style,
     transition,
-    trigger,
+    trigger
 } from '@angular/animations';
 
 import {
     NumberOfClouds,
     Overcast,
-    TimeOfDay,
+    TimeOfDay
 } from '../../../../../shared/public-api';
 
 @Component({
@@ -39,8 +39,6 @@ export class WeatherEffectCloudComponent implements OnInit, OnChanges {
     @Input() public timeOfDay: TimeOfDay = TimeOfDay.day;
 
     public numberOfClouds: number;
-
-    constructor() { }
 
     ngOnInit() {
         this.numberOfClouds = NumberOfClouds[this.overcast];

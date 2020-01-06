@@ -1,4 +1,5 @@
 export const environment = {
+    config: 'prod',
     production: true,
-    prerenderUrl: 'http://localhost:5400'
+    usedHost: 'https://app-simple-weather.herokuapp.com'
 };

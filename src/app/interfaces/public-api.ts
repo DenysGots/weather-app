@@ -72,11 +72,17 @@ export interface DaysForecast {
     uvIndex?: number;
 }
 
-export interface Location {
-    countryCode: string;
-    country: string;
-    city: string;
-}
+// export interface Location {
+//     countryCode: string;
+//     country: string;
+//     city: string;
+// }
+
+/* Types */
+export type ConfigFile = {
+    usedHost?: string;
+    noErrorsMode?: boolean;
+};
 
 /* Enums */
 export enum ButtonSizes {

@@ -6,13 +6,13 @@ import {
     OnChanges,
     OnInit,
     SimpleChanges,
-    ViewRef,
+    ViewRef
 } from '@angular/core';
 import {
     animate,
     style,
     transition,
-    trigger,
+    trigger
 } from '@angular/animations';
 
 import { MainService } from '../../../services/main.service';
@@ -25,7 +25,7 @@ import {
     spaceMd,
     State,
     TimeOfDay,
-    WaterDrop,
+    WaterDrop
 } from '../../../../../shared/public-api';
 
 @Component({
@@ -57,8 +57,10 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
 
     private numberOfDrops = 100;
 
-    constructor(private changeDetectorRef: ChangeDetectorRef,
-                private mainService: MainService) {
+    constructor(
+        private changeDetectorRef: ChangeDetectorRef,
+        private mainService: MainService
+    ) {
         this.mainService.currentStateSubject.subscribe((state: State) => {
             this.currentState = state;
         });

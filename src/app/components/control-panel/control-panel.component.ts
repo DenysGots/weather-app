@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import * as _cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash/fp';
 import * as moment from 'moment';
 
-import { MainService } from '../../services/main.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 import {
     MoonPhases,
     Overcast,
     State,
     TimeOfDay,
     WeatherTypes,
-    WindDirections,
+    WindDirections
 } from '../../../../shared/public-api';
+import { MainService } from '../../services/main.service';
 
 @Component({
     selector: 'app-control-panel',
@@ -37,8 +38,10 @@ export class ControlPanelComponent implements OnInit {
         currentTime: 12 * 60 * 60 * 1000,
     };
 
-    constructor(private formBuilder: FormBuilder,
-                private mainService: MainService) { }
+    constructor(
+        private formBuilder: FormBuilder,
+        private mainService: MainService
+    ) {}
 
     ngOnInit() {
         this.getState();
@@ -73,7 +76,7 @@ export class ControlPanelComponent implements OnInit {
     }
 
     public getState(): void {
-        this.testingState = _cloneDeep(this.mainService.currentState);
+        this.testingState = cloneDeep(this.mainService.currentState);
     }
 
     public setInitialState(): void {
@@ -121,12 +124,12 @@ export class ControlPanelComponent implements OnInit {
 
         this.setTimeOfDay();
         this.defineSkyBackground();
-        this.mainService.currentState = _cloneDeep(this.testingState);
+        this.mainService.currentState = cloneDeep(this.testingState);
         this.mainService.emitCurrentState();
     }
 
     public resetState(): void {
-        this.mainService.getCurrentState();
+        this.mainService.setCurrentState();
         this.mainService.emitCurrentState();
         this.getState();
         this.setFormValues();

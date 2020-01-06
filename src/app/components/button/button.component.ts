@@ -1,7 +1,7 @@
 import {
     Component,
     Input,
-    OnInit,
+    OnInit
 } from '@angular/core';
 
 import {
@@ -25,8 +25,6 @@ export class ButtonComponent implements OnInit {
     public size: string;
     public type: string;
     public fontSize: string;
-
-    constructor() { }
 
     ngOnInit() {
         this.size = ButtonSizes[this.buttonSize];

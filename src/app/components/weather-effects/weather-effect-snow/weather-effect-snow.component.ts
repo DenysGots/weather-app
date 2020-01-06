@@ -8,7 +8,7 @@ import {
     OnDestroy,
     OnInit,
     SimpleChanges,
-    ViewChild,
+    ViewChild
 } from '@angular/core';
 
 import { HelpersService } from '../../../services/helpers.service';
@@ -26,7 +26,7 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
     @Input() viewWidth: number;
     @Input() overcast: Overcast = Overcast.light;
 
-    @ViewChild('snowCanvas') snowCanvasRef: ElementRef;
+    @ViewChild('snowCanvas', {static: false}) snowCanvasRef: ElementRef;
 
     public snowCanvas;
 
@@ -34,8 +34,10 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
     private animation: any;
     private customWindowAnimationFrame: any;
 
-    constructor(private ngZone: NgZone,
-                private helpersService: HelpersService) { }
+    constructor(
+        private ngZone: NgZone,
+        private helpersService: HelpersService
+    ) {}
 
     ngOnInit() {
         this.snowCanvas = this.snowCanvasRef.nativeElement;

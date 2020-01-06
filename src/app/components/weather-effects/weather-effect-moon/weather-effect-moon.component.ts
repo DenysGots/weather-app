@@ -1,7 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    Input,
+    Input
 } from '@angular/core';
 
 import { MoonPhases } from '../../../../../shared/public-api';
@@ -16,8 +16,6 @@ export class WeatherEffectMoonComponent {
     @Input() viewHeight: number;
     @Input() viewWidth: number;
     @Input() moonPhase: MoonPhases;
-
-    constructor() { }
 
     public getMoonPhaseClass(): {[key: string]: boolean} {
         const moonPhaseClass = {};
