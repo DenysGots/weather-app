@@ -9,21 +9,20 @@ Note: used AccuWeather API has a limit of 50 calls/day due to Limited Trial
 Start local server:
 * clone
 * run `npm i`
-* change serverURL of HttpService to `http://localhost:5400`
-* run `npm run helper:build`
+* run `dev:local`
 * open browser at `http://localhost:5400`
 
 ---
 
 ## Used technologies and projects:
 ### General:
-* Angular 7, NestJS 5, Typescript, RxJS 6, Sass, Moment.js, Angular Material
+* Angular 8, NestJS 6, Typescript 3.5, RxJS 6, Sass, Moment.js, Angular Material
 ### Scaffolding:
 * https://github.com/kamilmysliwiec/universal-nest
 * https://github.com/necolas/normalize.css/
 ### Weather APIs:
 * https://developer.accuweather.com/
-* https://www.apixu.com/
+* https://www.weatherbit.io/
 ### Weather effects:
 * https://codepen.io/angiebadfox/pen/RRdQAb
 * https://codepen.io/tmrDevelops/pen/PPgjwz
