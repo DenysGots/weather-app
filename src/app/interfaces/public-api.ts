@@ -242,229 +242,413 @@ export const cardsDeckHeight = 200;
 export const cardWidth = 120;
 
 /* Weather APIs data */
-/* Apixu weather codes */
-export const ApixuWeatherCodes = {
-    dayClear: [1000],
-    nightClear: [1000],
-    fogCodes: [1030, 1135, 1147],
+/* Weatherbit weather codes */
+export const WeatherbitWeatherCodes = {
+    dayClear: [800],
+    nightClear: [800],
+    fogCodes: [700, 711, 721, 731, 741, 751],
     cloudsCodes: {
-        light: [1003],
-        medium: [1006],
-        heavy: [1009],
+        light: [801, 802],
+        medium: [803],
+        heavy: [804],
     },
     rainCodes: {
-        light: [1063, 1072, 1150, 1153, 1180, 1198, 1240, 1273],
-        medium: [1168, 1186, 1189, 1201, 1243, 1276],
-        heavy: [1087, 1171, 1192, 1195, 1246],
+        light: [200, 230, 300, 301, 500, 520],
+        medium: [900, 201, 231, 302, 501, 511, 521],
+        heavy: [202, 232, 233, 502, 522],
     },
     snowCodes: {
-        light: [1066, 1069, 1204, 1210, 1213, 1249, 1255, 1261, 1279],
-        medium: [1207, 1216, 1219, 1237, 1252, 1258, 1264, 1282],
-        heavy: [1114, 1117, 1222, 1225],
+        light: [600, 611],
+        medium: [601, 610, 612, 621],
+        heavy: [602, 622, 623],
     },
-    dayClearCodes: [1000, 1030, 1135, 1147],
-    dayLightCloudsCodes: [1003],
-    dayMediumCloudsCodes: [1006],
-    dayHeavyCloudsCodes: [1009],
-    dayLightRainCodes: [1063, 1072, 1150, 1153, 1180, 1198, 1240, 1273],
-    dayMediumRainCodes: [1168, 1186, 1189, 1201, 1243, 1276],
-    dayHeavyRainCodes: [1087, 1171, 1192, 1195, 1246],
-    dayLightSnowCodes: [1066, 1069, 1204, 1210, 1213, 1249, 1255, 1261, 1279],
-    dayMediumSnowCodes: [1207, 1216, 1219, 1237, 1252, 1258, 1264, 1282],
-    dayHeavySnowCodes: [1114, 1117, 1222, 1225],
-    1000: {
-        day: 'Sunny',
-        night: 'Clear',
+    dayClearCodes: [800, 700, 711, 721, 731, 741, 751],
+    dayLightCloudsCodes: [801, 802],
+    dayMediumCloudsCodes: [803],
+    dayHeavyCloudsCodes: [804],
+    dayLightRainCodes: [200, 230, 300, 301, 500, 520],
+    dayMediumRainCodes: [900, 201, 231, 302, 501, 511, 521],
+    dayHeavyRainCodes: [202, 232, 233, 502, 522],
+    dayLightSnowCodes: [600, 611],
+    dayMediumSnowCodes: [601, 610, 612, 621],
+    dayHeavySnowCodes: [602, 622, 623],
+    200: {
+        day: 'Thunderstorm with light rain',
+        night: 'Thunderstorm with light rain'
     },
-    1003: {
-        day: 'Partly cloudy',
-        night: 'Partly cloudy',
+    201: {
+        day: 'Thunderstorm with rain',
+        night: 'Thunderstorm with rain'
     },
-    1006: {
-        day: 'Cloudy',
-        night: 'Cloudy',
+    202: {
+        day: 'Thunderstorm with heavy rain',
+        night: 'Thunderstorm with heavy rain'
     },
-    1009: {
-        day: 'Overcast',
-        night: 'Overcast',
+    230: {
+        day: 'Thunderstorm with light drizzle',
+        night: 'Thunderstorm with light drizzle',
     },
-    1030: {
-        day: 'Mist',
-        night: 'Mist',
+    231: {
+        day: 'Thunderstorm with drizzle',
+        night: 'Thunderstorm with drizzle',
     },
-    1063: {
-        day: 'Patchy rain possible',
-        night: 'Patchy rain possible',
+    232: {
+        day: 'Thunderstorm with heavy drizzle',
+        night: 'Thunderstorm with heavy drizzle',
     },
-    1066: {
-        day: 'Patchy snow possible',
-        night: 'Patchy snow possible',
+    233: {
+        day: 'Thunderstorm with Hail',
+        night: 'Thunderstorm with Hail',
     },
-    1069: {
-        day: 'Patchy sleet possible',
-        night: 'Patchy sleet possible',
+    300: {
+        day: 'Light Drizzle',
+        night: 'Light Drizzle',
     },
-    1072: {
-        day: 'Patchy freezing drizzle possible',
-        night: 'Patchy freezing drizzle possible',
+    301: {
+        day: 'Drizzle',
+        night: 'Drizzle',
     },
-    1087: {
-        day: 'Thundery outbreaks possible',
-        night: 'Thundery outbreaks possible',
+    302: {
+        day: 'Heavy Drizzle',
+        night: 'Heavy Drizzle',
     },
-    1114: {
-        day: 'Blowing snow',
-        night: 'Blowing snow',
+    500: {
+        day: 'Light Rain',
+        night: 'Light Rain',
     },
-    1117: {
-        day: 'Blizzard',
-        night: 'Blizzard',
+    501: {
+        day: 'Moderate Rain',
+        night: 'Moderate Rain',
     },
-    1135: {
-        day: 'Fog',
-        night: 'Fog',
+    502: {
+        day: 'Heavy Rain',
+        night: 'Heavy Rain',
     },
-    1147: {
-        day: 'Freezing fog',
-        night: 'Freezing fog',
+    511: {
+        day: 'Freezing rain',
+        night: 'Freezing rain',
     },
-    1150: {
-        day: 'Patchy light drizzle',
-        night: 'Patchy light drizzle',
+    520: {
+        day: 'Light shower rain',
+        night: 'Light shower rain',
     },
-    1153: {
-        day: 'Light drizzle',
-        night: 'Light drizzle',
+    521: {
+        day: 'Shower rain',
+        night: 'Shower rain',
     },
-    1168: {
-        day: 'Freezing drizzle',
-        night: 'Freezing drizzle',
+    522: {
+        day: 'Heavy shower rain',
+        night: 'Heavy shower rain',
     },
-    1171: {
-        day: 'Heavy freezing drizzle',
-        night: 'Heavy freezing drizzle',
-    },
-    1180: {
-        day: 'Patchy light rain',
-        night: 'Patchy light rain',
-    },
-    1183: {
-        day: 'Light rain',
-        night: 'Light rain',
-    },
-    1186: {
-        day: 'Moderate rain at times',
-        night: 'Moderate rain at times',
-    },
-    1189: {
-        day: 'Moderate rain',
-        night: 'Moderate rain',
-    },
-    1192: {
-        day: 'Heavy rain at times',
-        night: 'Heavy rain at times',
-    },
-    1195: {
-        day: 'Heavy rain',
-        night: 'Heavy rain',
-    },
-    1198: {
-        day: 'Light freezing rain',
-        night: 'Light freezing rain',
-    },
-    1201: {
-        day: 'Moderate or heavy freezing rain',
-        night: 'Moderate or heavy freezing rain',
-    },
-    1204: {
-        day: 'Light sleet',
-        night: 'Light sleet',
-    },
-    1207: {
-        day: 'Moderate or heavy sleet',
-        night: 'Moderate or heavy sleet',
-    },
-    1210: {
-        day: 'Patchy light snow',
-        night: 'Patchy light snow',
-    },
-    1213: {
+    600: {
         day: 'Light snow',
         night: 'Light snow',
     },
-    1216: {
-        day: 'Patchy moderate snow',
-        night: 'Patchy moderate snow',
+    601: {
+        day: 'Snow',
+        night: 'Snow',
     },
-    1219: {
-        day: 'Moderate snow',
-        night: 'Moderate snow',
+    602: {
+        day: 'Heavy Snow',
+        night: 'Heavy Snow',
     },
-    1222: {
-        day: 'Patchy heavy snow',
-        night: 'Patchy heavy snow',
+    610: {
+        day: 'Mix snow/rain',
+        night: 'Mix snow/rain',
     },
-    1225: {
-        day: 'Heavy snow',
-        night: 'Heavy snow',
+    611: {
+        day: 'Sleet',
+        night: 'Sleet',
     },
-    1237: {
-        day: 'Ice pellets',
-        night: 'Ice pellets',
+    612: {
+        day: 'Heavy sleet',
+        night: 'Heavy sleet',
     },
-    1240: {
-        day: 'Light rain shower',
-        night: 'Light rain shower',
+    621: {
+        day: 'Snow shower',
+        night: 'Snow shower',
     },
-    1243: {
-        day: 'Moderate or heavy rain shower',
-        night: 'Moderate or heavy rain shower',
+    622: {
+        day: 'Heavy snow shower',
+        night: 'Heavy snow shower',
     },
-    1246: {
-        day: 'Torrential rain shower',
-        night: 'Torrential rain shower',
+    623: {
+        day: 'Flurries',
+        night: 'Flurries',
     },
-    1249: {
-        day: 'Light sleet showers',
-        night: 'Light sleet showers',
+    700: {
+        day: 'Mist',
+        night: 'Mist',
     },
-    1252: {
-        day: 'Moderate or heavy sleet showers',
-        night: 'Moderate or heavy sleet showers',
+    711: {
+        day: 'Smoke',
+        night: 'Smoke',
     },
-    1255: {
-        day: 'Light snow showers',
-        night: 'Light snow showers',
+    721: {
+        day: 'Haze',
+        night: 'Haze',
     },
-    1258: {
-        day: 'Moderate or heavy snow showers',
-        night: 'Moderate or heavy snow showers',
+    731: {
+        day: 'Sand/dust',
+        night: 'Sand/dust',
     },
-    1261: {
-        day: 'Light showers of ice pellets',
-        night: 'Light showers of ice pellets',
+    741: {
+        day: 'Fog',
+        night: 'Fog',
     },
-    1264: {
-        day: 'Moderate or heavy showers of ice pellets',
-        night: 'Moderate or heavy showers of ice pellets',
+    751: {
+        day: 'Freezing Fog',
+        night: 'Freezing Fog',
     },
-    1273: {
-        day: 'Patchy light rain with thunder',
-        night: 'Patchy light rain with thunder',
+    800: {
+        day: 'Sunny',
+        night: 'Clear sky'
     },
-    1276: {
-        day: 'Moderate or heavy rain with thunder',
-        night: 'Moderate or heavy rain with thunder',
+    801: {
+        day: 'Few clouds',
+        night: 'Few clouds',
     },
-    1279: {
-        day: 'Patchy light snow with thunder',
-        night: 'Patchy light snow with thunder',
+    802: {
+        day: 'Scattered clouds',
+        night: 'Scattered clouds',
     },
-    1282: {
-        day: 'Moderate or heavy snow with thunder',
-        night: 'Moderate or heavy snow with thunder',
+    803: {
+        day: 'Broken clouds',
+        night: 'Broken clouds',
     },
+    804: {
+        day: 'Overcast clouds',
+        night: 'Overcast clouds',
+    },
+    900: {
+        day: 'Unknown Precipitation',
+        night: 'Unknown Precipitation',
+    }
 };
+
+/* Apixu weather codes */
+// export const ApixuWeatherCodes = {
+//     dayClear: [1000],
+//     nightClear: [1000],
+//     fogCodes: [1030, 1135, 1147],
+//     cloudsCodes: {
+//         light: [1003],
+//         medium: [1006],
+//         heavy: [1009],
+//     },
+//     rainCodes: {
+//         light: [1063, 1072, 1150, 1153, 1180, 1198, 1240, 1273],
+//         medium: [1168, 1186, 1189, 1201, 1243, 1276],
+//         heavy: [1087, 1171, 1192, 1195, 1246],
+//     },
+//     snowCodes: {
+//         light: [1066, 1069, 1204, 1210, 1213, 1249, 1255, 1261, 1279],
+//         medium: [1207, 1216, 1219, 1237, 1252, 1258, 1264, 1282],
+//         heavy: [1114, 1117, 1222, 1225],
+//     },
+//     dayClearCodes: [1000, 1030, 1135, 1147],
+//     dayLightCloudsCodes: [1003],
+//     dayMediumCloudsCodes: [1006],
+//     dayHeavyCloudsCodes: [1009],
+//     dayLightRainCodes: [1063, 1072, 1150, 1153, 1180, 1198, 1240, 1273],
+//     dayMediumRainCodes: [1168, 1186, 1189, 1201, 1243, 1276],
+//     dayHeavyRainCodes: [1087, 1171, 1192, 1195, 1246],
+//     dayLightSnowCodes: [1066, 1069, 1204, 1210, 1213, 1249, 1255, 1261, 1279],
+//     dayMediumSnowCodes: [1207, 1216, 1219, 1237, 1252, 1258, 1264, 1282],
+//     dayHeavySnowCodes: [1114, 1117, 1222, 1225],
+//     1000: {
+//         day: 'Sunny',
+//         night: 'Clear',
+//     },
+//     1003: {
+//         day: 'Partly cloudy',
+//         night: 'Partly cloudy',
+//     },
+//     1006: {
+//         day: 'Cloudy',
+//         night: 'Cloudy',
+//     },
+//     1009: {
+//         day: 'Overcast',
+//         night: 'Overcast',
+//     },
+//     1030: {
+//         day: 'Mist',
+//         night: 'Mist',
+//     },
+//     1063: {
+//         day: 'Patchy rain possible',
+//         night: 'Patchy rain possible',
+//     },
+//     1066: {
+//         day: 'Patchy snow possible',
+//         night: 'Patchy snow possible',
+//     },
+//     1069: {
+//         day: 'Patchy sleet possible',
+//         night: 'Patchy sleet possible',
+//     },
+//     1072: {
+//         day: 'Patchy freezing drizzle possible',
+//         night: 'Patchy freezing drizzle possible',
+//     },
+//     1087: {
+//         day: 'Thundery outbreaks possible',
+//         night: 'Thundery outbreaks possible',
+//     },
+//     1114: {
+//         day: 'Blowing snow',
+//         night: 'Blowing snow',
+//     },
+//     1117: {
+//         day: 'Blizzard',
+//         night: 'Blizzard',
+//     },
+//     1135: {
+//         day: 'Fog',
+//         night: 'Fog',
+//     },
+//     1147: {
+//         day: 'Freezing fog',
+//         night: 'Freezing fog',
+//     },
+//     1150: {
+//         day: 'Patchy light drizzle',
+//         night: 'Patchy light drizzle',
+//     },
+//     1153: {
+//         day: 'Light drizzle',
+//         night: 'Light drizzle',
+//     },
+//     1168: {
+//         day: 'Freezing drizzle',
+//         night: 'Freezing drizzle',
+//     },
+//     1171: {
+//         day: 'Heavy freezing drizzle',
+//         night: 'Heavy freezing drizzle',
+//     },
+//     1180: {
+//         day: 'Patchy light rain',
+//         night: 'Patchy light rain',
+//     },
+//     1183: {
+//         day: 'Light rain',
+//         night: 'Light rain',
+//     },
+//     1186: {
+//         day: 'Moderate rain at times',
+//         night: 'Moderate rain at times',
+//     },
+//     1189: {
+//         day: 'Moderate rain',
+//         night: 'Moderate rain',
+//     },
+//     1192: {
+//         day: 'Heavy rain at times',
+//         night: 'Heavy rain at times',
+//     },
+//     1195: {
+//         day: 'Heavy rain',
+//         night: 'Heavy rain',
+//     },
+//     1198: {
+//         day: 'Light freezing rain',
+//         night: 'Light freezing rain',
+//     },
+//     1201: {
+//         day: 'Moderate or heavy freezing rain',
+//         night: 'Moderate or heavy freezing rain',
+//     },
+//     1204: {
+//         day: 'Light sleet',
+//         night: 'Light sleet',
+//     },
+//     1207: {
+//         day: 'Moderate or heavy sleet',
+//         night: 'Moderate or heavy sleet',
+//     },
+//     1210: {
+//         day: 'Patchy light snow',
+//         night: 'Patchy light snow',
+//     },
+//     1213: {
+//         day: 'Light snow',
+//         night: 'Light snow',
+//     },
+//     1216: {
+//         day: 'Patchy moderate snow',
+//         night: 'Patchy moderate snow',
+//     },
+//     1219: {
+//         day: 'Moderate snow',
+//         night: 'Moderate snow',
+//     },
+//     1222: {
+//         day: 'Patchy heavy snow',
+//         night: 'Patchy heavy snow',
+//     },
+//     1225: {
+//         day: 'Heavy snow',
+//         night: 'Heavy snow',
+//     },
+//     1237: {
+//         day: 'Ice pellets',
+//         night: 'Ice pellets',
+//     },
+//     1240: {
+//         day: 'Light rain shower',
+//         night: 'Light rain shower',
+//     },
+//     1243: {
+//         day: 'Moderate or heavy rain shower',
+//         night: 'Moderate or heavy rain shower',
+//     },
+//     1246: {
+//         day: 'Torrential rain shower',
+//         night: 'Torrential rain shower',
+//     },
+//     1249: {
+//         day: 'Light sleet showers',
+//         night: 'Light sleet showers',
+//     },
+//     1252: {
+//         day: 'Moderate or heavy sleet showers',
+//         night: 'Moderate or heavy sleet showers',
+//     },
+//     1255: {
+//         day: 'Light snow showers',
+//         night: 'Light snow showers',
+//     },
+//     1258: {
+//         day: 'Moderate or heavy snow showers',
+//         night: 'Moderate or heavy snow showers',
+//     },
+//     1261: {
+//         day: 'Light showers of ice pellets',
+//         night: 'Light showers of ice pellets',
+//     },
+//     1264: {
+//         day: 'Moderate or heavy showers of ice pellets',
+//         night: 'Moderate or heavy showers of ice pellets',
+//     },
+//     1273: {
+//         day: 'Patchy light rain with thunder',
+//         night: 'Patchy light rain with thunder',
+//     },
+//     1276: {
+//         day: 'Moderate or heavy rain with thunder',
+//         night: 'Moderate or heavy rain with thunder',
+//     },
+//     1279: {
+//         day: 'Patchy light snow with thunder',
+//         night: 'Patchy light snow with thunder',
+//     },
+//     1282: {
+//         day: 'Moderate or heavy snow with thunder',
+//         night: 'Moderate or heavy snow with thunder',
+//     },
+// };
 
 /* AccuWeather icons codes */
 export const AccuWeatherCodes = {

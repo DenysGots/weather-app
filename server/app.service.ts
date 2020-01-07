@@ -25,12 +25,14 @@ export class AppService {
     private overcast: Overcast;
     private ipgeolocationApikey = 'f7f993429c6e41e984e28f3a964c1d1d';
     private accuWeatherApikey = 'rpu3K5yQuA9IogpqOTDmX9hTEWXKnI0I';
-    private apixuApikey = 'abcf9bd6ce4b40b29d7170831191703';
+    // private apixuApikey = 'abcf9bd6ce4b40b29d7170831191703';
+    private weatherbitkey = '21d8d5888e2c42dca7d3ac7ee3ca5208';
     private accuWeatherGetLocationKeyUrl = 'http://dataservice.accuweather.com/locations/v1/cities/';
     private accuWeatherGetFiveDaysWeatherUrl = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
     private accuWeatherGetTwelveHoursWeatherUrl = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/{locationKey}';
     private accuWeatherGetCurrentWeatherUrl = 'http://dataservice.accuweather.com/currentconditions/v1/';
-    private apixuGetTenDaysWeatherUrl = 'http://api.apixu.com/v1/forecast.json?';
+    // private apixuGetTenDaysWeatherUrl = 'http://api.apixu.com/v1/forecast.json?';
+    private weatherbitSixteenDaysWeatherUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?';
 
     private retryPipeline =
         retryWhen(error => error.pipe(
@@ -63,13 +65,14 @@ export class AppService {
             );
     }
 
-    // TODO: one of APis/request fails, check
+    // TODO: update to new api
     public getWeather(locationDto: LocationDto): Observable<any> {
         let getLocationKeyUrl = this.accuWeatherGetLocationKeyUrl;
         let getCurrentWeatherUrl = this.accuWeatherGetCurrentWeatherUrl;
         let getFiveDaysWeatherUrl =  this.accuWeatherGetFiveDaysWeatherUrl;
         let getTwelveHoursWeatherUrl = this.accuWeatherGetTwelveHoursWeatherUrl;
-        let getTenDaysWeatherUrl = this.apixuGetTenDaysWeatherUrl;
+        // let getTenDaysWeatherUrl = this.apixuGetTenDaysWeatherUrl;
+        let getSixteenDaysWeatherUrl = this.weatherbitSixteenDaysWeatherUrl;
         let locationKey: any;
 
         getLocationKeyUrl += `${locationDto.countryCode}/search?apikey=${this.accuWeatherApikey}&q=${locationDto.city}`;
@@ -83,7 +86,8 @@ export class AppService {
                     getCurrentWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
                     getFiveDaysWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
                     getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}&language=en&details=true&metric=true`;
-                    getTenDaysWeatherUrl += `key=${this.apixuApikey}&q=${locationDto.city}&days=10`;
+                    // getTenDaysWeatherUrl += `key=${this.apixuApikey}&q=${locationDto.city}&days=10`;
+                    getSixteenDaysWeatherUrl += `city=${locationDto.city}&country=${locationDto.country}&key=${this.weatherbitkey}`;
 
                     const currentWeather = this.httpService
                         .get(getCurrentWeatherUrl)
@@ -106,14 +110,24 @@ export class AppService {
                             this.retryPipeline
                         );
 
-                    const tenDaysWeather = this.httpService
-                        .get(getTenDaysWeatherUrl)
+                    // const tenDaysWeather = this.httpService
+                    //     .get(getTenDaysWeatherUrl)
+                    //     .pipe(
+                    //         map(weatherData => weatherData.data),
+                    //         this.retryPipeline
+                    //     );
+
+                    const sixteenDaysWeather = this.httpService
+                        .get(getSixteenDaysWeatherUrl)
                         .pipe(
+                            // TODO: check
+                            tap(weatherData => console.log(weatherData.data)),
                             map(weatherData => weatherData.data),
                             this.retryPipeline
                         );
 
-                    return combineLatest(tenDaysWeather, fiveDaysWeather, twelveHoursWeather, currentWeather);
+                    // return combineLatest(tenDaysWeather fiveDaysWeather, twelveHoursWeather, currentWeather);
+                    return combineLatest(sixteenDaysWeather, fiveDaysWeather, twelveHoursWeather, currentWeather);
                 }),
                 this.retryPipeline
             );
@@ -122,7 +136,9 @@ export class AppService {
     public adjustReceivedData(weatherData: any): State {
         const weatherState = <State>{};
 
+        // TODO: update to weatherData[3] data
         weatherState.currentTime = this.setCurrentTime(weatherData[0].location.localtime);
+        // TODO: update to weatherData[3] data
         weatherState.dayLength = this.setDayLength(weatherData[0].forecast.forecastday[0].astro);
         weatherState.nightLength = this.setNightLength(weatherState.dayLength);
         weatherState.timeOfDay = this.setTimeOfDay(
@@ -130,20 +146,33 @@ export class AppService {
             weatherState.dayLength,
             weatherState.nightLength
         );
+        // TODO: update to weatherData[3] data
         weatherState.humidityCurrent = weatherData[0].current.humidity;
+        // TODO: update to weatherData[3] data
         weatherState.temperatureCurrent = weatherData[0].current.temp_c;
+        // TODO: update to weatherData[3] data
         weatherState.temperatureFeelsLike = weatherData[0].current.feelslike_c;
+        // TODO: update to weatherData[3] data
         weatherState.airPressure = Math.trunc(weatherData[0].current.pressure_mb / 1.333);
+        // TODO: update to weatherData[3] data
         weatherState.uvIndex = weatherData[0].current.uv;
+        // TODO: update to weatherData[3] data
         weatherState.windSpeed = weatherData[0].current.wind_kph;
+        // TODO: update to weatherData[3] data
         weatherState.weatherDefinition = weatherData[0].current.condition.text;
+        // TODO: update to weatherData[3] data
         weatherState.foggy = this.isFog(weatherData[0].current.condition.code);
+        // TODO: update to weatherData[3] data
         weatherState.cloudy = this.isCloud(weatherData[0].current.condition.code);
+        // TODO: update to weatherData[3] data
         weatherState.rainy = this.isRain(weatherData[0].current.condition.code);
+        // TODO: update to weatherData[3] data
         weatherState.snowy = this.isSnow(weatherData[0].current.condition.code);
         weatherState.overcast = this.overcast;
         weatherState.weatherType = this.setWeatherTypeAccuWeather(weatherData[3][0].WeatherIcon, weatherState.timeOfDay);
+        // TODO: update to weatherData[3] data
         weatherState.windDirection = this.setWindDirection(weatherData[0].current.wind_degree);
+        // TODO: update to new weatherData[0] data
         weatherState.daysForecast = this.setDaysForecast(weatherData[0].forecast.forecastday);
         weatherState.hoursForecast = this.setHoursForecast(
             weatherData[2],
@@ -202,7 +231,7 @@ export class AppService {
         return false;
     }
 
-    private setDayLength(astroData): number {
+    private setDayLength(astroData: any): number {
         let sunRiseTime: moment.Moment;
         let sunSetTime: moment.Moment;
         let sunRise = astroData.sunrise;
@@ -237,7 +266,12 @@ export class AppService {
         return moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
     }
 
-    private setTimeOfDay(currentTime: number, dayLength: number, nightLength: number, date?: string): TimeOfDay {
+    private setTimeOfDay(
+        currentTime: number,
+        dayLength: number,
+        nightLength: number,
+        date?: string
+    ): TimeOfDay {
         const currentHour: number = date
             ? moment.duration(this.setCurrentTime(date)).hours()
             : moment.duration(currentTime).hours();
@@ -310,7 +344,7 @@ export class AppService {
         }
     }
 
-    private setWindDirection(windAngle): WindDirections {
+    private setWindDirection(windAngle: any): WindDirections {
         function calculateBoundaries(angle) {
             const delta = 45 / 2;
             return (windAngle >= (angle - delta)) && (windAngle < (angle + delta));
@@ -338,7 +372,12 @@ export class AppService {
         }
     }
 
-    private setHoursForecast(hoursData, dayLength, nightLength, currentTime): HoursForecast[] {
+    private setHoursForecast(
+        hoursData: any,
+        dayLength: any,
+        nightLength: any,
+        currentTime: any
+    ): HoursForecast[] {
         return hoursData.map(hourData => {
             const timeOfDay: TimeOfDay = this.setTimeOfDay(currentTime, dayLength, nightLength, hourData.DateTime);
             const weatherType: WeatherTypes = this.setWeatherTypeAccuWeather(hourData.WeatherIcon, timeOfDay);
@@ -356,9 +395,10 @@ export class AppService {
         });
     }
 
-    private setDaysForecast(daysData): DaysForecast[] {
+    // TODO: update
+    private setDaysForecast(daysData: any): DaysForecast[] {
         return daysData.map(dayData => {
-            const weatherType: WeatherTypes =  this.setWeatherTypeApixu(dayData.day.condition.code);
+            const weatherType: WeatherTypes = this.setWeatherTypeApixu(dayData.day.condition.code);
 
             return  {
                 dayDate: moment(dayData.date).format('D MMM'),
