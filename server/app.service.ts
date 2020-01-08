@@ -6,7 +6,7 @@ import { HttpService, Injectable } from '@nestjs/common';
 
 import {
     AccuWeatherCodes,
-    ApixuWeatherCodes,
+    // ApixuWeatherCodes,
     DaysForecast,
     HoursForecast,
     LocationDto,
@@ -14,7 +14,8 @@ import {
     State,
     TimeOfDay,
     WeatherTypes,
-    WindDirections
+    WindDirections,
+    WeatherbitWeatherCodes
 } from '../shared/public-api';
 
 @Injectable()
@@ -68,11 +69,11 @@ export class AppService {
     // TODO: update to new api
     public getWeather(locationDto: LocationDto): Observable<any> {
         let getLocationKeyUrl = this.accuWeatherGetLocationKeyUrl;
-        let getCurrentWeatherUrl = this.accuWeatherGetCurrentWeatherUrl;
-        let getFiveDaysWeatherUrl =  this.accuWeatherGetFiveDaysWeatherUrl;
-        let getTwelveHoursWeatherUrl = this.accuWeatherGetTwelveHoursWeatherUrl;
         // let getTenDaysWeatherUrl = this.apixuGetTenDaysWeatherUrl;
         let getSixteenDaysWeatherUrl = this.weatherbitSixteenDaysWeatherUrl;
+        let getFiveDaysWeatherUrl =  this.accuWeatherGetFiveDaysWeatherUrl;
+        let getTwelveHoursWeatherUrl = this.accuWeatherGetTwelveHoursWeatherUrl;
+        let getCurrentWeatherUrl = this.accuWeatherGetCurrentWeatherUrl;
         let locationKey: any;
 
         getLocationKeyUrl += `${locationDto.countryCode}/search?apikey=${this.accuWeatherApikey}&q=${locationDto.city}`;
@@ -83,15 +84,24 @@ export class AppService {
                 switchMap(locationData => {
                     locationKey = locationData.data[0].Key;
 
-                    getCurrentWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
-                    getFiveDaysWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
-                    getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}&language=en&details=true&metric=true`;
                     // getTenDaysWeatherUrl += `key=${this.apixuApikey}&q=${locationDto.city}&days=10`;
                     getSixteenDaysWeatherUrl += `city=${locationDto.city}&country=${locationDto.country}&key=${this.weatherbitkey}`;
+                    getFiveDaysWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}`;
+                    getTwelveHoursWeatherUrl += `${locationKey}?apikey=${this.accuWeatherApikey}&language=en&details=true&metric=true`;
+                    getCurrentWeatherUrl += `${locationKey}?details=true&apikey=${this.accuWeatherApikey}`;
 
-                    const currentWeather = this.httpService
-                        .get(getCurrentWeatherUrl)
+                    // const tenDaysWeather = this.httpService
+                    //     .get(getTenDaysWeatherUrl)
+                    //     .pipe(
+                    //         map(weatherData => weatherData.data),
+                    //         this.retryPipeline
+                    //     );
+
+                    const sixteenDaysWeather = this.httpService
+                        .get(getSixteenDaysWeatherUrl)
                         .pipe(
+                            // TODO: check
+                            tap(weatherData => console.log(weatherData.data)),
                             map(weatherData => weatherData.data),
                             this.retryPipeline
                         );
@@ -110,18 +120,9 @@ export class AppService {
                             this.retryPipeline
                         );
 
-                    // const tenDaysWeather = this.httpService
-                    //     .get(getTenDaysWeatherUrl)
-                    //     .pipe(
-                    //         map(weatherData => weatherData.data),
-                    //         this.retryPipeline
-                    //     );
-
-                    const sixteenDaysWeather = this.httpService
-                        .get(getSixteenDaysWeatherUrl)
+                    const currentWeather = this.httpService
+                        .get(getCurrentWeatherUrl)
                         .pipe(
-                            // TODO: check
-                            tap(weatherData => console.log(weatherData.data)),
                             map(weatherData => weatherData.data),
                             this.retryPipeline
                         );
@@ -137,9 +138,9 @@ export class AppService {
         const weatherState = <State>{};
 
         // TODO: update to weatherData[3] data
-        weatherState.currentTime = this.setCurrentTime(weatherData[0].location.localtime);
-        // TODO: update to weatherData[3] data
-        weatherState.dayLength = this.setDayLength(weatherData[0].forecast.forecastday[0].astro);
+        weatherState.currentTime = this.setCurrentTime(weatherData[3].LocalObservationDateTime);
+        // TODO: update to weatherData[0][0] data
+        weatherState.dayLength = this.setDayLength(weatherData.data[0].sunrise, weatherData.data[0].sunset);
         weatherState.nightLength = this.setNightLength(weatherState.dayLength);
         weatherState.timeOfDay = this.setTimeOfDay(
             weatherState.currentTime,
@@ -147,33 +148,33 @@ export class AppService {
             weatherState.nightLength
         );
         // TODO: update to weatherData[3] data
-        weatherState.humidityCurrent = weatherData[0].current.humidity;
+        weatherState.humidityCurrent = weatherData[3].RelativeHumidity;
         // TODO: update to weatherData[3] data
-        weatherState.temperatureCurrent = weatherData[0].current.temp_c;
+        weatherState.temperatureCurrent = weatherData[3].Temperature.Metric.Value;
         // TODO: update to weatherData[3] data
-        weatherState.temperatureFeelsLike = weatherData[0].current.feelslike_c;
+        weatherState.temperatureFeelsLike = weatherData[3].RealFeelTemperature.Metric.Value;
         // TODO: update to weatherData[3] data
-        weatherState.airPressure = Math.trunc(weatherData[0].current.pressure_mb / 1.333);
+        weatherState.airPressure = Math.trunc(weatherData[3].Pressure.Metric.Value / 1.333);
         // TODO: update to weatherData[3] data
-        weatherState.uvIndex = weatherData[0].current.uv;
+        weatherState.uvIndex = weatherData[3].UVIndex;
         // TODO: update to weatherData[3] data
-        weatherState.windSpeed = weatherData[0].current.wind_kph;
+        weatherState.windSpeed = weatherData[3].Wind.Speed.Metric.Value;
         // TODO: update to weatherData[3] data
-        weatherState.weatherDefinition = weatherData[0].current.condition.text;
+        weatherState.windDirection = this.setWindDirection(weatherData[3].Wind.Direction.Degrees);
         // TODO: update to weatherData[3] data
-        weatherState.foggy = this.isFog(weatherData[0].current.condition.code);
+        weatherState.weatherDefinition = weatherData[3].WeatherText;
         // TODO: update to weatherData[3] data
-        weatherState.cloudy = this.isCloud(weatherData[0].current.condition.code);
+        weatherState.foggy = this.isFog(weatherData[3].WeatherIcon);
         // TODO: update to weatherData[3] data
-        weatherState.rainy = this.isRain(weatherData[0].current.condition.code);
+        weatherState.cloudy = this.isCloud(weatherData[3].WeatherIcon);
         // TODO: update to weatherData[3] data
-        weatherState.snowy = this.isSnow(weatherData[0].current.condition.code);
+        weatherState.rainy = this.isRain(weatherData[3].WeatherIcon);
+        // TODO: update to weatherData[3] data
+        weatherState.snowy = this.isSnow(weatherData[3].WeatherIcon);
         weatherState.overcast = this.overcast;
         weatherState.weatherType = this.setWeatherTypeAccuWeather(weatherData[3][0].WeatherIcon, weatherState.timeOfDay);
-        // TODO: update to weatherData[3] data
-        weatherState.windDirection = this.setWindDirection(weatherData[0].current.wind_degree);
         // TODO: update to new weatherData[0] data
-        weatherState.daysForecast = this.setDaysForecast(weatherData[0].forecast.forecastday);
+        weatherState.daysForecast = this.setDaysForecast(weatherData[0].data);
         weatherState.hoursForecast = this.setHoursForecast(
             weatherData[2],
             weatherState.dayLength,
@@ -184,15 +185,16 @@ export class AppService {
         return weatherState;
     }
 
+    // TODO: refactor this 4 into 1 using isWeather {snow: 'snow', ...} enum
     private isFog(code: number): boolean {
-        return ApixuWeatherCodes.fogCodes.indexOf(code) !== -1;
+        return AccuWeatherCodes.fogCodes.indexOf(code) !== -1;
     }
 
     private isCloud(code: number): boolean {
-        for (const prop in ApixuWeatherCodes.cloudsCodes) {
+        for (const prop in AccuWeatherCodes.cloudsCodes) {
             if (
-                ApixuWeatherCodes.cloudsCodes.hasOwnProperty(prop) &&
-                ApixuWeatherCodes.cloudsCodes[prop].indexOf(code) !== -1
+                AccuWeatherCodes.cloudsCodes.hasOwnProperty(prop) &&
+                AccuWeatherCodes.cloudsCodes[prop].indexOf(code) !== -1
             ) {
                 this.overcast = Overcast[prop];
                 return true;
@@ -204,10 +206,10 @@ export class AppService {
     }
 
     private isRain(code: number): boolean {
-        for (const prop in ApixuWeatherCodes.rainCodes) {
+        for (const prop in AccuWeatherCodes.rainCodes) {
             if (
-                ApixuWeatherCodes.rainCodes.hasOwnProperty(prop) &&
-                ApixuWeatherCodes.rainCodes[prop].indexOf(code) !== -1
+                AccuWeatherCodes.rainCodes.hasOwnProperty(prop) &&
+                AccuWeatherCodes.rainCodes[prop].indexOf(code) !== -1
             ) {
                 this.overcast = Overcast[prop];
                 return true;
@@ -218,10 +220,10 @@ export class AppService {
     }
 
     private isSnow(code: number): boolean {
-        for (const prop in ApixuWeatherCodes.snowCodes) {
+        for (const prop in AccuWeatherCodes.snowCodes) {
             if (
-                ApixuWeatherCodes.snowCodes.hasOwnProperty(prop) &&
-                ApixuWeatherCodes.snowCodes[prop].indexOf(code) !== -1
+                AccuWeatherCodes.snowCodes.hasOwnProperty(prop) &&
+                AccuWeatherCodes.snowCodes[prop].indexOf(code) !== -1
             ) {
                 this.overcast = Overcast[prop];
                 return true;
@@ -231,26 +233,26 @@ export class AppService {
         return false;
     }
 
-    private setDayLength(astroData: any): number {
+    private setDayLength(sunrise: string, sunset: string): number {
         let sunRiseTime: moment.Moment;
         let sunSetTime: moment.Moment;
-        let sunRise = astroData.sunrise;
-        let sunSet = astroData.sunset;
-
-        sunRise = sunRise.split('');
-        sunRise.splice(sunRise.indexOf(':'), 1);
-        sunRise.splice(sunRise.indexOf(' '), 3);
-
-        sunSet = sunSet.split('');
-        sunSet.splice(sunSet.indexOf(':'), 1);
-        sunSet.splice(sunSet.indexOf(' '), 3);
+        // let sunRise = astroData.sunrise;
+        // let sunSet = astroData.sunset;
+        //
+        // sunRise = sunRise.split('');
+        // sunRise.splice(sunRise.indexOf(':'), 1);
+        // sunRise.splice(sunRise.indexOf(' '), 3);
+        //
+        // sunSet = sunSet.split('');
+        // sunSet.splice(sunSet.indexOf(':'), 1);
+        // sunSet.splice(sunSet.indexOf(' '), 3);
 
         sunRiseTime = moment()
-            .hours(parseInt(sunRise.slice(0, 2).join(''), 10))
-            .minutes(parseInt(sunRise.slice(2, 2).join(''), 10));
+            .hours(parseInt(sunrise.slice(0, 2).join(''), 10))
+            .minutes(parseInt(sunrise.slice(3, 2).join(''), 10));
         sunSetTime = moment()
-            .hours(parseInt(sunSet.slice(0, 2).join(''), 10) + 12)
-            .minutes(parseInt(sunSet.slice(2, 2).join(''), 10));
+            .hours(parseInt(sunset.slice(0, 2).join(''), 10) + 12)
+            .minutes(parseInt(sunset.slice(3, 2).join(''), 10));
 
         return moment.duration(sunSetTime.diff(sunRiseTime)).as('milliseconds');
     }
@@ -282,37 +284,39 @@ export class AppService {
         return isNight ? TimeOfDay.night : TimeOfDay.day;
     }
 
-    private setWeatherTypeApixu(code: number): WeatherTypes {
-        function compareCodes(codes: any[]) {
-            return codes.some(elem => code === elem);
-        }
+    // private setWeatherTypeApixu(code: number): WeatherTypes {
+    //     function compareCodes(codes: any[]) {
+    //         return codes.some(elem => code === elem);
+    //     }
+    //
+    //     switch (true) {
+    //         case compareCodes(ApixuWeatherCodes.dayClearCodes):
+    //             return WeatherTypes.dayClear;
+    //         case compareCodes(ApixuWeatherCodes.dayLightCloudsCodes):
+    //             return WeatherTypes.dayLightClouds;
+    //         case compareCodes(ApixuWeatherCodes.dayMediumCloudsCodes):
+    //             return WeatherTypes.dayMediumClouds;
+    //         case compareCodes(ApixuWeatherCodes.dayHeavyCloudsCodes):
+    //             return WeatherTypes.dayHeavyClouds;
+    //         case compareCodes(ApixuWeatherCodes.dayLightRainCodes):
+    //             return WeatherTypes.dayLightRain;
+    //         case compareCodes(ApixuWeatherCodes.dayMediumRainCodes):
+    //             return WeatherTypes.dayMediumRain;
+    //         case compareCodes(ApixuWeatherCodes.dayHeavyRainCodes):
+    //             return WeatherTypes.dayHeavyRain;
+    //         case compareCodes(ApixuWeatherCodes.dayLightSnowCodes):
+    //             return WeatherTypes.dayLightSnow;
+    //         case compareCodes(ApixuWeatherCodes.dayMediumSnowCodes):
+    //             return WeatherTypes.dayMediumSnow;
+    //         case compareCodes(ApixuWeatherCodes.dayHeavySnowCodes):
+    //             return WeatherTypes.dayHeavySnow;
+    //         default:
+    //             return WeatherTypes.dayClear;
+    //     }
+    // }
 
-        switch (true) {
-            case compareCodes(ApixuWeatherCodes.dayClearCodes):
-                return WeatherTypes.dayClear;
-            case compareCodes(ApixuWeatherCodes.dayLightCloudsCodes):
-                return WeatherTypes.dayLightClouds;
-            case compareCodes(ApixuWeatherCodes.dayMediumCloudsCodes):
-                return WeatherTypes.dayMediumClouds;
-            case compareCodes(ApixuWeatherCodes.dayHeavyCloudsCodes):
-                return WeatherTypes.dayHeavyClouds;
-            case compareCodes(ApixuWeatherCodes.dayLightRainCodes):
-                return WeatherTypes.dayLightRain;
-            case compareCodes(ApixuWeatherCodes.dayMediumRainCodes):
-                return WeatherTypes.dayMediumRain;
-            case compareCodes(ApixuWeatherCodes.dayHeavyRainCodes):
-                return WeatherTypes.dayHeavyRain;
-            case compareCodes(ApixuWeatherCodes.dayLightSnowCodes):
-                return WeatherTypes.dayLightSnow;
-            case compareCodes(ApixuWeatherCodes.dayMediumSnowCodes):
-                return WeatherTypes.dayMediumSnow;
-            case compareCodes(ApixuWeatherCodes.dayHeavySnowCodes):
-                return WeatherTypes.dayHeavySnow;
-            default:
-                return WeatherTypes.dayClear;
-        }
-    }
 
+    // TODO: combine these 2 into 1 with enum
     private setWeatherTypeAccuWeather(code: number, timeOfDay: TimeOfDay): WeatherTypes {
         function compareCodes(codes: any[]) {
             return codes.some(elem => code === elem);
@@ -326,7 +330,7 @@ export class AppService {
             case compareCodes(AccuWeatherCodes.mediumCloudsCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumClouds : WeatherTypes.nightMediumClouds;
             case compareCodes(AccuWeatherCodes.heavyCloudsCodes):
-                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavyClouds : WeatherTypes.dayHeavyClouds;
+                return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavyClouds : WeatherTypes.nightHeavyClouds;
             case compareCodes(AccuWeatherCodes.lightRainCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayLightRain : WeatherTypes.nightLightRain;
             case compareCodes(AccuWeatherCodes.mediumRainCodes):
@@ -339,6 +343,37 @@ export class AppService {
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayMediumSnow : WeatherTypes.nightMediumSnow;
             case compareCodes(AccuWeatherCodes.heavySnowCodes):
                 return timeOfDay === TimeOfDay.day ? WeatherTypes.dayHeavySnow : WeatherTypes.nightHeavySnow;
+            default:
+                return WeatherTypes.dayClear;
+        }
+    }
+
+    private setWeatherTypeWeatherbit(code: number): WeatherTypes {
+        function compareCodes(codes: any[]) {
+            return codes.some(elem => code === elem);
+        }
+
+        switch (true) {
+            case compareCodes(WeatherbitWeatherCodes.dayClearCodes):
+                return WeatherTypes.dayClear;
+            case compareCodes(WeatherbitWeatherCodes.dayLightCloudsCodes):
+                return WeatherTypes.dayLightClouds;
+            case compareCodes(WeatherbitWeatherCodes.dayMediumCloudsCodes):
+                return WeatherTypes.dayMediumClouds;
+            case compareCodes(WeatherbitWeatherCodes.dayHeavyCloudsCodes):
+                return WeatherTypes.dayHeavyClouds;
+            case compareCodes(WeatherbitWeatherCodes.dayLightRainCodes):
+                return WeatherTypes.dayLightRain;
+            case compareCodes(WeatherbitWeatherCodes.dayMediumRainCodes):
+                return WeatherTypes.dayMediumRain;
+            case compareCodes(WeatherbitWeatherCodes.dayHeavyRainCodes):
+                return WeatherTypes.dayHeavyRain;
+            case compareCodes(WeatherbitWeatherCodes.dayLightSnowCodes):
+                return WeatherTypes.dayLightSnow;
+            case compareCodes(WeatherbitWeatherCodes.dayMediumSnowCodes):
+                return WeatherTypes.dayMediumSnow;
+            case compareCodes(WeatherbitWeatherCodes.dayHeavySnowCodes):
+                return WeatherTypes.dayHeavySnow;
             default:
                 return WeatherTypes.dayClear;
         }
@@ -398,15 +433,15 @@ export class AppService {
     // TODO: update
     private setDaysForecast(daysData: any): DaysForecast[] {
         return daysData.map(dayData => {
-            const weatherType: WeatherTypes = this.setWeatherTypeApixu(dayData.day.condition.code);
+            const weatherType: WeatherTypes = this.setWeatherTypeWeatherbit(dayData.weather.code);
 
             return  {
-                dayDate: moment(dayData.date).format('D MMM'),
+                dayDate: moment(dayData.timestamp_local).format('D MMM'),
                 weatherTypeDay: weatherType,
-                temperatureMin: dayData.day.mintemp_c,
-                temperatureMax: dayData.day.maxtemp_c,
-                humidity: dayData.day.avghumidity,
-                uvIndex: dayData.day.uv,
+                temperatureMax: dayData.max_temp,
+                temperatureMin: dayData.min_temp,
+                humidity: dayData.rh,
+                uvIndex: dayData.uv,
             };
         });
     }
