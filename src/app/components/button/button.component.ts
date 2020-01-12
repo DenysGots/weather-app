@@ -8,7 +8,7 @@ import {
     ButtonIconSizes,
     ButtonShapes,
     ButtonSizes,
-    ButtonTypes,
+    ButtonTypes
 } from '../../../../shared/public-api';
 
 @Component({

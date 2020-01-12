@@ -26,6 +26,7 @@ export interface WaterDrop {
 }
 
 export interface State {
+    locationData?: Location;
     timeOfDay?: TimeOfDay;
     dayLength?: number;
     nightLength?: number;
@@ -72,11 +73,11 @@ export interface DaysForecast {
     uvIndex?: number;
 }
 
-// export interface Location {
-//     countryCode: string;
-//     country: string;
-//     city: string;
-// }
+export interface Location {
+    countryCode: string;
+    country: string;
+    city: string;
+}
 
 /* Types */
 export type ConfigFile = {
@@ -88,26 +89,26 @@ export type ConfigFile = {
 export enum ButtonSizes {
     small = '15',
     medium = '30',
-    big = '40',
+    big = '40'
 }
 
 export enum ButtonIconSizes {
-    small = '10',
-    medium = '14',
-    big = '22',
+    small = '12',
+    medium = '18',
+    big = '26'
 }
 
 export enum ButtonTypes {
     left = 'angle-left',
     right = 'angle-right',
-    plus = 'plus',
-    minus = 'minus',
-    home = 'home',
+    up = 'angle-up',
+    down = 'angle-down',
+    home = 'home'
 }
 
 export enum ButtonShapes {
     circle = 'circle',
-    rectangle = 'rectangle',
+    rectangle = 'rectangle'
 }
 
 export enum WeatherTypes {
@@ -130,7 +131,7 @@ export enum WeatherTypes {
     nightHeavyRain = 'thunder',
     nightLightSnow = 'cloudy-4',
     nightMediumSnow = 'snowy-5',
-    nightHeavySnow = 'snowy-6',
+    nightHeavySnow = 'snowy-6'
 }
 
 export enum WeatherDefinitions {
@@ -153,7 +154,7 @@ export enum WeatherDefinitions {
     nightHeavyRain = 'Heavy rain',
     nightLightSnow = 'Light snow',
     nightMediumSnow = 'Medium snow',
-    nightHeavySnow = 'Heavy snow',
+    nightHeavySnow = 'Heavy snow'
 }
 
 export enum WindDirections {
@@ -164,7 +165,7 @@ export enum WindDirections {
     south = 'towards-180-deg',
     southWest = 'towards-225-deg',
     west = 'towards-270-deg',
-    westNorth = 'towards-313-deg',
+    westNorth = 'towards-313-deg'
 }
 
 export enum MoonPhases {
@@ -175,7 +176,7 @@ export enum MoonPhases {
     full = 'wi-moon-alt-full',
     waningGibbous = 'wi-moon-alt-waning-gibbous-4',
     thirdQuarter = 'wi-moon-alt-third-quarter',
-    waningCrescent = 'wi-moon-alt-waning-crescent-3',
+    waningCrescent = 'wi-moon-alt-waning-crescent-3'
 }
 
 export enum TimeOfDay {
@@ -185,43 +186,43 @@ export enum TimeOfDay {
 
 export enum CardsDeckType {
     hours = 'hours',
-    days = 'days',
+    days = 'days'
 }
 
 export enum Overcast {
     light = 'light',
     medium = 'medium',
-    heavy = 'heavy',
+    heavy = 'heavy'
 }
 
 export enum NumberOfClouds {
     light = 4,
     medium = 8,
-    heavy = 12,
+    heavy = 12
 }
 
 export enum NumberOfRainDrops {
     light = 200,
     medium = 450,
-    heavy = 750,
+    heavy = 750
 }
 
 export enum NumberOfRainThroughDrops {
     light = 5,
     medium = 20,
-    heavy = 50,
+    heavy = 50
 }
 
 export enum DropsOnScreen {
     light = 25,
     medium = 60,
-    heavy = 100,
+    heavy = 100
 }
 
 export enum NumberOfSnowFlakes {
     light = 100,
     medium = 300,
-    heavy = 500,
+    heavy = 500
 }
 
 export enum IconSizes {
@@ -230,7 +231,7 @@ export enum IconSizes {
     extra = '18',
     big = '22',
     hero = '28',
-    extra_big = '36',
+    extra_big = '36'
 }
 
 /* Variables */

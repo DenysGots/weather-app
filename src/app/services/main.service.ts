@@ -46,7 +46,7 @@ export class MainService {
 
     public getWeather(): void {
         this.httpService.getWeather()
-            .subscribe(weatherData => {
+            .subscribe((weatherData: State) => {
                 this.stateService.adjustReceivedData(weatherData);
                 this.stateService.saveStateToLocalStorage();
                 this.setCurrentState();

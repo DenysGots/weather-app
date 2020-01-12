@@ -19,7 +19,7 @@ import {
 })
 export class StateService {
     public currentState: State = <State>{};
-    public locationData: any;
+    // public locationData: any;
 
     constructor(private helpersService: HelpersService) { }
 
@@ -33,7 +33,7 @@ export class StateService {
     }
 
     public setLocation(): string {
-        return `${this.locationData.city}, ${this.locationData.country}`;
+        return `${this.currentState.locationData.city}, ${this.currentState.locationData.country}`;
     }
 
     public setCurrentDate(): string {

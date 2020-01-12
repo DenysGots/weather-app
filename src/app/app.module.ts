@@ -1,5 +1,5 @@
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faAngleLeft, faAngleRight, faHome, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleLeft, faAngleRight, faAngleUp, faHome } from '@fortawesome/free-solid-svg-icons';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
 import { APP_INITIALIZER, NgModule } from '@angular/core';
@@ -108,11 +108,11 @@ export function initApp(config: Config) {
 export class AppModule {
     constructor(private faIconLibrary: FaIconLibrary) {
         faIconLibrary.addIcons(
+            faAngleDown,
             faAngleLeft,
             faAngleRight,
-            faHome,
-            faMinus,
-            faPlus
+            faAngleUp,
+            faHome
         );
     }
 }
