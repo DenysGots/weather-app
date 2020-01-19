@@ -1,4 +1,6 @@
 {
+  "config": "local",
   "usedHost": "http://localhost:5400",
-  "noErrorsMode": true
+  "noErrorsMode": true,
+  "mockedIp": "185.112.173.116"
 }

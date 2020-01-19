@@ -6,5 +6,6 @@
 export const environment = {
     config: 'dev',
     production: false,
-    usedHost: 'http://localhost:5400'
+    usedHost: 'http://localhost:5400',
+    mockedIp = '185.112.173.116'
 };

@@ -13,6 +13,7 @@ export class Config {
     constructor(protected http: HttpClient) {
         !((window as any).environment) && ((window as any).environment = environment);
     }
+
     async init() {
         return import(`../config/config.${environment.config}.json`).then(
             configFile => (Config.configFile = configFile),

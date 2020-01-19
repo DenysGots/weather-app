@@ -3,3 +3,8 @@ export interface LocationDto {
     country: string;
     city: string;
 }
+
+export enum DevelopmentConfigurations {
+  dev = 'dev',
+  local = 'local'
+}

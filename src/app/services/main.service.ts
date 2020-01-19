@@ -30,19 +30,8 @@ export class MainService {
         this.stateService.getInitialState();
         this.setCurrentState();
         this.emitCurrentState();
-        // this.getLocation();
-        // this.httpService.testConnection();
         this.getWeather();
     }
-
-    // public getLocation(): void {
-    //     this.httpService.getLocation(locationData => {
-    //         this.stateService.locationData = locationData;
-    //         this.getWeather();
-    //     });
-    //
-    //     this.getWeather();
-    // }
 
     public getWeather(): void {
         this.httpService.getWeather()

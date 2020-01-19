@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import * as moment from 'moment';
 import * as _isNil from 'lodash/isNil';
+import * as moment from 'moment';
+
+import { Injectable } from '@angular/core';
 
 import { HelpersService } from './helpers.service';
 import {
@@ -19,7 +20,6 @@ import {
 })
 export class StateService {
     public currentState: State = <State>{};
-    // public locationData: any;
 
     constructor(private helpersService: HelpersService) { }
 
