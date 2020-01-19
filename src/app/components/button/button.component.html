@@ -1,15 +1,21 @@
-<button class="app-button"
-        [attr.disabled]="isActive ? null : ''"
-        [ngClass]="{
-            'app-button--circle': isCircle(),
-            'app-button--rectangle': isRectangle()
-        }"
-        [ngStyle]="{
-           'min-width.px': size,
-           'min-height.px': size,
-           'font-size.px': fontSize
-        }">
-    <fa-icon *ngIf="buttonType"
-             [icon]="['fas', type]"></fa-icon>
-    <ng-content></ng-content>
+<button
+  class="app-button"
+  [attr.disabled]="isActive ? null : ''"
+  [ngClass]="{
+    'app-button--circle': isCircle(),
+    'app-button--rectangle': isRectangle()
+  }"
+  [ngStyle]="{
+   'min-width.px': size,
+   'min-height.px': size,
+   'font-size.px': fontSize
+  }"
+>
+  <fa-icon
+    *ngIf="buttonType"
+    [icon]="['fas', type]"
+  >
+  </fa-icon>
+
+  <ng-content></ng-content>
 </button>

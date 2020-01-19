@@ -3,8 +3,8 @@ import { map, mergeMap } from 'rxjs/operators';
 import { Controller, Ip, Post } from '@nestjs/common';
 
 import { AppService } from './app.service';
-import { DevelopmentConfigurations, LocationDto } from '../shared/public-api';
-import { Config } from '../src/config/app.config';
+import { LocationDto } from '../shared/public-api';
+import { Config } from '../src/app/app.config';
 
 @Controller()
 export class AppController {
@@ -15,18 +15,11 @@ export class AppController {
 
   @Post('weather')
   public async getWeather(@Ip() clientIp: any) {
-    // TODO: test
-    console.log(
-      'DevelopmentConfigurations: ',
-      this.config.config,
-      DevelopmentConfigurations[this.config.config]
-    );
+    // TODO: test, delete
+    const mockedIp = '185.112.173.116';
 
-    return this.appService.getLocation(
-      DevelopmentConfigurations[this.config.config]
-        ? this.config.mockedIp
-        : clientIp
-      ).pipe(
+    return this.appService.getLocation(mockedIp)
+      .pipe(
         mergeMap((clientLocation: LocationDto) => this.appService.getWeather(clientLocation)),
         map((weatherData: any) => this.appService.adjustReceivedData(weatherData))
       );

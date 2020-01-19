@@ -1,6 +1,4 @@
 {
-  "config": "dev",
   "usedHost": "http://localhost:5400",
-  "noErrorsMode": true,
-  "mockedIp": "185.112.173.116"
+  "noErrorsMode": true
 }

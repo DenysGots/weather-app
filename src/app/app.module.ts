@@ -9,12 +9,12 @@ import { PreloadAllModules, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-    MatButtonModule,
-    MatCheckboxModule,
-    MatExpansionModule,
-    MatRadioModule,
-    MatSliderModule,
-    MatSlideToggleModule
+  MatButtonModule,
+  MatCheckboxModule,
+  MatExpansionModule,
+  MatRadioModule,
+  MatSliderModule,
+  MatSlideToggleModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -47,72 +47,72 @@ import { TemperatureValuePipe } from './pipes/temperatureValuePipe.pipe';
 import { WINDOW_PROVIDERS } from './services/helpers.service';
 
 export function initApp(config: Config) {
-    return () => config.init();
+  return () => config.init();
 }
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        ButtonComponent,
-        ControlPanelComponent,
-        DayTimeDayViewComponent,
-        DayTimeNightViewComponent,
-        DayTimeWeatherViewComponent,
-        ForecastCardsDeckComponent,
-        ForecastCurrentInformationComponent,
-        ForecastWeatherCardComponent,
-        IconComponent,
-        MainPageComponent,
-        NumberToIterablePipe,
-        TemperatureValuePipe,
-        WeatherEffectCloudComponent,
-        WeatherEffectFogComponent,
-        WeatherEffectLightningComponent,
-        WeatherEffectMoonComponent,
-        WeatherEffectRainComponent,
-        WeatherEffectSnowComponent,
-        WeatherEffectStarsComponent,
-        WeatherEffectSunComponent,
-        WeatherEffectWaterDropsComponent
-    ],
-    imports: [
-        HttpClientModule,
-        BrowserModule.withServerTransition({ appId: 'my-app' }),
-        TransferHttpCacheModule,
-        RouterModule.forRoot(routes, {
-            useHash: false,
-            preloadingStrategy: PreloadAllModules
-        }),
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        FontAwesomeModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatExpansionModule,
-        MatRadioModule,
-        MatSliderModule,
-        MatSlideToggleModule
-    ],
-    providers: [
-        WINDOW_PROVIDERS,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initApp,
-            deps: [Config],
-            multi: true
-        }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    ButtonComponent,
+    ControlPanelComponent,
+    DayTimeDayViewComponent,
+    DayTimeNightViewComponent,
+    DayTimeWeatherViewComponent,
+    ForecastCardsDeckComponent,
+    ForecastCurrentInformationComponent,
+    ForecastWeatherCardComponent,
+    IconComponent,
+    MainPageComponent,
+    NumberToIterablePipe,
+    TemperatureValuePipe,
+    WeatherEffectCloudComponent,
+    WeatherEffectFogComponent,
+    WeatherEffectLightningComponent,
+    WeatherEffectMoonComponent,
+    WeatherEffectRainComponent,
+    WeatherEffectSnowComponent,
+    WeatherEffectStarsComponent,
+    WeatherEffectSunComponent,
+    WeatherEffectWaterDropsComponent
+  ],
+  imports: [
+    HttpClientModule,
+    BrowserModule.withServerTransition({ appId: 'my-app' }),
+    TransferHttpCacheModule,
+    RouterModule.forRoot(routes, {
+      useHash: false,
+      preloadingStrategy: PreloadAllModules
+    }),
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatSliderModule,
+    MatSlideToggleModule
+  ],
+  providers: [
+    WINDOW_PROVIDERS,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      deps: [Config],
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
-    constructor(private faIconLibrary: FaIconLibrary) {
-        faIconLibrary.addIcons(
-            faAngleDown,
-            faAngleLeft,
-            faAngleRight,
-            faAngleUp,
-            faHome
-        );
-    }
+  constructor(private faIconLibrary: FaIconLibrary) {
+    faIconLibrary.addIcons(
+      faAngleDown,
+      faAngleLeft,
+      faAngleRight,
+      faAngleUp,
+      faHome
+    );
+  }
 }

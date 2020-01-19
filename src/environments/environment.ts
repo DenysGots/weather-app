@@ -4,8 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-    config: 'dev',
-    production: false,
-    usedHost: 'http://localhost:5400',
-    mockedIp = '185.112.173.116'
+  config: 'dev',
+  production: false,
+  usedHost: 'http://localhost:5400'
 };

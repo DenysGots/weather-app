@@ -1,34 +1,34 @@
 @mixin transform($property) {
-    -webkit-transform: $property;
-    -ms-transform: $property;
-    transform: $property;
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
 }
 
 @mixin animation($name, $duration, $timing-function, $delay) {
-    -webkit-animation: $name $duration $timing-function $delay;
-    animation: $name $duration $timing-function $delay;
+  -webkit-animation: $name $duration $timing-function $delay;
+  animation: $name $duration $timing-function $delay;
 }
 
 @mixin keyframes($name) {
-    @-webkit-keyframes #{$name} {
-        @content;
-    }
-    
-    @-moz-keyframes #{$name} {
-        @content;
-    }
-    
-    @-ms-keyframes #{$name} {
-        @content;
-    }
-    
-    @keyframes #{$name} {
-        @content;
-    }
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
 }
 
 @mixin appearance($name) {
-    -webkit-appearance: $name;
-    -moz-appearance: $name;
-    appearance: $name;
+  -webkit-appearance: $name;
+  -moz-appearance: $name;
+  appearance: $name;
 }

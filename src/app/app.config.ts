@@ -5,23 +5,23 @@ import { environment } from '../environments/environment';
 import { ConfigFile } from './interfaces/public-api';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class Config {
-    static configFile: ConfigFile;
+  static configFile: ConfigFile;
 
-    constructor(protected http: HttpClient) {
-        !((window as any).environment) && ((window as any).environment = environment);
-    }
+  constructor(protected http: HttpClient) {
+    !((window as any).environment) && ((window as any).environment = environment);
+  }
 
-    async init() {
-        return import(`../config/config.${environment.config}.json`).then(
-            configFile => (Config.configFile = configFile),
-            error => console.error('Config not loaded', error)
-        );
-    }
+  async init() {
+    return import(`../config/config.${environment.config}.json`).then(
+      configFile => (Config.configFile = configFile),
+      error => console.error('Config not loaded', error)
+    );
+  }
 
-    get backendUrl() {
-        return Config.configFile.usedHost;
-    }
+  get backendUrl() {
+    return Config.configFile.usedHost;
+  }
 }

@@ -2,83 +2,155 @@
 
 /* Text */
 .app-text-size-small {
-    font-size: $font-size-small;
-    line-height: $line-height-small;
+  font-size: $font-size-small;
+  line-height: $line-height-small;
 }
 
 .app-text-size-default {
-    font-size: $font-size-default;
-    line-height: $line-height-default;
+  font-size: $font-size-default;
+  line-height: $line-height-default;
 }
 
 .app-text-size-middle {
-    font-size: $font-size-middle;
-    line-height: $line-height-default;
+  font-size: $font-size-middle;
+  line-height: $line-height-default;
 }
 
 .app-text-size-extra {
-    font-size: $font-size-extra;
-    line-height: $line-height-extra;
+  font-size: $font-size-extra;
+  line-height: $line-height-extra;
 }
 
 .app-text-size-heading-default {
-    font-size: $font-size-big;
-    line-height: $line-height-big;
+  font-size: $font-size-big;
+  line-height: $line-height-big;
 }
 
 .app-text-size-heading-big {
-    font-size: $font-size-hero;
-    line-height: $line-height-hero;
+  font-size: $font-size-hero;
+  line-height: $line-height-hero;
 }
 
 .app-text-size-heading-hero {
-    font-size: $font-size-extra-big;
-    line-height: $line-height-hero;
+  font-size: $font-size-extra-big;
+  line-height: $line-height-hero;
 }
 
 .app-text-weight-regular {
-    font-weight: $font-weight-default;
+  font-weight: $font-weight-default;
 }
 
 .app-text-weight-semibold {
-    font-weight: $font-weight-semibold;
+  font-weight: $font-weight-semibold;
 }
 
 .app-text-weight-bold {
-    font-weight: $font-weight-bold;
+  font-weight: $font-weight-bold;
 }
 
 .app-text-align-bottom {
-    vertical-align: bottom;
+  vertical-align: bottom;
 }
 
 .app-text-align-text-bottom {
-    vertical-align: text-bottom;
+  vertical-align: text-bottom;
 }
 
 /* Sky backgrounds */
 /* Taken from https://codepen.io/billyysea/pen/whjbK by Billy */
-.app-sky-gradient-00, .app-sky-gradient-24 { background: radial-gradient(ellipse at bottom, $color-sky-00-01 20%, $color-sky-00-02 100%); }
-.app-sky-gradient-01 { background: radial-gradient(ellipse at bottom, $color-sky-01-02 20%, $color-sky-01-01 100%); }
-.app-sky-gradient-02 { background: radial-gradient(ellipse at bottom, $color-sky-02-02 20%, $color-sky-02-01 100%); }
-.app-sky-gradient-03 { background: radial-gradient(ellipse at bottom, $color-sky-03-02 20%, $color-sky-03-01 100%); }
-.app-sky-gradient-04 { background: linear-gradient(to bottom, $color-sky-04-01 0%, $color-sky-04-02 100%); }
-.app-sky-gradient-05 { background: linear-gradient(to bottom, $color-sky-05-01 0%, $color-sky-05-02 80%, $color-sky-05-03 100%); }
-.app-sky-gradient-06 { background: linear-gradient(to bottom, $color-sky-06-01 0%, $color-sky-06-02 50%, $color-sky-06-03 100%); }
-.app-sky-gradient-07 { background: linear-gradient(to bottom, $color-sky-07-01 0%, $color-sky-07-02 60%, $color-sky-07-03 100%); }
-.app-sky-gradient-08 { background: linear-gradient(to bottom, $color-sky-08-01 0%, $color-sky-08-02 100%); }
-.app-sky-gradient-09 { background: linear-gradient(to bottom, $color-sky-09-01 1%, $color-sky-09-02 70%, $color-sky-09-03 100%); }
-.app-sky-gradient-10 { background: linear-gradient(to bottom, $color-sky-10-01 0%, $color-sky-10-02 100%); }
-.app-sky-gradient-11 { background: linear-gradient(to bottom, $color-sky-11-01 0%, $color-sky-11-02 100%); }
-.app-sky-gradient-12 { background: linear-gradient(to bottom, $color-sky-12-01 0%, $color-sky-12-02 100%); }
-.app-sky-gradient-13 { background: linear-gradient(to bottom, $color-sky-13-01 0%, $color-sky-13-02 100%); }
-.app-sky-gradient-14 { background: linear-gradient(to bottom, $color-sky-14-01 0%, $color-sky-14-02 100%); }
-.app-sky-gradient-15 { background: linear-gradient(to bottom, $color-sky-15-01 0%, $color-sky-15-02 70%, $color-sky-15-03 100%); }
-.app-sky-gradient-16 { background: linear-gradient(to bottom, $color-sky-16-01 0%, $color-sky-16-02 50%, $color-sky-16-03 100%); }
-.app-sky-gradient-17 { background: linear-gradient(to bottom, $color-sky-17-01 0%, $color-sky-17-02 50%, $color-sky-17-03 100%); }
-.app-sky-gradient-18 { background: linear-gradient(to bottom, $color-sky-18-01 0%, $color-sky-18-02 30%, $color-sky-18-03 70%, $color-sky-18-04 100%); }
-.app-sky-gradient-19 { background: linear-gradient(to bottom, $color-sky-19-01 0%, $color-sky-19-02 30%, $color-sky-19-03 60%, $color-sky-19-04 80%, $color-sky-19-05 100%); }
-.app-sky-gradient-20 { background: linear-gradient(to bottom, $color-sky-20-01 0%, $color-sky-20-02 30%, $color-sky-20-03 80%, $color-sky-20-04 100%); }
-.app-sky-gradient-21 { background: linear-gradient(to bottom, $color-sky-21-01 30%, $color-sky-21-02 80%, $color-sky-21-03 100%); }
-.app-sky-gradient-22 { background: linear-gradient(to bottom, $color-sky-22-01 70%, $color-sky-22-02 100%); }
-.app-sky-gradient-23 { background: radial-gradient(ellipse at bottom, $color-sky-23-02 10%, $color-sky-23-01 100%); }
+.app-sky-gradient-00,
+.app-sky-gradient-24 {
+  background: radial-gradient(ellipse at bottom, $color-sky-00-01 20%, $color-sky-00-02 100%);
+}
+
+.app-sky-gradient-01 {
+  background: radial-gradient(ellipse at bottom, $color-sky-01-02 20%, $color-sky-01-01 100%);
+}
+
+.app-sky-gradient-02 {
+  background: radial-gradient(ellipse at bottom, $color-sky-02-02 20%, $color-sky-02-01 100%);
+}
+
+.app-sky-gradient-03 {
+  background: radial-gradient(ellipse at bottom, $color-sky-03-02 20%, $color-sky-03-01 100%);
+}
+
+.app-sky-gradient-04 {
+  background: linear-gradient(to bottom, $color-sky-04-01 0%, $color-sky-04-02 100%);
+}
+
+.app-sky-gradient-05 {
+  background: linear-gradient(to bottom, $color-sky-05-01 0%, $color-sky-05-02 80%, $color-sky-05-03 100%);
+}
+
+.app-sky-gradient-06 {
+  background: linear-gradient(to bottom, $color-sky-06-01 0%, $color-sky-06-02 50%, $color-sky-06-03 100%);
+}
+
+.app-sky-gradient-07 {
+  background: linear-gradient(to bottom, $color-sky-07-01 0%, $color-sky-07-02 60%, $color-sky-07-03 100%);
+}
+
+.app-sky-gradient-08 {
+  background: linear-gradient(to bottom, $color-sky-08-01 0%, $color-sky-08-02 100%);
+}
+
+.app-sky-gradient-09 {
+  background: linear-gradient(to bottom, $color-sky-09-01 1%, $color-sky-09-02 70%, $color-sky-09-03 100%);
+}
+
+.app-sky-gradient-10 {
+  background: linear-gradient(to bottom, $color-sky-10-01 0%, $color-sky-10-02 100%);
+}
+
+.app-sky-gradient-11 {
+  background: linear-gradient(to bottom, $color-sky-11-01 0%, $color-sky-11-02 100%);
+}
+
+.app-sky-gradient-12 {
+  background: linear-gradient(to bottom, $color-sky-12-01 0%, $color-sky-12-02 100%);
+}
+
+.app-sky-gradient-13 {
+  background: linear-gradient(to bottom, $color-sky-13-01 0%, $color-sky-13-02 100%);
+}
+
+.app-sky-gradient-14 {
+  background: linear-gradient(to bottom, $color-sky-14-01 0%, $color-sky-14-02 100%);
+}
+
+.app-sky-gradient-15 {
+  background: linear-gradient(to bottom, $color-sky-15-01 0%, $color-sky-15-02 70%, $color-sky-15-03 100%);
+}
+
+.app-sky-gradient-16 {
+  background: linear-gradient(to bottom, $color-sky-16-01 0%, $color-sky-16-02 50%, $color-sky-16-03 100%);
+}
+
+.app-sky-gradient-17 {
+  background: linear-gradient(to bottom, $color-sky-17-01 0%, $color-sky-17-02 50%, $color-sky-17-03 100%);
+}
+
+.app-sky-gradient-18 {
+  background: linear-gradient(to bottom, $color-sky-18-01 0%, $color-sky-18-02 30%, $color-sky-18-03 70%, $color-sky-18-04 100%);
+}
+
+.app-sky-gradient-19 {
+  background: linear-gradient(to bottom, $color-sky-19-01 0%, $color-sky-19-02 30%, $color-sky-19-03 60%, $color-sky-19-04 80%, $color-sky-19-05 100%);
+}
+
+.app-sky-gradient-20 {
+  background: linear-gradient(to bottom, $color-sky-20-01 0%, $color-sky-20-02 30%, $color-sky-20-03 80%, $color-sky-20-04 100%);
+}
+
+.app-sky-gradient-21 {
+  background: linear-gradient(to bottom, $color-sky-21-01 30%, $color-sky-21-02 80%, $color-sky-21-03 100%);
+}
+
+.app-sky-gradient-22 {
+  background: linear-gradient(to bottom, $color-sky-22-01 70%, $color-sky-22-02 100%);
+}
+
+.app-sky-gradient-23 {
+  background: radial-gradient(ellipse at bottom, $color-sky-23-02 10%, $color-sky-23-01 100%);
+}
