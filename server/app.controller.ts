@@ -4,14 +4,10 @@ import { Controller, Ip, Post } from '@nestjs/common';
 
 import { AppService } from './app.service';
 import { LocationDto } from '../shared/public-api';
-import { Config } from '../src/app/app.config';
 
 @Controller()
 export class AppController {
-  constructor(
-    private appService: AppService,
-    private config: Config
-  ) {}
+  constructor(private appService: AppService) {}
 
   @Post('weather')
   public async getWeather(@Ip() clientIp: any) {
