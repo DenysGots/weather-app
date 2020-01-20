@@ -1,25 +1,25 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    display: block;
-    height: 100%;
-    width: 100%;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 .app-day-time-night-view {
-    contain: content;
-    height: 100%;
-    position: relative;
-    width: 100%;
-    z-index: $z-index-day-time-view;
-    
-    &__moon-container {
-        position: absolute;
-        transform: translateZ(0);
-        transform: translate3d(0, 0, 0);
-        transform-origin: left bottom;
-        transition: left 0.1s ease-in-out, bottom 0.1s ease-in-out, transform 0.1s ease-in-out;
-        will-change: left, bottom, transform;
-        z-index: $z-index-moon;
-    }
+  contain: content;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  z-index: $z-index-day-time-view;
+
+  &__moon-container {
+    position: absolute;
+    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
+    transform-origin: left bottom;
+    transition: left 0.1s ease-in-out, bottom 0.1s ease-in-out, transform 0.1s ease-in-out;
+    will-change: left, bottom, transform;
+    z-index: $z-index-moon;
+  }
 }
