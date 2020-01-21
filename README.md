@@ -24,13 +24,14 @@ Start local server:
 * https://developer.accuweather.com/
 * https://www.weatherbit.io/
 ### Weather effects:
+* https://codepen.io/Hackroro/pen/ByrKLZ
 * https://codepen.io/angiebadfox/pen/RRdQAb
 * https://codepen.io/tmrDevelops/pen/PPgjwz
-* https://github.com/mourner/suncalc
 * https://codepen.io/Nvagelis/pen/yaQGAL
 * https://codepen.io/billyysea/pen/whjbK
+* https://codepen.io/anon/pen/wRqQOJ
 * https://github.com/jshakes/moontonight
-* https://codepen.io/billyysea/pen/whjbK
+* https://github.com/mourner/suncalc
 ### Icons:
 * https://erikflowers.github.io/weather-icons/
 * https://www.amcharts.com/free-animated-svg-weather-icons/
