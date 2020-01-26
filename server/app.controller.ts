@@ -16,10 +16,10 @@ export class AppController {
     console.log('Request: ', request);
     console.log('Headers from request: ', headers);
 
-    console.log('req.headers[x-forwarded-for]: ', req.headers && req.headers['x-forwarded-for']);
-    console.log('req.connection.remoteAddress: ', req.connection && req.connection.remoteAddress);
-    console.log('req.socket.remoteAddress: ', req.socket && req.socket.remoteAddress);
-    console.log('req.connection.socket.remoteAddress: ', req.connection && req.connection.socket && req.connection.socket.remoteAddress);
+    console.log('req.headers[x-forwarded-for]: ', request.headers && request.headers['x-forwarded-for']);
+    console.log('req.connection.remoteAddress: ', request.connection && request.connection.remoteAddress);
+    console.log('req.socket.remoteAddress: ', request.socket && request.socket.remoteAddress);
+    console.log('req.connection.socket.remoteAddress: ', request.connection && request.connection.socket && request.connection.socket.remoteAddress);
 
     // console.log('Ip from request: ', clientIp);
     // this.appService.clearIpAddress(clientIp);
