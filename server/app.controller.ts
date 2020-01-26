@@ -11,10 +11,7 @@ export class AppController {
 
   @Post('weather')
   public async getWeather(@Ip() clientIp: any) {
-    // TODO: test, delete
-    const mockedIp = '185.112.173.116';
-
-    return this.appService.getLocation(mockedIp)
+    return this.appService.getLocation(clientIp)
       .pipe(
         mergeMap((clientLocation: LocationDto) => this.appService.getWeather(clientLocation)),
         map((weatherData: any) => this.appService.adjustReceivedData(weatherData))

@@ -119,10 +119,7 @@ export class AppService {
 
     weatherState.locationData = this.locationData;
     weatherState.currentTime = this.setCurrentTime(weatherData[2][0].LocalObservationDateTime);
-    weatherState.dayLength = this.setDayLength(
-      weatherData[0][0].sunrise_ts,
-      weatherData[0][0].sunset_ts
-    );
+    weatherState.dayLength = this.setDayLength(weatherData[0][0].sunrise_ts, weatherData[0][0].sunset_ts);
     weatherState.nightLength = this.setNightLength(weatherState.dayLength);
     weatherState.timeOfDay = this.setTimeOfDay(
       weatherState.currentTime,
@@ -137,33 +134,12 @@ export class AppService {
     weatherState.windSpeed = weatherData[2][0].Wind.Speed.Metric.Value;
     weatherState.windDirection = this.setWindDirection(weatherData[2][0].Wind.Direction.Degrees);
     weatherState.weatherDefinition = weatherData[2][0].WeatherText;
-
-    weatherState.foggy = this.isWeatherOfType(
-      weatherData[2][0].WeatherIcon,
-      WeatherCodes.fogCodes
-    );
-    // weatherState.foggy = this.isFog(weatherData[2][0].WeatherIcon);
-    weatherState.cloudy = this.isWeatherOfType(
-      weatherData[2][0].WeatherIcon,
-      WeatherCodes.cloudsCodes
-    );
-    // weatherState.cloudy = this.isCloud(weatherData[2][0].WeatherIcon);
-    weatherState.rainy = this.isWeatherOfType(
-      weatherData[2][0].WeatherIcon,
-      WeatherCodes.rainCodes
-    );
-    // weatherState.rainy = this.isRain(weatherData[2][0].WeatherIcon);
-    weatherState.snowy = this.isWeatherOfType(
-      weatherData[2][0].WeatherIcon,
-      WeatherCodes.snowCodes
-    );
-    // weatherState.snowy = this.isSnow(weatherData[2][0].WeatherIcon);
-
+    weatherState.foggy = this.isWeatherOfType(weatherData[2][0].WeatherIcon, WeatherCodes.fogCodes);
+    weatherState.cloudy = this.isWeatherOfType(weatherData[2][0].WeatherIcon, WeatherCodes.cloudsCodes);
+    weatherState.rainy = this.isWeatherOfType(weatherData[2][0].WeatherIcon, WeatherCodes.rainCodes);
+    weatherState.snowy = this.isWeatherOfType(weatherData[2][0].WeatherIcon, WeatherCodes.snowCodes);
     weatherState.overcast = this.overcast;
-    weatherState.weatherType = this.setWeatherTypeAccuWeather(
-      weatherData[2][0].WeatherIcon,
-      weatherState.timeOfDay
-    );
+    weatherState.weatherType = this.setWeatherTypeAccuWeather(weatherData[2][0].WeatherIcon, weatherState.timeOfDay);
     weatherState.daysForecast = this.setDaysForecast(weatherData[0]);
     weatherState.hoursForecast = this.setHoursForecast(
       weatherData[1],
@@ -175,7 +151,6 @@ export class AppService {
     return weatherState;
   }
 
-  // TODO: test
   private isWeatherOfType(code: number, weatherCode: WeatherCodes) {
     if (weatherCode === WeatherCodes.fogCodes) {
       return AccuWeatherCodes[weatherCode].indexOf(code) !== -1;
@@ -194,54 +169,6 @@ export class AppService {
     this.overcast = Overcast.light;
     return false;
   }
-
-  // TODO: refactor this 4 into 1 using isWeather {snow: 'snow', ...} enum
-  // private isFog(code: number): boolean {
-  //     return AccuWeatherCodes.fogCodes.indexOf(code) !== -1;
-  // }
-  //
-  // private isCloud(code: number): boolean {
-  //     for (const prop in AccuWeatherCodes.cloudsCodes) {
-  //         if (
-  //             AccuWeatherCodes.cloudsCodes.hasOwnProperty(prop) &&
-  //             AccuWeatherCodes.cloudsCodes[prop].indexOf(code) !== -1
-  //         ) {
-  //             this.overcast = Overcast[prop];
-  //             return true;
-  //         }
-  //     }
-  //
-  //     this.overcast = Overcast.light;
-  //     return false;
-  // }
-  //
-  // private isRain(code: number): boolean {
-  //     for (const prop in AccuWeatherCodes.rainCodes) {
-  //         if (
-  //             AccuWeatherCodes.rainCodes.hasOwnProperty(prop) &&
-  //             AccuWeatherCodes.rainCodes[prop].indexOf(code) !== -1
-  //         ) {
-  //             this.overcast = Overcast[prop];
-  //             return true;
-  //         }
-  //     }
-  //
-  //     return false;
-  // }
-  //
-  // private isSnow(code: number): boolean {
-  //     for (const prop in AccuWeatherCodes.snowCodes) {
-  //         if (
-  //             AccuWeatherCodes.snowCodes.hasOwnProperty(prop) &&
-  //             AccuWeatherCodes.snowCodes[prop].indexOf(code) !== -1
-  //         ) {
-  //             this.overcast = Overcast[prop];
-  //             return true;
-  //         }
-  //     }
-  //
-  //     return false;
-  // }
 
   private setDayLength(dayStart: string, dayEnd: string): number {
     const sunRise: moment.Moment = moment(dayStart);
