@@ -11,7 +11,7 @@ export class AppController {
   constructor(private appService: AppService) {}
 
   @Post('weather')
-  public async getWeather(@Headers() headers: any, @Req() request: any, @Ip() clientIp: any) {
+  public async getWeather(@Headers() headers: any, @Req() request: any/*, @Ip() clientIp: any*/) {
     // TODO: test, fix, delete
     // console.log('Request: ', request);
     // console.log('Headers from request: ', headers);
