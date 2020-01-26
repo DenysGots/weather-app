@@ -15,6 +15,8 @@ export class HttpService {
     })
   };
 
+  private serverUrl = 'https://app-simple-weather.herokuapp.com';
+
   constructor(
     private http: HttpClient,
     private config: Config
@@ -22,6 +24,7 @@ export class HttpService {
 
   public getWeather(): Observable<any> {
     const getWeatherUrl = 'weather';
-    return this.http.post(`${this.config.backendUrl}/${getWeatherUrl}`, null, this.httpOptions);
+    // return this.http.post(`${this.config.backendUrl}/${getWeatherUrl}`, null, this.httpOptions);
+    return this.http.post(`${this.serverUrl}/${getWeatherUrl}`, null, this.httpOptions);
   }
 }

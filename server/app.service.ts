@@ -340,6 +340,11 @@ export class AppService {
   }
 
   private clearIpAddress(clientIp: string): string {
+    // TODO: delete
+    console.log('Cleaned Ip: ', clientIp.includes('::ffff:')
+      ? clientIp.replace(/::ffff:/, '')
+      : clientIp);
+
     return clientIp.includes('::ffff:')
       ? clientIp.replace(/::ffff:/, '')
       : clientIp;
