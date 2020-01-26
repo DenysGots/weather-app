@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
 import { Controller, Ip, Post } from '@nestjs/common';
@@ -13,12 +14,14 @@ export class AppController {
   public async getWeather(@Ip() clientIp: any) {
     // TODO: delete
     console.log('Ip from request: ', clientIp);
+    this.appService.clearIpAddress(clientIp);
+    return of({});
 
-    return this.appService.getLocation(clientIp)
-      .pipe(
-        mergeMap((clientLocation: LocationDto) => this.appService.getWeather(clientLocation)),
-        map((weatherData: any) => this.appService.adjustReceivedData(weatherData))
-      );
+    // return this.appService.getLocation(clientIp)
+    //   .pipe(
+    //     mergeMap((clientLocation: LocationDto) => this.appService.getWeather(clientLocation)),
+    //     map((weatherData: any) => this.appService.adjustReceivedData(weatherData))
+    //   );
   }
 
   // @Post('weather')
