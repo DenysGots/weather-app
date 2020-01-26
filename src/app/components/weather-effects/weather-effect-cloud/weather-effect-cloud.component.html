@@ -1,27 +1,37 @@
 <div class="app-weather-effect-clouds">
-    <div @enterLeaveTrigger
-         *ngIf="isOvercast('medium') && isTimeOfDay('day')"
-         class="app-weather-effect-clouds__background app-weather-effect-clouds__day-medium-background">
-    </div>
-    
-    <div @enterLeaveTrigger
-         *ngIf="isOvercast('heavy') && isTimeOfDay('day')"
-         class="app-weather-effect-clouds__background app-weather-effect-clouds__day-heavy-background">
-    </div>
-    
-    <div @enterLeaveTrigger
-         *ngIf="isOvercast('medium') && isTimeOfDay('night')"
-         class="app-weather-effect-clouds__background app-weather-effect-clouds__night-medium-background">
-    </div>
-    
-    <div @enterLeaveTrigger
-         *ngIf="isOvercast('heavy') && isTimeOfDay('night')"
-         class="app-weather-effect-clouds__background app-weather-effect-clouds__night-heavy-background">
-    </div>
-    
-    <div *ngFor="let value of numberOfClouds | NumberToIterablePipe"
-         class="app-weather-effect-clouds__layer app-weather-effect-clouds__layer-{{value}}">
-        <div class="app-weather-effect-clouds__img app-weather-effect-clouds__img-{{value}}"></div>
-        <div class="app-weather-effect-clouds__img app-weather-effect-clouds__img-{{value}}"></div>
-    </div>
+  <div
+    @enterLeaveTrigger
+    *ngIf="isOvercast('medium') && isTimeOfDay('day')"
+    class="app-weather-effect-clouds__background app-weather-effect-clouds__day-medium-background"
+  >
+  </div>
+
+  <div
+    @enterLeaveTrigger
+    *ngIf="isOvercast('heavy') && isTimeOfDay('day')"
+    class="app-weather-effect-clouds__background app-weather-effect-clouds__day-heavy-background"
+  >
+  </div>
+
+  <div
+    @enterLeaveTrigger
+    *ngIf="isOvercast('medium') && isTimeOfDay('night')"
+    class="app-weather-effect-clouds__background app-weather-effect-clouds__night-medium-background"
+  >
+  </div>
+
+  <div
+    @enterLeaveTrigger
+    *ngIf="isOvercast('heavy') && isTimeOfDay('night')"
+    class="app-weather-effect-clouds__background app-weather-effect-clouds__night-heavy-background"
+  >
+  </div>
+
+  <div
+    *ngFor="let value of numberOfClouds | NumberToIterablePipe"
+    class="app-weather-effect-clouds__layer app-weather-effect-clouds__layer-{{value}}"
+  >
+      <div class="app-weather-effect-clouds__img app-weather-effect-clouds__img-{{value}}"></div>
+      <div class="app-weather-effect-clouds__img app-weather-effect-clouds__img-{{value}}"></div>
+  </div>
 </div>

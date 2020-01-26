@@ -1,31 +1,25 @@
-import { NgModule } from '@angular/core';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faAngleDown, faAngleLeft, faAngleRight, faAngleUp, faHome } from '@fortawesome/free-solid-svg-icons';
+import { TransferHttpCacheModule } from '@nguniversal/common';
+
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-    MatButtonModule,
-    MatCheckboxModule,
-    MatExpansionModule,
-    MatRadioModule,
-    MatSliderModule,
-    MatSlideToggleModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatExpansionModule,
+  MatRadioModule,
+  MatSliderModule,
+  MatSlideToggleModule
 } from '@angular/material';
-import { TransferHttpCacheModule } from '@nguniversal/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faAngleLeft,
-    faAngleRight,
-    faHome,
-    faMinus,
-    faPlus,
-} from '@fortawesome/free-solid-svg-icons';
 
 import { AppComponent } from './app.component';
+import { Config } from './app.config';
 import { routes } from './app.routing';
-import { SharedModule } from './modules/shared/shared.module';
 
 import { ButtonComponent } from './components/button/button.component';
 import { ControlPanelComponent } from './components/control-panel/control-panel.component';
@@ -52,69 +46,73 @@ import { TemperatureValuePipe } from './pipes/temperatureValuePipe.pipe';
 
 import { WINDOW_PROVIDERS } from './services/helpers.service';
 
+export function initApp(config: Config) {
+  return () => config.init();
+}
+
 @NgModule({
-    declarations: [
-        AppComponent,
-        ButtonComponent,
-        ControlPanelComponent,
-        DayTimeDayViewComponent,
-        DayTimeNightViewComponent,
-        DayTimeWeatherViewComponent,
-        ForecastCardsDeckComponent,
-        ForecastCurrentInformationComponent,
-        ForecastWeatherCardComponent,
-        IconComponent,
-        MainPageComponent,
-        NumberToIterablePipe,
-        TemperatureValuePipe,
-        WeatherEffectCloudComponent,
-        WeatherEffectFogComponent,
-        WeatherEffectLightningComponent,
-        WeatherEffectMoonComponent,
-        WeatherEffectRainComponent,
-        WeatherEffectSnowComponent,
-        WeatherEffectStarsComponent,
-        WeatherEffectSunComponent,
-        WeatherEffectWaterDropsComponent,
-    ],
-    imports: [
-        HttpClientModule,
-        // Add .withServerTransition() to support Universal rendering.
-        // The application ID can be any identifier which is unique on
-        // the page.
-        BrowserModule.withServerTransition({ appId: 'my-app' }),
-        TransferHttpCacheModule,
-        RouterModule.forRoot(routes, {
-            useHash: false,
-            preloadingStrategy: PreloadAllModules,
-        }),
-        SharedModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        FontAwesomeModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatExpansionModule,
-        MatRadioModule,
-        MatSliderModule,
-        MatSlideToggleModule,
-    ],
-    providers: [
-        WINDOW_PROVIDERS,
-    ],
-    bootstrap: [
-        AppComponent,
-    ]
+  declarations: [
+    AppComponent,
+    ButtonComponent,
+    ControlPanelComponent,
+    DayTimeDayViewComponent,
+    DayTimeNightViewComponent,
+    DayTimeWeatherViewComponent,
+    ForecastCardsDeckComponent,
+    ForecastCurrentInformationComponent,
+    ForecastWeatherCardComponent,
+    IconComponent,
+    MainPageComponent,
+    NumberToIterablePipe,
+    TemperatureValuePipe,
+    WeatherEffectCloudComponent,
+    WeatherEffectFogComponent,
+    WeatherEffectLightningComponent,
+    WeatherEffectMoonComponent,
+    WeatherEffectRainComponent,
+    WeatherEffectSnowComponent,
+    WeatherEffectStarsComponent,
+    WeatherEffectSunComponent,
+    WeatherEffectWaterDropsComponent
+  ],
+  imports: [
+    HttpClientModule,
+    BrowserModule.withServerTransition({ appId: 'my-app' }),
+    TransferHttpCacheModule,
+    RouterModule.forRoot(routes, {
+      useHash: false,
+      preloadingStrategy: PreloadAllModules
+    }),
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatSliderModule,
+    MatSlideToggleModule
+  ],
+  providers: [
+    WINDOW_PROVIDERS,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      deps: [Config],
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
-    constructor() {
-        library.add(
-            faAngleLeft,
-            faAngleRight,
-            faHome,
-            faMinus,
-            faPlus
-        );
-    }
+  constructor(private faIconLibrary: FaIconLibrary) {
+    faIconLibrary.addIcons(
+      faAngleDown,
+      faAngleLeft,
+      faAngleRight,
+      faAngleUp,
+      faHome
+    );
+  }
 }

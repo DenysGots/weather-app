@@ -1,59 +1,88 @@
-<div #forecastCardsDeck
-     class="app-forecast-cards-deck">
-    <div class="app-forecast-cards-deck__container"
-         [ngStyle]="{'top.px': cardsDeckTopPosition}">
-        <div class="app-forecast-cards-deck__cards-container">
-            <div #forecastCardsDeckHoursContainer
-                 class="app-forecast-cards-deck__hours"
-                 [ngStyle]="{'left.px': hoursCardsDeckLeftPosition}">
-                <app-forecast-weather-card *ngFor="let card of currentState.hoursForecast"
-                                           [type]="cardsDeckType.hours"
-                                           [hourTime]="card.hourTime"
-                                           [weatherTypeHour]="card.weatherTypeHour"
-                                           [humidityCurrent]="card.humidityCurrent"
-                                           [temperatureCurrent]="card.temperatureCurrent"
-                                           [windSpeedCurrent]="card.windSpeedCurrent"
-                                           [windDirectionCurrent]="card.windDirectionCurrent"
-                                           [uvIndexCurrent]="card.uvIndexCurrent"></app-forecast-weather-card>
-            </div>
-        </div>
-        
-        <div class="app-forecast-cards-deck__cards-container">
-            <div #forecastCardsDeckDaysContainer
-                 class="app-forecast-cards-deck__days"
-                 [ngStyle]="{'left.px': daysCardsDeckLeftPosition}">
-                <app-forecast-weather-card *ngFor="let card of currentState.daysForecast"
-                                           [type]="cardsDeckType.days"
-                                           [dayDate]="card.dayDate"
-                                           [weatherTypeDay]="card.weatherTypeDay"
-                                           [temperatureMin]="card.temperatureMin"
-                                           [temperatureMax]="card.temperatureMax"
-                                           [humidity]="card.humidity"
-                                           [uvIndex]="card.uvIndex"></app-forecast-weather-card>
-            </div>
-        </div>
+<div
+  #forecastCardsDeck
+  class="app-forecast-cards-deck"
+>
+  <div
+    class="app-forecast-cards-deck__container"
+    [ngStyle]="{ 'top.px': cardsDeckTopPosition }"
+  >
+    <div class="app-forecast-cards-deck__cards-container">
+      <div
+        #forecastCardsDeckHoursContainer
+        class="app-forecast-cards-deck__hours"
+        [ngStyle]="{ 'left.px': hoursCardsDeckLeftPosition }"
+      >
+        <app-forecast-weather-card
+          *ngFor="let card of currentState.hoursForecast"
+          [type]="cardsDeckType.hours"
+          [hourTime]="card.hourTime"
+          [weatherTypeHour]="card.weatherTypeHour"
+          [humidityCurrent]="card.humidityCurrent"
+          [temperatureCurrent]="card.temperatureCurrent"
+          [windSpeedCurrent]="card.windSpeedCurrent"
+          [windDirectionCurrent]="card.windDirectionCurrent"
+          [uvIndexCurrent]="card.uvIndexCurrent"
+        >
+        </app-forecast-weather-card>
+      </div>
     </div>
+
+    <div class="app-forecast-cards-deck__cards-container">
+      <div
+        #forecastCardsDeckDaysContainer
+        class="app-forecast-cards-deck__days"
+        [ngStyle]="{ 'left.px': daysCardsDeckLeftPosition }"
+      >
+        <app-forecast-weather-card
+          *ngFor="let card of currentState.daysForecast"
+          [type]="cardsDeckType.days"
+          [dayDate]="card.dayDate"
+          [weatherTypeDay]="card.weatherTypeDay"
+          [temperatureMin]="card.temperatureMin"
+          [temperatureMax]="card.temperatureMax"
+          [humidity]="card.humidity"
+          [uvIndex]="card.uvIndex"
+        >
+        </app-forecast-weather-card>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="app-forecast-cards-deck__controls">
-    <app-button buttonType="left"
-                buttonSize="big"
-                buttonShape="circle"
-                (click)="goLeft()"></app-button>
-    
-    <app-button buttonType="minus"
-                buttonSize="medium"
-                (click)="goToHoursView()"></app-button>
-    
-    <app-button buttonType="home"
-                buttonSize="big"
-                (click)="resetCardsView()"></app-button>
-    
-    <app-button buttonType="plus"
-                buttonSize="medium"
-                (click)="goToDaysView()"></app-button>
-    
-    <app-button buttonType="right"
-                buttonSize="big"
-                (click)="goRight()"></app-button>
+  <app-button
+    buttonType="left"
+    buttonSize="big"
+    buttonShape="circle"
+    (click)="goLeft()"
+  >
+  </app-button>
+
+  <app-button
+    buttonType="up"
+    buttonSize="medium"
+    (click)="goToHoursView()"
+  >
+  </app-button>
+
+  <app-button
+    buttonType="home"
+    buttonSize="big"
+    (click)="resetCardsView()"
+  >
+  </app-button>
+
+  <app-button
+    buttonType="down"
+    buttonSize="medium"
+    (click)="goToDaysView()"
+  >
+  </app-button>
+
+  <app-button
+    buttonType="right"
+    buttonSize="big"
+    (click)="goRight()"
+  >
+  </app-button>
 </div>

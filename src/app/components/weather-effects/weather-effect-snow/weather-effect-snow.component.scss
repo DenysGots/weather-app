@@ -2,17 +2,17 @@
 @import '../../../../styles/mixins.scss';
 
 .app-weather-effect-snow {
-    contain: content;
+  contain: content;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: $z-index-snow;
+
+  &__canvas {
     height: 100%;
-    overflow: hidden;
     position: absolute;
     width: 100%;
-    z-index: $z-index-snow;
-
-    &__canvas {
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        z-index: ($z-index-snow + 20);
-    }
+    z-index: ($z-index-snow + 20);
+  }
 }

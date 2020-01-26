@@ -1,79 +1,79 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    height: 100%;
-    position: relative;
-    width: 100%;
+  height: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .app-forecast-weather-card {
-    background-color: $weather-card-background;
-    border-radius: $border-radius-default;
-    box-shadow: $box-shadow-default;
-    color: $color-cloud_sky_heavy_night_darker;
-    contain: content;
-    height: $weather-card-height;
-    padding: $space-md $space-md $space-md $space-lg;
+  background-color: $weather-card-background;
+  border-radius: $border-radius-default;
+  box-shadow: $box-shadow-default;
+  color: $color-cloud_sky_heavy_night_darker;
+  contain: content;
+  height: $weather-card-height;
+  padding: $space-md $space-md $space-md $space-lg;
+  position: relative;
+  transition: box-shadow 0.1s ease-in-out;
+  width: $weather-card-width;
+
+  &:hover {
+    background-color: $weather-card-background-hover;
+    box-shadow: $box-shadow-hover;
+  }
+
+  &__block {
     position: relative;
-    transition: box-shadow 0.1s ease-in-out;
-    width: $weather-card-width;
-    
-    &:hover {
-        background-color: $weather-card-background-hover;
-        box-shadow: $box-shadow-hover;
+
+    &:first-of-type {
+      margin-top: 0;
     }
-    
-    &__block {
-        position: relative;
-    
-        &:first-of-type {
-            margin-top: 0;
-        }
-    
-        &:last-of-type {
-            margin-bottom: 0;
-        }
-        
-        &:nth-of-type(3) {
-            margin-top: (-$space-lg);
-        }
-    
-        &:nth-of-type(4) {
-            margin-top: (-$space-sm);
-        }
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
-    
-    &__double-data-container {
-        display: inline-block;
-        margin: 0 $space-lg;
-        position: relative;
-        transform: rotate(-55deg);
+
+    &:nth-of-type(3) {
+      margin-top: (-$space-lg);
     }
-    
-    &__double-data-content {
-        &:first-of-type {
-            margin-bottom: ($space-md + $space-xxs);
-        }
-    
-        &:last-of-type {
-            margin-top: $space-xmd;
-        }
+
+    &:nth-of-type(4) {
+      margin-top: (-$space-sm);
     }
-    
-    &__double-data {
-        display: inline-block;
-        transform: rotate(55deg);
+  }
+
+  &__double-data-container {
+    display: inline-block;
+    margin: 0 $space-lg;
+    position: relative;
+    transform: rotate(-55deg);
+  }
+
+  &__double-data-content {
+    &:first-of-type {
+      margin-bottom: ($space-md + $space-xxs);
     }
-    
-    &__double-data-divider {
-        margin: 0 auto;
-        width: 70%;
-        height: 0;
-        border-top: 2px solid $color-cloud_sky_heavy_night_darker;
-        transform: rotate(25deg);
+
+    &:last-of-type {
+      margin-top: $space-xmd;
     }
-    
-    .wi {
-        color: $color-blue;
-    }
+  }
+
+  &__double-data {
+    display: inline-block;
+    transform: rotate(55deg);
+  }
+
+  &__double-data-divider {
+    margin: 0 auto;
+    width: 70%;
+    height: 0;
+    border-top: 2px solid $color-cloud_sky_heavy_night_darker;
+    transform: rotate(25deg);
+  }
+
+  .wi {
+    color: $color-blue;
+  }
 }

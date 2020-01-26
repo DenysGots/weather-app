@@ -1,38 +1,38 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    position: relative;
+  position: relative;
 }
 
 .app-control-panel {
-    contain: content;
-    padding: $space-xs;
-    position: relative;
-    
-    &__block {
-        margin: $space-sm 0;
-        
-        &:first-of-type,
-        &:last-of-type {
-            margin: 0;
-        }
-    
-        mat-radio-group {
-            align-items: center;
-            display: flex;
-            justify-content: flex-start;
-    
-            mat-radio-button {
-                margin: 0 $space-sm;
-        
-                &:nth-of-type(2n) {
-                    margin-left: 0;
-                }
-            }
-        }
-    
-        mat-slider {
-            width: 100%;
-        }
+  contain: content;
+  padding: $space-xs;
+  position: relative;
+
+  &__block {
+    margin: $space-sm 0;
+
+    &:first-of-type,
+    &:last-of-type {
+      margin: 0;
     }
+
+    mat-radio-group {
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+
+      mat-radio-button {
+        margin: 0 $space-sm;
+
+        &:nth-of-type(2n) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    mat-slider {
+      width: 100%;
+    }
+  }
 }

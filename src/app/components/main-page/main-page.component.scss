@@ -1,142 +1,142 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    height: 100%;
-    position: relative;
-    width: 100%;
+  height: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .app-main-page {
-    contain: content;
-    height: auto;
-    min-height: 100%;
-    overflow: auto;
+  contain: content;
+  height: auto;
+  min-height: 100%;
+  overflow: auto;
+  position: relative;
+  transition: background 1.0s ease-in-out;
+  width: 100%;
+  z-index: $z-index-main-page;
+
+  &__current-information {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: $space-lg 15%;
     position: relative;
-    transition: background 1.0s ease-in-out;
     width: 100%;
-    z-index: $z-index-main-page;
-    
-    &__current-information {
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        padding: $space-lg 15%;
-        position: relative;
-        width: 100%;
-        z-index: ($z-index-main-page + 30);
-    }
-    
-    &__day-time-view {
-        display: block;
-        height: $main-view-height;
-        min-width: 45%;
-        padding: 0 15%;
-        position: relative;
-        width: 100%;
-        z-index: ($z-index-main-page + 30);
-    }
-    
-    &__cards-deck {
-        align-items: center;
-        display: flex;
-        height: 100%;
-        justify-content: center;
-        padding: $space-lg 15%;
-        position: relative;
-        width: 100%;
-        z-index: ($z-index-main-page + 30);
-    }
-    
-    &__control-panel {
-        position: absolute;
-        right: $space-xl;
-        top: $space-xl;
-        z-index: ($z-index-main-page + 30);
-    }
-    
-    &__background {
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-    }
-    
-    &__blurred-background {
-        background: rgba(255, 255, 255, 0.1);
-        filter: brightness(1.1) blur(50.0px);
-        z-index: ($z-index-main-page + 20);
-    }
-    
-    &__fog-background {
-        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3) 100%);
-        filter: brightness(1.1) blur(5.0px);
-        z-index: ($z-index-main-page + 10);
-    }
-    
-    &__clouds-day-medium-background {
-        background: linear-gradient(25deg, $color-cloud_sky_medium_day_lighter 0%, $color-cloud_sky_medium_day_darker 100%);
-        z-index: ($z-index-main-page + 10);
-    }
-    
-    &__clouds-day-heavy-background {
-        background: linear-gradient(25deg, $color-cloud_sky_heavy_day_lighter 0%, $color-cloud_sky_heavy_day_darker 100%);
-        z-index: ($z-index-main-page + 10);
-    }
-    
-    &__clouds-night-medium-background {
-        background: linear-gradient(25deg, $color-cloud_sky_medium_night_lighter 0%, $color-cloud_sky_medium_night_darker 100%);
-        z-index: ($z-index-main-page + 10);
-    }
-    
-    &__clouds-night-heavy-background {
-        background: linear-gradient(25deg, $color-cloud_sky_heavy_night_lighter 0%, $color-cloud_sky_heavy_night_darker 100%);
-        z-index: ($z-index-main-page + 10);
-    }
+    z-index: ($z-index-main-page + 30);
+  }
+
+  &__day-time-view {
+    display: block;
+    height: $main-view-height;
+    min-width: 45%;
+    padding: 0 15%;
+    position: relative;
+    width: 100%;
+    z-index: ($z-index-main-page + 30);
+  }
+
+  &__cards-deck {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    padding: $space-lg 15%;
+    position: relative;
+    width: 100%;
+    z-index: ($z-index-main-page + 30);
+  }
+
+  &__control-panel {
+    position: absolute;
+    right: $space-xl;
+    top: $space-xl;
+    z-index: ($z-index-main-page + 30);
+  }
+
+  &__background {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &__blurred-background {
+    background: rgba(255, 255, 255, 0.1);
+    filter: brightness(1.1) blur(50.0px);
+    z-index: ($z-index-main-page + 20);
+  }
+
+  &__fog-background {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3) 100%);
+    filter: brightness(1.1) blur(5.0px);
+    z-index: ($z-index-main-page + 10);
+  }
+
+  &__clouds-day-medium-background {
+    background: linear-gradient(25deg, $color-cloud_sky_medium_day_lighter 0%, $color-cloud_sky_medium_day_darker 100%);
+    z-index: ($z-index-main-page + 10);
+  }
+
+  &__clouds-day-heavy-background {
+    background: linear-gradient(25deg, $color-cloud_sky_heavy_day_lighter 0%, $color-cloud_sky_heavy_day_darker 100%);
+    z-index: ($z-index-main-page + 10);
+  }
+
+  &__clouds-night-medium-background {
+    background: linear-gradient(25deg, $color-cloud_sky_medium_night_lighter 0%, $color-cloud_sky_medium_night_darker 100%);
+    z-index: ($z-index-main-page + 10);
+  }
+
+  &__clouds-night-heavy-background {
+    background: linear-gradient(25deg, $color-cloud_sky_heavy_night_lighter 0%, $color-cloud_sky_heavy_night_darker 100%);
+    z-index: ($z-index-main-page + 10);
+  }
 }
 
 @media (max-width: 1024px) {
-    .app-main-page {
-        &__current-information {
-            padding: $space-md $space-sm;
-        }
-        
-        &__day-time-view {
-            padding: 0 $space-sm;
-        }
-        
-        &__cards-deck {
-            padding: $space-md $space-sm;
-        }
+  .app-main-page {
+    &__current-information {
+      padding: $space-md $space-sm;
     }
+
+    &__day-time-view {
+      padding: 0 $space-sm;
+    }
+
+    &__cards-deck {
+      padding: $space-md $space-sm;
+    }
+  }
 }
 
 @media (max-width: 420px), (max-height: 420px) and (orientation: landscape) {
-    .app-main-page {
-        &__current-information {
-            height: 100vh;
-            padding: $space-sm 0;
-        }
-        
-        &__day-time-view {
-            backface-visibility: hidden;
-            height: 100%;
-            left: 0;
-            padding: 0;
-            position: fixed;
-            top: 0;
-            width: 100vw;
-            z-index: ($z-index-main-page + 20);
-        }
-        
-        &__cards-deck {
-            align-items: flex-start;
-            left: 0;
-            padding: 0 $space-sm $space-xsm $space-sm;
-        }
-    
-        &__control-panel {
-            display: none;
-        }
+  .app-main-page {
+    &__current-information {
+      height: 100vh;
+      padding: $space-sm 0;
     }
+
+    &__day-time-view {
+      backface-visibility: hidden;
+      height: 100%;
+      left: 0;
+      padding: 0;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: ($z-index-main-page + 20);
+    }
+
+    &__cards-deck {
+      align-items: flex-start;
+      left: 0;
+      padding: 0 $space-sm $space-xsm $space-sm;
+    }
+
+    &__control-panel {
+      display: none;
+    }
+  }
 }

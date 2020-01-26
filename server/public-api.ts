@@ -1,5 +1,5 @@
 export interface LocationDto {
-    countryCode: string;
-    country: string;
-    city: string;
+  countryCode: string;
+  country: string;
+  city: string;
 }

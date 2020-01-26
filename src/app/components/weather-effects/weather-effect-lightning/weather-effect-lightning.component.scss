@@ -2,44 +2,44 @@
 @import '../../../../styles/mixins.scss';
 
 @keyframes thunder-background {
-    0% { background-color: $color-lightning-background-darker; }
-    1% { background-color: $color-lightning-background-lighter; }
-    9% { background-color: $color-lightning-background-lighter; }
-    10% { background-color: $color-lightning-background-darker; }
-    10.5% { background-color: $color-lightning-background-lighter; }
-    11% { background-color: $color-lightning-background-darker; }
-    79% { background-color: $color-lightning-background-darker; }
-    80% { background-color: $color-lightning-background-lighter; }
-    82% { background-color: $color-lightning-background-darker; }
-    83% { background-color: $color-lightning-background-lighter; }
-    83.5% { background-color: $color-lightning-background-darker; }
-    98% { background-color: $color-lightning-background-darker; }
-    99% { background-color: $color-lightning-background-lighter; }
-    100% { background-color: $color-lightning-background-darker; }
+  0% { background-color: $color-lightning-background-darker; }
+  1% { background-color: $color-lightning-background-lighter; }
+  9% { background-color: $color-lightning-background-lighter; }
+  10% { background-color: $color-lightning-background-darker; }
+  10.5% { background-color: $color-lightning-background-lighter; }
+  11% { background-color: $color-lightning-background-darker; }
+  79% { background-color: $color-lightning-background-darker; }
+  80% { background-color: $color-lightning-background-lighter; }
+  82% { background-color: $color-lightning-background-darker; }
+  83% { background-color: $color-lightning-background-lighter; }
+  83.5% { background-color: $color-lightning-background-darker; }
+  98% { background-color: $color-lightning-background-darker; }
+  99% { background-color: $color-lightning-background-lighter; }
+  100% { background-color: $color-lightning-background-darker; }
 }
 
 .app-weather-effect-lightning2 {
-    contain: content;
+  contain: content;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: $z-index-lightning;
+
+  &__background {
+    animation: thunder-background 6s infinite;
+    background-color: white;
     height: 100%;
-    overflow: hidden;
+    position: absolute;
+    transition: none !important;
+    width: 100%;
+    z-index: ($z-index-lightning + 15);
+  }
+
+  &__canvas {
+    height: 100%;
     position: absolute;
     width: 100%;
-    z-index: $z-index-lightning;
-    
-    &__background {
-        animation: thunder-background 6s infinite;
-        background-color: white;
-        height: 100%;
-        position: absolute;
-        transition: none !important;
-        width: 100%;
-        z-index: ($z-index-lightning + 15);
-    }
-
-    &__canvas {
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        z-index: ($z-index-lightning + 20);
-    }
+    z-index: ($z-index-lightning + 20);
+  }
 }

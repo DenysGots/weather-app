@@ -1,17 +1,17 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    position: relative;
+  position: relative;
 }
 
 .app-icon {
-    background-size: cover;
-    background: no-repeat center;
-    contain: content;
-    display: inline-block;
-    position: relative;
-    
-    &__image {
-        vertical-align: middle;
-    }
+  background-size: cover;
+  background: no-repeat center;
+  contain: content;
+  display: inline-block;
+  position: relative;
+
+  &__image {
+    vertical-align: middle;
+  }
 }
