@@ -119,8 +119,8 @@ export class AppService {
 
     weatherState.locationData = this.locationData;
     weatherState.currentTime = this.setCurrentTime(weatherData[2][0].LocalObservationDateTime);
-    weatherState.dayLength = this.setDayLength(weatherData[0][0].sunrise_ts, weatherData[0][0].sunset_ts);
-    weatherState.nightLength = this.setNightLength(weatherState.dayLength);
+    weatherState.dayLength = this.setDayTimeLength(weatherData[0][0].sunrise_ts, weatherData[0][0].sunset_ts);
+    weatherState.nightLength = this.setNightTimeLength(weatherState.dayLength);
     weatherState.timeOfDay = this.setTimeOfDay(
       weatherState.currentTime,
       weatherState.dayLength,
@@ -170,15 +170,16 @@ export class AppService {
     return false;
   }
 
-  private setDayLength(dayStart: string, dayEnd: string): number {
+  private setDayTimeLength(dayStart: string, dayEnd: string): number {
     const sunRise: moment.Moment = moment(dayStart);
     const sunSet: moment.Moment = moment(dayEnd);
 
     return moment.duration(sunSet.diff(sunRise)).as('milliseconds');
   }
 
-  private setNightLength(dayLength: number): number {
-    return 86400000 - dayLength;
+  private setNightTimeLength(dayTimeLength: number): number {
+    const dayLength = 86400000;
+    return dayLength - dayTimeLength;
   }
 
   private setCurrentTime(time?: string): number {
