@@ -1,10 +1,15 @@
+import { interval } from 'rxjs';
+import { takeWhile, throttle } from 'rxjs/operators';
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Input,
+  NgZone,
   OnChanges,
   OnInit,
+  OnDestroy,
   SimpleChanges,
   ViewRef
 } from '@angular/core';
@@ -31,7 +36,7 @@ import {
   selector: 'app-weather-effect-water-drops',
   templateUrl: './weather-effect-water-drops.component.html',
   styleUrls: ['./weather-effect-water-drops.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('enterLeaveTrigger', [
       transition(
@@ -50,9 +55,9 @@ import {
     ])
   ]
 })
-export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
-  @Input() viewHeight: number;
-  @Input() viewWidth: number;
+export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() viewHeight: any;
+  @Input() viewWidth: any;
   @Input() overcast: Overcast;
   @Input() currentBackground: string;
 
@@ -61,32 +66,56 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
   public adjustedCelestialData: {[key: string]: number} = {};
 
   private numberOfDrops = 100;
+  private isAlive = true;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
+    private ngZone: NgZone,
     private mainService: MainService
   ) {
-    this.mainService.currentStateSubject.subscribe((state: State) => {
-      this.currentState = state;
-    });
+    this.mainService.currentStateSubject
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe((state: State) => {
+        this.currentState = state;
+      });
 
-    this.mainService.celestialDataSubject.subscribe((data: CelestialData) => {
-      this.adjustCelestialPosition(data);
-      this.changeDetectorRef.detectChanges();
-    });
+    this.mainService.celestialDataSubject
+      .pipe(
+        takeWhile(() => this.isAlive),
+        throttle(val => interval(5000))
+      )
+      .subscribe((data: CelestialData) => {
+        this.adjustCelestialPosition(data);
+        this.initDropsWeatherEffect();
+        // !(<ViewRef>changeDetectorRef).destroyed && this.changeDetectorRef.detectChanges();
+      });
   }
 
   ngOnInit() {
-    this.numberOfDrops = DropsOnScreen[this.overcast];
-    this.generateDrops();
+    this.initDropsWeatherEffect();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if ('overcast' in changes && !changes.overcast.firstChange) {
-      this.drops = [];
-      this.numberOfDrops = DropsOnScreen[this.overcast];
-      this.generateDrops();
+      this.initDropsWeatherEffect();
     }
+  }
+
+  ngOnDestroy() {
+    this.isAlive = false;
+  }
+
+  private initDropsWeatherEffect() {
+    this.drops = [];
+    this.numberOfDrops = DropsOnScreen[this.overcast];
+
+    // TODO: test
+    this.ngZone.runOutsideAngular(() => {
+      this.generateDrops();
+    });
+
+
+    // this.generateDrops();
   }
 
   private randomTimeout(): number {
@@ -112,13 +141,25 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
         const borderWidth = dropWidth - 4;
         const borderHeight = 0.94 * dropHeight;
 
-        const xPosition =  x * this.viewWidth;
-        const yPosition =  y * this.viewHeight;
+        const xPosition =  x * parseFloat(this.viewWidth);
+        const yPosition =  y * parseFloat(this.viewHeight);
 
         const backgroundPosition = `${x * 100}% ${y * 100}%`;
-        const backgroundSize = `${this.viewHeight / 100 * 5}px ${this.viewWidth / 100 * 5}px`;
+        const backgroundSize =
+          `${parseFloat(this.viewHeight) / 100 * 5}px ${parseFloat(this.viewWidth) / 100 * 5}px`;
 
-        this.drops.push({
+        const fogBackground =
+          this.isWeather('foggy') || this.isWeather('cloudy');
+        const dayMediumBackground =
+          this.isWeather('cloudy') && this.isOvercast('medium') && this.isTimeOfDay('day');
+        const dayHeavyBackground =
+          this.isWeather('cloudy') && this.isOvercast('heavy') && this.isTimeOfDay('day');
+        const nightMediumBackground =
+          this.isWeather('cloudy') && this.isOvercast('medium') && this.isTimeOfDay('night');
+        const nightHeavyBackground =
+          this.isWeather('cloudy') && this.isOvercast('heavy') && this.isTimeOfDay('night');
+
+        const generatedDrop = <any>{
           xPosition,
           yPosition,
           dropWidth,
@@ -126,10 +167,27 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges {
           borderWidth,
           borderHeight,
           backgroundPosition,
-          backgroundSize
+          backgroundSize,
+          fogBackground,
+          dayMediumBackground,
+          dayHeavyBackground,
+          nightMediumBackground,
+          nightHeavyBackground
+        };
+
+        generatedDrop.shouldRender = this.shouldRenderDrop(generatedDrop);
+
+        this.drops.push(generatedDrop);
+
+        console.log(this.drops);
+
+
+        // TODO: test
+        this.ngZone.run(() => {
+          detectChanges();
         });
 
-        detectChanges();
+        // detectChanges();
       }, this.randomTimeout());
     }
   }

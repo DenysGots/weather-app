@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { takeWhile } from 'rxjs/operators';
+
+import { Component, OnDestroy } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
 import { State, WeatherTypes } from '../../../../shared/public-api';
@@ -8,13 +10,20 @@ import { State, WeatherTypes } from '../../../../shared/public-api';
   templateUrl: './forecast-current-information.component.html',
   styleUrls: ['./forecast-current-information.component.scss']
 })
-export class ForecastCurrentInformationComponent {
+export class ForecastCurrentInformationComponent implements OnDestroy {
   public currentState: State;
+  private isAlive = true;
 
   constructor(private mainService: MainService) {
-    this.mainService.currentStateSubject.subscribe((state: State) => {
-      this.currentState = state;
-    });
+    this.mainService.currentStateSubject
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe((state: State) => {
+        this.currentState = state;
+      });
+  }
+
+  ngOnDestroy() {
+    this.isAlive = false;
   }
 
   public getWeatherIcon() {

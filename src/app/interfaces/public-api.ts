@@ -15,14 +15,20 @@ export interface CelestialPosition {
 }
 
 export interface WaterDrop {
-  yPosition;
-  xPosition;
-  dropWidth;
-  dropHeight;
-  borderWidth;
-  borderHeight;
-  backgroundPosition;
-  backgroundSize;
+  yPosition: number;
+  xPosition: number;
+  dropWidth: number;
+  dropHeight: number;
+  borderWidth: number;
+  borderHeight: number;
+  backgroundPosition: string;
+  backgroundSize: string;
+  shouldRender?: boolean;
+  fogBackground?: boolean;
+  dayMediumBackground?: boolean;
+  dayHeavyBackground?: boolean;
+  nightMediumBackground?: boolean;
+  nightHeavyBackground?: boolean;
 }
 
 export interface State {

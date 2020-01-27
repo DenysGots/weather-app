@@ -1,3 +1,5 @@
+import { takeWhile } from 'rxjs/operators';
+
 import {
   animate,
   style,
@@ -9,6 +11,7 @@ import {
   Component,
   ElementRef,
   OnInit,
+  OnDestroy,
   ViewChild
 } from '@angular/core';
 
@@ -37,10 +40,12 @@ import { Overcast, State } from '../../../../shared/public-api';
     ])
   ]
 })
-export class DayTimeWeatherViewComponent implements OnInit {
+export class DayTimeWeatherViewComponent implements OnInit, OnDestroy {
   public viewHeight: number;
   public viewWidth: number;
   public currentState: State;
+
+  private isAlive = true;
 
   @ViewChild('weatherView', { static: false }) weatherView: ElementRef;
 
@@ -49,15 +54,21 @@ export class DayTimeWeatherViewComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private mainService: MainService
   ) {
-    this.mainService.currentStateSubject.subscribe((state: State) => {
+    this.mainService.currentStateSubject
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe((state: State) => {
         this.currentState = state;
-    });
+      });
   }
 
   ngOnInit() {
     this.viewHeight = this.elementRef.nativeElement.offsetHeight;
     this.viewWidth = this.elementRef.nativeElement.offsetWidth;
     this.changeDetectorRef.detectChanges();
+  }
+
+  ngOnDestroy() {
+    this.isAlive = false;
   }
 
   public isTimeOfDay(timeOfDay) {

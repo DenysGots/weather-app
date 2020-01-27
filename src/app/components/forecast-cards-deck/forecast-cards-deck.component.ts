@@ -1,21 +1,24 @@
+import { takeWhile } from 'rxjs/operators';
+
 import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnInit,
-    ViewChild
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  OnDestroy,
+  ViewChild
 } from '@angular/core';
 
 import { MainService } from '../../services/main.service';
 import {
-    cardsDeckHeight,
-    CardsDeckType,
-    cardWidth,
-    spaceMd,
-    spaceSm,
-    State
+  cardsDeckHeight,
+  CardsDeckType,
+  cardWidth,
+  spaceMd,
+  spaceSm,
+  State
 } from '../../../../shared/public-api';
 
 @Component({
@@ -24,7 +27,7 @@ import {
   styleUrls: ['./forecast-cards-deck.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ForecastCardsDeckComponent implements OnInit, AfterViewInit {
+export class ForecastCardsDeckComponent implements OnInit, AfterViewInit, OnDestroy {
   public currentState: State;
   public currentMode: CardsDeckType = CardsDeckType.hours;
   public cardsDeckType = CardsDeckType;
@@ -39,10 +42,14 @@ export class ForecastCardsDeckComponent implements OnInit, AfterViewInit {
   private deckWidth: number;
   private deckHoursContainerWidth: number;
   private deckDaysContainerWidth: number;
+  private isAlive = true;
 
-  @ViewChild('forecastCardsDeck', {static: false}) private forecastCardsDeck: ElementRef;
-  @ViewChild('forecastCardsDeckHoursContainer', {static: false}) private forecastCardsDeckHoursContainer: ElementRef;
-  @ViewChild('forecastCardsDeckDaysContainer', {static: false}) private forecastCardsDeckDaysContainer: ElementRef;
+  @ViewChild('forecastCardsDeck', { static: false })
+  private forecastCardsDeck: ElementRef;
+  @ViewChild('forecastCardsDeckHoursContainer', { static: false })
+  private forecastCardsDeckHoursContainer: ElementRef;
+  @ViewChild('forecastCardsDeckDaysContainer', { static: false })
+  private forecastCardsDeckDaysContainer: ElementRef;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -50,16 +57,22 @@ export class ForecastCardsDeckComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.mainService.currentStateSubject.subscribe((state: State) => {
-      this.currentState = state;
-      this.changeDetectorRef.detectChanges();
-      this.setNumbersOfCards();
-      this.setContainersWidth();
-    });
+    this.mainService.currentStateSubject
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe((state: State) => {
+        this.currentState = state;
+        this.changeDetectorRef.detectChanges();
+        this.setNumbersOfCards();
+        this.setContainersWidth();
+      });
   }
 
   ngAfterViewInit() {
     this.deckWidth = this.forecastCardsDeck.nativeElement.offsetWidth;
+  }
+
+  ngOnDestroy() {
+    this.isAlive = false;
   }
 
   public setNumbersOfCards(): void {

@@ -30,7 +30,9 @@ export class AppController {
     // this.appService.clearIpAddress(clientIp);
     // return of({});
 
-    const clientIp = request.headers['x-forwarded-for'];
+    // IP value falls back to mocked one in case of serving app locally
+    const clientIp = request.headers['x-forwarded-for'] || '94.76.111.246';
+    console.log('clientIp: ', clientIp);
 
     return this.appService.getLocation(clientIp).pipe(
       mergeMap((clientLocation: LocationDto) => this.appService.getWeather(clientLocation)),

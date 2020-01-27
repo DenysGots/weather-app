@@ -1,7 +1,7 @@
 <div class="app-weather-effect-water-drops__container">
   <ng-container *ngFor="let drop of drops">
     <div
-      *ngIf="shouldRenderDrop(drop)"
+      *ngIf="drop.shouldRender"
       @enterLeaveTrigger
       class="app-weather-effect-water-drops__drop"
       [ngClass]="getCurrentBackgroundClass()"
@@ -16,35 +16,35 @@
     >
       <div
         @enterLeaveTrigger
-        *ngIf="isWeather('foggy') || isWeather('cloudy')"
+        *ngIf="drop.fogBackground"
         class="app-weather-effect-water-drops__background app-weather-effect-water-drops__fog-background"
       >
       </div>
 
       <div
         @enterLeaveTrigger
-        *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('day')"
+        *ngIf="drop.dayMediumBackground"
         class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-day-medium-background"
       >
       </div>
 
       <div
         @enterLeaveTrigger
-        *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('day')"
+        *ngIf="drop.dayHeavyBackground"
         class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-day-heavy-background"
       >
       </div>
 
       <div
         @enterLeaveTrigger
-        *ngIf="isWeather('cloudy') && isOvercast('medium') && isTimeOfDay('night')"
+        *ngIf="drop.nightMediumBackground"
         class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-night-medium-background"
       >
       </div>
 
       <div
         @enterLeaveTrigger
-        *ngIf="isWeather('cloudy') && isOvercast('heavy') && isTimeOfDay('night')"
+        *ngIf="drop.nightHeavyBackground"
         class="app-weather-effect-water-drops__background app-weather-effect-water-drops__clouds-night-heavy-background"
       >
       </div>
@@ -53,7 +53,7 @@
 
   <ng-container *ngFor="let drop of drops">
     <div
-      *ngIf="shouldRenderDrop(drop)"
+      *ngIf="drop.shouldRender"
       @enterLeaveTrigger
       class="app-weather-effect-water-drops__border"
       [ngStyle]="{

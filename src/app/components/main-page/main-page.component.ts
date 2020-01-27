@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { takeWhile } from 'rxjs/operators';
+
+import { Component, OnDestroy } from '@angular/core';
 import {
   animate,
   style,
@@ -35,13 +37,20 @@ import {
     ])
   ]
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnDestroy {
   public currentState: State;
+  private isAlive = true;
 
   constructor(private mainService: MainService) {
-    this.mainService.currentStateSubject.subscribe((state: State) => {
-      this.currentState = state;
-    });
+    this.mainService.currentStateSubject
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe((state: State) => {
+        this.currentState = state;
+      });
+  }
+
+  ngOnDestroy() {
+    this.isAlive = false;
   }
 
   public getCurrentBackgroundClass(): any {
