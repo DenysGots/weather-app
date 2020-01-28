@@ -1,7 +1,7 @@
 import { of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
-import { Controller, Ip, Post, Headers, Req } from '@nestjs/common';
+import { Controller, Ip, Post, Headers, Req, Body } from '@nestjs/common';
 
 import { AppService } from './app.service';
 import { LocationDto } from '../shared/public-api';
@@ -40,15 +40,14 @@ export class AppController {
     );
   }
 
-  // @Post('weather')
-  // public async getWeather(@Ip() clientIp: any) {
-  //   // TODO: test, delete
-  //   const mockedIp = '185.112.173.116';
-  //
-  //   return this.appService.getLocation(mockedIp)
-  //     .pipe(
-  //       mergeMap((clientLocation: LocationDto) => this.appService.getWeather(clientLocation)),
-  //       map((weatherData: any) => this.appService.adjustReceivedData(weatherData))
-  //     );
-  // }
+  @Post('weather-locally')
+  public async getWeatherLocally(@Body clientIp: any) {
+    console.log('body: ', clientIp);
+
+    return this.appService.getLocation(clientIp).pipe(
+      mergeMap((clientLocation: LocationDto) => this.appService.getWeather(clientLocation)),
+      map((weatherData: any) => this.appService.adjustReceivedData(weatherData))
+    );
+  }
+
 }

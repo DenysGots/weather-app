@@ -34,6 +34,8 @@ export class MainService {
   }
 
   public getWeather(): void {
+    this.httpService.getIp(); // TODO: delete
+
     this.httpService.getWeather().subscribe((weatherData: State) => {
       this.stateService.adjustReceivedData(weatherData);
       this.stateService.saveStateToLocalStorage();

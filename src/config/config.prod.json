@@ -1,4 +1,5 @@
 {
   "usedHost": "https://app-simple-weather.herokuapp.com",
-  "noErrorsMode": true
+  "noErrorsMode": true,
+  "config": "prod"
 }

@@ -179,7 +179,7 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges, OnDe
 
         this.drops.push(generatedDrop);
 
-        console.log(this.drops);
+        // console.log(this.drops);
 
 
         // TODO: test
