@@ -9,7 +9,7 @@ Note: used AccuWeather API has a limit of 50 calls/day due to Limited Trial
 Start local server:
 * clone
 * run `npm i`
-* run `dev:local`
+* run `npm run dev:local`
 * open browser at `http://localhost:5400`
 
 ---
@@ -36,6 +36,7 @@ Start local server:
 * https://erikflowers.github.io/weather-icons/
 * https://www.amcharts.com/free-animated-svg-weather-icons/
 ### Helpers
+* https://api.ipify.org
 * https://github.com/milosdjakonovic/requestAnimationFrame-polyfill/blob/master/rafPolyfill.js
 * https://gist.github.com/paulirish/1579671
 * https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
