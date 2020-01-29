@@ -1,5 +1,5 @@
 import * as $ from 'jquery';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,7 +16,6 @@ export class HttpService {
     })
   };
 
-  // private serverUrl = 'https://app-simple-weather.herokuapp.com';
   private getIpUrl = 'https://api.ipify.org';
 
   constructor(
@@ -32,6 +31,7 @@ export class HttpService {
     return this.http.post(`${this.config.backendUrl}/local`, { clientIp }, this.httpOptions);
   }
 
+  // Used to get IP with local deployment
   public getIpForLocalDeployment() {
     return $.ajax({
         method: 'GET',
@@ -39,13 +39,4 @@ export class HttpService {
         dataType: 'text'
       });
   }
-
-  // TODO: this works, use IP in case of local start-up
-  // public getIp(): any {
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: this.getIpUrl,
-  //     dataType: 'text'
-  //   }).done((clientIp: any) => console.log('api.ipify.org 2', clientIp));
-  // }
 }
