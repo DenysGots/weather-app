@@ -41,8 +41,6 @@ export class MainService {
 
     const localDeployment = ['dev', 'local'].includes((window as any).environment.config);
     const setState = (weatherData: State) => {
-      console.log('weatherData: ', weatherData);
-
       this.stateService.adjustReceivedData(weatherData);
       this.stateService.saveStateToLocalStorage();
       this.setCurrentState();
