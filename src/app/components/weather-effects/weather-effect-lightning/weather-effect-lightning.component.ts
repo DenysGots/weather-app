@@ -24,7 +24,7 @@ export class WeatherEffectLightningComponent implements OnInit, OnDestroy {
   @Input() viewHeight: number;
   @Input() viewWidth: number;
 
-  @ViewChild('lightning', { static: false }) lightningRef: ElementRef;
+  @ViewChild('lightning', { static: true }) lightningRef: ElementRef;
 
   public lightningElement;
 

@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { CelestialData, State } from '../../../shared/public-api';
+import { Config } from '../app.config';
 import { HttpService } from './http.service';
 import { StateService } from './state.service';
 
@@ -21,7 +22,8 @@ export class MainService {
 
   constructor(
     private httpService: HttpService,
-    private stateService: StateService
+    private stateService: StateService,
+    private config: Config
   ) {
     this.currentStateSource = new BehaviorSubject(this.currentState);
     this.celestialDataSource = new BehaviorSubject(this.celestialData);
@@ -34,14 +36,26 @@ export class MainService {
   }
 
   public getWeather(): void {
-    this.httpService.getIp(); // TODO: delete
+    console.log('environment: ', (window as any).environment);
+    console.log('config: ', this.config);
 
-    this.httpService.getWeather().subscribe((weatherData: State) => {
+    const localDeployment = ['dev', 'local'].includes((window as any).environment.config);
+    const setState = (weatherData: State) => {
+      console.log('weatherData: ', weatherData);
+
       this.stateService.adjustReceivedData(weatherData);
       this.stateService.saveStateToLocalStorage();
       this.setCurrentState();
       this.emitCurrentState();
-    });
+    };
+
+    localDeployment && this.httpService.getIpForLocalDeployment()
+      .done((clientIp: string) => this.httpService.getWeatherLocally(clientIp)
+        .subscribe((weatherData: State) => setState(weatherData))
+      );
+
+    !localDeployment && this.httpService.getWeather()
+      .subscribe((weatherData: State) => setState(weatherData));
   }
 
   public setCurrentState(): void {

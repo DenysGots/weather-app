@@ -36,7 +36,7 @@ import {
   selector: 'app-weather-effect-water-drops',
   templateUrl: './weather-effect-water-drops.component.html',
   styleUrls: ['./weather-effect-water-drops.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('enterLeaveTrigger', [
       transition(
@@ -87,7 +87,6 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges, OnDe
       .subscribe((data: CelestialData) => {
         this.adjustCelestialPosition(data);
         this.initDropsWeatherEffect();
-        // !(<ViewRef>changeDetectorRef).destroyed && this.changeDetectorRef.detectChanges();
       });
   }
 
@@ -109,13 +108,9 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges, OnDe
     this.drops = [];
     this.numberOfDrops = DropsOnScreen[this.overcast];
 
-    // TODO: test
     this.ngZone.runOutsideAngular(() => {
       this.generateDrops();
     });
-
-
-    // this.generateDrops();
   }
 
   private randomTimeout(): number {
@@ -179,15 +174,9 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges, OnDe
 
         this.drops.push(generatedDrop);
 
-        // console.log(this.drops);
-
-
-        // TODO: test
         this.ngZone.run(() => {
           detectChanges();
         });
-
-        // detectChanges();
       }, this.randomTimeout());
     }
   }
@@ -228,9 +217,15 @@ export class WeatherEffectWaterDropsComponent implements OnInit, OnChanges, OnDe
 
     return celestial
       ? (
-        (drop.xPosition > celestial.x + moonSize + spaceMd || drop.xPosition + drop.dropWidth < celestial.x - spaceMd)
+        (
+          (drop.xPosition > (celestial.x + moonSize + spaceMd)) ||
+          ((drop.xPosition + drop.dropWidth) < (celestial.x - spaceMd))
+        )
         &&
-        (yPosition > celestial.y + spaceMd || yPosition + drop.dropHeight < celestial.y - moonSize - spaceMd)
+        (
+          (yPosition > (celestial.y + spaceMd)) ||
+          ((yPosition + drop.dropHeight) < (celestial.y - moonSize - spaceMd))
+        )
       )
       : true;
   }

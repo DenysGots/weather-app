@@ -31,8 +31,8 @@ export class WeatherEffectRainComponent implements OnInit, OnChanges, OnDestroy 
   @Input() overcast: Overcast;
   @Input() timeOfDay: TimeOfDay;
 
-  @ViewChild('rainCanvas', { static: false }) rainCanvasRef: ElementRef;
-  @ViewChild('rainThroughCanvas', { static: false }) rainThroughCanvasRef: ElementRef;
+  @ViewChild('rainCanvas', { static: true }) rainCanvasRef: ElementRef;
+  @ViewChild('rainThroughCanvas', { static: true }) rainThroughCanvasRef: ElementRef;
 
   public rainCanvas;
   public rainThroughCanvas;

@@ -40,8 +40,8 @@ export class AppController {
     );
   }
 
-  @Post('weather-locally')
-  public async getWeatherLocally(@Body clientIp: any) {
+  @Post('local')
+  public async getWeatherLocally(@Body('clientIp') clientIp: any) {
     console.log('body: ', clientIp);
 
     return this.appService.getLocation(clientIp).pipe(

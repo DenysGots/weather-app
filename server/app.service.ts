@@ -170,10 +170,9 @@ export class AppService {
     return false;
   }
 
-  private setDayTimeLength(dayStart: string, dayEnd: string): number {
-    const sunRise: moment.Moment = moment(dayStart);
-    const sunSet: moment.Moment = moment(dayEnd);
-
+  private setDayTimeLength(dayStart: number, dayEnd: number): number {
+    const sunRise: moment.Moment = moment.unix(dayStart);
+    const sunSet: moment.Moment = moment.unix(dayEnd);
     return moment.duration(sunSet.diff(sunRise)).as('milliseconds');
   }
 
@@ -185,7 +184,6 @@ export class AppService {
   private setCurrentTime(time?: string): number {
     const currentTime: moment.Moment = time ? moment(time) : moment();
     const startOfDay: moment.Moment = moment().startOf('hour').hours(0);
-
     return moment.duration(currentTime.diff(startOfDay)).asMilliseconds();
   }
 
@@ -339,13 +337,7 @@ export class AppService {
     });
   }
 
-  // private
-  public clearIpAddress(clientIp: string): string {
-    // TODO: delete
-    console.log('Cleaned Ip: ', clientIp.includes('::ffff:')
-      ? clientIp.replace(/::ffff:/, '')
-      : clientIp);
-
+  private clearIpAddress(clientIp: string): string {
     return clientIp.includes('::ffff:')
       ? clientIp.replace(/::ffff:/, '')
       : clientIp;

@@ -25,7 +25,7 @@ export class WeatherEffectSnowComponent implements OnInit, OnChanges, OnDestroy 
   @Input() viewWidth: number;
   @Input() overcast: Overcast = Overcast.light;
 
-  @ViewChild('snowCanvas', { static: false }) snowCanvasRef: ElementRef;
+  @ViewChild('snowCanvas', { static: true }) snowCanvasRef: ElementRef;
 
   public snowCanvas;
 
