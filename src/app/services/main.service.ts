@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { CelestialData, State } from '../../../shared/public-api';
-import { Config } from '../app.config';
 import { HttpService } from './http.service';
 import { StateService } from './state.service';
 
@@ -22,8 +21,7 @@ export class MainService {
 
   constructor(
     private httpService: HttpService,
-    private stateService: StateService,
-    private config: Config
+    private stateService: StateService
   ) {
     this.currentStateSource = new BehaviorSubject(this.currentState);
     this.celestialDataSource = new BehaviorSubject(this.celestialData);
@@ -36,9 +34,6 @@ export class MainService {
   }
 
   public getWeather(): void {
-    console.log('environment: ', (window as any).environment);
-    console.log('config: ', this.config);
-
     const localDeployment = ['dev', 'local'].includes((window as any).environment.config);
     const setState = (weatherData: State) => {
       this.stateService.adjustReceivedData(weatherData);
