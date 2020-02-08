@@ -173,6 +173,7 @@ export abstract class WindowRef {
   }
 }
 
+@Injectable()
 export class BrowserWindowRef extends WindowRef {
   get nativeWindow(): Window | Object {
     return window;
