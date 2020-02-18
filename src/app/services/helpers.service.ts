@@ -168,19 +168,19 @@ export class HelpersService {
 export const WINDOW = new InjectionToken('WindowToken');
 
 export abstract class WindowRef {
-  get nativeWindow(): Window | Object {
+  get nativeWindow(): Window | any {
     throw new Error('Not implemented.');
   }
 }
 
 @Injectable()
 export class BrowserWindowRef extends WindowRef {
-  get nativeWindow(): Window | Object {
+  get nativeWindow(): Window | any {
     return window;
   }
 }
 
-export function windowFactory(browserWindowRef: BrowserWindowRef, platformId: Object): Window | Object {
+export function windowFactory(browserWindowRef: BrowserWindowRef, platformId: any): Window | any {
   return isPlatformBrowser(platformId)
     ? browserWindowRef.nativeWindow
     : {};

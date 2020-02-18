@@ -18,7 +18,7 @@
  * BROWSER POLYFILLS
  */
 
-/** IE9, IE10 and IE11 requires all of the following polyfills. **/
+/** IE9, IE10 and IE11 requires all of the following polyfills. */
 import 'core-js/es/symbol';
 import 'core-js/es/object';
 import 'core-js/es/function';
@@ -40,14 +40,14 @@ import 'classlist.js';  // Run `npm install --save classlist.js`.
 /** IE10 and IE11 requires the following for the Reflect API. */
 import 'core-js/es/reflect';
 
-/** Evergreen browsers require these. **/
+/** Evergreen browsers require these. */
 // Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.
 
 /**
  * Web Animations `@angular/platform-browser/animations`
  * Only required if AnimationBuilder is used within the application and using IE/Edge or Safari.
  * Standard animation support in Angular DOES NOT require any polyfills (as of Angular 6.0).
- **/
+ */
 // import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 
 /**
@@ -73,9 +73,8 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
 /**
  * Fix "Uncaught ReferenceError: global is not defined" https://github.com/valor-software/ng2-dragula/issues/849
  */
 (window as any).global = window;
-
-import 'hammerjs/hammer';

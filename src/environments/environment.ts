@@ -6,5 +6,6 @@
 export const environment = {
   config: 'dev',
   production: false,
-  usedHost: 'http://localhost:5400'
+  usedHost: 'http://localhost:5400',
+  prerenderUrl: 'http://localhost:4000'
 };

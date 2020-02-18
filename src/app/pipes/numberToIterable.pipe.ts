@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'NumberToIterablePipe'
 })
 export class NumberToIterablePipe implements PipeTransform {
-  transform(value, args: number[]): any {
+  transform(value, args?: number[]): any {
     return Array(value).fill(1).map((x, i) => x + i);
   }
 }

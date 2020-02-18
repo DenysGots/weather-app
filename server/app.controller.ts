@@ -10,7 +10,7 @@ export class AppController {
   constructor(private appService: AppService) {}
 
   @Post('weather')
-  public async getWeather(@Headers() headers: any, @Req() request: any/*, @Ip() clientIp: any*/) {
+  public async getWeather(@Headers() headers: any, @Req() request: any) {
     const clientIp = request.headers['x-forwarded-for'] || '94.76.111.246';
 
     return this.appService.getLocation(clientIp).pipe(

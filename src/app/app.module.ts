@@ -3,9 +3,10 @@ import { faAngleDown, faAngleLeft, faAngleRight, faAngleUp, faHome } from '@fort
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
 import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PreloadAllModules, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -74,13 +75,11 @@ export function initApp(config: Config) {
     WeatherEffectWaterDropsComponent
   ],
   imports: [
+    CommonModule,
     HttpClientModule,
     BrowserModule.withServerTransition({ appId: 'my-app' }),
     TransferHttpCacheModule,
-    RouterModule.forRoot(routes, {
-      useHash: false,
-      preloadingStrategy: PreloadAllModules
-    }),
+    RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

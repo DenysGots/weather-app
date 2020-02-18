@@ -1,5 +1,11 @@
-export { ngExpressEngine } from '@nguniversal/express-engine';
-export { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
-export { AppServerModule } from './app/app.server.module';
+import { enableProdMode } from '@angular/core';
+import { environment } from './environments/environment';
+
+// (window as any).environment = environment;
+//
+// if (environment.production) {
+//   enableProdMode();
+// }
 
 export { renderModule, renderModuleFactory } from '@angular/platform-server';
+export { AppServerModule } from './app/app.server.module';
