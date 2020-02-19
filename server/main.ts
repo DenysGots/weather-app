@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(ApplicationModule);
 
   app.enableCors({
-    methods: 'GET',
+    methods: 'GET,POST',
     maxAge: 3600
   });
 

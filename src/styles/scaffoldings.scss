@@ -27,8 +27,10 @@ body {
   font-weight: $font-weight-default;
   height: 100%;
   line-height: $line-height-default;
+  max-width: 100vw;
   min-height: 100vh;
   min-width: 100vw;
+  overflow-x: hidden;
   width: 100%;
 }
 
