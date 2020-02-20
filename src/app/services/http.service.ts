@@ -34,9 +34,9 @@ export class HttpService {
   // Used to get IP with local deployment
   public getIpForLocalDeployment() {
     return $.ajax({
-        method: 'GET',
-        url: this.getIpUrl,
-        dataType: 'text'
-      });
+      method: 'GET',
+      url: this.getIpUrl,
+      dataType: 'text'
+    });
   }
 }

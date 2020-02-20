@@ -44,11 +44,11 @@ export class ForecastCardsDeckComponent implements OnInit, AfterViewInit, OnDest
   private deckDaysContainerWidth: number;
   private isAlive = true;
 
-  @ViewChild('forecastCardsDeck', { static: false })
+  @ViewChild('forecastCardsDeck')
   private forecastCardsDeck: ElementRef;
-  @ViewChild('forecastCardsDeckHoursContainer', { static: false })
+  @ViewChild('forecastCardsDeckHoursContainer')
   private forecastCardsDeckHoursContainer: ElementRef;
-  @ViewChild('forecastCardsDeckDaysContainer', { static: false })
+  @ViewChild('forecastCardsDeckDaysContainer')
   private forecastCardsDeckDaysContainer: ElementRef;
 
   constructor(

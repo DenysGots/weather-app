@@ -47,7 +47,7 @@ export class DayTimeWeatherViewComponent implements OnInit, OnDestroy {
 
   private isAlive = true;
 
-  @ViewChild('weatherView', { static: false }) weatherView: ElementRef;
+  @ViewChild('weatherView') weatherView: ElementRef;
 
   constructor(
     private elementRef: ElementRef,

@@ -1,23 +1,29 @@
+import { HttpModule, Module } from '@nestjs/common';
+import { AngularUniversalModule } from '@nestjs/ng-universal';
 import { join } from 'path';
 
-import { HttpModule, Module } from '@nestjs/common';
-import { AngularUniversalModule, applyDomino } from '@nestjs/ng-universal';
-
+import { AppServerModule } from '../src/main.server';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-const BROWSER_DIR = join(process.cwd(), 'dist/browser');
-applyDomino(global, join(BROWSER_DIR, 'index.html'));
+// Angular SSR "window is not defined" error workaround, taken from https://github.com/angular/universal/issues/830#issuecomment-345228799
+const domino = require('domino');
+const fs = require('fs');
+const path = require('path');
+const template = fs.readFileSync(path.join(__dirname, '../', 'browser', 'index.html')).toString();
+const win = domino.createWindow(template);
+global['window'] = win;
+global['document'] = win.document;
 
 @Module({
   imports: [
     AngularUniversalModule.forRoot({
-      viewsPath: BROWSER_DIR,
-      bundle: require('./../dist/server/main.js')
+      bootstrap: AppServerModule,
+      viewsPath: join(process.cwd(), 'dist/universal-starter-v9/browser')
     }),
-    HttpModule,
+    HttpModule
   ],
   controllers: [AppController],
   providers: [AppService]
 })
-export class ApplicationModule { }
+export class ApplicationModule {}

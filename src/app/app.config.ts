@@ -15,7 +15,7 @@ export class Config {
   }
 
   async init() {
-    return import(`../config/config.${environment.config}.json`).then(
+    return await import(`../config/config.${environment.config}.json`).then(
       configFile => (Config.configFile = configFile),
       error => console.error('Config not loaded', error)
     );
