@@ -20,7 +20,7 @@
     "prebuild:ssr": "ngcc",
     "prerender": "ng run universal-starter-v9:prerender",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "heroku-postbuild": "npm run build:ssr && npm run serve:ssr"
+    "heroku-postbuild": "npm run build:ssr"
   },
   "pre-commit": [],
   "private": true,
