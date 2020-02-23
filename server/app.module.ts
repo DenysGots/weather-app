@@ -6,6 +6,8 @@ import { AppServerModule } from '../src/main.server';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { environment } from '../src/environments/environment';
+
 // Angular SSR "window is not defined" error workaround, taken from https://github.com/angular/universal/issues/830#issuecomment-345228799
 const domino = require('domino');
 const fs = require('fs');
@@ -14,6 +16,8 @@ const template = fs.readFileSync(path.join(__dirname, '../', 'browser', 'index.h
 const win = domino.createWindow(template);
 global['window'] = win;
 global['document'] = win.document;
+
+((window as any).environment = environment);
 
 @Module({
   imports: [
