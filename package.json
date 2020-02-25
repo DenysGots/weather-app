@@ -11,7 +11,7 @@
     "start": "ng serve",
     "lint": "ng lint",
     "build": "ng build",
-    "build:ssr": "ng build --prod && ng run universal-starter-v9:server:production",
+    "build:ssr": "ng build --configuration=prod && ng run universal-starter-v9:server:production",
     "build:ssr:local": "ng build --configuration=local && ng run universal-starter-v9:server",
     "serve:ssr": "node dist/universal-starter-v9/server/main.js",
     "dev:ssr": "ng run universal-starter-v9:serve-ssr",

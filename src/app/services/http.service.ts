@@ -24,6 +24,9 @@ export class HttpService {
   ) {}
 
   public getWeather(): Observable<any> {
+    console.log('getting weather');
+    console.log('config.backendUrl: ', this.config.backendUrl);
+
     return this.http.post(`${this.config.backendUrl}/weather`, null, this.httpOptions);
   }
 
