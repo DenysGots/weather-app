@@ -6,5 +6,5 @@
 export const environment = {
   config: 'dev',
   production: false,
-  usedHost: 'https://app-simple-weather.herokuapp.com/'
+  usedHost: 'https://app-simple-weather.herokuapp.com'
 };
