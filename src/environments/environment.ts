@@ -6,6 +6,5 @@
 export const environment = {
   config: 'dev',
   production: false,
-  usedHost: 'http://localhost:5400',
-  prerenderUrl: 'http://localhost:4000'
+  usedHost: 'https://app-simple-weather.herokuapp.com/'
 };

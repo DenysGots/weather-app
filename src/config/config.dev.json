@@ -1,5 +1,5 @@
 {
-  "usedHost": "http://localhost:5400",
+  "usedHost": "https://app-simple-weather.herokuapp.com/",
   "noErrorsMode": true,
   "config": "local"
 }

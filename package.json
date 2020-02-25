@@ -2,21 +2,23 @@
   "name": "weather_app",
   "version": "1.2.0",
   "license": "MIT",
+  "engines": {
+    "node": "12.16.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/DenysGots/weather-app.git"
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run serve:ssr",
     "lint": "ng lint",
     "build": "ng build",
     "build:ssr": "ng build --configuration=production && ng run universal-starter-v9:server:production",
     "build:ssr:local": "ng build --configuration=local && ng run universal-starter-v9:server",
     "serve:ssr": "node dist/universal-starter-v9/server/main.js",
     "dev:ssr": "ng run universal-starter-v9:serve-ssr",
-    "dev:local": "npm run build:ssr:local && npm run serve:ssr --configuration=local --open",
-    "helper:build": "npm run build:ssr && npm run serve:ssr",
+    "dev:local": "npm run build:ssr:local && npm run serve:ssr --configuration=local",
     "prebuild:ssr": "ngcc",
     "prerender": "ng run universal-starter-v9:prerender",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
