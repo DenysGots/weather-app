@@ -42,7 +42,7 @@ export class AppService {
           of(e).pipe(delay(3000)),
         )
       ),
-      tap(() => console.log('Request error, retrying...', error)),
+      tap(() => console.log('Request error, retrying...'/*, error*/)), // TODO: uncomment
     ));
 
   constructor(private readonly httpService: HttpService) {
@@ -54,6 +54,10 @@ export class AppService {
     const clearedIp = this.clearIpAddress(clientIp);
     const getLocationUrl =
       `https://api.ipgeolocation.io/ipgeo?apiKey=${this.ipgeolocationApikey}&ip=${clearedIp}&fields=geo`;
+
+    console.log('clientIp: ', clientIp);
+    console.log('clearedIp: ', clearedIp);
+    console.log();
 
     return this.httpService
       .get(getLocationUrl)
