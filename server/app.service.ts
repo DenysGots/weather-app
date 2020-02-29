@@ -57,7 +57,6 @@ export class AppService {
 
     console.log('clientIp: ', clientIp);
     console.log('clearedIp: ', clearedIp);
-    console.log();
 
     return this.httpService
       .get(getLocationUrl)
@@ -75,8 +74,10 @@ export class AppService {
     let getCurrentWeatherUrl = this.accuWeatherGetCurrentWeatherUrl;
     let locationKey: any;
 
+    console.log('location: ', location);
+
     getLocationKeyUrl +=
-      `${location.countryCode}/search?apikey=${this.accuWeatherApikey}&q=${location.city}`;
+      `${location.countryCode || 'UA'}/search?apikey=${this.accuWeatherApikey}&q=${location.city || 'Kyiv'}`;
 
     return this.httpService
       .get(getLocationKeyUrl)
@@ -347,7 +348,7 @@ export class AppService {
       : clientIp;
   }
 
-  private mapLocationDto(clientLocation: any): LocationDto {
+  private mapLocationDto(clientLocation: any = {}): LocationDto {
     const {
       country_code2: countryCode = null,
       country_name: country = null,
