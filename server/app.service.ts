@@ -87,6 +87,8 @@ export class AppService {
         switchMap(locationData => {
           locationKey = locationData.data[0].Key;
 
+          console.log('locationData: ', locationData);
+
           getSixteenDaysWeatherUrl +=
             `city=${location.city}&country=${location.country}&key=${this.weatherbitkey}`;
           getTwelveHoursWeatherUrl +=
