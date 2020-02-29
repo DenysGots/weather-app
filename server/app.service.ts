@@ -79,6 +79,8 @@ export class AppService {
     getLocationKeyUrl +=
       `${location.countryCode || 'UA'}/search?apikey=${this.accuWeatherApikey}&q=${location.city || 'Kyiv'}`;
 
+    console.log('getLocationKeyUrl: ', getLocationKeyUrl);
+
     return this.httpService
       .get(getLocationKeyUrl)
       .pipe(
