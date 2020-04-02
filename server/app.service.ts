@@ -43,7 +43,7 @@ export class AppService {
           of(e).pipe(delay(3000)),
         )
       ),
-      tap(() => console.log('Request error, retrying...'/*, error*/)), // TODO: uncomment
+      tap(() => console.log('Request error, retrying...', error))
     ));
 
   constructor(private readonly httpService: HttpService) {
@@ -55,10 +55,6 @@ export class AppService {
     const clearedIp = this.clearIpAddress(clientIp);
     const getLocationUrl =
       `https://api.ipgeolocation.io/ipgeo?apiKey=${this.ipgeolocationApikey}&ip=${clearedIp}&fields=geo`;
-
-    console.log('clientIp: ', clientIp);
-    console.log('clearedIp: ', clearedIp);
-    console.log('getLocationUrl: ', getLocationUrl);
 
     return this.httpService
       .get(getLocationUrl)
@@ -76,19 +72,13 @@ export class AppService {
     let getCurrentWeatherUrl = this.accuWeatherGetCurrentWeatherUrl;
     let locationKey: any;
 
-    console.log('location: ', location);
-
     getLocationKeyUrl += `${location.countryCode}/search?apikey=${this.accuWeatherApikey}&q=${location.city}`;
-
-    console.log('getLocationKeyUrl: ', getLocationKeyUrl);
 
     return this.httpService
       .get(getLocationKeyUrl)
       .pipe(
         switchMap(locationData => {
           locationKey = locationData.data[0].Key;
-
-          console.log('locationData: ', locationData);
 
           getSixteenDaysWeatherUrl +=
             `city=${location.city}&country=${location.country}&key=${this.weatherbitkey}`;
@@ -118,7 +108,7 @@ export class AppService {
               this.retryPipeline
             );
 
-          return combineLatest(sixteenDaysWeather, twelveHoursWeather, currentWeather);
+          return combineLatest([sixteenDaysWeather, twelveHoursWeather, currentWeather]);
         }),
         this.retryPipeline
       );
@@ -352,27 +342,13 @@ export class AppService {
   }
 
   private mapLocationDto(clientLocation: any): LocationDto {
-    console.log('clientLocation: ', clientLocation);
-
     const defaultLocation = { countryCode: 'UA', country: 'Ukraine', city: 'Kyiv' };
-
     const {
       country_code2: countryCode = null,
       country_name: country = null,
       city = null
     } = clientLocation || {};
-
     const location = { countryCode, country, city };
-
-    // TODO: default to { countryCode: 'UA', country: 'Ukraine', city: 'Kyiv' } if any of the fields above is empty
-
-    // return {
-    //   countryCode,
-    //   country,
-    //   city
-    // };
-
-    console.log('mapped clientLocation: ', every(entry => !!entry, location) ? location : defaultLocation);
 
     return every(entry => !!entry, location) ? location : defaultLocation;
   }
