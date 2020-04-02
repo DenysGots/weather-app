@@ -36,7 +36,8 @@ export class HttpService {
 
   // Used to get IP with local deployment
   public getIpForLocalDeployment() {
-    return $.ajax({
+    const getIp = $.ajax as any;
+    return getIp({
       method: 'GET',
       url: this.getIpUrl,
       dataType: 'text'

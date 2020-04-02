@@ -1,3 +1,4 @@
+import { every } from 'lodash/fp';
 import * as moment from 'moment';
 import { combineLatest, iif, Observable, of, Subject, throwError } from 'rxjs';
 import { concatMap, delay, map, retryWhen, switchMap, tap } from 'rxjs/operators';
@@ -124,7 +125,7 @@ export class AppService {
   }
 
   public adjustReceivedData(weatherData: any): State {
-    const weatherState = <State>{};
+    const weatherState = {} as State;
 
     weatherState.locationData = this.locationData;
     weatherState.currentTime = this.setCurrentTime(weatherData[2][0].LocalObservationDateTime);
@@ -271,10 +272,8 @@ export class AppService {
     }
   }
 
-  private compareCodes(code: number): Function {
-    return function(codes: any[]) {
-      return codes.some(elem => code === elem);
-    };
+  private compareCodes(code: number): (codes: any[]) => boolean {
+    return (codes: any[]) => codes.some(elem => code === elem);
   }
 
   private setWindDirection(windAngle: any): WindDirections {
@@ -355,16 +354,26 @@ export class AppService {
   private mapLocationDto(clientLocation: any): LocationDto {
     console.log('clientLocation: ', clientLocation);
 
+    const defaultLocation = { countryCode: 'UA', country: 'Ukraine', city: 'Kyiv' };
+
     const {
       country_code2: countryCode = null,
       country_name: country = null,
       city = null
     } = clientLocation || {};
 
-    return {
-      countryCode,
-      country,
-      city
-    };
+    const location = { countryCode, country, city };
+
+    // TODO: default to { countryCode: 'UA', country: 'Ukraine', city: 'Kyiv' } if any of the fields above is empty
+
+    // return {
+    //   countryCode,
+    //   country,
+    //   city
+    // };
+
+    console.log('mapped clientLocation: ', every(entry => !!entry, location) ? location : defaultLocation);
+
+    return every(entry => !!entry, location) ? location : defaultLocation;
   }
 }
