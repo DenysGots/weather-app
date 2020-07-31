@@ -4,9 +4,9 @@ Simple weather widget, desktop and mobile layout
 Deployed on Heroku:
 http://app-simple-weather.herokuapp.com/
 
-Note: AccuWeather API is used, which has a limit of 50 calls/day due to Limited Trial
+Note: AccuWeather API is being used, which has a limit of 50 calls/day due to Limited Trial
 
-Start local server:
+Start a local server:
 * clone
 * run `npm i`
 * run `npm run dev:local`
@@ -16,7 +16,7 @@ Start local server:
 
 ## Used technologies and projects:
 ### General:
-* Angular 9, NestJS 7, Typescript, RxJS 6, Sass, Angular Material, Moment.js, Lodash
+* Angular 10, NestJS 7, Typescript, RxJS 6, Sass, Angular Material, Moment.js, Lodash
 ### Scaffolding:
 * https://github.com/kamilmysliwiec/universal-nest
 * https://github.com/necolas/normalize.css/
