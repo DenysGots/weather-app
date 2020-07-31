@@ -1,9 +1,9 @@
 {
   "name": "weather_app",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "license": "MIT",
   "engines": {
-    "node": "12.16.0"
+    "node": "12.17.0"
   },
   "repository": {
     "type": "git",
