@@ -16,7 +16,7 @@ Start a local server:
 
 ## Used technologies and projects:
 ### General:
-* Angular 10, NestJS 7, Typescript, RxJS 6, Sass, Angular Material, Moment.js, Lodash
+* Angular 11, NestJS 7, Typescript, RxJS 6, Sass, Angular Material, Moment.js, Lodash
 ### Scaffolding:
 * https://github.com/kamilmysliwiec/universal-nest
 * https://github.com/necolas/normalize.css/

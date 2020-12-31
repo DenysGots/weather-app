@@ -79,7 +79,7 @@ export function initApp(config: Config) {
     HttpClientModule,
     BrowserModule.withServerTransition({ appId: 'my-app' }),
     TransferHttpCacheModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
