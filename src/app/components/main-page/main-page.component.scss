@@ -134,9 +134,11 @@
       left: 0;
       padding: 0 $space-sm $space-xsm $space-sm;
     }
+  }
+}
 
-    &__control-panel {
-      display: none;
-    }
+@media (max-width: 420px) {
+  &__control-panel {
+    display: none;
   }
 }
