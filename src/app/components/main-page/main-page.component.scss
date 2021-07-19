@@ -138,7 +138,9 @@
 }
 
 @media (max-width: 420px) {
-  &__control-panel {
-    display: none;
+  .app-main-page {
+    &__control-panel {
+      display: none;
+    }
   }
 }
