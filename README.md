@@ -35,7 +35,7 @@ Start a local server:
 ### Icons:
 * https://erikflowers.github.io/weather-icons/
 * https://www.amcharts.com/free-animated-svg-weather-icons/
-### Helpers
+### Utils:
 * https://api.ipify.org
 * https://github.com/milosdjakonovic/requestAnimationFrame-polyfill/blob/master/rafPolyfill.js
 * https://gist.github.com/paulirish/1579671
