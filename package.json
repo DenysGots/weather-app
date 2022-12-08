@@ -85,7 +85,7 @@
     "enhanced-resolve": "5.7.0",
     "eslint": "7.21.0",
     "eslint-plugin-import": "2.22.1",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "http-server": "0.12.3",
     "mini-css-extract-plugin": "1.3.9",
     "nodemon": "2.0.7",
